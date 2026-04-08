@@ -6,6 +6,11 @@ import { websiteSchema, organizationSchema } from "@utils/seo";
 // Repositorio de Componentes (Mix & Match)
 import HeaderSticky from "@components/headers/HeaderSticky.astro";
 // import HeaderTransparent from "@components/headers/HeaderTransparent.astro";
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+
 
 import BodyTwoColumns from "@components/body/BodyTwoColumns.astro";
 import BodyGrid from "@components/body/BodyGrid.astro";
@@ -17,45 +22,49 @@ import FooterThreeCols from "@components/footers/FooterThreeCols.astro";
 // Base Components
 import Section from "@components/base/Section.astro";
 import Button from "@components/base/Button.astro";
-import Card from "@components/base/Card.astro";
+import LogoCard from "@components/logo/LogoCard.astro";
 import Container from "@components/base/Container.astro";
 import Slider from "@components/base/Slider.astro";
 
-const seoTitle = "Boilerplate Astro + React de Alto Rendimiento";
+const seoTitle = "Inicio";
 const seoDesc = "Sistema de plantillas modular y escalable para creación rápida de sitios web corporativos y landing pages.";
 
 const slides = [
   {
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=1200",
-    title: "Innovación en Diseño",
-    subtitle: "Descubre nuestra nueva colección de calzado deportivo con tecnología de punta.",
-    primaryButtonText: "Ver Colección",
-    primaryButtonLink: "/contact",
-    secondaryButtonText: "Saber más",
-    secondaryButtonLink: "/contact"
-  },
-  {
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=1200",
-    title: "Elegancia y Precisión",
-    subtitle: "Relojes inteligentes que combinan el estilo clásico con funciones modernas.",
+    image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Nombre del Evento #1",
+    subtitle: "Descripcion del evento #1",
+    date:"10/10/2026",
     primaryButtonText: "Comprar Ahora",
     primaryButtonLink: "/contact",
     secondaryButtonText: "Ver Detalles",
     secondaryButtonLink: "/contact"
   },
   {
-    image: "https://images.unsplash.com/photo-1774847897731-ad86ff58390b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Innovación en Diseño",
-    subtitle: "Descubre nuestra nueva colección de calzado deportivo con tecnología de punta.",
-    primaryButtonText: "Ver Colección",
+    image: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Nombre del Evento #2",
+    subtitle: "Descripcion del evento #2",
+    date:"10/10/2026",
+    primaryButtonText: "Comprar Ahora",
     primaryButtonLink: "/contact",
-    secondaryButtonText: "Saber más",
+    secondaryButtonText: "Ver Detalles",
     secondaryButtonLink: "/contact"
   },
   {
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=1200",
-    title: "Elegancia y Precisión",
-    subtitle: "Relojes inteligentes que combinan el estilo clásico con funciones modernas.",
+    image: "https://images.unsplash.com/photo-1522158637959-30385a09e0da?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Nombre del Evento #3",
+    subtitle: "Descripcion del evento #3",
+    date:"10/10/2026",
+    primaryButtonText: "Comprar Ahora",
+    primaryButtonLink: "/contact",
+    secondaryButtonText: "Ver Detalles",
+    secondaryButtonLink: "/contact"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1558008258-3256797b43f3?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Nombre del Evento #4",
+    subtitle: "Descripcion del evento #4",
+    date:"10/10/2026",
     primaryButtonText: "Comprar Ahora",
     primaryButtonLink: "/contact",
     secondaryButtonText: "Ver Detalles",
@@ -174,6 +183,60 @@ const cards = [
   }
 ];
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const clientsDir = path.resolve(__dirname, '../../public/clientes-venezolanos');
+const clientsDir2 = path.resolve(__dirname, '../../public/clientes-de-la-region');
+
+let files: string[] = [];
+
+try {
+  files = fs.readdirSync(clientsDir);
+} catch (error) {
+  console.error('Error reading clients directory:', error);
+}
+
+
+const clientesVenezolanos = files
+  .filter(file => /\.(webp|png|jpg|jpeg|svg)$/i.test(file))
+  .map(file => {
+    const nameWithoutExt = file.replace(/\.[^/.]+$/, "");
+    // Remove "Logo-" prefix and replace hyphens with spaces
+    const title = nameWithoutExt
+      .replace(/^Logo-/i, "")
+      .replace(/-/g, " ");
+    
+    return {
+      image: `/clientes-venezolanos/${file}`,
+      title: title,
+      link: "/#"
+    };
+  });
+
+let files2: string[] = [];
+try{
+  files2 = fs.readdirSync(clientsDir2);
+}catch(error){
+  console.error('Error reading clients directory:', error);
+}
+
+const clientesDeLaRegion = files2
+  .filter(file =>  /\.(webp|png|jpg|jpeg|svg)$/i.test(file))
+  .map(file => {
+    const nameWithoutExt = file.replace(/\.[^/.]+$/, "");
+    // Remove "Logo-" prefix and replace hyphens with spaces
+    const title = nameWithoutExt
+      .replace(/^Logo-/i, "")
+      .replace(/-/g, " ");
+    
+    return {
+      image: `/clientes-de-la-region/${file}`,
+      title: title,
+      link: "/#"
+    };
+  }
+
+  )
 ---
 
 <MainLayout title={seoTitle}>
@@ -186,14 +249,14 @@ const cards = [
 
   <HeaderSticky slot="header" />
 
-  <Section variant="hero">
+  <Section variant="fullHeightWithHeader">
     <Container>
       <Slider slides={slides} />
     </Container>
   </Section>
 
   <!-- Hero Section (Full Width example) -->
-  <Section variant="fullHeightWithHeader">
+  <!-- <Section variant="fullHeightWithHeader">
     <Container>
       <div style="text-align: center; max-width: 800px; margin: 0 auto;">
         <h1 style="font-size: var(--font-size-4xl); margin-bottom: var(--space-6);">
@@ -208,7 +271,7 @@ const cards = [
         </div>
       </div>
     </Container>
-  </Section>
+  </Section> -->
 
   <!--Card Carrusel -->
   <Section variant="alt">
@@ -218,25 +281,68 @@ const cards = [
   </Section>
 
   <!-- Content with Sidebar Example -->
-  <Section variant="alt">
-    <BodyTwoColumns sidebarLeft={true}>
+  <Section variant="hero">
+    <!-- <BodyTwoColumns sidebarLeft={true}>
       <div slot="sidebar">
-        <h3 style="margin-bottom: var(--space-4);">Categorías</h3>
         <ul style="display: flex; flex-direction: column; gap: var(--space-2);">
-          <li><a href="#" style="color: var(--color-primary);">Diseño Web</a></li>
-          <li><a href="#">Arquitectura React</a></li>
-          <li><a href="#">Rendimiento Astro</a></li>
-          <li><a href="#">Nanostores State</a></li>
+          {clientesVenezolanos.map((cliente) => (
+          <li>
+            {/* <a href={cliente.link}> */}
+              {cliente.title}
+              {/* </a> */}
+              </li>
+              ))}
+              </ul>
+              </div>
+              </BodyTwoColumns> -->
+              
+              <!-- <p style="margin: var(--space-4) 0 var(--space-8);">
+                Este starter kit utiliza lo mejor del ecosistema moderno: Astro para el esqueleto y React par la interactividad donde sea estrictamente necesario.
+                </p> -->
+                
+      <h2 style="margin-bottom: var(--space-4);justify-self:center">Clientes Venezolanos</h2>
+      <BodyGrid >
+        {
+          clientesVenezolanos.map((cliente) => (
+            <LogoCard 
+              title={cliente.title}
+              image={cliente.image}
+            />
+          ))
+        }
+      </BodyGrid>
+  </Section>
+
+  <Section variant="compact">
+    <!-- <BodyTwoColumns sidebarLeft={true}>
+      <div slot="sidebar">
+        <ul style="display: flex; flex-direction: column; gap: var(--space-2);">
+          {clientesDeLaRegion.map((cliente) => (
+            <li>
+              {/* <a href={cliente.link}> */}
+                {cliente.title}
+              {/* </a> */}
+            </li>
+          ))}
         </ul>
       </div>
-
-      <h2>Arquitectura de Software Senior</h2>
-      <p style="margin: var(--space-4) 0 var(--space-8);">
+    </BodyTwoColumns> -->
+      
+      <!-- <p style="margin: var(--space-4) 0 var(--space-8);">
         Este starter kit utiliza lo mejor del ecosistema moderno: Astro para el esqueleto y React par la interactividad donde sea estrictamente necesario.
-      </p>
-
+        </p> -->
+        
+      <h2 style="margin-bottom: var(--space-4);justify-self:center">Clientes de la Región</h2>
       <BodyGrid>
-        <Card 
+        {
+          clientesDeLaRegion.map((cliente) => (
+            <LogoCard 
+              title={cliente.title}
+              image={cliente.image}
+            />
+          ))
+        }
+        <!-- <Card 
           title="Componentes Base" 
           description="Botones, contenedores y secciones listos para usar con CSS Modules."
           image="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=400"
@@ -250,9 +356,8 @@ const cards = [
           title="SEO Avanzado" 
           description="Metadatos dinámicos y esquemas JSON-LD integrados por defecto."
           image="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=400"
-        />
+        /> -->
       </BodyGrid>
-    </BodyTwoColumns>
   </Section>
 
   <FooterThreeCols slot="footer" />

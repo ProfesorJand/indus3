@@ -2,19 +2,19 @@
 import styles from './HeaderSticky.module.css';
 import Container from '@components/base/Container.astro';
 import MobileMenu from './MobileMenu.jsx';
+import HorizontalLogo from '@components/logo/horizontal.astro';
 
 const navigation = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'Services', href: '/services' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Inicio', href: '/' },
+  { label: 'Servicios', href: '/servicios' },
+  { label: 'Contacto', href: '/contacto' },
 ];
 ---
 
 <header class={styles.header} id="header-sticky">
   <Container className={styles.inner}>
-    <a href="/" class={styles.logo}>LOGO</a>
+    <!-- <a href="/" class={styles.logo}>LOGO</a> -->
+    <a href="/" class={styles.logo}><HorizontalLogo /></a>
     
     <nav class={styles.nav}>
       {navigation.map(item => (

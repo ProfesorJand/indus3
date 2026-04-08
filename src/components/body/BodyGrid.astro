@@ -4,13 +4,17 @@ import Container from '@components/base/Container.astro';
 
 interface Props {
   fullWidth?: boolean;
+  widthOfGrid?: string;
 }
 
-const { fullWidth = false } = Astro.props;
+const { fullWidth = false, widthOfGrid = '' } = Astro.props;
 ---
 
 <Container variant={fullWidth ? 'full' : 'wide'}>
-  <div class={styles.grid}>
+  <div 
+    class={styles.grid} 
+    style={widthOfGrid ? `grid-template-columns: repeat(auto-fill, minmax(${widthOfGrid}, 1fr));` : `grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));`}
+  >
     <slot />
   </div>
 </Container>

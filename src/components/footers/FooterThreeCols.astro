@@ -1,6 +1,7 @@
 ---
 import styles from './FooterThreeCols.module.css';
 import Container from '@components/base/Container.astro';
+import HorizontalLogo from '@components/logo/horizontal.astro';
 
 ---
 
@@ -8,9 +9,11 @@ import Container from '@components/base/Container.astro';
   <Container>
     <div class={styles.grid}>
       <div class={styles.brandInfo}>
-        <a href="/" class={styles.logo}>LOGO</a>
+        <a href="/" class={styles.logo}>
+          <HorizontalLogo />
+        </a>
         <p class={styles.tagline}>
-          Designing the future of scalable web components with Astro and React.
+          Nosotros somos los arquitectos de la emoción, los narradores de historias y los creadores de momentos inolvidables. En cada proyecto, fusionamos la pasión con la precisión, la imaginación con la ejecución. Nuestro compromiso es transformar ideas en experiencias que trasciendan el tiempo.
         </p>
         <div class={styles.socials}>
           <!-- Social Icons Placeholder -->

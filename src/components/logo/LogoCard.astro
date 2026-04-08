@@ -1,0 +1,32 @@
+---
+import styles from './LogoCard.module.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  href?: string;
+  className?: string;
+}
+
+const { title, description, image, href, className = '' } = Astro.props;
+const Element = href ? 'a' : 'div';
+---
+
+<Element href={href} class={`${styles.card} ${className}`} >
+  {image && (
+    <div class={styles.imageWrapper}>
+      <img src={image} alt={title} class={styles.image} />
+    </div>
+  )}
+  <div class={styles.content}>
+    <h3 class={styles.title}>{title}</h3>
+    {
+    description && 
+      <p class={styles.description}>{description}</p>
+    }
+  </div>
+  <!-- <div class={styles.footer}>
+    <slot name="footer" />
+  </div> -->
+</Element>

@@ -20,6 +20,7 @@
   font-size: var(--font-size-2xl);
   font-weight: 700;
   color: var(--color-primary);
+  width: 100px;
 }
 
 .tagline {

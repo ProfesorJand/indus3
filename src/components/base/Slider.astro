@@ -5,6 +5,7 @@ interface Slide {
   image: string;
   title: string;
   subtitle: string;
+  date?: string;
   primaryButtonText?: string;
   primaryButtonLink?: string;
   secondaryButtonText?: string;
@@ -38,6 +39,12 @@ const stylesVariables = {
         <div class={styles.overlay} />
         <div class={styles.content}>
           <h2 class={styles.title}>{slide.title}</h2>
+          {slide.date && (
+              <div class={styles.date}>
+                <i class="fas fa-calendar-alt" />
+                {slide.date}
+              </div>
+            )}
           <p class={styles.subtitle}>{slide.subtitle}</p>
           <div class={styles.buttons}>
             {slide.primaryButtonText && (

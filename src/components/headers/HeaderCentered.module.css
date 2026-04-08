@@ -13,7 +13,9 @@
 }
 
 .logo {
-  font-size: var(--font-size-3xl);
+  position:relative;
+  width:100px;
+  height:100px;
   font-weight: 800;
   color: var(--color-primary);
   letter-spacing: -0.025em;

@@ -9,7 +9,7 @@ import HorizontalLogo from '@components/logo/horizontal.astro';
   <Container>
     <div class={styles.grid}>
       <div class={styles.brandInfo}>
-        <a href="/" class={styles.logo}>
+        <a href={import.meta.env.BASE_URL} class={styles.logo}>
           <HorizontalLogo />
         </a>
         <p class={styles.tagline}>

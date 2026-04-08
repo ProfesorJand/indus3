@@ -4,17 +4,19 @@ import Container from '@components/base/Container.astro';
 import MobileMenu from './MobileMenu.jsx';
 import HorizontalLogo from '@components/logo/horizontal.astro';
 
+const base = import.meta.env.BASE_URL;
+
 const navigation = [
-  { label: 'Inicio', href: '/' },
-  { label: 'Servicios', href: '/servicios' },
-  { label: 'Contacto', href: '/contacto' },
+  { label: 'Inicio', href: `${base}` },
+  { label: 'Servicios', href: `${base}servicios` },
+  { label: 'Contacto', href: `${base}contacto` },
 ];
 ---
 
 <header class={styles.header} id="header-sticky">
   <Container className={styles.inner}>
     <!-- <a href="/" class={styles.logo}>LOGO</a> -->
-    <a href="/" class={styles.logo}><HorizontalLogo /></a>
+    <a href={base} class={styles.logo}><HorizontalLogo /></a>
     
     <nav class={styles.nav}>
       {navigation.map(item => (

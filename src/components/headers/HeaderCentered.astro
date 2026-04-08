@@ -1,0 +1,24 @@
+---
+import styles from './HeaderCentered.module.css';
+import Container from '@components/base/Container.astro';
+
+const navigation = [
+  { label: 'Proyectos', href: '/' },
+  { label: 'Servicios', href: '/servicios' },
+  { label: 'Empresa', href: '/empresa' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contacto', href: '/contacto' },
+];
+---
+
+<header class={styles.header}>
+  <Container className={styles.inner}>
+    <a href="/" class={styles.logo}>LOGO</a>
+    
+    <nav class={styles.nav}>
+      {navigation.map(item => (
+        <a href={item.href} class={styles.navLink}>{item.label}</a>
+      ))}
+    </nav>
+  </Container>
+</header>

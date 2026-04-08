@@ -1,0 +1,29 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  keywords?: string;
+  canonical?: string;
+  schemas?: any[];
+}
+
+const { title, description, keywords, canonical, schemas = [] } = Astro.props;
+const siteName = "Astro Boilerplate";
+const fullTitle = `${title} | ${siteName}`;
+
+console.log("Astro.url:", Astro.url);
+
+// Build canonical URL automatically if not provided
+const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).toString();
+---
+
+<!-- Basic Metadata -->
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+{keywords && <meta name="keywords" content={keywords} />}
+<link rel="canonical" href={canonicalURL} />
+
+<!-- JSON-LD Schemas -->
+{schemas.map(schema => (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}

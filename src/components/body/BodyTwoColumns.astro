@@ -1,0 +1,36 @@
+---
+import styles from './BodyTwoColumns.module.css';
+import Container from '@components/base/Container.astro';
+
+interface Props {
+  width?: string;
+  height?: string;
+  sidebarLeft?: boolean;
+}
+
+const { width, height, sidebarLeft = false } = Astro.props;
+const classes = [styles.layout, sidebarLeft ? styles.flipped : ''].join(' ');
+const styleContainer = {
+  '--grid-columns': width || (sidebarLeft ? '300px 1fr' : '1fr 300px'),
+  '--min-height': height || 'auto',
+};
+
+const styleSidebar ={
+  '--min-height': height || 'auto',
+}
+
+const styleContent ={
+  '--min-height': height || 'auto',
+}
+---
+
+<Container>
+  <div class={classes} style={styleContainer}>
+    <main class={styles.content} style={styleSidebar}>
+      <slot />
+    </main>
+    <aside class={styles.sidebar} style={styleContent}>
+      <slot name="sidebar" />
+    </aside>
+  </div>
+</Container>

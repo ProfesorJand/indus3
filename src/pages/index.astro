@@ -1,0 +1,260 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import SEO from "@components/seo/SEO.astro";
+import { websiteSchema, organizationSchema } from "@utils/seo";
+
+// Repositorio de Componentes (Mix & Match)
+import HeaderSticky from "@components/headers/HeaderSticky.astro";
+// import HeaderTransparent from "@components/headers/HeaderTransparent.astro";
+
+import BodyTwoColumns from "@components/body/BodyTwoColumns.astro";
+import BodyGrid from "@components/body/BodyGrid.astro";
+import CardCarousel from "@components/base/CardCarousel.astro";
+
+import FooterThreeCols from "@components/footers/FooterThreeCols.astro";
+// import FooterSimple from "@components/footers/FooterSimple.astro";
+
+// Base Components
+import Section from "@components/base/Section.astro";
+import Button from "@components/base/Button.astro";
+import Card from "@components/base/Card.astro";
+import Container from "@components/base/Container.astro";
+import Slider from "@components/base/Slider.astro";
+
+const seoTitle = "Boilerplate Astro + React de Alto Rendimiento";
+const seoDesc = "Sistema de plantillas modular y escalable para creación rápida de sitios web corporativos y landing pages.";
+
+const slides = [
+  {
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=1200",
+    title: "Innovación en Diseño",
+    subtitle: "Descubre nuestra nueva colección de calzado deportivo con tecnología de punta.",
+    primaryButtonText: "Ver Colección",
+    primaryButtonLink: "/contact",
+    secondaryButtonText: "Saber más",
+    secondaryButtonLink: "/contact"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=1200",
+    title: "Elegancia y Precisión",
+    subtitle: "Relojes inteligentes que combinan el estilo clásico con funciones modernas.",
+    primaryButtonText: "Comprar Ahora",
+    primaryButtonLink: "/contact",
+    secondaryButtonText: "Ver Detalles",
+    secondaryButtonLink: "/contact"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1774847897731-ad86ff58390b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Innovación en Diseño",
+    subtitle: "Descubre nuestra nueva colección de calzado deportivo con tecnología de punta.",
+    primaryButtonText: "Ver Colección",
+    primaryButtonLink: "/contact",
+    secondaryButtonText: "Saber más",
+    secondaryButtonLink: "/contact"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=1200",
+    title: "Elegancia y Precisión",
+    subtitle: "Relojes inteligentes que combinan el estilo clásico con funciones modernas.",
+    primaryButtonText: "Comprar Ahora",
+    primaryButtonLink: "/contact",
+    secondaryButtonText: "Ver Detalles",
+    secondaryButtonLink: "/contact"
+  }
+];
+
+const cards = [
+  {
+    id: 1,
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=1200",
+    title: "Innovación en Diseño",
+    description: "Descubre nuestra nueva colección de calzado deportivo con tecnología de punta.",
+    actions: [
+      {
+        label: "Ver Colección",
+        url: "/contact",
+        variant: "primary"
+      },
+      {
+        label: "Saber más",
+        url: "/contact",
+        variant: "secondary"
+      }
+    ]
+  },
+  {
+    id: 2,
+    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=1200",
+    title: "Elegancia y Precisión",
+    description: "Relojes inteligentes que combinan el estilo clásico con funciones modernas.",
+    actions: [
+      {
+        label: "Comprar Ahora",
+        url: "/contact",
+        variant: "primary"
+      },
+      {
+        label: "Ver Detalles",
+        url: "/contact",
+        variant: "secondary"
+      }
+    ]
+  },
+  {
+    id: 3,
+    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=1200",
+    title: "Elegancia y Precisión",
+    description: "Relojes inteligentes que combinan el estilo clásico con funciones modernas.",
+    actions: [
+      {
+        label: "Comprar Ahora",
+        url: "/contact",
+        variant: "primary"
+      },
+      {
+        label: "Ver Detalles",
+        url: "/contact",
+        variant: "secondary"
+      }
+    ]
+  },
+  {
+    id: 4,
+    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=1200",
+    title: "Elegancia y Precisión",
+    description: "Relojes inteligentes que combinan el estilo clásico con funciones modernas.",
+    actions: [
+      {
+        label: "Comprar Ahora",
+        url: "/contact",
+        variant: "primary"
+      },
+      {
+        label: "Ver Detalles",
+        url: "/contact",
+        variant: "secondary"
+      }
+    ]
+  },
+  {
+    id: 5,
+    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=1200",
+    title: "Elegancia y Precisión",
+    description: "Relojes inteligentes que combinan el estilo clásico con funciones modernas.",
+    actions: [
+      {
+        label: "Comprar Ahora",
+        url: "/contact",
+        variant: "primary"
+      },
+      {
+        label: "Ver Detalles",
+        url: "/contact",
+        variant: "secondary"
+      }
+    ]
+  },
+  {
+    id: 6,
+    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=1200",
+    title: "Elegancia y Precisión",
+    description: "Relojes inteligentes que combinan el estilo clásico con funciones modernas.",
+    actions: [
+      {
+        label: "Comprar Ahora",
+        url: "/contact",
+        variant: "primary"
+      },
+      {
+        label: "Ver Detalles",
+        url: "/contact",
+        variant: "secondary"
+      }
+    ]
+  }
+];
+
+---
+
+<MainLayout title={seoTitle}>
+  <SEO 
+    slot="seo" 
+    title={seoTitle} 
+    description={seoDesc} 
+    schemas={[websiteSchema, organizationSchema]} 
+  />
+
+  <HeaderSticky slot="header" />
+
+  <Section variant="hero">
+    <Container>
+      <Slider slides={slides} />
+    </Container>
+  </Section>
+
+  <!-- Hero Section (Full Width example) -->
+  <Section variant="fullHeightWithHeader">
+    <Container>
+      <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+        <h1 style="font-size: var(--font-size-4xl); margin-bottom: var(--space-6);">
+          Boilerplate Modular para <span style="color: var(--color-primary);">Frontend Moderno</span>
+        </h1>
+        <p style="font-size: var(--font-size-xl); color: var(--color-text-light); margin-bottom: var(--space-8);">
+          Construye sitios web de alto rendimiento combinando headers, layouts y footers intercambiables.
+        </p>
+        <div style="display: flex; gap: var(--space-4); justify-content: center;">
+          <Button size="large">Comenzar Ahora</Button>
+          <Button variant="outline" size="large">Ver Documentación</Button>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!--Card Carrusel -->
+  <Section variant="alt">
+    <Container>
+      <CardCarousel cards={cards} title="Productos Destacados" />
+    </Container>
+  </Section>
+
+  <!-- Content with Sidebar Example -->
+  <Section variant="alt">
+    <BodyTwoColumns sidebarLeft={true}>
+      <div slot="sidebar">
+        <h3 style="margin-bottom: var(--space-4);">Categorías</h3>
+        <ul style="display: flex; flex-direction: column; gap: var(--space-2);">
+          <li><a href="#" style="color: var(--color-primary);">Diseño Web</a></li>
+          <li><a href="#">Arquitectura React</a></li>
+          <li><a href="#">Rendimiento Astro</a></li>
+          <li><a href="#">Nanostores State</a></li>
+        </ul>
+      </div>
+
+      <h2>Arquitectura de Software Senior</h2>
+      <p style="margin: var(--space-4) 0 var(--space-8);">
+        Este starter kit utiliza lo mejor del ecosistema moderno: Astro para el esqueleto y React par la interactividad donde sea estrictamente necesario.
+      </p>
+
+      <BodyGrid>
+        <Card 
+          title="Componentes Base" 
+          description="Botones, contenedores y secciones listos para usar con CSS Modules."
+          image="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=400"
+        />
+        <Card 
+          title="CSS Modules" 
+          description="Estilos aislados y escalables sin conflictos, siguiendo la filosofía BEM."
+          image="https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?auto=format&fit=crop&q=80&w=400"
+        />
+        <Card 
+          title="SEO Avanzado" 
+          description="Metadatos dinámicos y esquemas JSON-LD integrados por defecto."
+          image="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=400"
+        />
+      </BodyGrid>
+    </BodyTwoColumns>
+  </Section>
+
+  <FooterThreeCols slot="footer" />
+</MainLayout>
+

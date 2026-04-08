@@ -1,0 +1,39 @@
+---
+import styles from './Button.module.css';
+
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'small' | 'large';
+  className?: string;
+  type?: 'button' | 'submit' | 'reset';
+  onClick?: string;
+}
+
+const { 
+  href, 
+  variant = 'primary', 
+  size, 
+  className = '', 
+  type = 'button',
+  onClick
+} = Astro.props;
+
+const classes = [
+  styles.button,
+  variant ? styles[variant] : '',
+  size ? styles[size] : '',
+  className
+].join(' ');
+
+const Element = href ? 'a' : 'button';
+---
+
+<Element 
+  href={href} 
+  type={!href ? type : undefined} 
+  class={classes}
+  onclick={onClick}
+>
+  <slot />
+</Element>

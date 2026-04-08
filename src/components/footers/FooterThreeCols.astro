@@ -1,0 +1,36 @@
+---
+import styles from './FooterThreeCols.module.css';
+import Container from '@components/base/Container.astro';
+
+---
+
+<footer class={styles.footer}>
+  <Container>
+    <div class={styles.grid}>
+      <div class={styles.brandInfo}>
+        <a href="/" class={styles.logo}>LOGO</a>
+        <p class={styles.tagline}>
+          Designing the future of scalable web components with Astro and React.
+        </p>
+        <div class={styles.socials}>
+          <!-- Social Icons Placeholder -->
+        </div>
+      </div>
+      
+      <div class={styles.column}>
+        <h4 class={styles.heading}>Resources</h4>
+        <a href="#" class={styles.link}>Documentation</a>
+        <a href="#" class={styles.link}>Tutorials</a>
+        <a href="#" class={styles.link}>Starter Kits</a>
+      </div>
+
+      <div class={styles.column}>
+        <h4 class={styles.heading}>Company</h4>
+        <a href="#" class={styles.link}>About Us</a>
+        <a href="#" class={styles.link}>Careers</a>
+        <a href="#" class={styles.link}>Contact</a>
+      </div>
+    </div>
+
+  </Container>
+</footer>

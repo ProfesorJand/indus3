@@ -1,0 +1,16 @@
+---
+import styles from './Section.module.css';
+
+interface Props {
+  variant?: 'alt' | 'compact' | 'hero' | 'fullHeightWithHeader';
+  id?: string;
+  className?: string;
+}
+
+const { variant, id, className = '' } = Astro.props;
+const classes = [styles.section, variant ? styles[variant] : '', className].join(' ');
+---
+
+<section id={id} class={classes}>
+  <slot />
+</section>

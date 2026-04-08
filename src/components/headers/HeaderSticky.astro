@@ -1,0 +1,40 @@
+---
+import styles from './HeaderSticky.module.css';
+import Container from '@components/base/Container.astro';
+import MobileMenu from './MobileMenu.jsx';
+
+const navigation = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Services', href: '/services' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contact', href: '/contact' },
+];
+---
+
+<header class={styles.header} id="header-sticky">
+  <Container className={styles.inner}>
+    <a href="/" class={styles.logo}>LOGO</a>
+    
+    <nav class={styles.nav}>
+      {navigation.map(item => (
+        <a href={item.href} class={styles.navLink}>{item.label}</a>
+      ))}
+    </nav>
+
+    <div class={styles.mobileActions}>
+      <MobileMenu client:load items={navigation} />
+    </div>
+  </Container>
+</header>
+
+<script>
+  const header = document.getElementById('header-sticky');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
+  });
+</script>

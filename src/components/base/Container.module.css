@@ -1,0 +1,19 @@
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+  min-height:100%
+}
+
+.narrow {
+  max-width: 800px;
+}
+
+.wide {
+  max-width: 1400px;
+}
+
+.full {
+  max-width: 100%;
+}

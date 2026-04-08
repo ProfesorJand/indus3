@@ -1,0 +1,16 @@
+---
+import styles from './BodyGrid.module.css';
+import Container from '@components/base/Container.astro';
+
+interface Props {
+  fullWidth?: boolean;
+}
+
+const { fullWidth = false } = Astro.props;
+---
+
+<Container variant={fullWidth ? 'full' : 'wide'}>
+  <div class={styles.grid}>
+    <slot />
+  </div>
+</Container>

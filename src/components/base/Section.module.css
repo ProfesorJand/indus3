@@ -1,0 +1,41 @@
+.section {
+  padding: var(--space-4) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.alt {
+  background-color: var(--color-bg-alt);
+}
+
+.compact {
+  padding: var(--space-4) 0;
+}
+
+.hero {
+  padding: var(--space-2) 0;
+}
+
+.fullHeightWithHeader{
+  min-height: var(--height-full-screen-with-header);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .section{
+    padding: var(--space-12) 0;
+  }
+  .alt {
+    background-color: var(--color-bg-alt);
+  }
+
+  .compact {
+    padding: var(--space-6) 0;
+  }
+
+  .hero {
+    padding: var(--space-16) 0;
+  }
+}

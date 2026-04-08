@@ -1,0 +1,53 @@
+---
+import styles from './HeaderTransparent.module.css';
+import Container from '@components/base/Container.astro';
+import MobileMenu from './MobileMenu.jsx';
+
+const navigation = [
+  { label: 'Servicios', href: '/servicios' },
+  { label: 'Portafolio', href: '/portafolio' },
+  { label: 'Nosotros', href: '/nosotros' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contacto', href: '/contacto' },
+];
+---
+
+<header class={styles.header} id="header-transparent">
+  <Container className={styles.inner}>
+    <a href="/" class={styles.logo}>LOGO</a>
+    
+    <nav class={styles.nav}>
+      {navigation.map(item => (
+        <a href={item.href} class={styles.navLink}>{item.label}</a>
+      ))}
+    </nav>
+
+    <div class={styles.mobileActions}>
+      <MobileMenu client:load items={navigation} />
+    </div>
+  </Container>
+</header>
+
+<script>
+  const header = document.getElementById('header-transparent');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) {
+      header?.classList.add(header.getAttribute('data-scrolled-class') || 'scrolled-active');
+      // For CSS Modules, we often have to handle classes specifically
+      // but simpler to use a data attribute or global class for state
+      header?.classList.add('scrolled-state');
+    } else {
+      header?.classList.remove('scrolled-state');
+    }
+  });
+</script>
+
+<style is:global>
+  /* Global state class for HeaderTransparent as it shifts from transparent to solid */
+  .scrolled-state {
+    background-color: var(--color-bg) !important;
+    box-shadow: var(--shadow-md);
+    color: var(--color-text) !important;
+    border-bottom: 1px solid var(--color-border);
+  }
+</style>

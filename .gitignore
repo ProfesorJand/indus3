@@ -1,0 +1,23 @@
+# Dependencias
+node_modules/
+
+# Directorios de construcción (Build)
+dist/
+
+# Caché de Astro
+.astro/
+
+# Archivos de entorno (Contienen claves secretas)
+.env
+.env.local
+.env.*.local
+
+# Archivos de TypeScript
+*.tsbuildinfo
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Configuración de VS Code
+.vscode/

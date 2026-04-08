@@ -1,0 +1,122 @@
+---
+import styles from './CardCarousel.module.css';
+
+interface CardAction {
+  label: string;
+  url: string;
+  variant?: 'primary' | 'secondary';
+}
+
+interface Card {
+  id: string | number;
+  image: string;
+  title: string;
+  description: string;
+  actions: CardAction[];
+}
+
+interface Props {
+  cards: Card[];
+  title?: string;
+}
+
+const { cards = [], title } = Astro.props;
+---
+
+
+<div class={styles.carouselWrapper} id="cardCarouselRoot">
+  {title && <h2 class={styles.sectionTitle}>{title}</h2>}
+  
+  <div class={styles.carouselContainer}>
+    <!-- Navigation Arrows For Desktop/Tablet -->
+    <div class={styles.nav}>
+      <button class={`${styles.arrow} ${styles.prev}`} id="cardCarouselPrev" aria-label="Anterior">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <button class={`${styles.arrow} ${styles.next}`} id="cardCarouselNext" aria-label="Siguiente">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    </div>
+
+    <div class={styles.carousel} id="cardCarouselTrack">
+      {cards.map((card) => (
+        <div class={styles.card} key={card.id}>
+          <div class={styles.imageWrapper}>
+            <img src={card.image} alt={card.title} class={styles.image} loading="lazy" />
+          </div>
+          
+          <div class={styles.content}>
+            <h3 class={styles.title}>{card.title}</h3>
+            <p class={styles.description} title={card.description}>
+              {card.description}
+            </p>
+            
+            <div class={styles.buttons}>
+              {card.actions.slice(0, 2).map((action) => (
+                <a 
+                  href={action.url} 
+                  class={`${styles.btn} ${action.variant === 'secondary' ? styles.btnSecondary : styles.btnPrimary}`}
+                >
+                  {action.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Local overrides or additional section styles if needed */
+  .sectionTitle {
+    margin-bottom: var(--space-8);
+  }
+</style>
+
+<script>
+  import styles from './CardCarousel.module.css';
+
+  function setupCarousel() {
+    const track = document.getElementById('cardCarouselTrack');
+    const prevBtn = document.getElementById('cardCarouselPrev') as HTMLButtonElement;
+    const nextBtn = document.getElementById('cardCarouselNext') as HTMLButtonElement;
+
+    if (!track || !prevBtn || !nextBtn) return;
+
+    const scrollAmount = () => {
+      const card = track.querySelector(`.${styles.card}`);
+      if (!card) return 300;
+      const style = window.getComputedStyle(track);
+      const gap = parseInt(style.columnGap) || 16;
+      return card.clientWidth + gap;
+    };
+
+    const updateButtons = () => {
+      const scrollLeft = track.scrollLeft;
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      
+      prevBtn.disabled = scrollLeft <= 0;
+      nextBtn.disabled = scrollLeft >= maxScroll - 5; // offset por redondeo
+    };
+
+    prevBtn.addEventListener('click', () => {
+      track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      track.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+    });
+
+    track.addEventListener('scroll', updateButtons);
+    window.addEventListener('resize', updateButtons);
+    
+    // Initial check
+    updateButtons();
+  }
+
+  // Init
+  setupCarousel();
+  document.addEventListener('astro:after-swap', setupCarousel);
+</script>

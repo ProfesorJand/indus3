@@ -1,0 +1,96 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import SEO from "@components/seo/SEO.astro";
+import { websiteSchema, organizationSchema } from "@utils/seo";
+import HeaderSticky from "@components/headers/HeaderSticky.astro";
+import FooterThreeCols from "@components/footers/FooterThreeCols.astro";
+import Section from "@components/base/Section.astro";
+import BodyTwoColumns from "@components/body/BodyTwoColumns.astro";
+
+const seoTitle = "Contacto";
+const seoDesc = "Página de contacto";
+const numeroTel = "xxxxxxxxxxxx";
+const numeroWsp = "xxxxxxxxxxxx";
+const emailContact = "tucorreoelectronico@gmail.com";
+const address = "C.C. Trinidad Tepuy, Av. Intercomunal de La Trinidad, Caracas, Venezuela";
+const googleMapsUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3923.8803591298974!2d-66.8490269!3d10.4310677!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2af7c9929eb569%3A0x106784cf538bed29!2sCentro%20Comercial%20Trinidad%20Tepuy!5e0!3m2!1ses!2sve!4v1775137666562!5m2!1ses!2sve"; // Placeholder, but I can use a generic search link if the specific one is unknown
+// Let's use a robust search URL for the address
+const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+
+const formatNumberMobile = (number: string) => {
+  return `(+${number.slice(0, 2)}) ${number.slice(2, 5)}-${number.slice(5, 8)}-${number.slice(8, 11)}`;
+}
+
+const formatNumberLandline = (number: string) => {
+  return `${number.slice(0, 4)}-${number.slice(4)}`;
+}
+---
+
+<MainLayout title={seoTitle}>
+  <SEO 
+    slot="seo" 
+    title={seoTitle} 
+    description={seoDesc} 
+    schemas={[websiteSchema, organizationSchema]} 
+  />
+
+  <HeaderSticky slot="header" />
+
+  <!-- Hero Section (Full Width example) -->
+  <Section variant="hero">
+    <BodyTwoColumns sidebarLeft={false} height="100%" width="1fr 2fr">
+      <div slot="sidebar" style="height:100%">
+        <iframe 
+        src={googleMapsUrl} width="100%" height="100%" style="border:0;" allowfullscreen="true" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+        <h1 style="font-size: var(--font-size-4xl); margin-bottom: var(--space-6);">
+          Contacto
+        </h1>
+      </div>
+      
+      <div style="display: flex; flex-direction: column; gap: var(--space-6);">
+        <div>
+          <h2 style="font-size: var(--font-size-xl);"><i class="fas fa-phone-alt"></i> Teléfono</h2>
+          <div style="margin-top: var(--space-2); display: flex; flex-direction: column; gap: var(--space-2);">
+            {numeroWsp && (
+              <a href={`https://wa.me/${numeroWsp}`} style="display: flex; align-items: center; gap: var(--space-2);">
+                <i class="fab fa-whatsapp" style="color:#25D366; font-size: 1.25rem;"></i>
+                <span>WhatsApp: {formatNumberMobile(numeroWsp)}</span>
+              </a>
+            )}
+            {numeroTel && (
+              <a href={`tel:${numeroTel}`} style="display: flex; align-items: center; gap: var(--space-2);">
+                <i class="fas fa-phone" style="color:var(--color-primary); font-size: 1.1rem;"></i>
+                <span>Llamada: {formatNumberLandline(numeroTel)}</span>
+              </a>
+            )}
+          </div>
+        </div>
+
+        <div>
+          <h2 style="font-size: var(--font-size-xl);"><i class="fas fa-envelope"></i> Correo</h2>
+          <p style="margin-top: var(--space-2);">
+            <a href={`mailto:${emailContact}`} style="display: flex; align-items: center; gap: var(--space-2);">
+              <i class="fas fa-at" style="color:var(--color-primary);"></i>
+              <span>{emailContact}</span>
+            </a>
+          </p>
+        </div>
+
+        <div>
+          <h2 style="font-size: var(--font-size-xl);"><i class="fas fa-map-marker-alt"></i> Dirección</h2>
+          <a 
+            href={mapsLink} 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            {address}
+          </a>
+        </div>
+      </div>
+    </BodyTwoColumns>
+  </Section>
+
+  <FooterThreeCols slot="footer" />
+</MainLayout>

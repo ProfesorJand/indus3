@@ -1,0 +1,222 @@
+.carouselWrapper {
+  width: 100%;
+  padding: var(--space-8) 0;
+  /* Eliminamos overflow: hidden para que las flechas situadas fuera se vean */
+  overflow: visible; 
+}
+
+.carouselContainer {
+  position: relative;
+  width: 100%;
+}
+
+.carousel {
+  display: flex;
+  gap: var(--space-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: var(--space-6) 0;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  scroll-behavior: smooth;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.card {
+  flex: 0 0 calc(100% - var(--space-8)); /* Mobile: 1 card visible starts */
+  scroll-snap-align: center;
+  background: var(--color-bg);
+  border-radius: var(--border-radius-xl);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.imageWrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  position: relative;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-base);
+}
+
+.card:hover .image {
+  transform: scale(1.05);
+}
+
+.content {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Esto hace que el contenido crezca para empujar los botones al fondo */
+}
+
+.title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+  color: var(--color-text);
+}
+
+.description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+  margin-bottom: var(--space-6);
+  line-height: 1.5;
+  
+  /* Elipsis text logic */
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Máximo 3 líneas */
+  -webkit-box-orient: vertical;
+  line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  flex-grow: 1; /* Asegura que todas las descripciones ocupen el mismo espacio si es necesario */
+}
+
+.buttons {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: auto; /* Empuja los botones siempre al final */
+}
+
+.btn {
+  flex: 1;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--border-radius-md);
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  transition: all var(--transition-base);
+}
+
+.btnPrimary {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.btnPrimary:hover {
+  background: var(--color-primary-dark);
+}
+
+.btnSecondary {
+  background: var(--color-bg-alt);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.btnSecondary:hover {
+  background: var(--color-border);
+}
+
+/* Nav Arrows */
+.nav {
+  display: none; /* Ocultar en móvil por defecto */
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.arrow {
+  pointer-events: auto;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-text);
+  transition: all var(--transition-base);
+  position: absolute;
+  z-index: 10;
+}
+
+.arrow:hover:not(:disabled) {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+  transform: scale(1.1);
+}
+
+.arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+
+/* Responsive Queries */
+@media (min-width: 640px) { /* Tablet */
+  .nav {
+    display: flex; /* Mostrar flechas en Tablet */
+  }
+  .card {
+    flex: 0 0 calc(50% - var(--space-4));
+    scroll-snap-align: start;
+  }
+  .prev {
+    left: 4px;
+  }
+  .next {
+    right: 4px;
+  }
+}
+
+@media (min-width: 1024px) { /* PC */
+  .carouselWrapper {
+    /* Agregamos padding lateral para hacer espacio a las flechas 
+       sin que salgan del contenedor principal (Container) */
+    padding: var(--space-8) var(--space-12);
+  }
+  
+  .card {
+    flex: 0 0 calc((100% - (var(--space-4) * 2)) / 3);
+  }
+  
+  .carousel {
+    padding: var(--space-8) 0;
+  }
+
+  /* Posicionamos las flechas dentro del padding del wrapper */
+  .prev {
+    left: calc(var(--space-12) * -1);;
+  }
+  .next {
+    right: calc(var(--space-12) * -1); ;
+  }
+}

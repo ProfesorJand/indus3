@@ -1,0 +1,15 @@
+---
+import styles from './Container.module.css';
+
+interface Props {
+  variant?: 'narrow' | 'wide' | 'full';
+  className?: string;
+}
+
+const { variant, className = '' } = Astro.props;
+const classes = [styles.container, variant ? styles[variant] : '', className].join(' ');
+---
+
+<div class={classes}>
+  <slot />
+</div>

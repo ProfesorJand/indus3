@@ -48,15 +48,17 @@ const stylesVariables = {
           <p class={styles.subtitle}>{slide.subtitle}</p>
           <div class={styles.buttons}>
             {slide.primaryButtonText && (
-              <a href={slide.primaryButtonLink} class={`${styles.btn} ${styles.btnPrimary}`}>
+              <a href={slide.primaryButtonLink?.startsWith('/') ? `${import.meta.env.BASE_URL}${slide.primaryButtonLink.slice(1)}` : slide.primaryButtonLink} class={`${styles.btn} ${styles.btnPrimary}`}>
                 {slide.primaryButtonText}
               </a>
             )}
+
             {slide.secondaryButtonText && (
-              <a href={slide.secondaryButtonLink} class={`${styles.btn} ${styles.btnSecondary}`}>
+              <a href={slide.secondaryButtonLink?.startsWith('/') ? `${import.meta.env.BASE_URL}${slide.secondaryButtonLink.slice(1)}` : slide.secondaryButtonLink} class={`${styles.btn} ${styles.btnSecondary}`}>
                 {slide.secondaryButtonText}
               </a>
             )}
+
           </div>
         </div>
       </div>

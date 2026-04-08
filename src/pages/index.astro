@@ -82,12 +82,12 @@ const cards = [
       {
         label: "Ver Colección",
         url: "/contact",
-        variant: "primary"
+        variant: "primary" as const
       },
       {
         label: "Saber más",
         url: "/contact",
-        variant: "secondary"
+        variant: "secondary" as const
       }
     ]
   },
@@ -100,12 +100,12 @@ const cards = [
       {
         label: "Comprar Ahora",
         url: "/contact",
-        variant: "primary"
+        variant: "primary" as const
       },
       {
         label: "Ver Detalles",
         url: "/contact",
-        variant: "secondary"
+        variant: "secondary" as const
       }
     ]
   },
@@ -118,12 +118,12 @@ const cards = [
       {
         label: "Comprar Ahora",
         url: "/contact",
-        variant: "primary"
+        variant: "primary" as const
       },
       {
         label: "Ver Detalles",
         url: "/contact",
-        variant: "secondary"
+        variant: "secondary" as const
       }
     ]
   },
@@ -136,12 +136,12 @@ const cards = [
       {
         label: "Comprar Ahora",
         url: "/contact",
-        variant: "primary"
+        variant: "primary" as const
       },
       {
         label: "Ver Detalles",
         url: "/contact",
-        variant: "secondary"
+        variant: "secondary" as const
       }
     ]
   },
@@ -154,12 +154,12 @@ const cards = [
       {
         label: "Comprar Ahora",
         url: "/contact",
-        variant: "primary"
+        variant: "primary" as const
       },
       {
         label: "Ver Detalles",
         url: "/contact",
-        variant: "secondary"
+        variant: "secondary" as const
       }
     ]
   },
@@ -172,12 +172,12 @@ const cards = [
       {
         label: "Comprar Ahora",
         url: "/contact",
-        variant: "primary"
+        variant: "primary" as const
       },
       {
         label: "Ver Detalles",
         url: "/contact",
-        variant: "secondary"
+        variant: "secondary" as const
       }
     ]
   }
@@ -207,10 +207,11 @@ const clientesVenezolanos = files
       .replace(/-/g, " ");
     
     return {
-      image: `/clientes-venezolanos/${file}`,
+      image: `${import.meta.env.BASE_URL}clientes-venezolanos/${file}`,
       title: title,
       link: "/#"
     };
+
   });
 
 let files2: string[] = [];
@@ -230,10 +231,11 @@ const clientesDeLaRegion = files2
       .replace(/-/g, " ");
     
     return {
-      image: `/clientes-de-la-region/${file}`,
+      image: `${import.meta.env.BASE_URL}clientes-de-la-region/${file}`,
       title: title,
       link: "/#"
     };
+
   }
 
   )

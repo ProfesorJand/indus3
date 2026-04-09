@@ -1,0 +1,17 @@
+---
+import styles from './CardArtista.module.css';
+
+interface Props {
+  name: string;
+  image: string;
+}
+
+const { name, image } = Astro.props;
+---
+
+<div class={styles.card}>
+  <div class={styles.imageContainer}>
+    <img src={image} alt={name} class={styles.image} />
+  </div>
+  <h3 class={styles.name}>{name}</h3>
+</div>

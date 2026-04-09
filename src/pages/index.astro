@@ -25,6 +25,8 @@ import Button from "@components/base/Button.astro";
 import LogoCard from "@components/logo/LogoCard.astro";
 import Container from "@components/base/Container.astro";
 import Slider from "@components/base/Slider.astro";
+import CardArtista from "@components/base/CardArtista.astro";
+import artistas from "../data/artistas.json";
 
 const seoTitle = "Inicio";
 const seoDesc = "Sistema de plantillas modular y escalable para creación rápida de sitios web corporativos y landing pages.";
@@ -281,6 +283,54 @@ const clientesDeLaRegion = files2
       <CardCarousel cards={cards} title="Productos Destacados" />
     </Container>
   </Section>
+
+  <!-- Artistas Section -->
+  <Section>
+    <Container>
+      <h2 style="text-align: center; margin-bottom: var(--space-12); font-size: var(--font-size-3xl);">Nuestros Clientes y Aliados</h2>
+      <div class="artist-grid">
+        {artistas.map((artista) => (
+          <CardArtista name={artista.name} image={artista.image} />
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <style>
+    .artist-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-8);
+      margin-bottom: var(--space-12);
+    }
+
+    .artist-grid > :global(*) {
+      flex: 0 0 calc(12.5% - var(--space-8));
+      min-width: 120px;
+    }
+
+    @media (max-width: 1400px) {
+      .artist-grid > :global(*) {
+        flex: 0 0 calc(16.66% - var(--space-8));
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .artist-grid > :global(*) {
+        flex: 0 0 calc(25% - var(--space-8));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .artist-grid {
+        gap: var(--space-4);
+      }
+      .artist-grid > :global(*) {
+        flex: 0 0 calc(50% - var(--space-4));
+      }
+    }
+  </style>
 
   <!-- Content with Sidebar Example -->
   <Section variant="hero">

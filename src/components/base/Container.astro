@@ -5,10 +5,11 @@ interface Props {
   variant?: 'narrow' | 'wide' | 'full';
   className?: string;
   fullHeight?: boolean;
+  padding?: string;
 }
 
-const { variant, className = '', fullHeight } = Astro.props;
-const classes = [styles.container, variant ? styles[variant] : '', className, fullHeight ? styles.fullHeight : ''].join(' ');
+const { variant, className = '', fullHeight, padding } = Astro.props;
+const classes = [styles.container, variant ? styles[variant] : '', className, fullHeight ? styles.fullHeight : '', padding ? styles[padding] : ''].join(' ');
 ---
 
 <div class={classes}>

@@ -1,0 +1,24 @@
+---
+import EventForm from "./EventForm.jsx";
+
+interface Props {
+  eventToEdit?: any;
+}
+
+const { eventToEdit } = Astro.props;
+---
+
+<div class="events-form-wrapper">
+  <EventForm client:load eventToEdit={eventToEdit} />
+</div>
+
+<style>
+  .events-form-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: var(--color-bg-alt);
+    min-height: 100vh;
+    padding: 2rem 0;
+  }
+</style>

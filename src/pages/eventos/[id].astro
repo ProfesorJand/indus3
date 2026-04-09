@@ -1,0 +1,381 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import SEO from "@components/seo/SEO.astro";
+import HeaderSticky from "@components/headers/HeaderSticky.astro";
+import FooterThreeCols from "@components/footers/FooterThreeCols.astro";
+import Section from "@components/base/Section.astro";
+import Container from "@components/base/Container.astro";
+import BodyGrid from "@components/body/BodyGrid.astro";
+import eventsData from "@data/events.json";
+
+export async function getStaticPaths() {
+  return eventsData.map((event) => ({
+    params: { id: event.id.toString() },
+    props: { event },
+  }));
+}
+
+const { event } = Astro.props;
+
+const seoTitle = `${event.nombreEvento} | Indus3`;
+const seoDesc = event.descripcionEvento;
+---
+
+<MainLayout title={seoTitle}>
+  <SEO slot="seo" title={seoTitle} description={seoDesc} />
+  
+  <HeaderSticky slot="header" />
+
+  <main>
+    <!-- Hero Banner -->
+    <div class="event-hero">
+      <img src={event.imagenBanner} alt={event.nombreEvento} class="hero-img" />
+      <div class="hero-overlay"></div>
+      <Container className="hero-content">
+        <div class="event-badge">Próximo Evento</div>
+        <h1 class="event-title">{event.nombreEvento}</h1>
+        <p class="event-subtitle">{event.identificacionEvento}</p>
+      </Container>
+    </div>
+
+    <!-- Quick Info Bar -->
+    <div class="info-bar">
+      <Container>
+        <div class="info-grid">
+          <div class="info-item">
+            <i class="fas fa-calendar-alt"></i>
+            <div>
+              <span>Fecha</span>
+              <strong>{event.fechaEvento}</strong>
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-clock"></i>
+            <div>
+              <span>Inicio del Show</span>
+              <strong>{event.comienzoShow}</strong>
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <span>Lugar</span>
+              <strong>{event.lugarEvento}</strong>
+            </div>
+          </div>
+          <div class="info-action">
+            <a href={event.ventaEntradas} target="_blank" class="btn-tickets">
+              Comprar Entradas
+            </a>
+          </div>
+        </div>
+      </Container>
+    </div>
+
+    <!-- Main Content -->
+    <Section>
+      <Container>
+        <BodyGrid>
+          <!-- Left Column: Details -->
+          <div class="content-left">
+            <h2 class="section-title">Sobre el Evento</h2>
+            <p class="description">{event.descripcionEvento}</p>
+            
+            <div class="details-box">
+              <div class="detail-row">
+                <strong>Apertura de Puertas:</strong>
+                <span>{event.aperturaPuertas}</span>
+              </div>
+              <div class="detail-row">
+                <strong>Restricciones de Edad:</strong>
+                <span>{event.restriccionesEdad}</span>
+              </div>
+            </div>
+
+            {event.flyerEvento && (
+              <div class="flyer-container">
+                <h3 class="subsection-title">Flyer Oficial</h3>
+                <img src={event.flyerEvento} alt="Flyer del Evento" class="flyer-img" />
+              </div>
+            )}
+          </div>
+
+          <!-- Right Column: Artist/Bio -->
+          <div class="content-right">
+             <div class="artist-card">
+                <img src={event.imagenBiografia} alt={event.identificacionEvento} class="artist-img" />
+                <div class="artist-info">
+                   <h3>Quién es {event.identificacionEvento}</h3>
+                   <p>{event.quienEsArtista}</p>
+                   {event.linkBiografia && (
+                      <a href={`/biografia/${event.linkBiografia}`} class="btn-bio">Ver Biografía Completa</a>
+                   )}
+                </div>
+             </div>
+
+             <div class="spotify-section">
+                <h3 class="subsection-title">Mejores Canciones</h3>
+                {event.mejoresCanciones?.map(url => (
+                    <iframe 
+                      style="border-radius:12px; margin-bottom: 1rem;" 
+                      src={url.includes('embed') ? url : url.replace('/track/', '/embed/track/')} 
+                      width="100%" 
+                      height="80" 
+                      frameBorder="0" 
+                      allowfullscreen="" 
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                      loading="lazy"
+                    ></iframe>
+                ))}
+             </div>
+          </div>
+        </BodyGrid>
+      </Container>
+    </Section>
+
+    <!-- History & Curiosities -->
+    <Section variant="alt">
+      <Container>
+        <BodyGrid>
+           <div class="text-block">
+             <h3 class="section-title">Historia</h3>
+             <p>{event.historiaArtista}</p>
+           </div>
+           <div class="text-block">
+             <h3 class="section-title">Datos Curiosos</h3>
+             <ul class="curiosities-list">
+               {event.datosCuriosos?.split('.').filter(t => t.trim()).map(dato => (
+                 <li>{dato}.</li>
+               ))}
+             </ul>
+           </div>
+        </BodyGrid>
+      </Container>
+    </Section>
+
+    <!-- Logistics -->
+    <Section>
+      <Container>
+        <div class="logistics-card">
+          <h3><i class="fas fa-info-circle"></i> Información Logística e Higiénica</h3>
+          <p>{event.logisticaHigienicos}</p>
+        </div>
+      </Container>
+    </Section>
+
+    {/* Patrocinadores (Simple representation for now) */}
+    {event.patrocinadores && (
+      <Section variant="alt">
+        <Container>
+          <h3 class="section-title" style="text-align: center;">Patrocinado por</h3>
+          <div class="sponsors-grid">
+             {event.patrocinadores.split(',').map(s => (
+               <div class="sponsor-placeholder">{s.trim()}</div>
+             ))}
+          </div>
+        </Container>
+      </Section>
+    )}
+  </main>
+
+  <FooterThreeCols slot="footer" />
+</MainLayout>
+
+<style>
+  .event-hero {
+    position: relative;
+    height: 70vh;
+    min-height: 500px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  .hero-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding-bottom: 4rem;
+  }
+  .event-badge {
+    background: var(--color-primary);
+    color: white;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-full);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .event-title {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    color: white;
+  }
+  .event-subtitle {
+    font-size: var(--font-size-xl);
+    color: var(--color-primary-light);
+    font-weight: 500;
+  }
+
+  /* Info Bar */
+  .info-bar {
+    background: #111;
+    border-bottom: 1px solid var(--color-border);
+    padding: 1.5rem 0;
+  }
+  .info-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  }
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .info-item i {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+  }
+  .info-item span {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+  }
+  .info-item strong {
+    font-size: 1.1rem;
+    color: white;
+  }
+  .btn-tickets {
+    background: var(--color-primary);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: var(--border-radius-lg);
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .btn-tickets:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  }
+
+  /* Sections */
+  .section-title {
+    font-size: var(--font-size-3xl);
+    margin-bottom: 1.5rem;
+    color: var(--color-primary);
+  }
+  .description {
+    font-size: var(--font-size-lg);
+    line-height: 1.8;
+    color: var(--color-text-light);
+    margin-bottom: 2rem;
+  }
+
+  .details-box {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--color-border);
+    padding: 1.5rem;
+    border-radius: var(--border-radius-lg);
+  }
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .detail-row:last-child { border: none; }
+
+  .flyer-img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: var(--border-radius-lg);
+    margin-top: 1rem;
+  }
+
+  /* Artist Card */
+  .artist-card {
+    background: var(--color-bg);
+    border-radius: var(--border-radius-xl);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    margin-bottom: 2rem;
+  }
+  .artist-img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+  .artist-info {
+    padding: 2rem;
+  }
+  .artist-info h3 { margin-bottom: 1rem; }
+  .btn-bio {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+  }
+  .btn-bio:hover { border-bottom-color: var(--color-primary); }
+
+  .logistics-card {
+    background: rgba(var(--color-primary-rgb), 0.05);
+    border-left: 5px solid var(--color-primary);
+    padding: 2.5rem;
+    border-radius: var(--border-radius-lg);
+  }
+
+  .curiosities-list {
+    list-style: none;
+    padding: 0;
+  }
+  .curiosities-list li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+  .curiosities-list li::before {
+    content: "•";
+    color: var(--color-primary);
+    position: absolute;
+    left: 0;
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .sponsors-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  .sponsor-placeholder {
+    padding: 1.5rem 3rem;
+    background: white;
+    color: black;
+    font-weight: 800;
+    border-radius: var(--border-radius-md);
+  }
+</style>

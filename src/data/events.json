@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "nombreEvento": "Indus3 Music Fest 2026",
+    "fechaEvento": "2026-08-15",
+    "descripcionEvento": "El festival de música electrónica más grande de la región, uniendo talentos nacionales e internacionales en una noche inolvidable.",
+    "imagenBanner": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=2000",
+    "imagenPR": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=1200",
+    "identificacionEvento": "Indus3 Festival",
+    "aperturaPuertas": "16:00",
+    "comienzoShow": "18:00",
+    "lugarEvento": "C.C.T. Caracas, Venezuela",
+    "ventaEntradas": "https://ticketera.com/indus3fest",
+    "flyerEvento": "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?auto=format&fit=crop&q=80&w=1000",
+    "patrocinadores": "Logo1, Logo2, Logo3",
+    "linkBiografia": "indus3-fest",
+    "restriccionesEdad": "Mayores de 18 años",
+    "logisticaHigienicos": "Contamos con amplias zonas de hidratación, servicios médicos de emergencia 24/7, y protocolos de seguridad de alto nivel. Estacionamiento disponible en el sótano del Centro Comercial.",
+    "imagenTicketera": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=800",
+    "imagenBiografia": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=1200",
+    "quienEsArtista": "Indus3 Fest es una plataforma de lanzamiento para la cultura urbana y electrónica en Venezuela.",
+    "mejoresCanciones": ["https://open.spotify.com/embed/track/6UelLqGlKEfk6HbsStH3tR", "https://open.spotify.com/embed/track/4cOdzhR0rp6P686mAtY79m"],
+    "historiaArtista": "Nacido de la necesidad de espacios seguros y de alta producción para artistas locales.",
+    "datosCuriosos": "Es el primer festival en usar energía solar para el 30% de su iluminación."
+  }
+]

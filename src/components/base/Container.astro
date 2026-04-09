@@ -4,10 +4,11 @@ import styles from './Container.module.css';
 interface Props {
   variant?: 'narrow' | 'wide' | 'full';
   className?: string;
+  fullHeight?: boolean;
 }
 
-const { variant, className = '' } = Astro.props;
-const classes = [styles.container, variant ? styles[variant] : '', className].join(' ');
+const { variant, className = '', fullHeight } = Astro.props;
+const classes = [styles.container, variant ? styles[variant] : '', className, fullHeight ? styles.fullHeight : ''].join(' ');
 ---
 
 <div class={classes}>

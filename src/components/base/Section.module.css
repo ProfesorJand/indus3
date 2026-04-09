@@ -17,7 +17,7 @@
 }
 
 .fullHeightWithHeader{
-  min-height: var(--height-full-screen-with-header);
+  height: var(--height-full-screen-with-header);
   display: flex;
   align-items: center;
   justify-content: center;

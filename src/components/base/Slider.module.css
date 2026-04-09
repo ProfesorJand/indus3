@@ -1,7 +1,7 @@
 .sliderContainer {
   position: relative;
   width: var(--slider-width, 100%);
-  height: var(--slider-height, 500px);
+  height: var(--slider-height, 100%);
   overflow: hidden;
   border-radius: var(--border-radius-xl);
   box-shadow: var(--shadow-lg);
@@ -68,7 +68,7 @@
   backdrop-filter: blur(10px);
   padding: var(--space-1) var(--space-4);
   border-radius: var(--border-radius-full);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xl);
   font-weight: 600;
   display: flex;
   justify-self: center;
@@ -84,7 +84,7 @@
 
 
 .title {
-  font-size: var(--font-size-4xl);
+  font-size: var(--font-size-5xl);
   font-weight: 800;
   margin-bottom: var(--space-4);
   line-height: 1.1;
@@ -170,11 +170,6 @@
   align-items: center;
   justify-content: center;
   transition: all var(--transition-base);
-  opacity: 0;
-}
-
-.sliderContainer:hover .arrow {
-  opacity: 1;
 }
 
 .arrow:hover {
@@ -194,6 +189,7 @@
   z-index: 10;
   display: flex;
   gap: var(--space-3);
+  align-items: center;
 }
 
 .dot {
@@ -205,13 +201,35 @@
   transition: all var(--transition-base);
 }
 
+.controlBtn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: all var(--transition-base);
+  font-size: 0.9rem;
+  margin-left: var(--space-2);
+}
+
+.controlBtn:hover {
+  color: var(--color-white);
+  transform: scale(1.1);
+}
+
+.hidden {
+  display: none !important;
+}
+
 .dotActive {
   background: var(--color-white);
   width: 30px;
   border-radius: var(--border-radius-full);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .sliderContainer {
     height: var(--slider-height-mobile, 400px);
   }
@@ -221,11 +239,16 @@
   .subtitle {
     font-size: var(--font-size-base);
   }
-  .arrow {
-    display: none;
-  }
   .content {
     max-width: 90%;
     padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    justify-content:space-evenly;
+    align-items: center;
+    height:100%;
+  }
+  .date{
+    font-size:var(--font-size-sm);
   }
 }

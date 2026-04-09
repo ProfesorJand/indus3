@@ -4,7 +4,7 @@ import styles from './Slider.module.css';
 interface Slide {
   image: string;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   date?: string;
   primaryButtonText?: string;
   primaryButtonLink?: string;
@@ -45,7 +45,7 @@ const stylesVariables = {
                 {slide.date}
               </div>
             )}
-          <p class={styles.subtitle}>{slide.subtitle}</p>
+          {slide.subtitle && <p class={styles.subtitle}>{slide.subtitle}</p>}
           <div class={styles.buttons}>
             {slide.primaryButtonText && (
               <a href={slide.primaryButtonLink?.startsWith('/') ? `${import.meta.env.BASE_URL}${slide.primaryButtonLink.slice(1)}` : slide.primaryButtonLink} class={`${styles.btn} ${styles.btnPrimary}`}>
@@ -79,6 +79,13 @@ const stylesVariables = {
         data-index={index} 
       />
     ))}
+    {/* dot de pausa y play del slider */}
+    <button id="pauseBtn" class={styles.controlBtn} data-index="pause" aria-label="Pause autoplay">
+      <i class="fas fa-pause" />
+    </button>
+    <button id="playBtn" class={`${styles.controlBtn} ${styles.hidden}`} data-index="play" aria-label="Start autoplay">
+      <i class="fas fa-play" />
+    </button>
   </div>
 </div>
 
@@ -89,8 +96,10 @@ const stylesVariables = {
     const track = document.getElementById('sliderTrack');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
+    const playBtn = document.querySelector(`[data-index="play"]`);
+    const pauseBtn = document.querySelector(`[data-index="pause"]`);
     
-    if (!container || !track || !prevBtn || !nextBtn) return;
+    if (!container || !track || !prevBtn || !nextBtn || !playBtn || !pauseBtn) return;
 
     const dots = container.querySelectorAll(`[class*="${styles.dot}"]`);
     const slides = track.querySelectorAll(`[class*="slide"]`);
@@ -113,6 +122,18 @@ const stylesVariables = {
     function stopAutoPlay() {
       if (autoPlayInterval) {
         clearInterval(autoPlayInterval);
+      }
+    }
+
+    function togglePlay(action: string) {
+      if (action === 'play') {
+        startAutoPlay();
+        playBtn.classList.add(styles.hidden);
+        pauseBtn.classList.remove(styles.hidden);
+      } else {
+        stopAutoPlay();
+        playBtn.classList.remove(styles.hidden);
+        pauseBtn.classList.add(styles.hidden);
       }
     }
 
@@ -152,6 +173,19 @@ const stylesVariables = {
         resetAutoPlay();
       });
     });
+
+    // Add event listener for pause/play button
+    
+    if (playBtn) {
+      playBtn.addEventListener('click', () => {
+        togglePlay('play');
+      });
+    }
+    if (pauseBtn) {
+      pauseBtn.addEventListener('click', () => {
+        togglePlay('pause');
+      });
+    }
 
     // Start initial auto-play
     startAutoPlay();

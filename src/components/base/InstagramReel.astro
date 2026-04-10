@@ -1,0 +1,159 @@
+---
+const { instagramReelTitle, instagramReelId } = Astro.props;
+
+// Colores corporativos (puedes ajustarlos)
+const brandPurple = "#6a1b9a";
+const brandPurpleLight = "#9c4dcc";
+const skeletonBg = "rgba(255, 255, 255, 0.05)";
+---
+
+<div class="reel-section">  
+  <div class="reel-wrapper glass">
+    {instagramReelTitle && <h2 class="section-title">{instagramReelTitle}</h2>}
+    <blockquote 
+      class="instagram-media" 
+      data-instgrm-permalink={`https://www.instagram.com/reel/${instagramReelId}/?utm_source=ig_embed&amp;utm_campaign=loading`} 
+      data-instgrm-version="14"
+    >
+      <div class="skeleton-placeholder"> 
+        <a href={`https://www.instagram.com/reel/${instagramReelId}/`} target="_blank">
+          <div class="skeleton-header"> 
+            <div class="skeleton-avatar"></div>
+            <div class="skeleton-text-lines"> 
+              <div class="line line-long"></div> 
+              <div class="line line-short"></div>
+            </div>
+          </div>
+          <div class="skeleton-main-body"></div>
+          <div class="skeleton-footer">
+            <div class="insta-icon">
+              <i class="fab fa-instagram"></i>
+            </div>
+            <span class="cta-text">Ver reel de @indus3pro</span>
+          </div>
+        </a>
+      </div>
+    </blockquote>
+    <script async src="//www.instagram.com/embed.js"></script>
+  </div>
+</div>
+
+<style>
+  .reel-section {
+    margin: var(--space-6) 0;
+  }
+
+  .section-title {
+    font-size: var(--font-size-2xl);
+    font-weight: 800;
+    margin-bottom: var(--space-6);
+    color: white;
+  }
+
+  .reel-wrapper {
+    flex-direction: column;
+    position: relative;
+    max-width: 540px;
+    margin: 0 auto;
+    padding: var(--space-4);
+    border-radius: 12px;
+    /* CORTAMOS EL EXCESO: Solo mostramos la altura del video */
+    height: 480px; 
+    overflow: hidden; 
+    background: #000;
+    display: flex;
+    justify-content: center;
+  }
+
+  .instagram-media {
+    /* DESPLAZAMIENTO: Subimos el video para ocultar la cabecera de IG */
+    margin-top: -65px !important; 
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+    border: none !important;
+  }
+
+  /* Ya no necesitamos la máscara ::after porque estamos recortando */
+  .reel-wrapper::after {
+    display: none;
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .instagram-media {
+    margin: 0 !important;
+    width: 100% !important;
+    border: none !important;
+    background: #000 !important;
+  }
+
+  /* Estilos del Esqueleto (Loading State) */
+  .skeleton-placeholder {
+    padding: 20px;
+    width: 100%;
+    min-width: 326px;
+    background: #000;
+  }
+/* ... rest of existing skeleton styles ... */
+
+  .skeleton-placeholder a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .skeleton-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .skeleton-avatar {
+    background: linear-gradient(45deg, #6a1b9a, #9c4dcc);
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    margin-right: 14px;
+  }
+
+  .line {
+    border-radius: 4px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .line-long { width: 120px; margin-bottom: 8px; }
+  .line-short { width: 80px; }
+
+  .skeleton-main-body {
+    height: 300px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .skeleton-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .insta-icon {
+    font-size: 2.5rem;
+    color: #9c4dcc;
+  }
+
+  .cta-text {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+    font-weight: 600;
+  }
+</style>

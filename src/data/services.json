@@ -1,0 +1,42 @@
+{
+  "highLevelServices" : [
+    "Booking agency.",
+    "Producción general de eventos.",
+    "Desarrollo, planificación y ejecución de conciertos, festivales, exposiciones y eventos.",
+    "Agencia 360 de comunicaciones y marketing.",
+    "Y mucho más..."
+  ],
+  "serviceCategories" : [
+    {
+      "title": "Corporativo",
+      "icon": "fas fa-briefcase",
+      "items": [
+        "Eventos (lanzamientos, ruedas de prensa, fiestas)",
+        "Promociones en PDV",
+        "Actividades BTL",
+        "Convenciones de ventas"
+      ]
+    },
+    {
+      "title": "Musicales",
+      "icon": "fas fa-music",
+      "items": [
+        "Conciertos",
+        "Festivales",
+        "Giras nacionales e internacionales",
+        "Booking artistas (nacionales e internacionales)"
+      ]
+    },
+    {
+      "title": "Entretenimiento",
+      "icon": "fas fa-smile-beam",
+      "items": [
+        "Exposiciones",
+        "Charlas y conferencias",
+        "Deporte",
+        "Esports",
+        "Circos y shows temáticos"
+      ]
+    }
+  ]
+}

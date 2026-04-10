@@ -1,0 +1,330 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import HeaderSticky from "@components/headers/HeaderSticky.astro";
+import FooterThreeCols from "@components/footers/FooterThreeCols.astro";
+import Section from "@components/base/Section.astro";
+import Container from "@components/base/Container.astro";
+import biografias from "@data/biografias.json";
+import SEO from "@components/seo/SEO.astro";
+import BodyTwoColumns from "@components/body/BodyTwoColumns.astro";
+import { redes } from "@stores/redes";
+import SpotifyPlayer from "@components/base/SpotifyPlayer.astro";
+
+export function getStaticPaths() {
+  return biografias.map((bio) => ({
+    params: { id: bio.id },
+    props: { bio },
+  }));
+}
+
+const { bio } = Astro.props;
+
+const seoTitle = `${bio.name} - Biografía`;
+const seoDesc = bio?.description || `Conoce la trayectoria de ${bio.name}`;
+---
+
+<MainLayout title={seoTitle}>
+  <SEO slot="seo" title={seoTitle} description={seoDesc} />
+  <HeaderSticky slot="header" />
+
+  <main class="bio-page">
+
+    <!-- 1. INTRODUCCIÓN: Artista y Descripción -->
+    <Section variant="hero" className="intro-section">
+      <Container padding="padding-0-32" height={true}>
+        <BodyTwoColumns height="100%" width="1fr 2fr" sidebarLeft={true}>
+          <div slot="sidebar" style="height:100%">
+            <div slot="content" style="height:100%">
+              <div class="intro-text">
+                <div class="bio-badge">{bio.type.toUpperCase()}</div>
+                <h1 class="artist-name" transition:name={`title-${bio.id}`}>{bio.name}</h1>
+                <!-- <div class="intro-image-container">
+                  <img src={bio.artistImg} alt={bio.name} class="artist-main-img" transition:name={`image-${bio.id}`} />
+                </div> -->
+                <p class="artist-description">{bio.description}</p>
+                {bio.genre && bio.genre.length > 0 && (
+                  <div class="genre-container">
+                    <span>Genero:</span>
+                    <div class="bio-badge genre">{bio.genre.join(", ")}</div>
+                  </div>
+                )}
+              
+              <div class="details-list">
+                {bio.artistDetails?.map((detail) => (
+                  <div class="detail-card glass">
+                    {detail.realName && <h3>{detail.realName}</h3>}
+                    <ul>
+                      {detail.birthPlace && <li><strong>Origen:</strong> {detail.birthPlace}</li>}
+                      {detail.birthDate && <li><strong>Fecha de Nacimiento:</strong> {detail.birthDate}</li>}
+                      {detail.height && <li><strong>Estatura:</strong> {detail.height}</li>}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+          </div>
+          </div>
+         <!-- 2. MÚSICA: Éxitos Destacados -->
+        {bio.urlSpotify && (
+              <div class="music-section glass">
+                <h2 class="section-title">Escucha su música</h2>
+                <div class="music-container">
+                  <SpotifyPlayer url={bio.urlSpotify} height={"100%"} title={`Spotify de ${bio.name}`} />
+                </div>
+              </div>
+        )}
+      </Container>
+    </Section>
+
+   
+
+   
+
+    <!-- 4. HECHO CURIOSO: Video -->
+    {bio.instagramReelVideo && (
+      <Section variant="compact">
+        <Container padding="padding-0-32">
+          <BodyTwoColumns height="100%" width="2fr 1fr" sidebarLeft={true}>
+            {bio.awards && bio.awards.length > 0 && (
+              <div slot="sidebar" style="height:100%">
+                <h2 class="section-title centered">Premios y Reconocimientos</h2>
+                <div class="awards-grid">
+                  {bio.awards.map(award => (
+                    <div class="award-item glass">
+                      <div class="icon-box">
+                        <i class="fas fa-trophy"></i>
+                      </div>
+                      <p>{award}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+                <h2 class="section-title centered">{bio.instagramReelTitle || "Dato Curioso"}</h2>
+                <p class="see-more" style="color: var(--color-primary);">
+                  <a href={redes.instagram} target="_blank">Ver más contenido -> instagram/@indus3pro</a>
+                </p>
+                <div class="video-wrapper shadow-xl">
+                  <video controls loop playsinline class="my-reel">
+                    <source src={import.meta.env.BASE_URL + bio.instagramReelVideo} type="video/mp4" />
+                    Tu navegador no soporta videos.
+                  </video>
+                </div>
+          </BodyTwoColumns>
+        </Container>
+      </Section>
+    )}
+  </main>
+
+  <FooterThreeCols slot="footer" />
+</MainLayout>
+
+<style>
+  .bio-page {
+    overflow-x: hidden;
+  }
+
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: var(--space-12);
+    align-items: center;
+    padding-top: var(--space-8);
+  }
+
+  .bio-badge {
+    background: var(--color-primary);
+    color: white;
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: 800;
+    margin-bottom: var(--space-4);
+    letter-spacing: 1px;
+  }
+
+  .genre{
+    background: var(--color-secondary);
+  }
+
+  .artist-name {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    margin-bottom: var(--space-4);
+    line-height: 1.1;
+  }
+
+  .artist-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-light);
+    line-height: 1.6;
+    margin-bottom: var(--space-10);
+    max-width: 90%;
+  }
+
+  .artist-main-img {
+    width: 100%;
+    border-radius: var(--border-radius-2xl);
+    box-shadow: var(--shadow-2xl);
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .details-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+  }
+
+  .detail-card {
+    padding: var(--space-6);
+    flex: 1 1 250px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .detail-card h3 {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--space-3);
+    color: var(--color-primary);
+  }
+
+  .detail-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .detail-card li {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+    margin-bottom: 4px;
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    border-radius: var(--border-radius-xl);
+  }
+
+  .music-section {
+    height: 100%;
+    padding: var(--space-4);
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section-title {
+    font-size: var(--font-size-2xl);
+    font-weight: 800;
+  }
+
+  .section-title.centered {
+    text-align: center;
+    margin-bottom: var(--space-4);
+  }
+
+  .music-container{
+    display: flex;
+    position:relative;
+    height: 100%;
+    width:100%;
+  }
+  .awards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+    gap: var(--space-6);
+  }
+
+  .award-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    padding: var(--space-8);
+    transition: transform 0.3s ease;
+  }
+
+  .award-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.06);
+  }
+
+  .icon-box {
+    background: rgba(255, 255, 255, 0.05);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .icon-box i {
+    color: var(--color-primary);
+    font-size: 1.25rem;
+  }
+
+  .video-wrapper {
+    max-width: 450px;
+    margin: 0 auto;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #000;
+    line-height: 0;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  }
+
+  .my-reel {
+    width: 100%;
+    height: auto;
+  }
+
+  .see-more {
+    text-align: center;
+    font-size: var(--font-size-sm);
+    margin: var(--space-2);
+  }
+
+  /* .background{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    height: 100vh;
+    width: 100%;
+  }
+
+  .background-image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  } */
+
+  @media (max-width: 1024px) {
+    .intro-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .intro-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .artist-description {
+      max-width: 100%;
+    }
+    .details-list {
+      justify-content: center;
+    }
+    .intro-image-container {
+      
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  }
+</style>

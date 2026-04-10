@@ -30,7 +30,7 @@ const seoDesc = "Próximos eventos, conciertos y festivales producidos por Indus
     <Section variant="alt">
       <Container>
         {eventsData.length > 0 ? (
-          <BodyGrid>
+          <BodyGrid columns={eventsData.length > 3 ? 3 : eventsData.length}>
             {eventsData.map(event => (
               <a href={`/eventos/${event.id}`} class="event-card">
                 <div class="image-wrapper">
@@ -40,7 +40,7 @@ const seoDesc = "Próximos eventos, conciertos y festivales producidos por Indus
                 <div class="content">
                   <h3>{event.nombreEvento}</h3>
                   <p class="location"><i class="fas fa-map-marker-alt"></i> {event.lugarEvento}</p>
-                  <p class="description">{event.descripcionEvento.substring(0, 100)}...</p>
+                  <p class="description">{event.descripcionEvento?.[0].substring(0, 100)}...</p>
                   <span class="btn-more">Más Información</span>
                 </div>
               </a>

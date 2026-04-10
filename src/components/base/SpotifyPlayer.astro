@@ -1,0 +1,156 @@
+---
+interface Props {
+  url: string;
+  height?: string | number;
+  title?: string;
+}
+
+const { url, height = "352", title = "Spotify Player" } = Astro.props;
+---
+
+<div class="spotify-wrapper" style={`min-height: ${height}px;`}>
+  <!-- Placeholder / Skeleton -->
+  <div class="spotify-skeleton glass">
+    <div class="spotify-icon-container">
+      <i class="fab fa-spotify pulse"></i>
+    </div>
+    <div class="skeleton-text">
+       <span class="loading-label">Conectando con Spotify...</span>
+       <div class="skeleton-bar"></div>
+       <div class="skeleton-bar short"></div>
+    </div>
+  </div>
+  
+  <iframe 
+    class="spotify-iframe"
+    data-src={url}
+    title={title}
+    width="100%" 
+    height={height}
+    frameBorder="0" 
+    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+    loading="lazy"
+  ></iframe>
+</div>
+
+<style>
+  .spotify-wrapper {
+    position: relative;
+    width: 100%;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  .spotify-skeleton {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
+    transition: opacity 0.4s ease-out, visibility 0.4s;
+  }
+
+  .spotify-iframe {
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  /* Estado Cargado */
+  .spotify-wrapper.loaded .spotify-skeleton {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .spotify-wrapper.loaded .spotify-iframe {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .spotify-icon-container {
+    font-size: 3rem;
+    color: #1DB954; /* Verde Spotify */
+  }
+
+  .pulse {
+    animation: pulse 2s infinite;
+  }
+
+  .loading-label {
+    font-size: 0.9rem;
+    color: #b3b3b3;
+    font-weight: 500;
+  }
+
+  .skeleton-text {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .skeleton-bar {
+    height: 8px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    width: 80%;
+  }
+
+  .skeleton-bar.short {
+    width: 50%;
+  }
+
+  .glass {
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.8; }
+  }
+</style>
+
+<script>
+  function initSpotifyPlayers() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const wrapper = entry.target;
+          const iframe = wrapper.querySelector('iframe') as HTMLIFrameElement;
+          
+          if (iframe && iframe.dataset.src) {
+            // Cargar el src real
+            iframe.src = iframe.dataset.src;
+            
+            // Cuando termine de cargar, mostrarlo
+            iframe.onload = () => {
+              wrapper.classList.add('loaded');
+            };
+
+            observer.unobserve(wrapper);
+          }
+        }
+      });
+    }, { rootMargin: '200px' }); // Empieza a cargar 200px antes de que llegue a la pantalla
+
+    document.querySelectorAll('.spotify-wrapper').forEach(wrapper => {
+      observer.observe(wrapper);
+    });
+  }
+
+  // Ejecutar en la carga inicial y después de transiciones de página (View Transitions)
+  document.addEventListener('astro:page-load', initSpotifyPlayers);
+  initSpotifyPlayers();
+</script>

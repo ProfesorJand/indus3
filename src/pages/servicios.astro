@@ -7,18 +7,12 @@ import FooterThreeCols from "@components/footers/FooterThreeCols.astro";
 import Section from "@components/base/Section.astro";
 import Container from "@components/base/Container.astro";
 import BodyGrid from "@components/body/BodyGrid.astro";
+import PrestamosServiciosDe from "@components/banners/servicios/PrestamosServiciosDe.astro";
+
 import Card from "@components/base/Card.astro";
 
 const seoTitle = "Nuestros Servicios";
 const seoDesc = "Agencia 360 de comunicaciones, marketing y producción de eventos. Booking, conciertos, festivales y mucho más.";
-
-const highLevelServices = [
-  "Booking agency.",
-  "Producción general de eventos.",
-  "Desarrollo, planificación y ejecución de conciertos, festivales, exposiciones y eventos.",
-  "Agencia 360 de comunicaciones y marketing.",
-  "Y mucho más..."
-];
 
 const serviceCategories = [
   {
@@ -75,17 +69,7 @@ const serviceCategories = [
             Somos los arquitectos de la emoción, transformando ideas en experiencias que trascienden.
           </p>
           
-          <div style="background: rgba(255, 255, 255, 0.05); padding: var(--space-8); border-radius: var(--border-radius-xl); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); text-align: left;">
-            <p style="font-weight: 600; margin-bottom: var(--space-4); font-size: var(--font-size-lg);">Prestamos servicios de:</p>
-            <ul style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-3); list-style: none; padding: 0;">
-              {highLevelServices.map(service => (
-                <li style="display: flex; align-items: flex-start; gap: var(--space-2);">
-                  <i class="fas fa-check-circle" style="color: var(--color-primary); margin-top: 4px;"></i>
-                  <span>{service}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <PrestamosServiciosDe/>
         </div>
       </Container>
     </Section>
@@ -94,7 +78,7 @@ const serviceCategories = [
     <Section variant="alt">
       <Container>
         <h2 style="text-align: center; margin-bottom: var(--space-12); font-size: var(--font-size-3xl);">Especialidades por Área</h2>
-        <BodyGrid>
+        <BodyGrid columns={3}>
           {serviceCategories.map(category => (
             <div style="background: var(--color-bg); padding: var(--space-8); border-radius: var(--border-radius-lg); border: 1px solid var(--color-border); transition: transform 0.3s ease; height: 100%;" class="service-category-card">
               <div style="width: 60px; height: 60px; justify-self:center; background: var(--color-primary-light); color: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-2); font-size: 1.5rem;">

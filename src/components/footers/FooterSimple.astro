@@ -3,7 +3,7 @@ import styles from './FooterSimple.module.css';
 import Container from '@components/base/Container.astro';
 ---
 
-<footer class={styles.footer}>
+<footer class={styles.footer} transition:persist>
   <Container className={styles.inner}>
     <div class={styles.links}>
       <a href="#" class={styles.link}>Privacidad</a>

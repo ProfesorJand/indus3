@@ -1,0 +1,106 @@
+[
+  {
+    "id": "sanluis",
+    "type": "artista",
+    "name": "Sanluis",
+    "banner":"https://image-cdn-ak.spotifycdn.com/image/ab67618600000194a9ec7f058929d746921f66d2",
+    "description": "Sanluis es un dúo venezolano de pop rock, integrado por Santiago Castillo y Luigi Castillo.",
+    "artistImg": "https://i.scdn.co/image/ab6761610000f178432d1de7b231d65629485085",
+    "genre": ["Pop Rock"],
+    "artistDetails": [
+      {
+        "realName": "Santiago Castillo",
+        "birthDate": "desconocido",
+        "birthPlace": "Venezuela",
+        "height": "desconocido"
+      },
+      {
+        "realName": "Luis Fernando Castillo",
+        "birthDate": "desconocido",
+        "birthPlace": "Venezuela",
+        "height": "desconocido"
+      }
+    ],
+    "urlSpotify": "https://open.spotify.com/embed/artist/3b2zi4PtiILG4Iyswyk4LW?utm_source=generator&theme=0",
+    "awards": [
+      "Grammy al Mejor Álbum de Música Urbana (2021)",
+      "Latin Grammy al Mejor Álbum de Música Urbana"
+    ],
+    "instagramReelTitle":"Hecho Curioso",
+    "instagramReelId": "DWy3bQTkXWJ",
+    "instagramReelVideo": "/instagram/reels/bad-bunny.mp4"
+
+  },
+  {
+    "id": "sanluis",
+    "type": "artista",
+    "name": "Sanluis",
+    "banner":"https://image-cdn-ak.spotifycdn.com/image/ab67618600000194a9ec7f058929d746921f66d2",
+    "description": "Sanluis es un dúo venezolano de pop rock, integrado por Santiago Castillo y Luigi Castillo.",
+    "artistImg": "https://i.scdn.co/image/ab6761610000f178432d1de7b231d65629485085",
+    "genre": ["Pop Rock"],
+    "artistDetails": [
+      {
+        "realName": "Santiago Castillo",
+        "birthDate": "desconocido",
+        "birthPlace": "Venezuela",
+        "height": "desconocido"
+      },
+      {
+        "realName": "Luis Fernando Castillo",
+        "birthDate": "desconocido",
+        "birthPlace": "Venezuela",
+        "height": "desconocido"
+      }
+    ],
+    "urlSpotify": "https://open.spotify.com/embed/artist/3b2zi4PtiILG4Iyswyk4LW?utm_source=generator&theme=0",
+    "awards": [
+      "Grammy al Mejor Álbum de Música Urbana (2021)",
+      "Latin Grammy al Mejor Álbum de Música Urbana"
+    ],
+    "instagramReelTitle":"Hecho Curioso",
+    "instagramReelId": "DWy3bQTkXWJ",
+    "instagramReelVideo": "/instagram/reels/bad-bunny.mp4"
+
+  },
+  {
+    "id": "coldplay",
+    "type": "banda",
+    "name": "Coldplay",
+    "description": "Coldplay es una banda británica de pop rock formada en Londres, conocida por sus conciertos masivos y estilo melódico.",
+    "image": "https://images.unsplash.com/photo-1514525253361-bee8a18744ad?q=80&w=1000&auto=format&fit=crop",
+    "details": {
+      "members": [
+        "Chris Martin",
+        "Jonny Buckland",
+        "Guy Berryman",
+        "Will Champion"
+      ],
+      "formationPlace": "Londres, Reino Unido",
+      "genre": ["Pop Rock", "Alternative Rock"]
+    },
+    "awards": [
+      "7 premios Grammy",
+      "9 Brit Awards"
+    ],
+    "instagramReel": "https://www.instagram.com/reel/C5_8Q_XIk5p/"
+  },
+  {
+    "id": "lollapalooza-2025",
+    "type": "evento",
+    "name": "Lollapalooza Argentina 2025",
+    "description": "Lollapalooza Argentina es uno de los festivales de música más importantes de Latinoamérica, con artistas internacionales y locales.",
+    "image": "https://images.unsplash.com/photo-1459749411177-042180ce673c?q=80&w=1000&auto=format&fit=crop",
+    "details": {
+      "location": "Hipódromo de San Isidro, Buenos Aires, Argentina",
+      "eventDate": "2025-03-21",
+      "organizer": "DF Entertainment"
+    },
+    "songs": [],
+    "awards": [
+      "Festival más importante de Argentina",
+      "Reconocimiento internacional en eventos musicales"
+    ],
+    "instagramReel": "https://www.instagram.com/reel/C5_8Q_XIk5p/"
+  }
+]

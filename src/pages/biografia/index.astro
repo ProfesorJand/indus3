@@ -1,0 +1,87 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import HeaderSticky from "@components/headers/HeaderSticky.astro";
+import FooterThreeCols from "@components/footers/FooterThreeCols.astro";
+import Section from "@components/base/Section.astro";
+import Container from "@components/base/Container.astro";
+import BodyGrid from "@components/body/BodyGrid.astro";
+import LogoCard from "@components/logo/LogoCard.astro";
+import biografias from "@data/biografias.json";
+---
+
+<MainLayout title="Biografías y Perfiles">
+  <HeaderSticky slot="header" />
+
+  <main>
+    <Section variant="hero">
+      <Container>
+        <div class="bio-intro">
+          <h1>Directorio de Artistas y Eventos</h1>
+          <p>Conoce la historia detrás de tus artistas y festivales favoritos.</p>
+        </div>
+
+        <BodyGrid columns={3}>
+          {biografias.map((bio) => (
+            <div class="bio-card-wrapper">
+              <a href={`${import.meta.env.BASE_URL}/biografia/${bio.id}`} class="bio-link">
+                <LogoCard 
+                  title={bio.name} 
+                  image={bio.image}
+                />
+                <div class="bio-type-tag">{bio.type}</div>
+              </a>
+            </div>
+          ))}
+        </BodyGrid>
+      </Container>
+    </Section>
+  </main>
+
+  <FooterThreeCols slot="footer" />
+</MainLayout>
+
+<style>
+  .bio-intro {
+    text-align: center;
+    margin-bottom: var(--space-12);
+  }
+
+  .bio-intro h1 {
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--space-4);
+  }
+
+  .bio-intro p {
+    color: var(--color-text-light);
+    font-size: var(--font-size-lg);
+  }
+
+  .bio-card-wrapper {
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .bio-card-wrapper:hover {
+    transform: translateY(-8px);
+  }
+
+  .bio-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .bio-type-tag {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--color-primary);
+    color: white;
+    padding: 4px 12px;
+    border-radius: var(--border-radius-full);
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+</style>

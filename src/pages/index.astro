@@ -2,6 +2,7 @@
 import MainLayout from "@layouts/MainLayout.astro";
 import SEO from "@components/seo/SEO.astro";
 import { websiteSchema, organizationSchema } from "@utils/seo";
+import PrestamosServiciosDe from "@components/banners/servicios/PrestamosServiciosDe.astro";
 
 // Repositorio de Componentes (Mix & Match)
 import HeaderSticky from "@components/headers/HeaderSticky.astro";
@@ -276,6 +277,12 @@ const clientesDeLaRegion = files2
       </div>
     </Container>
   </Section> -->
+
+  <Section variant="alt">
+    <Container>
+      <PrestamosServiciosDe link={`${import.meta.env.BASE_URL}/servicios`}/>
+    </Container>
+  </Section>
 
   <!--Card Carrusel -->
   <Section variant="alt">

@@ -32,7 +32,7 @@ const seoDesc = "Próximos eventos, conciertos y festivales producidos por Indus
         {eventsData.length > 0 ? (
           <BodyGrid columns={eventsData.length > 3 ? 3 : eventsData.length}>
             {eventsData.map(event => (
-              <a href={`/eventos/${event.id}`} class="event-card">
+              <a href={`${import.meta.env.BASE_URL}/eventos/${event.id}`} class="event-card">
                 <div class="image-wrapper">
                   <img src={event.imagenPR} alt={event.nombreEvento} />
                   <div class="date-badge">{event.fechaEvento}</div>

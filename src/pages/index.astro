@@ -360,7 +360,7 @@ const clientesDeLaRegion = files2
                 </p> -->
                 
       <h2 style="margin-bottom: var(--space-4);justify-self:center">Clientes Venezolanos</h2>
-      <BodyGrid >
+      <BodyGrid columns={4}>
         {
           clientesVenezolanos.map((cliente) => (
             <LogoCard 
@@ -392,7 +392,7 @@ const clientesDeLaRegion = files2
         </p> -->
         
       <h2 style="margin-bottom: var(--space-4);justify-self:center">Clientes de la Región</h2>
-      <BodyGrid>
+      <BodyGrid columns={4}>
         {
           clientesDeLaRegion.map((cliente) => (
             <LogoCard 

@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "indus3fest",
     "nombreEvento": "Indus3 Festival",
     "fechaEvento": "2026",
     "descripcionEvento": ["El Indus3 Festival es un evento que se lleva a cabo en el C.C.T. Caracas, Venezuela. Es un evento que se lleva a cabo en el C.C.T. Caracas, Venezuela."],
@@ -8,17 +8,19 @@
     "imagenPR": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=1200",    "aperturaPuertas": "16:00",
     "comienzoShow": "18:00",
     "lugarEvento": "C.C.T. Caracas, Venezuela. Piso 1 asasd asdasd",
-    "ventaEntradas": "https://ticketera.com/indus3fest",
     "flyerEvento": "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?auto=format&fit=crop&q=80&w=1000",
     "patrocinadores": ["https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=2000", "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=1200", "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?auto=format&fit=crop&q=80&w=1000"],
     "restriccionesEdad": "Mayores de 18 años",
     "logisticaHigienicos": "Contamos con amplias zonas de hidratación, servicios médicos de emergencia 24/7, y protocolos de seguridad de alto nivel. Estacionamiento disponible en el sótano del Centro Comercial.",
     "datosCuriosos": "Es el primer festival en usar energía solar para el 30% de su iluminación.",
     "imagenTicketera": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=800",
-    "artistas": ["sanluis"]
+    "artistas": ["sanluis"],
+    "primaryButtonText": "Comprar Ahora",
+    "ventaEntradas": "https://ticketera.com/indus3fest",
+    "secondaryButtonText": "Ver Detalles"
   },
   {
-    "id": 2,
+    "id": "lgaplay",
     "nombreEvento": "LGAPlay 2026",
     "fechaEvento": "2026",
     "descripcionEvento": ["LGAplay, la productora líder en organización de eventos de deportes electrónicos (esports) se prepara para iniciar con su ciclo competitivo de 2026 con un montón de novedades y sorpresas para continuar seguir haciendo crecer esta escena durante todo 2026.",
@@ -35,6 +37,9 @@
     "logisticaHigienicos": "Contamos con amplias zonas de hidratación, servicios médicos de emergencia 24/7, y protocolos de seguridad de alto nivel. Estacionamiento disponible en el sótano del Centro Comercial.",
     "datosCuriosos": "Es el primer festival en usar energía solar para el 30% de su iluminación.",
     "imagenTicketera": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=800",
-    "artistas": ["sanluis"]
+    "artistas": ["sanluis"],
+    "primaryButtonText": "Comprar Ahora",
+    "primaryButtonLink": "https://ticketera.com/lgaplay",
+    "secondaryButtonText": "Ver Detalles"
   }
 ]

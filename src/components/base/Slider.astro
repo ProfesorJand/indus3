@@ -2,14 +2,15 @@
 import styles from './Slider.module.css';
 
 interface Slide {
-  image: string;
-  title: string;
+  id: string;
+  nombreEvento: string;
+  fechaEvento?: string;
+  descripcionEvento: string[];
+  imagenPR: string;
   subtitle?: string;
-  date?: string;
   primaryButtonText?: string;
-  primaryButtonLink?: string;
+  ventaEntradas?: string;
   secondaryButtonText?: string;
-  secondaryButtonLink?: string;
 }
 
 interface Props {
@@ -35,26 +36,26 @@ const stylesVariables = {
         class={`${styles.slide} ${index === 0 ? styles.active : ''}`} 
         data-index={index}
       >
-        <img src={slide.image} alt={slide.title} class={styles.image} loading={index === 0 ? 'eager' : 'lazy'} />
+        <img src={slide.imagenPR} alt={slide.nombreEvento} class={styles.image} loading={index === 0 ? 'eager' : 'lazy'} />
         <div class={styles.overlay} />
         <div class={styles.content}>
-          <h2 class={styles.title}>{slide.title}</h2>
-          {slide.date && (
+          <h2 class={styles.title}>{slide.nombreEvento}</h2>
+          {slide.fechaEvento && (
               <div class={styles.date}>
                 <i class="fas fa-calendar-alt" />
-                {slide.date}
+                {slide.fechaEvento}
               </div>
             )}
-          {slide.subtitle && <p class={styles.subtitle}>{slide.subtitle}</p>}
+          {slide.descripcionEvento && <p class={styles.subtitle}>{slide.descripcionEvento[0]}</p>}
           <div class={styles.buttons}>
             {slide.primaryButtonText && (
-              <a href={slide.primaryButtonLink?.startsWith('/') ? `${import.meta.env.BASE_URL}${slide.primaryButtonLink.slice(1)}` : slide.primaryButtonLink} class={`${styles.btn} ${styles.btnPrimary}`}>
+              <a href={slide.ventaEntradas} class={`${styles.btn} ${styles.btnPrimary}`}>
                 {slide.primaryButtonText}
               </a>
             )}
 
             {slide.secondaryButtonText && (
-              <a href={slide.secondaryButtonLink?.startsWith('/') ? `${import.meta.env.BASE_URL}${slide.secondaryButtonLink.slice(1)}` : slide.secondaryButtonLink} class={`${styles.btn} ${styles.btnSecondary}`}>
+              <a href={import.meta.env.BASE_URL + "/eventos/" + slide.id} class={`${styles.btn} ${styles.btnSecondary}`}>
                 {slide.secondaryButtonText}
               </a>
             )}

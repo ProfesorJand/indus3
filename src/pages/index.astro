@@ -186,19 +186,20 @@ const cards = [
   }
 ];
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const clientsDir = path.resolve(__dirname, '../../public/clientes-venezolanos');
-const clientsDir2 = path.resolve(__dirname, '../../public/clientes-de-la-region');
+const projectRoot = process.cwd();
+const clientsDir = path.resolve(projectRoot, 'public/clientes-venezolanos');
+const clientsDir2 = path.resolve(projectRoot, 'public/clientes-de-la-region');
 
 let files: string[] = [];
 
 try {
   files = fs.readdirSync(clientsDir);
+  if (files.length === 0) console.warn('Warning: No files found in', clientsDir);
 } catch (error) {
   console.error('Error reading clients directory:', error);
 }
 
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 const clientesVenezolanos = files
   .filter(file => /\.(webp|png|jpg|jpeg|svg)$/i.test(file))
@@ -210,7 +211,7 @@ const clientesVenezolanos = files
       .replace(/-/g, " ");
     
     return {
-      image: `${import.meta.env.BASE_URL}/clientes-venezolanos/${file}`,
+      image: `${baseUrl}/clientes-venezolanos/${file}`,
       title: title,
       link: "/#"
     };
@@ -218,23 +219,24 @@ const clientesVenezolanos = files
   });
 
 let files2: string[] = [];
-try{
+try {
   files2 = fs.readdirSync(clientsDir2);
-}catch(error){
-  console.error('Error reading clients directory:', error);
+  if (files2.length === 0) console.warn('Warning: No files found in', clientsDir2);
+} catch (error) {
+  console.error('Error reading clients directory 2:', error);
 }
 
 const clientesDeLaRegion = files2
-  .filter(file =>  /\.(webp|png|jpg|jpeg|svg)$/i.test(file))
+  .filter(file => /\.(webp|png|jpg|jpeg|svg)$/i.test(file))
   .map(file => {
     const nameWithoutExt = file.replace(/\.[^/.]+$/, "");
     // Remove "Logo-" prefix and replace hyphens with spaces
     const title = nameWithoutExt
       .replace(/^Logo-/i, "")
       .replace(/-/g, " ");
-    
+
     return {
-      image: `${import.meta.env.BASE_URL}/clientes-de-la-region/${file}`,
+      image: `${baseUrl}/clientes-de-la-region/${file}`,
       title: title,
       link: "/#"
     };

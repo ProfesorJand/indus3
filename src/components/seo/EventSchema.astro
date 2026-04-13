@@ -1,0 +1,88 @@
+---
+interface Props {
+  name: string;
+  description?: string;
+  startDate: string;
+  endDate?: string;
+  url?: string;
+  locationName?: string;
+  locationAddress?: string;
+  image?: string;
+  organizerName?: string[];
+  offersUrl?: string;
+  performers?: { name: string; type: "Person" | "MusicGroup" }[];
+  status?: "EventScheduled" | "EventCancelled" | "EventMovedOnline" | "EventPostponed" | "EventRescheduled";
+  attendanceMode?: "OfflineEventAttendanceMode" | "OnlineEventAttendanceMode" | "MixedEventAttendanceMode";
+}
+
+const {
+  name,
+  description,
+  startDate,
+  endDate,
+  url,
+  locationName,
+  locationAddress,
+  image,
+  organizerName,
+  offersUrl,
+  performers = [],
+  status = "EventScheduled",
+  attendanceMode = "OfflineEventAttendanceMode",
+} = Astro.props;
+
+// Helper to filter out "desconocido" and empty values
+const cleanValue = (val: any) => {
+  if (!val || val === "desconocido") return undefined;
+  return val;
+};
+
+// Ensure date is ISO format if possible, otherwise leave it (though it might invalidate schema)
+const formatSchemaDate = (dateStr: string) => {
+  if (!dateStr || dateStr === "desconocido") return undefined;
+  // If it's just a year like "2026", schema requires more. Try to make it first of year if just year.
+  if (/^\d{4}$/.test(dateStr)) return `${dateStr}-01-01T00:00:00Z`;
+  return dateStr;
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": name,
+  "description": cleanValue(description),
+  "startDate": formatSchemaDate(startDate),
+  "endDate": formatSchemaDate(endDate),
+  "url": cleanValue(url),
+  "image": cleanValue(image),
+  "eventStatus": `https://schema.org/${status}`,
+  "eventAttendanceMode": `https://schema.org/${attendanceMode}`,
+  "location": (locationName || locationAddress) ? {
+    "@type": "Place",
+    "name": cleanValue(locationName),
+    "address": locationAddress ? {
+      "@type": "PostalAddress",
+      "streetAddress": cleanValue(locationAddress)
+    } : undefined
+  } : undefined,
+  "organizer": organizerName ? {
+    "@type": "Organization",
+    "name": cleanValue(organizerName)
+  } : undefined,
+  "offers": offersUrl ? {
+    "@type": "Offer",
+    "url": cleanValue(offersUrl),
+    "availability": "https://schema.org/InStock"
+  } : undefined,
+  "performer": performers.length > 0 ? performers.map(p => ({
+    "@type": p.type,
+    "name": p.name
+  })) : undefined
+};
+
+// Remove undefined keys
+const finalSchema = Object.fromEntries(
+  Object.entries(schema).filter(([_, v]) => v !== undefined)
+);
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />

@@ -1,0 +1,74 @@
+---
+interface Props {
+  name: string;
+  alternateName?: string;
+  description?: string;
+  image?: string;
+  url?: string;
+  sameAs?: string[];
+  birthDate?: string;
+  birthPlace?: string;
+  nationality?: string;
+  height?: string;
+  awards?: string[];
+  genres?: string[];
+  jobTitle?: string;
+}
+
+const {
+  name,
+  alternateName,
+  description,
+  image,
+  url,
+  sameAs = [],
+  birthDate,
+  birthPlace,
+  nationality,
+  height,
+  awards = [],
+  genres = [],
+  jobTitle = "Musical Artist",
+} = Astro.props;
+
+// Helper to filter out "desconocido" and empty values
+const cleanValue = (val: any) => {
+  if (!val || val === "desconocido") return undefined;
+  return val;
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": name,
+  "alternateName": cleanValue(alternateName),
+  "description": cleanValue(description),
+  "image": cleanValue(image),
+  "url": cleanValue(url),
+  "sameAs": sameAs.length > 0 ? sameAs : undefined,
+  "birthDate": cleanValue(birthDate),
+  "birthPlace": birthPlace && birthPlace !== "desconocido" ? {
+    "@type": "Place",
+    "name": birthPlace
+  } : undefined,
+  "homeLocation": birthPlace && birthPlace !== "desconocido" ? {
+    "@type": "Place",
+    "name": birthPlace
+  } : undefined,
+  "nationality": nationality && nationality !== "desconocido" ? {
+    "@type": "Country",
+    "name": nationality
+  } : undefined,
+  "height": cleanValue(height),
+  "award": awards.length > 0 ? awards : undefined,
+  "knowsAbout": genres.length > 0 ? genres : undefined,
+  "jobTitle": cleanValue(jobTitle),
+};
+
+// Remove undefined keys
+const finalSchema = Object.fromEntries(
+  Object.entries(schema).filter(([_, v]) => v !== undefined)
+);
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />

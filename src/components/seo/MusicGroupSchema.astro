@@ -1,0 +1,81 @@
+---
+interface Member {
+  name: string;
+  role?: string;
+}
+
+interface Props {
+  name: string;
+  alternateName?: string;
+  description?: string;
+  image?: string;
+  url?: string;
+  sameAs?: string[];
+  foundingLocation?: string;
+  foundingDate?: string;
+  genres?: string[];
+  members?: (string | Member)[];
+  awards?: string[];
+}
+
+const {
+  name,
+  alternateName,
+  description,
+  image,
+  url,
+  sameAs = [],
+  foundingLocation,
+  foundingDate,
+  genres = [],
+  members = [],
+  awards = [],
+} = Astro.props;
+
+// Helper to filter out "desconocido" and empty values
+const cleanValue = (val: any) => {
+  if (!val || val === "desconocido") return undefined;
+  return val;
+};
+
+const processedMembers = members.map(member => {
+  if (typeof member === 'string') {
+    return {
+      "@type": "Person",
+      "name": member
+    };
+  }
+  return {
+    "@type": "Person",
+    "name": member.name,
+    "jobTitle": member.role
+  };
+});
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "MusicGroup",
+  "name": name,
+  "alternateName": cleanValue(alternateName),
+  "description": cleanValue(description),
+  "image": cleanValue(image),
+  "logo": cleanValue(image), // Often the same for groups
+  "url": cleanValue(url),
+  "sameAs": sameAs.length > 0 ? sameAs : undefined,
+  "foundingLocation": foundingLocation && foundingLocation !== "desconocido" ? {
+    "@type": "Place",
+    "name": foundingLocation
+  } : undefined,
+  "foundingDate": cleanValue(foundingDate),
+  "genre": genres.length > 0 ? genres : undefined,
+  "member": processedMembers.length > 0 ? processedMembers : undefined,
+  "award": awards.length > 0 ? awards : undefined,
+};
+
+// Remove undefined keys
+const finalSchema = Object.fromEntries(
+  Object.entries(schema).filter(([_, v]) => v !== undefined)
+);
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />

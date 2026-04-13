@@ -9,7 +9,8 @@ import BodyGrid from "@components/body/BodyGrid.astro";
 import eventsData from "@data/events.json";
 import biografiasArtistas from "@data/biografias.json";
 import SpotifyPlayer from "@components/base/SpotifyPlayer.astro";
-
+import EventSchema from "@components/seo/EventSchema.astro";
+import BodyTwoColumns from "@components/body/BodyTwoColumns.astro";
 export async function getStaticPaths() {
   return eventsData.map((event) => ({
     params: { id: event.id.toString() },
@@ -18,14 +19,24 @@ export async function getStaticPaths() {
 }
 
 const { event } = Astro.props;
-
 const seoTitle = `${event.nombreEvento} | Indus3`;
 const seoDesc = event?.descripcionEvento?.[0] || "Mini Descripcion";
 const datosArtistas = biografiasArtistas.filter((artista) => event.artistas.includes(artista.id));
 ---
 
 <MainLayout title={seoTitle}>
-  <SEO slot="seo" title={seoTitle} description={seoDesc} />
+  <Fragment slot="seo">
+    <SEO title={seoTitle} description={seoDesc} />
+    <EventSchema 
+      name={event.nombreEvento}
+      description={event.descripcionEvento?.join(" ")}
+      startDate={event.fechaEvento}
+      locationName={event.lugarEvento}
+      image={event.imagenPR || event.imagenBanner}
+      offersUrl={event.ventaEntradas}
+      performers={datosArtistas.map(a => ({ name: a.name, type: a.type === "Grupo Musical" ? "MusicGroup" : "Person" }))}
+    />
+  </Fragment>
   
   <HeaderSticky slot="header" />
 
@@ -36,51 +47,55 @@ const datosArtistas = biografiasArtistas.filter((artista) => event.artistas.incl
       <div class="pr-banner">
         <img src={event.imagenPR} alt="Prense/PR Evento" class="hero-img"/>
         <div class="pr-overlay">
-             <h1 class="pr-title">Vive la experiencia {event.nombreEvento}</h2>
-            <div class="info-bar glass">
-          <div class="info-grid">
-            <div class="info-item">
+          <div class="pr-content">
+            <h1 class="pr-title">{event.nombreEvento}</h2>
+            <div class="info-item info-place glass ">
               <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
               <div>
                 <span>Lugar</span>
                 <strong>{event.lugarEvento}</strong>
               </div>
             </div>
-            <div class="info-item">
-              <div class="info-icon"><i class="fas fa-calendar-alt"></i></div>
-              <div>
-                <span>Fecha</span>
-                <strong>{event.fechaEvento}</strong>
+          </div>
+          <div class="info-bar glass">
+            <div class="info-grid">
+              <div class="info-item">
               </div>
-            </div>
-            <div class="info-item">
-              <div class="info-icon"><i class="fas fa-door-open"></i></div>
-              <div>
-                <span>Apertura</span>
-                <strong>{event.aperturaPuertas}</strong>
+              <div class="info-item">
+                <div class="info-icon"><i class="fas fa-calendar-alt"></i></div>
+                <div>
+                  <span>Fecha</span>
+                  <strong>{event.fechaEvento}</strong>
+                </div>
               </div>
-            </div>
-            <div class="info-item">
-              <div class="info-icon"><i class="fas fa-clock"></i></div>
-              <div>
-                <span>Show</span>
-                <strong>{event.comienzoShow}</strong>
+              <div class="info-item">
+                <div class="info-icon"><i class="fas fa-door-open"></i></div>
+                <div>
+                  <span>Apertura</span>
+                  <strong>{event.aperturaPuertas}</strong>
+                </div>
               </div>
-            </div>
-            <div class="info-item hide-mobile">
-              <div class="info-icon"><i class="fas fa-users"></i></div>
-              <div>
-                <span>Edad</span>
-                <strong>{event.restriccionesEdad}</strong>
+              <div class="info-item">
+                <div class="info-icon"><i class="fas fa-clock"></i></div>
+                <div>
+                  <span>Show</span>
+                  <strong>{event.comienzoShow}</strong>
+                </div>
               </div>
-            </div>
-            <div class="info-action">
-              <a href={event.ventaEntradas} target="_blank" class="btn-tickets pulse">
-               <i class="fas fa-ticket-alt"></i> Comprar Entradas 
-              </a>
+              <div class="info-item hide-mobile">
+                <div class="info-icon"><i class="fas fa-users"></i></div>
+                <div>
+                  <span>Edad</span>
+                  <strong>{event.restriccionesEdad}</strong>
+                </div>
+              </div>
+              <div class="info-action">
+                <a href={event.ventaEntradas} target="_blank" class="btn-tickets pulse">
+                <i class="fas fa-ticket-alt"></i> Comprar Entradas 
+                </a>
+              </div>
             </div>
           </div>
-        </div>
         </div>
       </div>
     )}
@@ -88,20 +103,23 @@ const datosArtistas = biografiasArtistas.filter((artista) => event.artistas.incl
     
     <!-- Main Content -->
     <Section>
-      <Container>
-        <BodyGrid>
-          <!-- Left Column: Details -->
-          <div class="content-left">
-            <div class="reveal-up">
-              <h2 class="section-title">Sobre el Evento</h2>
-              <div class="description-wrap">
-                {event.descripcionEvento.map(parrafo => (
-                  <p class="description">{parrafo}</p>
+      <Container variant="full">
+          <div class="reveal-up">
+            <h2 class="section-title">Sobre el Evento</h2>
+            <div class="description-wrap">
+              {event.descripcionEvento.map(parrafo => (
+                <p class="description">{parrafo}</p>
                 ))}
-              </div>
             </div>
-
-      <Container> 
+            <!-- <div class="flyer-container">
+              <img src={event.flyerEvento} alt="Flyer del Evento" class="flyer-img" />
+              <div class="flyer-overlay">
+                <a href={event.flyerEvento} target="_blank" class="btn-zoom"><i class="fas fa-search-plus"></i></a>
+              </div>
+            </div> -->
+          </div>
+        <div class="content-left">
+        
         {datosArtistas && datosArtistas.length > 0 && (
           <div class="artists-section">
         <h2 class="section-title">{datosArtistas.length === 1 ? "Artista " : "Artistas "} que se presentan en {event.nombreEvento}</h2>
@@ -123,14 +141,13 @@ const datosArtistas = biografiasArtistas.filter((artista) => event.artistas.incl
                 )}
 
                 {artista.id && (
-                  <a href={`/biografia/${artista.id}`} class="btn-bio">Conocer Biografia de {artista.name} <i class="fas fa-arrow-right"></i></a>
+                  <a href={`${import.meta.env.BASE_URL}/biografia/${artista.id}`} class="btn-bio">Conocer Biografia de {artista.name} <i class="fas fa-arrow-right"></i></a>
                 )}
             </div>
           </div>
         ))}
       </div>
     )}
-    </Container>
             
             <div class="logistics-card glass reveal-up">
               <h3><i class="fas fa-shield-alt"></i> Logística y Seguridad</h3>
@@ -144,17 +161,6 @@ const datosArtistas = biografiasArtistas.filter((artista) => event.artistas.incl
 
             
 
-            {event.flyerEvento && (
-              <div class="flyer-section reveal-up">
-                <h3 class="subsection-title">Flyer Oficial</h3>
-                <div class="flyer-container">
-                  <img src={event.flyerEvento} alt="Flyer del Evento" class="flyer-img" />
-                  <div class="flyer-overlay">
-                    <a href={event.flyerEvento} target="_blank" class="btn-zoom"><i class="fas fa-search-plus"></i></a>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
 
           <!-- Right Column: Context/Side Info -->
@@ -164,11 +170,11 @@ const datosArtistas = biografiasArtistas.filter((artista) => event.artistas.incl
                <ul class="curiosities-list">
                  {event.datosCuriosos?.split('.').filter(t => t.trim()).map(dato => (
                    <li>{dato.trim()}.</li>
-                 ))}
+                  ))}
                </ul>
              </div>
           </div>
-        </BodyGrid>
+                
       </Container>
     </Section>
 
@@ -290,6 +296,12 @@ const datosArtistas = biografiasArtistas.filter((artista) => event.artistas.incl
     padding: 2rem;
     border-radius: var(--border-radius-2xl, 2rem);
   }
+
+  .info-place {
+    padding: 1rem;
+    border-radius: var(--border-radius-2xl, 2rem);
+    width: fit-content;
+  }
   .info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -304,12 +316,12 @@ const datosArtistas = biografiasArtistas.filter((artista) => event.artistas.incl
   .info-icon {
     width: 48px;
     height: 48px;
-    background: rgba(var(--color-primary-rgb, 59, 130, 246), 0.1);
+    background: var(--color-primary);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-primary);
+    color: var(--color-white);
     font-size: 1.25rem;
   }
   .info-item span {
@@ -564,6 +576,12 @@ const datosArtistas = biografiasArtistas.filter((artista) => event.artistas.incl
     display: flex;
     align-items: center;
     justify-content: space-around;
+    flex
+  }
+  .pr-content{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
   .pr-title {
     font-size: clamp(2rem, 5vw, 4rem);
@@ -571,6 +589,7 @@ const datosArtistas = biografiasArtistas.filter((artista) => event.artistas.incl
     font-weight: 900;
     max-width: 800px;
     line-height: 1.1;
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 3px 3px 0 #000;
   }
 
   /* Sponsors */

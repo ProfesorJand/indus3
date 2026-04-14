@@ -1,7 +1,8 @@
 [
   {
     "id": "sanluis",
-    "type": "Grupo Musical",
+    "type": "Duo",
+    "jobTitle":"Artista Musical",
     "name": "Sanluis",
     "bannerImg":"https://image-cdn-ak.spotifycdn.com/image/ab67618600000194a9ec7f058929d746921f66d2",
     "description": "Sanluis es un dúo venezolano de pop rock, integrado por Santiago Castillo y Luigi Castillo.",
@@ -39,9 +40,10 @@
     "type": "Organización",
     "name": "LGAPlay 2026",
     "fechaEvento": "2026",
-    "descripcionEvento": ["LGAplay, la productora líder en organización de eventos de deportes electrónicos (esports) se prepara para iniciar con su ciclo competitivo de 2026 con un montón de novedades y sorpresas para continuar seguir haciendo crecer esta escena durante todo 2026.",
+    "description": ["LGAplay, la productora líder en organización de eventos de deportes electrónicos (esports) se prepara para iniciar con su ciclo competitivo de 2026 con un montón de novedades y sorpresas para continuar seguir haciendo crecer esta escena durante todo 2026.",
     "al igual que en el recorrido pasado, todas las competencias de LGAplay contarán con el apoyo de INDUS3, por lo que todas las ligas forman parte del #RoadToVGS2026 por cuarto año consecutivo .Además de ellos, Movilnet-e y Golden Sabores también regresan como patrocinantes de todas las competencias que se llevarán a cabo a lo largo de este año.",
     "Entre las competencias principales que se llevarán a cabo están: la Temporada 7 de la Star Pro League (Counter Strike 2), la Temporada 9 de la Spiritual Rift Series (League of Legends) y la Temporada 6 de la Spike Pro League (Valorant). Sin embargo, 2026 trae consigo una increíble noticia: LGAplay está más que listo para incursionar en el competitivo mobile con la Lord Eternal Series, el primer torneo de Mobile Legends: Bang Bang de esta casa productora."],
+    "squareImg":"https://pbs.twimg.com/profile_images/1322931144657129472/HqbNhwgA_400x400.png",
     "imagenBanner": "https://lgaplay.com/wp-content/uploads/2026/04/534534535.png",
     "imagenPR": "https://lgaplay.com/wp-content/uploads/2026/04/534534535.png",    "aperturaPuertas": "16:00",
     "comienzoShow": "18:00",

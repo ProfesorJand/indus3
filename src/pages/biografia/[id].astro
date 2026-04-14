@@ -12,6 +12,7 @@ import SpotifyPlayer from "@components/base/SpotifyPlayer.astro";
 import PersonSchema from "@components/seo/PersonSchema.astro";
 import MusicGroupSchema from "@components/seo/MusicGroupSchema.astro";
 import EventSchema from "@components/seo/EventSchema.astro";
+import OrganizationSchema from "@components/seo/OrganizationSchema.astro";
 
 export function getStaticPaths() {
   return biografias.map((bio) => ({
@@ -25,12 +26,13 @@ const { pathname, href } = Astro.url;
 
 const seoTitle = `${bio.name} - Biografía`;
 const seoDesc = bio?.description || `Conoce la trayectoria de ${bio.name}`;
+const bioType = bio.type?.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 ---
 
 <MainLayout title={seoTitle}>
   <Fragment slot="seo">
     <SEO title={seoTitle} description={seoDesc} />
-    {bio.type === "artista" ? (
+    {bioType === "artista" ? (
       <PersonSchema 
         name={bio.name}
         description={bio.description}
@@ -42,17 +44,17 @@ const seoDesc = bio?.description || `Conoce la trayectoria de ${bio.name}`;
         birthDate={bio.artistDetails?.[0]?.birthDate}
         height={bio.artistDetails?.[0]?.height}
       />
-    ) : bio.type === "evento" ? (
-      <EventSchema 
+    ) : bioType === "organizacion" ? (
+      <OrganizationSchema 
         name={bio.name}
         description={bio.description}
-        startDate={bio.details?.eventDate}
+        image={bio.image || bio.banner || bio.imagenPR}
         url={href}
-        locationName={bio.details?.location}
-        image={bio.image || bio.banner}
-        organizerName={bio.details?.organizer}
+        foundingLocation={bio.foundingLocation || bio.lugarEvento}
+        foundingDate={bio.foundingDate}
+        awards={bio.awards}
       />
-    ) : (
+    ) : (bioType === "banda" || bioType === "duo") ? (
       <MusicGroupSchema 
         name={bio.name}
         description={bio.description}
@@ -64,7 +66,17 @@ const seoDesc = bio?.description || `Conoce la trayectoria de ${bio.name}`;
         foundingDate={bio.foundingDate}
         members={bio.members}
       />
-    )}
+    ) : bioType === "evento" ? (
+      <EventSchema 
+        name={bio.name}
+        description={bio.description}
+        startDate={bio.details?.eventDate || bio.fechaEvento}
+        url={href}
+        locationName={bio.details?.location || bio.lugarEvento}
+        image={bio.image || bio.banner || bio.imagenPR}
+        organizerName={bio.details?.organizer}
+      />
+    ) : null}
   </Fragment>
   <HeaderSticky slot="header" />
 
@@ -73,19 +85,9 @@ const seoDesc = bio?.description || `Conoce la trayectoria de ${bio.name}`;
     <!-- 1. INTRODUCCIÓN: Artista y Descripción -->
     <Section variant="compact" className="intro-section">
       <Container padding="padding-0-32">
-        <BodyTwoColumns sidebarLeft={true}>
-          <div slot="sidebar">
-            <div class="video-wrapper shadow-xl" slot="sidebar">
-              <video controls loop playsinline class="my-reel">
-                <source src={import.meta.env.BASE_URL + bio.instagramReelVideo} type="video/mp4" />
-                Tu navegador no soporta videos.
-              </video>
-            </div>
-            <p class="see-more" style="color: var(--color-primary);">
-              <a href={redes.instagram} target="_blank">Ver más contenido -> instagram/@indus3pro</a>
-            </p>
-          </div>
-          <div class="intro-text">
+        {
+          !bio.instagramReelVideo ? (
+            <div class="intro-text">
             <div class="intro-text-header">
               <h1 class="artist-name" transition:name={`title-${bio.id}`}>{bio.name}</h1>
             </div>
@@ -98,13 +100,17 @@ const seoDesc = bio?.description || `Conoce la trayectoria de ${bio.name}`;
                 </div> -->
                 <div>
                   <h2>Historia</h2>
-                  <p class="artist-description">{bio.description}</p>
+                  {
+                    bio.description.map((parrafo) => (
+                      <p class="artist-description">{parrafo}</p>
+                    ))
+                  }
                 </div>
               </div>
             
           
           <div class="details-list">
-            {bio.type ==="artista" && bio.artistDetails?.map((detail) => (
+            {bio.type?.toLowerCase() ==="artista" && bio.artistDetails?.map((detail) => (
               <div class="detail-card glass">
                 {detail.realName && <h3>{detail.realName}</h3>}
                 <ul>
@@ -115,45 +121,145 @@ const seoDesc = bio?.description || `Conoce la trayectoria de ${bio.name}`;
               </div>
             ))}
           </div>
-        </div>
-        <Container>
+          </div>
+          <Container>
+            <div class="details-list">
+              {
+                bio.jobTitle && (
+                  <div class="bio-badge">{bio.jobTitle.toUpperCase()}</div>
+                )
+              }
 
-        <div class="details-list">
-          <div class="bio-badge">{bio.type.toUpperCase()}</div>
-          {
-            bio.alternateName && (
-              <p class="info-text"><strong>Nombre Alternativo:</strong> {bio.alternateName}</p>
-            )
-          }
-          {
-            bio.foundingDate && (
-              <p class="info-text"><strong>Fecha de Fundación:</strong> {bio.foundingDate}</p>
-            )
-          }
-          {
-            bio.foundingLocation && (
-              <p class="info-text"><strong>Origen:</strong> {bio.foundingLocation}</p>
-            )
-          }
-          {
-            bio.members && (
-              <p class="info-text"><strong>Integrantes:</strong> {bio.members.map(member => member.name).join(", ")}</p>
-            )
-          }
-          {
-            bio.awards && bio.awards.length > 0 && (
-              <p class="info-text"><strong>Premios:</strong> {bio.awards.join(", ")}</p>
-            )
-          }
-      
-      {bio.genre && bio.genre.length > 0 && (
-        <div class="genre-container">
-          <strong>Género:</strong> {bio.genre.join(", ")}
-        </div>
-      )}
-      </div>
-    </Container>
-        </BodyTwoColumns>
+              {
+                bio.alternateName && (
+                  <p class="info-text"><strong>Nombre Alternativo:</strong> {bio.alternateName}</p>
+                )
+              }
+              {
+                bio.foundingDate && (
+                  <p class="info-text"><strong>Fecha de Fundación:</strong> {bio.foundingDate}</p>
+                )
+              }
+              {
+                bio.foundingLocation && (
+                  <p class="info-text"><strong>Origen:</strong> {bio.foundingLocation}</p>
+                )
+              }
+              {
+                bio.members && (
+                  <p class="info-text"><strong>Integrantes:</strong> {bio.members.map(({name, rol}) => `${name} (${rol})`).join(", ")}</p>
+                )
+              }
+              {
+                bio.awards && bio.awards.length > 0 && (
+                  <p class="info-text"><strong>Premios:</strong> {bio.awards.join(", ")}</p>
+                )
+              }
+          
+          {bio.genre && bio.genre.length > 0 && (
+            <div class="genre-container">
+              <strong>Género:</strong> {bio.genre.join(", ")}
+            </div>
+          )}
+            </div>
+          </Container>
+          ) : (
+
+          <BodyTwoColumns sidebarLeft={true}>
+            <div slot="sidebar">
+              <div class="video-wrapper shadow-xl" slot="sidebar">
+                <video controls loop playsinline class="my-reel">
+                  <source src={import.meta.env.BASE_URL + bio.instagramReelVideo} type="video/mp4" />
+                  Tu navegador no soporta videos.
+                </video>
+              </div>
+              <p class="see-more" style="color: var(--color-primary);">
+                <a href={redes.instagram} target="_blank">Ver más contenido -> instagram/@indus3pro</a>
+              </p>
+            </div>
+            <div class="intro-text">
+              <div class="intro-text-header">
+                <h1 class="artist-name" transition:name={`title-${bio.id}`}>{bio.name}</h1>
+              </div>
+              <div class="intro-text-history">
+                <div class="mini-img-container">
+                  <img src={bio.squareImg} alt={bio.name} class="artist-main-img" transition:name={`image-${bio.id}`} />
+                </div>
+                <!-- <div class="intro-image-container">
+                  <img src={bio.artistImg} alt={bio.name} class="artist-main-img" transition:name={`image-${bio.id}`} />
+                  </div> -->
+                  <div>
+                    <h2>Historia</h2>
+                    {
+                      typeof bio.description === "string" ? (
+                        <p class="artist-description">{bio.description}</p>
+                      ):
+                      bio.description.map((parrafo) => (
+                        <p class="artist-description">{parrafo}</p>
+                      ))
+                    }
+                  </div>
+                </div>
+              
+            
+            <div class="details-list">
+              {bio.type?.toLowerCase() ==="artista" && bio.artistDetails?.map((detail) => (
+                <div class="detail-card glass">
+                  {detail.realName && <h3>{detail.realName}</h3>}
+                  <ul>
+                    {detail.birthPlace && <li><strong>Origen:</strong> {detail.birthPlace}</li>}
+                    {detail.birthDate && <li><strong>Fecha de Nacimiento:</strong> {detail.birthDate}</li>}
+                    {detail.height && <li><strong>Estatura:</strong> {detail.height}</li>}
+                  </ul>
+                </div>
+              ))}
+            </div>
+            </div>
+            <Container>
+              <div class="details-list">
+                {
+                  bio.jobTitle && (
+                    <div class="bio-badge">{bio.jobTitle.toUpperCase()}</div>
+                  )
+                }
+  
+                {
+                  bio.alternateName && (
+                    <p class="info-text"><strong>Nombre Alternativo:</strong> {bio.alternateName}</p>
+                  )
+                }
+                {
+                  bio.foundingDate && (
+                    <p class="info-text"><strong>Fecha de Fundación:</strong> {bio.foundingDate}</p>
+                  )
+                }
+                {
+                  bio.foundingLocation && (
+                    <p class="info-text"><strong>Origen:</strong> {bio.foundingLocation}</p>
+                  )
+                }
+                {
+                  bio.members && (
+                    <p class="info-text"><strong>Integrantes:</strong> {bio.members.map(({name, rol}) => `${name} (${rol})`).join(", ")}</p>
+                  )
+                }
+                {
+                  bio.awards && bio.awards.length > 0 && (
+                    <p class="info-text"><strong>Premios:</strong> {bio.awards.join(", ")}</p>
+                  )
+                }
+            
+            {bio.genre && bio.genre.length > 0 && (
+              <div class="genre-container">
+                <strong>Género:</strong> {bio.genre.join(", ")}
+              </div>
+            )}
+              </div>
+            </Container>
+          </BodyTwoColumns>
+          )
+
+        }
       </Container>
     </Section>
 

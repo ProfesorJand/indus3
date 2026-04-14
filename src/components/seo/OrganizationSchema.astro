@@ -1,0 +1,70 @@
+---
+interface Props {
+  name: string;
+  alternateName?: string;
+  description?: string;
+  logo?: string;
+  image?: string;
+  url?: string;
+  sameAs?: string[];
+  foundingDate?: string;
+  foundingLocation?: string;
+  awards?: string[];
+  email?: string;
+  telephone?: string;
+  address?: string;
+}
+
+const {
+  name,
+  alternateName,
+  description,
+  logo,
+  image,
+  url,
+  sameAs = [],
+  foundingDate,
+  foundingLocation,
+  awards = [],
+  email,
+  telephone,
+  address,
+} = Astro.props;
+
+// Helper to filter out "desconocido" and empty values
+const cleanValue = (val: any) => {
+  if (!val || val === "desconocido") return undefined;
+  return val;
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": name,
+  "alternateName": cleanValue(alternateName),
+  "description": cleanValue(description),
+  "logo": cleanValue(logo),
+  "image": cleanValue(image),
+  "url": cleanValue(url),
+  "sameAs": sameAs.length > 0 ? sameAs : undefined,
+  "foundingDate": cleanValue(foundingDate),
+  "foundingLocation": foundingLocation && foundingLocation !== "desconocido" ? {
+    "@type": "Place",
+    "name": foundingLocation
+  } : undefined,
+  "award": awards.length > 0 ? awards : undefined,
+  "email": cleanValue(email),
+  "telephone": cleanValue(telephone),
+  "address": address ? {
+    "@type": "PostalAddress",
+    "streetAddress": cleanValue(address)
+  } : undefined,
+};
+
+// Remove undefined keys
+const finalSchema = Object.fromEntries(
+  Object.entries(schema).filter(([_, v]) => v !== undefined)
+);
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />

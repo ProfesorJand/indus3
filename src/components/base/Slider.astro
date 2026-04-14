@@ -92,112 +92,102 @@ const stylesVariables = {
 
 <script>
   import styles from './Slider.module.css';
-  function initSlider() {
-    const container = document.getElementById('mainSlider');
-    const track = document.getElementById('sliderTrack');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const playBtn = document.querySelector(`[data-index="play"]`);
-    const pauseBtn = document.querySelector(`[data-index="pause"]`);
+
+  function initSliders() {
+    const sliders = document.querySelectorAll(`.${styles.sliderContainer}`);
     
-    if (!container || !track || !prevBtn || !nextBtn || !playBtn || !pauseBtn) return;
+    sliders.forEach(container => {
+      const track = container.querySelector(`.${styles.track}`) as HTMLElement;
+      const prevBtn = container.querySelector('#prevBtn');
+      const nextBtn = container.querySelector('#nextBtn');
+      const playBtn = container.querySelector(`[data-index="play"]`);
+      const pauseBtn = container.querySelector(`[data-index="pause"]`);
+      const dots = container.querySelectorAll(`.${styles.dot}`);
+      const slides = container.querySelectorAll(`.${styles.slide}`);
+      
+      if (!track || !slides.length) return;
 
-    const dots = container.querySelectorAll(`[class*="${styles.dot}"]`);
-    const slides = track.querySelectorAll(`[class*="slide"]`);
-    
-    if (slides.length === 0) return;
+      let currentIndex = 0;
+      const totalSlides = slides.length;
+      let autoPlayInterval: number | undefined;
 
-    const activeSlideClass = slides[0].className.split(' ').find(c => c.includes('active')) || '';
-    const activeDotClass = container.querySelector(`[class*="${styles.dotActive}"]`);
-    let currentIndex = 0;
-    const totalSlides = slides.length;
-    let autoPlayInterval: number | undefined;
-
-    function startAutoPlay() {
-      stopAutoPlay();
-      autoPlayInterval = window.setInterval(() => {
-        updateSlider(currentIndex + 1);
-      }, 5000);
-    }
-
-    function stopAutoPlay() {
-      if (autoPlayInterval) {
-        clearInterval(autoPlayInterval);
-      }
-    }
-
-    function togglePlay(action: string) {
-      if (action === 'play') {
-        startAutoPlay();
-        playBtn.classList.add(styles.hidden);
-        pauseBtn.classList.remove(styles.hidden);
-      } else {
+      function startAutoPlay() {
         stopAutoPlay();
-        playBtn.classList.remove(styles.hidden);
-        pauseBtn.classList.add(styles.hidden);
+        autoPlayInterval = window.setInterval(() => {
+          updateSlider(currentIndex + 1);
+        }, 5000);
       }
-    }
 
-    function resetAutoPlay() {
-      startAutoPlay();
-    }
+      function stopAutoPlay() {
+        if (autoPlayInterval) {
+          clearInterval(autoPlayInterval);
+        }
+      }
 
-    function updateSlider(index: number) {
-      if (index < 0) index = totalSlides - 1;
-      if (index >= totalSlides) index = 0;
-      
-      currentIndex = index;
-      if (track) track.style.transform = `translateX(-${currentIndex * 100}%)`;
-      
-      slides.forEach((slide, i) => {
-        if (activeSlideClass) slide.classList.toggle(activeSlideClass, i === currentIndex);
+      function togglePlay(action: string) {
+        if (action === 'play') {
+          startAutoPlay();
+          playBtn?.classList.add(styles.hidden);
+          pauseBtn?.classList.remove(styles.hidden);
+        } else {
+          stopAutoPlay();
+          playBtn?.classList.remove(styles.hidden);
+          pauseBtn?.classList.add(styles.hidden);
+        }
+      }
+
+      function updateSlider(index: number) {
+        if (index < 0) index = totalSlides - 1;
+        if (index >= totalSlides) index = 0;
+        
+        currentIndex = index;
+        if (track) {
+          track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+        
+        slides.forEach((slide, i) => {
+          slide.classList.toggle(styles.active, i === currentIndex);
+        });
+
+        dots.forEach((dot, i) => {
+          dot.classList.toggle(styles.dotActive, i === currentIndex);
+        });
+      }
+
+      prevBtn?.addEventListener('click', () => {
+        updateSlider(currentIndex - 1);
+        startAutoPlay();
+      });
+
+      nextBtn?.addEventListener('click', () => {
+        updateSlider(currentIndex + 1);
+        startAutoPlay();
       });
 
       dots.forEach((dot, i) => {
-        dot.classList.toggle(styles.dotActive, i === currentIndex);
+        dot.addEventListener('click', () => {
+          updateSlider(i);
+          startAutoPlay();
+        });
       });
-    }
 
-    prevBtn.addEventListener('click', () => {
-      updateSlider(currentIndex - 1);
-      resetAutoPlay();
+      playBtn?.addEventListener('click', () => togglePlay('play'));
+      pauseBtn?.addEventListener('click', () => togglePlay('pause'));
+
+      startAutoPlay();
+
+      // Intersection Observer to stop autoplay when not visible
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) startAutoPlay();
+          else stopAutoPlay();
+        });
+      }, { threshold: 0.1 });
+
+      observer.observe(container);
     });
-
-    nextBtn.addEventListener('click', () => {
-      updateSlider(currentIndex + 1);
-      resetAutoPlay();
-    });
-
-    dots.forEach((dot, i) => {
-      dot.addEventListener('click', () => {
-        updateSlider(i);
-        resetAutoPlay();
-      });
-    });
-
-    // Add event listener for pause/play button
-    
-    if (playBtn) {
-      playBtn.addEventListener('click', () => {
-        togglePlay('play');
-      });
-    }
-    if (pauseBtn) {
-      pauseBtn.addEventListener('click', () => {
-        togglePlay('pause');
-      });
-    }
-
-    // Start initial auto-play
-    startAutoPlay();
-    
-    // Cleanup if needed
-    window.addEventListener('unload', stopAutoPlay);
   }
 
-  // Run on mount
-  initSlider();
-  
-  // Re-run on View Transitions
-  document.addEventListener('astro:after-swap', initSlider);
+  // Run on mount and transitions
+  document.addEventListener('astro:page-load', initSliders);
 </script>

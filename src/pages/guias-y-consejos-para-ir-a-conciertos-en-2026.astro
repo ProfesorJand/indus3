@@ -76,23 +76,43 @@ const sections = [
                   </thead>
                   <tbody>
                     <tr>
-                      <td class="item-name">Cédula / Documento</td>
-                      <td><span class="status-badge high">Obligatorio</span></td>
+                      <td class="item-name">Entrada + Cédula / Documento</td>
+                      <td>
+                        <p class="column">
+                          <span class="status-badge high">Obligatorio</span>
+                          <span class="small-text">(Entrada al recinto).</span>
+                        </p>
+                      </td>
                       <td>Ten una foto en tu celular como respaldo.</td>
                     </tr>
                     <tr>
                       <td class="item-name">Powerbank</td>
-                      <td><span class="status-badge high">Alta</span></td>
+                      <td>
+                        <p class="column">
+                          <span class="status-badge high">Alta</span>
+                          <span class="small-text">(Para no quedarte incomunicado).</span>
+                        </p>
+                      </td>
                       <td>Guárdalo en una bolsa "Ziploc" por si llueve.</td>
                     </tr>
                     <tr>
                       <td class="item-name">Efectivo</td>
-                      <td><span class="status-badge mid">Media</span></td>
+                      <td>
+                        <p class="column">
+                          <span class="status-badge mid">Media</span>
+                          <span class="small-text">(Por si fallan los puntos de venta).</span>
+                        </p>
+                      </td>
                       <td>Distribúyelo en distintos bolsillos.</td>
                     </tr>
                     <tr>
                       <td class="item-name">Medicinas básicas</td>
-                      <td><span class="status-badge low">Baja</span></td>
+                      <td>
+                        <p class="column">
+                          <span class="status-badge low">Baja/Media</span>
+                          <span class="small-text">(Dolor de cabeza o digestión).</span>
+                        </p>
+                      </td>
                       <td>Solo lo necesario para el día.</td>
                     </tr>
                   </tbody>
@@ -199,7 +219,7 @@ const sections = [
                 <p><strong>Puntos de encuentro:</strong> Fijen un lugar físico apenas lleguen. En eventos grandes la señal suele caerse por completo.</p>
               </div>
               <div class="feature-card">
-                <h5>Salud</h5>
+                <h5>Hidratación constante</h5>
                 <p><strong>Hidratación estratégica:</strong> Ubica los puestos de agua. Bebe constante pero en sorbos pequeños.</p>
               </div>
             </div>
@@ -443,6 +463,7 @@ const sections = [
     border-radius: var(--border-radius-full);
     font-size: var(--font-size-xs);
     font-weight: 700;
+    width: fit-content;
   }
 
   .status-badge.high { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
@@ -523,6 +544,16 @@ const sections = [
   .safety-content h4 {
     color: var(--color-accent);
     margin-bottom: var(--space-4);
+  }
+
+  .column{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .small-text{
+    font-size: var(--font-size-xs);
+    font-weight: 400;
   }
 
   /* Dark mode overrides if needed */

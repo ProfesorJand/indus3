@@ -1,0 +1,134 @@
+---
+import { redes } from "@stores/redes";
+
+const socialConfig = [
+  {
+    name: "instagram",
+    label: "Instagram",
+    icon: `<i class="fab fa-instagram" style="color:var(--color-primary); font-size: 1.25rem;"></i>`
+  },
+  {
+    name: "facebook",
+    label: "Facebook",
+    icon: `<i class="fab fa-facebook" style="color:var(--color-primary); font-size: 1.25rem;"></i>`
+  },
+  {
+    name: "x",
+    label: "X (Twitter)",
+    icon: `<i class="fab fa-twitter" style="color:var(--color-primary); font-size: 1.25rem;"></i>`
+  },
+  {
+    name: "linkedin",
+    label: "LinkedIn",
+    icon: `<i class="fab fa-linkedin" style="color:var(--color-primary); font-size: 1.25rem;"></i>`
+  },
+  {
+    name: "youtube",
+    label: "YouTube",
+    icon: `<i class="fab fa-youtube" style="color:var(--color-primary); font-size: 1.25rem;"></i>`
+  },
+  {
+    name: "tiktok",
+    label: "TikTok",
+    icon: `<i class="fab fa-tiktok" style="color:var(--color-primary); font-size: 1.25rem;"></i>`
+  },
+  {
+    name: "whatsapp",
+    label: "WhatsApp",
+    icon: `<i class="fab fa-whatsapp" style="color:var(--color-primary); font-size: 1.25rem;"></i>`
+  },
+  {
+    name: "telegram",
+    label: "Telegram",
+    icon: `<i class="fab fa-telegram" style="color:var(--color-primary); font-size: 1.25rem;"></i>`
+  },
+  {
+    name: "email",
+    label: "Email",
+    icon: `<i class="fas fa-envelope" style="color:var(--color-primary); font-size: 1.25rem;"></i>`,
+    prefix: "mailto:"
+  }
+];
+
+const availableRedes = socialConfig
+  .filter(item => redes[item.name])
+  .map(item => ({
+    ...item,
+    url: item.prefix ? `${item.prefix}${redes[item.name]}` : redes[item.name]
+  }));
+
+interface Props {
+  className?: string;
+  variant?: "default" | "glass" | "minimal";
+}
+
+const { className = "", variant = "default" } = Astro.props;
+---
+
+<div class={`social-links ${variant} ${className}`}>
+  {availableRedes.map(social => (
+    <a 
+      href={social.url} 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      class="social-item"
+      title={social.label}
+      aria-label={social.label}
+    >
+      <div class="icon-wrapper" set:html={social.icon} />
+    </a>
+  ))}
+</div>
+
+<style>
+  .social-links {
+    display: flex;
+    gap: var(--space-4);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .social-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    transition: all var(--transition-base);
+    color: var(--color-text);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .social-item:hover {
+    color: var(--color-primary);
+    background: rgba(59, 130, 246, 0.1);
+    border-color: var(--color-primary);
+    transform: translateY(-3px);
+  }
+
+  .icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Variants */
+  .minimal .social-item {
+    background: transparent;
+    border: none;
+    width: auto;
+    height: auto;
+  }
+
+  .minimal .social-item:hover {
+    transform: translateY(-2px);
+    background: transparent;
+  }
+
+  .glass .social-item {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+  }
+</style>

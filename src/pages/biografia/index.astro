@@ -7,6 +7,8 @@ import Container from "@components/base/Container.astro";
 import BodyGrid from "@components/body/BodyGrid.astro";
 import LogoCard from "@components/logo/LogoCard.astro";
 import biografias from "@data/biografias.json";
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <MainLayout title="Biografías y Perfiles">
@@ -23,7 +25,7 @@ import biografias from "@data/biografias.json";
         <BodyGrid columns={3}>
           {biografias.map((bio) => (
             <div class="bio-card-wrapper">
-              <a href={`${import.meta.env.BASE_URL}/biografia/${bio.id}`} class="bio-link">
+              <a href={`${base}biografia/${bio.id}`} class="bio-link">
                 <LogoCard 
                   title={bio.name} 
                   image={bio.image}

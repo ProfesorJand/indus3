@@ -4,13 +4,14 @@ import Container from '@components/base/Container.astro';
 import HorizontalLogo from '@components/logo/horizontal.astro';
 import Redes from '@components/base/Redes.astro';
 
+const base = import.meta.env.BASE_URL;
 ---
 
 <footer class={styles.footer} transition:persist>
   <Container padding="padding-0-32">
     <div class={styles.grid}>
       <div class={styles.brandInfo}>
-        <a href={import.meta.env.BASE_URL} class={styles.logo}>
+        <a href={base} class={styles.logo}>
           <HorizontalLogo />
         </a>
         <p class={styles.tagline}>
@@ -23,9 +24,9 @@ import Redes from '@components/base/Redes.astro';
       
       <div class={styles.column}>
         <h4 class={styles.heading}>Empresa</h4>
-        <a href={`${import.meta.env.BASE_URL}/servicios`} class={styles.link}>Servicios</a>
-        <a href={`${import.meta.env.BASE_URL}/eventos`} class={styles.link}>Eventos</a>
-        <a href={`${import.meta.env.BASE_URL}/contacto`} class={styles.link}>Contacto</a>
+        <a href={`${base}servicios`} class={styles.link}>Servicios</a>
+        <a href={`${base}eventos`} class={styles.link}>Eventos</a>
+        <a href={`${base}contacto`} class={styles.link}>Contacto</a>
       </div>
 
       <div class={styles.column}>

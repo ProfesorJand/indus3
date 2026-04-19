@@ -27,6 +27,8 @@ const { pathname, href } = Astro.url;
 const seoTitle = `${bio.name} - Biografía`;
 const seoDesc = bio?.description || `Conoce la trayectoria de ${bio.name}`;
 const bioType = bio.type?.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <MainLayout title={seoTitle}>
@@ -169,7 +171,7 @@ const bioType = bio.type?.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f
             <div slot="sidebar">
               <div class="video-wrapper shadow-xl" slot="sidebar">
                 <video controls loop playsinline class="my-reel">
-                  <source src={import.meta.env.BASE_URL + bio.instagramReelVideo} type="video/mp4" />
+                  <source src={`${base}${bio.instagramReelVideo}`} type="video/mp4" />
                   Tu navegador no soporta videos.
                 </video>
               </div>

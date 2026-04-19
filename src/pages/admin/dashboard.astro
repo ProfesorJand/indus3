@@ -1,0 +1,36 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import SEO from "@components/seo/SEO.astro";
+import DashboardComponent from "@components/admin/Dashboard.jsx";
+
+// Fetch initial data
+import eventsData from "@data/events.json";
+import biosData from "@data/biografias.json";
+
+const seoTitle = "Dashboard Administrativo | Indus3";
+---
+
+<MainLayout title={seoTitle}>
+  <SEO 
+    slot="seo" 
+    title={seoTitle} 
+    description="Panel de control para la gestión de contenidos de Indus3." 
+  />
+
+  <DashboardComponent 
+    client:load 
+    initialEvents={eventsData} 
+    initialBios={biosData} 
+  />
+</MainLayout>
+
+<style is:global>
+  /* Reset some defaults for the dashboard to feel more app-like */
+  body {
+    overflow-x: hidden;
+  }
+  
+  header, footer {
+    display: none !important; /* Hide site-wide header/footer in dashboard */
+  }
+</style>

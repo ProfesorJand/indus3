@@ -2,6 +2,7 @@
 import styles from './HeaderSticky.module.css';
 import Container from '@components/base/Container.astro';
 import MobileMenu from './MobileMenu.jsx';
+import ThemeToggle from '@components/base/ThemeToggle.astro';
 import HorizontalLogo from '@components/logo/horizontal.astro';
 
 const base = import.meta.env.BASE_URL;
@@ -16,7 +17,6 @@ const navigation = [
 
 <header class={styles.header} id="header-sticky" transition:persist>
   <Container className={styles.inner} padding="padding-0-32">
-    <!-- <a href="/" class={styles.logo}>LOGO</a> -->
     <a href={base} class={styles.logo}><HorizontalLogo /></a>
     
     <nav class={styles.nav}>
@@ -25,8 +25,11 @@ const navigation = [
       ))}
     </nav>
 
-    <div class={styles.mobileActions}>
-      <MobileMenu client:load items={navigation} />
+    <div class={styles.actions}>
+      <ThemeToggle />
+      <div class={styles.mobileActions}>
+        <MobileMenu client:load items={navigation} />
+      </div>
     </div>
   </Container>
 </header>

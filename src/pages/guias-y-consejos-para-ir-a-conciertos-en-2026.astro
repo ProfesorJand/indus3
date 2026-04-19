@@ -28,43 +28,55 @@ const sections = [
   <HeaderSticky slot="header" />
 
   <main class="guide-page">
-    <!-- Hero Section -->
-    <header class="hero">
-      <div class="hero-glow"></div>
-      <Container>
-        <div class="hero-content">
-          <span class="badge">Guía Experta 2026</span>
-          <h1>Guías y Consejos para ir a Conciertos</h1>
-          <p class="hero-subtitle">Ir a un concierto es una inversión de tiempo y energía. La logística es lo que separa una noche épica de un mal recuerdo. Ya sea en un estadio o en un festival, esta guía de conciertos te prepara para una experiencia brutal.</p>
-          
-          <nav class="quick-nav">
-            {sections.map(sec => (
-              <a href={`#${sec.id}`} class="nav-link">
-                <span>{sec.title}</span>
-              </a>
-            ))}
-          </nav>
-        </div>
-      </Container>
-    </header>
-
     <Section>
       <Container>
-        <div class="content-wrapper">
-          
-          <!-- Antes del evento: La preparación es clave -->
-          <article id="antes" class="guide-card glass-card">
-            <div class="card-header">
-              <div class="icon-circle">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-              </div>
-              <h2>Antes del evento: La preparación es clave</h2>
-            </div>
-            
+        <div class="hero-content">
+          <h1>Cómo prepararte para ir a conciertos en 2026: 10 consejos para disfrutar al máximo</h1>
+          <p>Ir a un concierto es una inversión de tiempo y energía. La logística es lo que separa una noche épica de un mal recuerdo. Ya sea en un estadio o en un festival, esta guía de conciertos te prepara para el antes, durante y despues del evento y así vivas una experiencia brutal.</p>
+          <h2>Recomendaciones para asistir conciertos</h2>
+          <ol>
+            <li>
+            <a href="#checklist">Haz el Checklist del "pana preparado"</a>
+          </li>
+          <li>
+            <a href="#objetos-prohibidos">Evita objetos prohibidos</a>
+          </li>
+          <li>
+              <a href="#redes-oficiales">Revisa las redes oficiales de la productora 24 horas antes</a>
+          </li>
+          <li>
+            <a href="#celular">Usa el celular de forma inteligente</a>
+          </li>
+          <li>
+            <a href="#ropa">Usa ropa adecuada</a>
+          </li>
+          <li>
+            <a href="#punto-encuentro">Establece un punto de encuentro</a>
+          </li>
+          <li>
+            <a href="#hidratacion">Mantén una hidratación constante</a>
+          </li>
+          <li>
+            <a href="#seguridad">Mantén tus articulos personales seguros</a>
+          </li>
+          <li>
+            <a href="#transporte">Planifica tu salida y transporte</a>
+          </li>
+          <li>
+            <a href="#recuperacion">Recupérate fisicamente</a>
+          </li>
+        </ol>
+      </div>
+    </Container>
+  </Section>
+  
+  <Container>
+    <div class="content-wrapper">
+      <!-- Antes del evento: La preparación es clave -->
+      <article class="glass-card">
             <p class="intro-p">No dejes todo para última hora. El éxito de la jornada depende de lo que hagas días antes del gran día.</p>
-            
             <div class="sub-section">
-              <h3>El Checklist del "Pana preparado"</h3>
+              <h2 id="checklist">Haz el Checklist del "pana preparado"</h2>
               <div class="table-container">
                 <table class="modern-table">
                   <thead>
@@ -121,7 +133,7 @@ const sections = [
             </div>
 
             <div class="sub-section">
-              <h3> Lo que NO entra: Objetos Prohibidos</h3>
+              <h2 id="objetos-prohibidos">Evita objetos prohibidos</h2>
               <p class="intro-p">No dejes que un descuido arruine tu entrada al recinto. Generalmente, si intentas pasar estos objetos, tendrás que botarlos o regresarte a guardarlos, lo que significa perder tu lugar en la fila.</p>
               <div class="table-container">
                 <table class="modern-table">
@@ -173,104 +185,65 @@ const sections = [
               </div>
             </div>
 
-            <div class="tips-grid">
-              <div class="tip-box pro">
-                <div class="tip-tag">Tip de Pro</div>
-                <p>Revisa las redes oficiales de la productora 24h antes. A veces prohíben cosas específicas como Powerbanks de gran capacidad según el nivel de seguridad.</p>
+            <h2 id="redes-oficiales">Revisa las redes oficiales de la productora 24 horas antes</h2>
+            <div class="tip-box pro">
+              <span>A veces prohíben cosas específicas como Powerbanks de gran capacidad según el nivel de seguridad.</span>
+            </div>
+            <div class="tip-box gold">
+              <div class="tip-tag">
+                <h3>Tip de Oro</h3>
               </div>
-              <div class="tip-box gold">
-                <div class="tip-tag">Tip de Oro</div>
-                <p>En 2026 se está volviendo obligatorio el uso de <strong>mochilas de PVC transparentes</strong> en estadios para agilizar el ingreso.</p>
-              </div>
+              <span>En 2026 se está volviendo obligatorio el uso de <strong>mochilas de PVC transparentes</strong> en estadios para agilizar el ingreso.</span>
             </div>
 
-            <div class="info-grid">
-              <div class="info-item">
-                <h4>Uso Inteligente del Celular</h4>
-                <ul>
-                  <li><strong>Memoria:</strong> Libera al menos 5GB. No quieres el aviso de "Memoria Llena" en el coro.</li>
-                  <li><strong>Brillo:</strong> Bájalo un poco para ahorrar batería y no molestar a los demás.</li>
-                </ul>
-              </div>
-              <div class="info-item">
-                <h4>Outfit y Comodidad</h4>
-                <ul>
-                  <li><strong>Calzado:</strong> Usa zapatos ya "domados". Evita estrenar rígidos ese día.</li>
-                  <li><strong>Ropa:</strong> Vístete en capas. Calor adentro, frío al salir.</li>
-                </ul>
-              </div>
-            </div>
+            <h2 id="celular">Usa el celular de forma inteligente</h2>
+            <ul>
+              <li><strong>Memoria:</strong> Libera al menos 5GB. No quieres el aviso de "Memoria Llena" en el coro.</li>
+              <li><strong>Brillo:</strong> Bájalo un poco para ahorrar batería y no molestar a los demás.</li>
+            </ul>
+
+            <h2 id="ropa">Usa ropa adecuada</h2>
+            <ul>
+              <li><span><strong>Calzado:</strong> Usa zapatos ya "domados". Evita estrenar rígidos ese día.</span></li>
+              <li><span><strong>Ropa:</strong> Vístete en capas. Calor adentro, frío al salir.</span></li>
+            </ul>
           </article>
-
+          
           <!-- Durante el Concierto -->
-          <article id="durante" class="guide-card glass-card">
-            <div class="card-header">
-              <div class="icon-circle">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-              </div>
-              <h2>Durante el Concierto: Disfruta con inteligencia</h2>
-            </div>
-            
+          <article id="durante" class="glass-card">            
             <p class="intro-p">Ya pasaste los controles, ahora toca mantener la energía con inteligencia táctica en el recinto.</p>
+            <h2 id="punto-de-encuentro">Establece un punto de encuentro</h2>
+            <p>Fijen un lugar físico apenas lleguen. En eventos grandes la señal suele caerse por completo.</p>
+            <h2 id="hidratacion">Mantén una hidratación constante</h2>
+            <p>Ubica los puestos de agua. Bebe constante pero en sorbos pequeños.</p>
 
-            <div class="feature-grid">
-              <div class="feature-card">
-                <h5>Logística de Grupo</h5>
-                <p><strong>Puntos de encuentro:</strong> Fijen un lugar físico apenas lleguen. En eventos grandes la señal suele caerse por completo.</p>
-              </div>
-              <div class="feature-card">
-                <h5>Hidratación constante</h5>
-                <p><strong>Hidratación estratégica:</strong> Ubica los puestos de agua. Bebe constante pero en sorbos pequeños.</p>
-              </div>
-            </div>
+            <h2 id="seguridad">Mantén tus articulos personales seguros</h2>
+            <ul>
+              <li><strong>Mochilas al pecho:</strong> En aglomeraciones, gira tu bolso hacia adelante.</li>
+              <li><strong>Koalas cruzados:</strong> Mantén tus pertenencias pegadas a tu pecho.</li>
+              <li><strong>Cierres:</strong> Nunca uses los bolsillos traseros. Si hay cierres, úsalos.</li>
+            </ul>
 
-            <div class="safety-banner">
-              <div class="safety-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-              </div>
-              <div class="safety-content">
-                <h4>Seguridad Personal: La Regla "Todo al Frente"</h4>
-                <ul>
-                  <li><strong>Mochilas al pecho:</strong> En aglomeraciones, gira tu bolso hacia adelante.</li>
-                  <li><strong>Koalas cruzados:</strong> Mantén tus pertenencias pegadas a tu pecho.</li>
-                  <li><strong>Cierres:</strong> Nunca uses los bolsillos traseros. Si hay cierres, úsalos.</li>
-                </ul>
-              </div>
-            </div>
           </article>
-
+          
           <!-- Despues del Concierto -->
-          <article id="despues" class="guide-card glass-card">
-            <div class="card-header">
-              <div class="icon-circle">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-              </div>
-              <h2>Después del Show: El retorno seguro</h2>
-            </div>
-            
-            <p class="intro-p">El concierto terminó y la adrenalina está alta, pero el cuerpo y tu seguridad personal son prioridad.</p>
-            
-            <div class="info-grid">
-              <div class="info-item">
-                <h4>Salida y Transporte</h4>
-                <p>Espera 15 minutos a que baje el flujo masivo. Si usas apps de transporte, camina unas cuadras lejos para evitar tarifas dinámicas extremas.</p>
-              </div>
-              <div class="info-item">
-                <h4>Recuperación Física</h4>
-                <p>Al llegar, estira pantorrillas y espalda. Si sientes pitido de oídos (tinnitus), evita ruidos fuertes por las próximas 24 horas.</p>
-              </div>
-            </div>
+          <article id="despues" class="glass-card">
+            <p class="intro-p">El concierto terminó y la adrenalina está alta, pero el cuerpo y tu seguridad personal son prioridad.</p> 
+            <h2 id="transporte">Planifica tu salida y transporte</h2>
+            <p>Espera 15 minutos a que baje el flujo masivo. Si usas apps de transporte, camina unas cuadras lejos para evitar tarifas dinámicas extremas.</p>
+            <h2 id="recuperacion">Recupérate fisicamente</h2>
+            <p>Al llegar, estira pantorrillas y espalda. Si sientes pitido de oídos (tinnitus), evita ruidos fuertes por las próximas 24 horas.</p>
           </article>
 
           <!-- Guía creada por Indus3, siguenos en todas nuestras redes -->
           <footer class="guide-footer glass-card">
             <span class="footer-text">Guía creada por <strong style="color:var(--color-primary);">Indus3</strong></span>
             <p>Síguenos en nuestras redes para más contenido exclusivo</p>
-            <Redes variant="minimal" className="footer-socials" />
+            <Redes  />
           </footer>
         </div>
       </Container>
-    </Section>
+
   </main>
 
   <FooterThreeCols slot="footer" />
@@ -281,10 +254,12 @@ const sections = [
     scroll-behavior: smooth;
   }
 
+
   .guide-page {
     background-color: var(--color-bg);
     color: var(--color-text);
   }
+
 
   /* Hero Section */
   .hero {
@@ -292,7 +267,6 @@ const sections = [
     padding: var(--space-16) 0 0 0 ;
     text-align: center;
     overflow: hidden;
-    background: linear-gradient(to bottom, #111827, var(--color-bg));
   }
 
   .hero-glow {
@@ -302,7 +276,6 @@ const sections = [
     transform: translateX(-50%);
     width: 100%;
     height: calc(100% + var(--space-16) + var(--space-4));
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
     z-index: 0;
     pointer-events: none;
   }
@@ -312,6 +285,9 @@ const sections = [
     z-index: 1;
     max-width: 800px;
     margin: 0 auto;
+    gap:var(--space-6);
+    display: flex;
+    flex-direction: column;
   }
 
   .badge {
@@ -326,49 +302,6 @@ const sections = [
     letter-spacing: 1px;
     border: 1px solid rgba(59, 130, 246, 0.2);
     margin-bottom: var(--space-6);
-  }
-
-  .hero h1 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    line-height: 1.1;
-    font-weight: 900;
-    margin-bottom: var(--space-6);
-    background: linear-gradient(135deg, var(--color-text) 0%, var(--color-primary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .hero-subtitle {
-    font-size: var(--font-size-xl);
-    color: var(--color-text-light);
-    line-height: 1.6;
-    margin-bottom: var(--space-10);
-  }
-
-  /* Quick Nav */
-  .quick-nav {
-    display: flex;
-    justify-content: center;
-    gap: var(--space-4);
-    flex-wrap: wrap;
-  }
-
-  .nav-link {
-    padding: var(--space-2) var(--space-6);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius-lg);
-    font-weight: 500;
-    transition: all var(--transition-base);
-    color: var(--color-text);
-  }
-
-  .nav-link:hover {
-    background: var(--color-primary);
-    color: white;
-    transform: translateY(-2px);
-    border-color: var(--color-primary);
-    text-decoration: none;
   }
 
   /* Content Layout */
@@ -390,6 +323,9 @@ const sections = [
     position: relative;
     transition: transform var(--transition-base);
     scroll-margin-top: calc(var(--height-header) + var(--space-8));
+    display:flex;
+    flex-direction: column;
+    gap:var(--space-6)
   }
 
   .card-header {
@@ -417,11 +353,6 @@ const sections = [
     margin: 0;
   }
 
-  .intro-p {
-    font-size: var(--font-size-lg);
-    color: var(--color-text-light);
-    margin-bottom: var(--space-8);
-  }
 
   /* Table Style */
   .table-container {
@@ -504,7 +435,7 @@ const sections = [
     gap: var(--space-8);
   }
 
-  .info-item h4, .feature-card h5 {
+  .info-item h3, .feature-card h5 {
     font-size: var(--font-size-xl);
     font-weight: 700;
     margin-bottom: var(--space-4);
@@ -541,7 +472,7 @@ const sections = [
     margin-top: var(--space-4);
   }
 
-  .safety-content h4 {
+  .safety-content h3 {
     color: var(--color-accent);
     margin-bottom: var(--space-4);
   }
@@ -554,7 +485,12 @@ const sections = [
   .small-text{
     font-size: var(--font-size-xs);
     font-weight: 400;
+    text-align: left;
   }
+
+  ul {
+  list-style-type: disc;
+}
 
   /* Dark mode overrides if needed */
   @media (prefers-color-scheme: light) {
@@ -565,8 +501,6 @@ const sections = [
     }
     .modern-table { background: #fff; }
     .modern-table th { background: #f9fafb; color: #374151; }
-    .hero { background: linear-gradient(to bottom, #f3f4f6, #fff); }
-    .hero h1 { background: linear-gradient(135deg, #111827 0%, var(--color-primary) 100%); -webkit-background-clip: text; }
   }
 
   @media (max-width: 768px) {
@@ -606,3 +540,42 @@ const sections = [
     margin-top: var(--space-2);
   }
 </style>
+
+<script>
+  function setupSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (!href || href === '#') return;
+
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          
+          // Obtenemos la altura del header desde la variable CSS o usamos 80 por defecto
+          const headerHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--height-header')) || 80;
+          const extraMargin = 20; // Margen adicional para que respire el título
+          
+          // Calculamos la posición destino
+          const elementPosition = target.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - headerHeight - extraMargin;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+          
+          // Opcional: Actualizar la URL sin saltar
+          history.pushState(null, null, href);
+        }
+      });
+    });
+  }
+
+  // Inicializar
+  setupSmoothScroll();
+  
+  // Re-inicializar si usas Astro View Transitions
+  document.addEventListener('astro:after-swap', setupSmoothScroll);
+</script>
+

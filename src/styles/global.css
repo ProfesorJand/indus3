@@ -46,14 +46,37 @@ button {
 }
 
 ul, ol {
-  list-style: none;
+  list-style: auto;
+  text-align: left;
+  padding-left: 20px;
 }
+
+h1{
+  font-size: 2.5rem;
+  color: var(--color-text);
+  text-align: left;
+  line-height: 1.2;
+}
+
+h2{
+  text-align: left;
+}
+
+p{
+  color: var(--color-text);
+  font-size: var(--font-size-lg);
+  line-height: 1.6;
+  text-align: justify;
+  margin-bottom: var(--space-4);
+}
+
 
 img {
   max-width: 100%;
   height: auto;
   display: block;
 }
+
 
 /* Mobile defaults */
 @media (max-width: 639px) {

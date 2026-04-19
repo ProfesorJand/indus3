@@ -1,17 +1,16 @@
+/* Default Theme (Light) */
 :root {
-  /* Colors */
   --color-primary: #3b82f6;
   --color-primary-dark: #2563eb;
   --color-secondary: #10b981;
   --color-accent: #f59e0b;
   --color-text: #1f2937;
-  --color-text-light: #6b7280;
+  --color-text-light: #4d5461;
   --color-bg: #ffffff;
-  --color-bg-alt: #f9fafb;
-  --color-border: #e5e7eb;
+  --color-bg-alt: #c7c7c7;
+  --color-border: #424242;
   --color-white: #ffffff;
   --color-black: #000000;
-
   /* Typography */
   --font-family-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-family-mono: 'Fira Code', monospace;
@@ -63,14 +62,16 @@
   --height-full-screen: 100vh;
   --height-full-screen-with-header: calc(100vh - var(--height-header));
   
+
+
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-text: #f9fafb;
-    --color-text-light: #9ca3af;
-    --color-bg: #111827;
-    --color-bg-alt: #1f2937;
-    --color-border: #374151;
-  }
+/* Dark Theme Toggle Support */
+html.dark {
+  --color-text: #f9fafb;
+  --color-text-light: #768092;
+  --color-bg: #0f0f0f;
+  --color-bg-alt: #1e293b;
+  --color-border: #334155;
+  --color-white: #0f172a;
 }

@@ -1,5 +1,43 @@
 ---
-
+// HorizontalLogo.astro
+const base = import.meta.env.BASE_URL;
 ---
+<div class="logo-container">
+  <!-- Logo para tema claro -->
+  <img 
+    src={`${base}/indus3-logo-darker.webp`} 
+    alt="Indus3" 
+    class="logo-light" 
+  />
+  <!-- Logo para tema oscuro -->
+  <img 
+    src={`${base}/indus3-logo.webp`} 
+    alt="Indus3" 
+    class="logo-dark" 
+  />
+</div>
+<style>
+  .logo-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 180px; /* Ajusta según el tamaño de tu logo */
+  }
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+  /* Lógica de visibilidad */
+  .logo-dark {
+    display: none;
+  }
+  /* Cuando el HTML tiene la clase .dark, invertimos la visibilidad */
+  :global(html.dark) .logo-dark {
+    display: block;
+  }
+  :global(html.dark) .logo-light {
+    display: none;
+  }
+</style>
 
-<img src={`${import.meta.env.BASE_URL}/indus3-logo.webp`} alt="Indus3" style="width: 100%; object-fit: cover;" />

@@ -27,7 +27,7 @@ const seoDesc = "Próximos eventos, conciertos y festivales producidos por Indus
       </Container>
     </Section>
 
-    <Section variant="alt">
+    <Section>
       <Container>
         {eventsData.length > 0 ? (
           <BodyGrid columns={eventsData.length > 3 ? 3 : eventsData.length}>
@@ -111,7 +111,6 @@ const seoDesc = "Próximos eventos, conciertos y festivales producidos por Indus
   .content h3 {
     font-size: 1.4rem;
     margin-bottom: 0.5rem;
-    color: white;
   }
   .location {
     font-size: 0.9rem;

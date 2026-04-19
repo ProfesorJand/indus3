@@ -15,7 +15,7 @@ const socialConfig = [
   {
     name: "x",
     label: "X (Twitter)",
-    icon: `<i class="fab fa-twitter" style="color:var(--color-primary); font-size: 1.25rem;"></i>`
+    icon: `<i class="fa-brands fa-x-twitter" style="color:var(--color-primary); font-size: 1.25rem;"></i>`
   },
   {
     name: "linkedin",
@@ -59,7 +59,7 @@ const availableRedes = socialConfig
 
 interface Props {
   className?: string;
-  variant?: "default" | "glass" | "minimal";
+  variant?: "default" | "glass" | "minimal" | "left";
 }
 
 const { className = "", variant = "default" } = Astro.props;
@@ -86,6 +86,10 @@ const { className = "", variant = "default" } = Astro.props;
     gap: var(--space-4);
     align-items: center;
     justify-content: center;
+  }
+
+  .left{
+    justify-content: left;
   }
 
   .social-item {
@@ -130,5 +134,9 @@ const { className = "", variant = "default" } = Astro.props;
   .glass .social-item {
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(10px);
+  }
+
+  a{
+    text-decoration: none;
   }
 </style>

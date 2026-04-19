@@ -1,21 +1,55 @@
 import React, { useState } from 'react';
 
-const BioForm = () => {
-  const [type, setType] = useState('artista');
-  const [songs, setSongs] = useState([{ title: '', spotifyEmbed: '' }]);
-  const [awards, setAwards] = useState(['']);
+const BioForm = ({ bioToEdit = null }) => {
+  const initialState = {
+    id: bioToEdit?.id || Date.now(),
+    type: bioToEdit?.type || 'artista',
+    name: bioToEdit?.name || '',
+    jobTitle: bioToEdit?.jobTitle || '',
+    description: bioToEdit?.description || '',
+    squareImg: bioToEdit?.squareImg || '',
+    bannerImg: bioToEdit?.bannerImg || '',
+    foundingLocation: bioToEdit?.foundingLocation || '',
+    foundingDate: bioToEdit?.foundingDate || '',
+    genre: bioToEdit?.genre || [],
+    urlSpotify: bioToEdit?.urlSpotify || '',
+    awards: bioToEdit?.awards || [''],
+    instagramReelId: bioToEdit?.instagramReelId || ''
+  };
 
-  const addSong = () => setSongs([...songs, { title: '', spotifyEmbed: '' }]);
-  const addAward = () => setAwards([...awards, '']);
+  const [formData, setFormData] = useState(initialState);
+  const [status, setStatus] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('Guardando...');
+    try {
+      const response = await fetch('/api/save-bio', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      if (response.ok) setStatus('¡Éxito! Guardado.');
+      else setStatus('Error al guardar.');
+    } catch (error) {
+      console.error(error);
+      setStatus('Error de conexión.');
+    }
+  };
 
   return (
     <div className="admin-form-container">
-      <form className="bio-form">
+      <form className="bio-form" onSubmit={handleSubmit}>
         <div className="form-section">
           <h2>Información Básica</h2>
           <div className="form-group">
             <label>Tipo de Biografía</label>
-            <select value={type} onChange={(e) => setType(e.target.value)}>
+            <select name="type" value={formData.type} onChange={handleChange}>
               <option value="artista">Artista</option>
               <option value="banda">Banda</option>
               <option value="evento">Evento</option>
@@ -25,87 +59,44 @@ const BioForm = () => {
           <div className="form-row">
             <div className="form-group">
               <label>Nombre / Título</label>
-              <input type="text" placeholder="Ej: Bad Bunny" />
+              <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Ej: Bad Bunny" />
             </div>
             <div className="form-group">
-              <label>ID (Slug)</label>
-              <input type="text" placeholder="ej: bad-bunny" />
+              <label>Puesto / Título Secundario</label>
+              <input type="text" name="jobTitle" value={formData.jobTitle} onChange={handleChange} placeholder="Ej: Artista Musical" />
             </div>
           </div>
 
           <div className="form-group">
-            <label>Descripción Corta</label>
-            <textarea placeholder="Breve biografía..." rows={4}></textarea>
+            <label>Descripción</label>
+            <textarea name="description" value={formData.description} onChange={handleChange} placeholder="Breve biografía..." rows={4}></textarea>
           </div>
 
-          <div className="form-group">
-            <label>URL Imagen Portada</label>
-            <input type="text" placeholder="https://..." />
+          <div className="form-row">
+            <div className="form-group">
+              <label>Imagen Cuadrada (URL)</label>
+              <input type="text" name="squareImg" value={formData.squareImg} onChange={handleChange} placeholder="https://..." />
+            </div>
+            <div className="form-group">
+              <label>Imagen Banner (URL)</label>
+              <input type="text" name="bannerImg" value={formData.bannerImg} onChange={handleChange} placeholder="https://..." />
+            </div>
           </div>
         </div>
 
         <div className="form-section">
-          <h2>Detalles Específicos ({type})</h2>
-          {type === 'artista' && (
-            <div className="form-grid">
-              <div className="form-group"><label>Nombre Real</label><input type="text" /></div>
-              <div className="form-group"><label>Fecha Nacimiento</label><input type="date" /></div>
-              <div className="form-group"><label>Lugar Nacimiento</label><input type="text" /></div>
-              <div className="form-group"><label>Estatura</label><input type="text" /></div>
-              <div className="form-group"><label>Géneros (separados por coma)</label><input type="text" /></div>
-            </div>
-          )}
-          {type === 'banda' && (
-            <div className="form-grid">
-              <div className="form-group"><label>Integrantes (separados por coma)</label><input type="text" /></div>
-              <div className="form-group"><label>Lugar de Formación</label><input type="text" /></div>
-              <div className="form-group"><label>Géneros (separados por coma)</label><input type="text" /></div>
-            </div>
-          )}
-          {type === 'evento' && (
-            <div className="form-grid">
-              <div className="form-group"><label>Ubicación</label><input type="text" /></div>
-              <div className="form-group"><label>Fecha del Evento</label><input type="date" /></div>
-              <div className="form-group"><label>Organizador</label><input type="text" /></div>
-            </div>
-          )}
-        </div>
-
-        <div className="form-section">
-          <div className="section-header">
-            <h2>Canciones / Hits</h2>
-            <button type="button" onClick={addSong} className="btn-add">+ Añadir</button>
-          </div>
-          {songs.map((_, idx) => (
-            <div key={idx} className="form-row song-row">
-              <input type="text" placeholder="Título" />
-              <input type="text" placeholder="Spotify Embed URL" />
-            </div>
-          ))}
-        </div>
-
-        <div className="form-section">
-          <div className="section-header">
-            <h2>Premios</h2>
-            <button type="button" onClick={addAward} className="btn-add">+ Añadir</button>
-          </div>
-          {awards.map((_, idx) => (
-            <div key={idx} className="form-group">
-              <input type="text" placeholder="Nombre del premio..." />
-            </div>
-          ))}
-        </div>
-
-        <div className="form-section">
-          <h2>Redes Sociales</h2>
-          <div className="form-group">
-            <label>Instagram Reel Link</label>
-            <input type="text" placeholder="https://instagram.com/reel/..." />
+          <h2>Detalles Específicos</h2>
+          <div className="form-grid">
+             <div className="form-group"><label>Ubicación</label><input type="text" name="foundingLocation" value={formData.foundingLocation} onChange={handleChange} /></div>
+             <div className="form-group"><label>Fecha</label><input type="text" name="foundingDate" value={formData.foundingDate} onChange={handleChange} /></div>
+             <div className="form-group"><label>URL Spotify Embed</label><input type="text" name="urlSpotify" value={formData.urlSpotify} onChange={handleChange} /></div>
+             <div className="form-group"><label>Instagram Reel ID</label><input type="text" name="instagramReelId" value={formData.instagramReelId} onChange={handleChange} /></div>
           </div>
         </div>
 
         <div className="form-actions">
           <button type="submit" className="btn-submit">Guardar Biografía</button>
+          {status && <p style={{marginTop: '10px', color: '#007bff'}}>{status}</p>}
         </div>
       </form>
 

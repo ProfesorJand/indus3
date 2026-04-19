@@ -2,6 +2,7 @@
 import styles from './FooterThreeCols.module.css';
 import Container from '@components/base/Container.astro';
 import HorizontalLogo from '@components/logo/horizontal.astro';
+import Redes from '@components/base/Redes.astro';
 
 ---
 
@@ -21,17 +22,18 @@ import HorizontalLogo from '@components/logo/horizontal.astro';
       </div>
       
       <div class={styles.column}>
-        <h4 class={styles.heading}>Resources</h4>
-        <a href="#" class={styles.link}>Documentation</a>
-        <a href="#" class={styles.link}>Tutorials</a>
-        <a href="#" class={styles.link}>Starter Kits</a>
+        <h4 class={styles.heading}>Empresa</h4>
+        <a href={`${import.meta.env.BASE_URL}/servicios`} class={styles.link}>Servicios</a>
+        <a href={`${import.meta.env.BASE_URL}/eventos`} class={styles.link}>Eventos</a>
+        <a href={`${import.meta.env.BASE_URL}/contacto`} class={styles.link}>Contacto</a>
       </div>
 
       <div class={styles.column}>
-        <h4 class={styles.heading}>Company</h4>
-        <a href="#" class={styles.link}>About Us</a>
-        <a href="#" class={styles.link}>Careers</a>
-        <a href="#" class={styles.link}>Contact</a>
+        <h4 class={styles.heading}>Redes Sociales</h4>
+        <Redes variant="left"></Redes>
+        <!-- <a href={"/#"} class={styles.link}>Instagram</a>
+        <a href={"/#"} class={styles.link}>Facebook</a>
+        <a href={"/#"} class={styles.link}>Whatsapp</a> -->
       </div>
     </div>
 

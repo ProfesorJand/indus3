@@ -1,5 +1,9 @@
 name: Deploy to GitHub Pages
 
+env:
+  PUBLIC_GOOGLE_CLIENT_ID: ${{ secrets.PUBLIC_GOOGLE_CLIENT_ID }}
+  BACKEND_AUTH_KEY: ${{ secrets.BACKEND_AUTH_KEY }}
+
 on:
   # Trigger the workflow on push or pull request,
   # but only for the main branch

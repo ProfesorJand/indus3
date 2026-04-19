@@ -343,7 +343,7 @@ console.log({GOOGLE_CLIENT_ID})
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json',
-            'Authorization': `Bearer XW5V7VNGYUMILM1SJOAEKI8W48F1PVKW`
+            'Authorization': `Bearer ${import.meta.env.BACKEND_AUTH_KEY}`
           },
           body: JSON.stringify({ email, token: response.credential })
         });

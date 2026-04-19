@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://ProfesorJand.github.io', // Cambia 'ProfesorJand' por tu usuario si es diferente
+  site: 'https://indus3pro.com', // Cambia 'ProfesorJand' por tu usuario si es diferente
   base: '/indus3',
 
   integrations: [react()],

@@ -3,6 +3,8 @@ import react from '@astrojs/react';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+import sitemap from '@astrojs/sitemap';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -11,7 +13,7 @@ export default defineConfig({
   site: 'https://indus3pro.com', // Cambia 'ProfesorJand' por tu usuario si es diferente
    base: '/',
 
-  integrations: [react()],
+  integrations: [react(), sitemap()],
   vite: {
     resolve: {
       alias: {

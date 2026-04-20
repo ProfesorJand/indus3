@@ -73,5 +73,45 @@
     "id": 15,
     "name": "Andrea Bocelli",
     "image": "https://i.scdn.co/image/ab6761610000f178fb101ed2a035fcfa2bd6fee1"
+  },
+  {
+    "id": 16,
+    "name": "The Offspring",
+    "image": "https://i.scdn.co/image/ab6761610000f178ffb1ffb7c417745cdad67b88"
+  },
+  {
+    "id": 17,
+    "name": "Simple Plan",
+    "image": "https://i.scdn.co/image/ab6761610000f178f8a6c76b696c37d752a6797e"
+  },
+  {
+    "id": 18,
+    "name": "Greeicy",
+    "image": "https://i.scdn.co/image/ab6761610000f178e61e455c71409acc91810b3e"
+  },
+  {
+    "id": 19,
+    "name": "Farruko",
+    "image": "https://i.scdn.co/image/ab6761610000f1789fdfba2d2da87b9305d50758"
+  },
+  {
+    "id": 20,
+    "name": "50 Cent",
+    "image": "https://i.scdn.co/image/6f0da41419b31d9d2ba55d2df212f59ad0668118"
+  },
+  {
+    "id": 21,
+    "name": "Don Omar",
+    "image": "https://i.scdn.co/image/ab6761610000f178c9154bd840cd45e769c4e480"
+  },
+  {
+    "id": 22,
+    "name": "Daddy Yankee (DY)",
+    "image": "https://i.scdn.co/image/ab6761610000f1789a6918fd0b2fd675d63c675d"
+  },
+  {
+    "id": 23,
+    "name": "Franco De Vita",
+    "image": "https://i.scdn.co/image/ab6761610000f17821fb9c2d53162906b9c23035"
   }
 ]

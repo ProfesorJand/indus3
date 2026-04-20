@@ -14,251 +14,332 @@ const seoDesc = `Prepárate para la mejor experiencia en vivo. Logística, segur
 const sections = [
   { id: "antes", title: "Antes del evento", icon: "calendar" },
   { id: "durante", title: "Durante el show", icon: "music" },
-  { id: "despues", title: "Después del evento", icon: "home" }
+  { id: "despues", title: "Después del evento", icon: "home" },
 ];
---- 
+---
 
 <MainLayout title={seoTitle}>
-    <SEO 
-      slot="seo" 
-      title={seoTitle} 
-      description={seoDesc} 
-      schemas={[websiteSchema, organizationSchema]} 
-    />
+  <SEO
+    slot="seo"
+    title={seoTitle}
+    description={seoDesc}
+    schemas={[websiteSchema, organizationSchema]}
+  />
   <HeaderSticky slot="header" />
 
   <main class="guide-page">
     <Section>
-      <Container>
-        
-    </Container>
-  </Section>
-  
-  <Container>
-    <div class="content-wrapper">
-      
-          <h1>Cómo prepararte para ir a conciertos en 2026: 10 consejos para disfrutar al máximo</h1>
-          <p>Ir a un concierto es una inversión de tiempo y energía. La logística es lo que separa una noche épica de un mal recuerdo. Ya sea en un estadio o en un festival, esta guía de conciertos te prepara para el antes, durante y despues del evento y así vivas una experiencia brutal.</p>
-          <div class="recom-container">
+      <Container />
+    </Section>
+
+    <Container>
+      <div class="content-wrapper">
+        <h1>
+          Cómo prepararte para ir a conciertos en 2026: 10 consejos para
+          disfrutar al máximo
+        </h1>
+        <p>
+          Ir a un concierto es una inversión de tiempo y energía. La logística
+          es lo que separa una noche épica de un mal recuerdo. Ya sea en un
+          estadio o en un festival, esta guía de conciertos te prepara para el
+          antes, durante y despues del evento y así vivas una experiencia
+          brutal.
+        </p>
+        <div class="recom-container">
           <h2>Recomendaciones para asistir conciertos</h2>
           <ol>
             <li>
-            <a href="#checklist">Prepara los articulos esenciales</a>
-          </li>
-          <li>
-            <a href="#objetos-prohibidos">Evita objetos prohibidos</a>
-          </li>
-          <li>
-              <a href="#redes-oficiales">Revisa las redes oficiales de la productora 24 horas antes</a>
-          </li>
-          <li>
-            <a href="#celular">Usa el celular de forma inteligente</a>
-          </li>
-          <li>
-            <a href="#ropa">Usa ropa adecuada</a>
-          </li>
-          <li>
-            <a href="#punto-encuentro">Establece un punto de encuentro</a>
-          </li>
-          <li>
-            <a href="#hidratacion">Mantén una hidratación constante</a>
-          </li>
-          <li>
-            <a href="#seguridad">Mantén tus articulos personales seguros</a>
-          </li>
-          <li>
-            <a href="#transporte">Planifica tu salida y transporte</a>
-          </li>
-          <li>
-            <a href="#recuperacion">Recupérate fisicamente</a>
-          </li>
-        </ol>
-
+              <a href="#checklist">Prepara los articulos esenciales</a>
+            </li>
+            <li>
+              <a href="#objetos-prohibidos">Evita objetos prohibidos</a>
+            </li>
+            <li>
+              <a href="#redes-oficiales"
+                >Revisa las redes oficiales de la productora 24 horas antes</a
+              >
+            </li>
+            <li>
+              <a href="#celular">Usa el celular de forma inteligente</a>
+            </li>
+            <li>
+              <a href="#ropa">Usa ropa adecuada</a>
+            </li>
+            <li>
+              <a href="#punto-encuentro">Establece un punto de encuentro</a>
+            </li>
+            <li>
+              <a href="#hidratacion">Mantén una hidratación constante</a>
+            </li>
+            <li>
+              <a href="#seguridad">Mantén tus articulos personales seguros</a>
+            </li>
+            <li>
+              <a href="#transporte">Planifica tu salida y transporte</a>
+            </li>
+            <li>
+              <a href="#recuperacion">Recupérate fisicamente</a>
+            </li>
+          </ol>
         </div>
- 
-      <!-- Antes del evento: La preparación es clave -->
-      <article class="glass-card">
-            <p class="intro-p">No dejes todo para última hora. El éxito de la jornada depende de lo que hagas días antes del gran día.</p>
-            <div class="recom-container">
-              <h2 id="checklist">1. Prepara los artículos esenciales</h2>
-                <table class="modern-table">
-                  <thead>
-                    <tr>
-                      <th>Artículo</th>
-                      <th>Importancia</th>
-                      <th>Tip de Seguridad</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="item-name">Entrada + Cédula / Documento</td>
-                      <td>
-                        <p class="column">
-                          <span class="status-badge high">Obligatorio</span>
-                          <span class="small-text">(Entrada al recinto).</span>
-                        </p>
-                      </td>
-                      <td>Ten una foto en tu celular como respaldo.</td>
-                    </tr>
-                    <tr>
-                      <td class="item-name">Powerbank</td>
-                      <td>
-                        <p class="column">
-                          <span class="status-badge high">Alta</span>
-                          <span class="small-text">(Para no quedarte incomunicado).</span>
-                        </p>
-                      </td>
-                      <td>Guárdalo en una bolsa "Ziploc" por si llueve.</td>
-                    </tr>
-                    <tr>
-                      <td class="item-name">Efectivo</td>
-                      <td>
-                        <p class="column">
-                          <span class="status-badge mid">Media</span>
-                          <span class="small-text">(Por si fallan los puntos de venta).</span>
-                        </p>
-                      </td>
-                      <td>Distribúyelo en distintos bolsillos.</td>
-                    </tr>
-                    <tr>
-                      <td class="item-name">Medicinas básicas</td>
-                      <td>
-                        <p class="column">
-                          <span class="status-badge low">Baja/Media</span>
-                          <span class="small-text">(Dolor de cabeza o digestión).</span>
-                        </p>
-                      </td>
-                      <td>Solo lo necesario para el día.</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-    
-              <div class="recom-container">
-                <h2 id="objetos-prohibidos">2. Evita objetos prohibidos</h2>
-                <p class="intro-p">No dejes que un descuido arruine tu entrada al recinto. Generalmente, si intentas pasar estos objetos, tendrás que botarlos o regresarte a guardarlos, lo que significa perder tu lugar en la fila.</p>
-              </div>
 
-                <table class="modern-table">
-                  <thead>
-                    <tr>
-                      <th>Categoría</th>
-                      <th>Objeto Prohibido</th>
-                      <th>¿Por qué? / Alternativa</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="item-name">Seguridad</td>
-                      <td>Armas de cualquier tipo, objetos punzantes o cadenas pesadas.</td>
-                      <td>Seguridad básica. Evita incluso correas con tachuelas grandes.</td>
-                    </tr>
-                    <tr>
-                      <td class="item-name">Clima</td>
-                      <td>Paraguas o sombrillas con punta.</td>
-                      <td>Obstruyen la vista y son peligrosos. Usa un poncho impermeable.</td>
-                    </tr>
-                    <tr>
-                      <td class="item-name">Tecnología</td>
-                      <td>Cámaras profesionales (lentes intercambiables) o GoPros.</td>
-                      <td>Derechos de transmisión. Usa la cámara de tu celular.</td>
-                    </tr>
-                    <tr>
-                      <td class="item-name">Accesorios</td>
-                      <td>Selfie sticks (palos de selfie) y punteros láser.</td>
-                      <td>Molestan al resto del público y al artista.</td>
-                    </tr>
-                    <tr>
-                      <td class="item-name">Comodidad</td>
-                      <td>Sillas plegables, carpas o hieleras (coolers).</td>
-                      <td>Por gestión de espacio y evacuación.</td>
-                    </tr>
-                    <tr>
-                      <td class="item-name">Sustancias</td>
-                      <td>Bebidas alcohólicas, sustancias ilícitas o envases de vidrio/metal.</td>
-                      <td>Control de ventas interno y seguridad.</td>
-                    </tr>
-                    <tr>
-                      <td class="item-name">Varios</td>
-                      <td>Pancartas de cartón muy grandes o con palos.</td>
-                      <td>Bloquean la visibilidad de los que están atrás.</td>
-                    </tr>
-                  </tbody>
-                </table>
+        <!-- Antes del evento: La preparación es clave -->
+        <article class="glass-card">
+          <p class="intro-p">
+            No dejes todo para última hora. El éxito de la jornada depende de lo
+            que hagas días antes del gran día.
+          </p>
+          <div class="recom-container">
+            <h2 id="checklist">1. Prepara los artículos esenciales</h2>
+            <table class="modern-table">
+              <thead>
+                <tr>
+                  <th>Artículo</th>
+                  <th>Importancia</th>
+                  <th>Tip de Seguridad</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="item-name">Entrada + Cédula / Documento</td>
+                  <td>
+                    <p class="column">
+                      <span class="status-badge high">Obligatorio</span>
+                      <span class="small-text">(Entrada al recinto).</span>
+                    </p>
+                  </td>
+                  <td>Ten una foto en tu celular como respaldo.</td>
+                </tr>
+                <tr>
+                  <td class="item-name">Powerbank</td>
+                  <td>
+                    <p class="column">
+                      <span class="status-badge high">Alta</span>
+                      <span class="small-text"
+                        >(Para no quedarte incomunicado).</span
+                      >
+                    </p>
+                  </td>
+                  <td>Guárdalo en una bolsa "Ziploc" por si llueve.</td>
+                </tr>
+                <tr>
+                  <td class="item-name">Efectivo</td>
+                  <td>
+                    <p class="column">
+                      <span class="status-badge mid">Media</span>
+                      <span class="small-text"
+                        >(Por si fallan los puntos de venta).</span
+                      >
+                    </p>
+                  </td>
+                  <td>Distribúyelo en distintos bolsillos.</td>
+                </tr>
+                <tr>
+                  <td class="item-name">Medicinas básicas</td>
+                  <td>
+                    <p class="column">
+                      <span class="status-badge low">Baja/Media</span>
+                      <span class="small-text"
+                        >(Dolor de cabeza o digestión).</span
+                      >
+                    </p>
+                  </td>
+                  <td>Solo lo necesario para el día.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
- 
-            <div class="recom-container">
+          <div class="recom-container">
+            <h2 id="objetos-prohibidos">2. Evita objetos prohibidos</h2>
+            <p class="intro-p">
+              No dejes que un descuido arruine tu entrada al recinto.
+              Generalmente, si intentas pasar estos objetos, tendrás que
+              botarlos o regresarte a guardarlos, lo que significa perder tu
+              lugar en la fila.
+            </p>
+          </div>
 
-              <h2 id="redes-oficiales">3. Revisa las redes oficiales de la productora 24 horas antes</h2>
-              <div class="tip-box pro">
-                <span>A veces prohíben cosas específicas como Powerbanks de gran capacidad según el nivel de seguridad.</span>
-              </div>
-            </div>
-            <div class="tip-box gold">
-              <div class="tip-tag">
-                <h3>Tip de Oro</h3>
-              </div>
-              <span>En 2026 se está volviendo obligatorio el uso de <strong>mochilas de PVC transparentes</strong> en estadios para agilizar el ingreso.</span>
-            </div>
-            <div class="recom-container">
-              <h2 id="celular">4. Usa el celular de forma inteligente</h2>
-              <ul>
-                <li><strong>Memoria:</strong> Libera al menos 5GB. No quieres el aviso de "Memoria Llena" en el coro.</li>
-                <li><strong>Brillo:</strong> Bájalo un poco para ahorrar batería y no molestar a los demás.</li>
-              </ul>
-            </div>
-            
-            <div class="recom-container">
-              <h2 id="ropa">5. Usa ropa adecuada</h2>
-              <ul>
-                <li><span><strong>Calzado:</strong> Usa zapatos ya "domados". Evita estrenar rígidos ese día.</span></li>
-                <li><span><strong>Ropa:</strong> Vístete en capas. Calor adentro, frío al salir.</span></li>
-              </ul>
-            </div>
+          <table class="modern-table">
+            <thead>
+              <tr>
+                <th>Categoría</th>
+                <th>Objeto Prohibido</th>
+                <th>¿Por qué? / Alternativa</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="item-name">Seguridad</td>
+                <td
+                  >Armas de cualquier tipo, objetos punzantes o cadenas pesadas.</td
+                >
+                <td
+                  >Seguridad básica. Evita incluso correas con tachuelas
+                  grandes.</td
+                >
+              </tr>
+              <tr>
+                <td class="item-name">Clima</td>
+                <td>Paraguas o sombrillas con punta.</td>
+                <td
+                  >Obstruyen la vista y son peligrosos. Usa un poncho
+                  impermeable.</td
+                >
+              </tr>
+              <tr>
+                <td class="item-name">Tecnología</td>
+                <td>Cámaras profesionales (lentes intercambiables) o GoPros.</td
+                >
+                <td>Derechos de transmisión. Usa la cámara de tu celular.</td>
+              </tr>
+              <tr>
+                <td class="item-name">Accesorios</td>
+                <td>Selfie sticks (palos de selfie) y punteros láser.</td>
+                <td>Molestan al resto del público y al artista.</td>
+              </tr>
+              <tr>
+                <td class="item-name">Comodidad</td>
+                <td>Sillas plegables, carpas o hieleras (coolers).</td>
+                <td>Por gestión de espacio y evacuación.</td>
+              </tr>
+              <tr>
+                <td class="item-name">Sustancias</td>
+                <td
+                  >Bebidas alcohólicas, sustancias ilícitas o envases de
+                  vidrio/metal.</td
+                >
+                <td>Control de ventas interno y seguridad.</td>
+              </tr>
+              <tr>
+                <td class="item-name">Varios</td>
+                <td>Pancartas de cartón muy grandes o con palos.</td>
+                <td>Bloquean la visibilidad de los que están atrás.</td>
+              </tr>
+            </tbody>
+          </table>
 
-           
-            <p class="intro-p">Ya pasaste los controles, ahora toca mantener la energía con inteligencia táctica en el recinto.</p>
-            <div class="recom-container">
-              <h2 id="punto-de-encuentro">6. Establece un punto de encuentro</h2>
-              <p>Fijen un lugar físico apenas lleguen. En eventos grandes la señal suele caerse por completo.</p>
+          <div class="recom-container">
+            <h2 id="redes-oficiales">
+              3. Revisa las redes oficiales de la productora 24 horas antes
+            </h2>
+            <div class="tip-box pro">
+              <span
+                >A veces prohíben cosas específicas como Powerbanks de gran
+                capacidad según el nivel de seguridad.</span
+              >
             </div>
-            <div class="recom-container">
-              <h2 id="hidratacion">7. Mantén una hidratación constante</h2>
-              <p>Ubica los puestos de agua. Bebe constante pero en sorbos pequeños.</p>
+          </div>
+          <div class="tip-box gold">
+            <div class="tip-tag">
+              <h3>Tip de Oro</h3>
             </div>
-            <div class="recom-container">
-              <h2 id="seguridad">8. Mantén tus articulos personales seguros</h2>
-              <ul>
-                <li><strong>Mochilas al pecho:</strong> En aglomeraciones, gira tu bolso hacia adelante.</li>
-                <li><strong>Koalas cruzados:</strong> Mantén tus pertenencias pegadas a tu pecho.</li>
-                <li><strong>Cierres:</strong> Nunca uses los bolsillos traseros. Si hay cierres, úsalos.</li>
-              </ul>
-            </div>
+            <span
+              >En 2026 se está volviendo obligatorio el uso de <strong
+                >mochilas de PVC transparentes</strong
+              > en estadios para agilizar el ingreso.</span
+            >
+          </div>
+          <div class="recom-container">
+            <h2 id="celular">4. Usa el celular de forma inteligente</h2>
+            <ul>
+              <li>
+                <strong>Memoria:</strong> Libera al menos 5GB. No quieres el aviso
+                de "Memoria Llena" en el coro.
+              </li>
+              <li>
+                <strong>Brillo:</strong> Bájalo un poco para ahorrar batería y no
+                molestar a los demás.
+              </li>
+            </ul>
+          </div>
 
+          <div class="recom-container">
+            <h2 id="ropa">5. Usa ropa adecuada</h2>
+            <ul>
+              <li>
+                <span
+                  ><strong>Calzado:</strong> Usa zapatos ya "domados". Evita estrenar
+                  rígidos ese día.</span>
+              </li>
+              <li>
+                <span
+                  ><strong>Ropa:</strong> Vístete en capas. Calor adentro, frío al
+                  salir.</span>
+              </li>
+            </ul>
+          </div>
 
-          
+          <p class="intro-p">
+            Ya pasaste los controles, ahora toca mantener la energía con
+            inteligencia táctica en el recinto.
+          </p>
+          <div class="recom-container">
+            <h2 id="punto-de-encuentro">6. Establece un punto de encuentro</h2>
+            <p>
+              Fijen un lugar físico apenas lleguen. En eventos grandes la señal
+              suele caerse por completo.
+            </p>
+          </div>
+          <div class="recom-container">
+            <h2 id="hidratacion">7. Mantén una hidratación constante</h2>
+            <p>
+              Ubica los puestos de agua. Bebe constante pero en sorbos pequeños.
+            </p>
+          </div>
+          <div class="recom-container">
+            <h2 id="seguridad">8. Mantén tus articulos personales seguros</h2>
+            <ul>
+              <li>
+                <strong>Mochilas al pecho:</strong> En aglomeraciones, gira tu bolso
+                hacia adelante.
+              </li>
+              <li>
+                <strong>Koalas cruzados:</strong> Mantén tus pertenencias pegadas
+                a tu pecho.
+              </li>
+              <li>
+                <strong>Cierres:</strong> Nunca uses los bolsillos traseros. Si hay
+                cierres, úsalos.
+              </li>
+            </ul>
+          </div>
+
           <!-- Despues del Concierto -->
 
-            <p class="intro-p">El concierto terminó y la adrenalina está alta, pero el cuerpo y tu seguridad personal son prioridad.</p> 
-            <div class="recom-container">
-              <h2 id="transporte">9. Planifica tu salida y transporte</h2>
-              <p>Espera 15 minutos a que baje el flujo masivo. Si usas apps de transporte, camina unas cuadras lejos para evitar tarifas dinámicas extremas.</p>
-            </div>
-            <div class="recom-container">
-              <h2 id="recuperacion">10. Recupérate fisicamente</h2>
-              <p>Al llegar, estira pantorrillas y espalda. Si sientes pitido de oídos (tinnitus), evita ruidos fuertes por las próximas 24 horas.</p>
-            </div>
-          </article>
+          <p class="intro-p">
+            El concierto terminó y la adrenalina está alta, pero el cuerpo y tu
+            seguridad personal son prioridad.
+          </p>
+          <div class="recom-container">
+            <h2 id="transporte">9. Planifica tu salida y transporte</h2>
+            <p>
+              Espera 15 minutos a que baje el flujo masivo. Si usas apps de
+              transporte, camina unas cuadras lejos para evitar tarifas
+              dinámicas extremas.
+            </p>
+          </div>
+          <div class="recom-container">
+            <h2 id="recuperacion">10. Recupérate fisicamente</h2>
+            <p>
+              Al llegar, estira pantorrillas y espalda. Si sientes pitido de
+              oídos (tinnitus), evita ruidos fuertes por las próximas 24 horas.
+            </p>
+          </div>
+        </article>
 
-          <!-- Guía creada por Indus3, siguenos en todas nuestras redes -->
-          <footer class="guide-footer glass-card">
-            <span class="footer-text">Guía creada por <strong style="color:var(--color-primary);">Indus3</strong></span>
-            <p>Síguenos en nuestras redes para más contenido exclusivo</p>
-            <Redes  />
-          </footer>
-        </div>
-      </Container>
-
+        <!-- Guía creada por Indus3, siguenos en todas nuestras redes -->
+        <footer class="guide-footer glass-card">
+          <span class="footer-text"
+            >Guía creada por <strong style="color:var(--color-primary);"
+              >Indus3</strong
+            ></span
+          >
+          <p>Síguenos en nuestras redes para más contenido exclusivo</p>
+          <Redes />
+        </footer>
+      </div>
+    </Container>
   </main>
 
   <FooterThreeCols slot="footer" />
@@ -268,7 +349,7 @@ const sections = [
   html {
     scroll-behavior: smooth;
   }
-  .recom-container{
+  .recom-container {
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
@@ -279,11 +360,10 @@ const sections = [
     color: var(--color-text);
   }
 
-
   /* Hero Section */
   .hero {
     position: relative;
-    padding: var(--space-16) 0 0 0 ;
+    padding: var(--space-16) 0 0 0;
     text-align: center;
     overflow: hidden;
   }
@@ -303,7 +383,7 @@ const sections = [
     position: relative;
     z-index: 1;
     margin: 0 auto;
-    gap:var(--space-6);
+    gap: var(--space-6);
     display: flex;
     flex-direction: column;
   }
@@ -341,9 +421,9 @@ const sections = [
     position: relative;
     transition: transform var(--transition-base);
     scroll-margin-top: calc(var(--height-header) + var(--space-8));
-    display:flex;
+    display: flex;
     flex-direction: column;
-    gap:var(--space-6)
+    gap: var(--space-6);
   }
 
   .card-header {
@@ -370,7 +450,6 @@ const sections = [
     margin: 0;
   }
 
-
   /* Table Style */
   .table-container {
     overflow-x: auto;
@@ -394,7 +473,7 @@ const sections = [
     color: var(--color-text-light);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    text-align:center;
+    text-align: center;
   }
 
   .modern-table td {
@@ -415,9 +494,18 @@ const sections = [
     width: fit-content;
   }
 
-  .status-badge.high { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
-  .status-badge.mid { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
-  .status-badge.low { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+  .status-badge.high {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+  }
+  .status-badge.mid {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+  }
+  .status-badge.low {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+  }
 
   /* Tips Grid */
   .tips-grid {
@@ -434,8 +522,12 @@ const sections = [
     background: var(--color-bg-alt);
   }
 
-  .tip-box.pro { border-color: var(--color-primary); }
-  .tip-box.gold { border-color: var(--color-accent); }
+  .tip-box.pro {
+    border-color: var(--color-primary);
+  }
+  .tip-box.gold {
+    border-color: var(--color-accent);
+  }
 
   .tip-tag {
     font-size: var(--font-size-xs);
@@ -447,13 +539,15 @@ const sections = [
   }
 
   /* Info/Feature Grids */
-  .info-grid, .feature-grid {
+  .info-grid,
+  .feature-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: var(--space-8);
   }
 
-  .info-item h3, .feature-card h5 {
+  .info-item h3,
+  .feature-card h5 {
     font-size: var(--font-size-xl);
     font-weight: 700;
     margin-bottom: var(--space-4);
@@ -495,23 +589,23 @@ const sections = [
     margin-bottom: var(--space-4);
   }
 
-  .column{
+  .column {
     display: flex;
     flex-direction: column;
   }
 
-  .small-text{
+  .small-text {
     font-size: var(--font-size-xs);
     font-weight: 400;
     text-align: left;
   }
 
   ul {
-  list-style-type: disc;
-}
-p{
-  margin-bottom:0;
-}
+    list-style-type: disc;
+  }
+  p {
+    margin-bottom: 0;
+  }
 
   /* Dark mode overrides if needed */
   @media (prefers-color-scheme: light) {
@@ -520,17 +614,33 @@ p{
       border-color: var(--color-border);
       box-shadow: var(--shadow-lg);
     }
-    .modern-table { background: #fff; }
-    .modern-table th { background: #f9fafb; color: #374151; }
+    .modern-table {
+      background: #fff;
+    }
+    .modern-table th {
+      background: #f9fafb;
+      color: #374151;
+    }
   }
 
   @media (max-width: 768px) {
-    .glass-card { 
-      padding: var(--space-6); 
+    .glass-card {
       scroll-margin-top: calc(var(--height-header-mobile) + var(--space-4));
     }
-    .tips-grid, .info-grid { grid-template-columns: 1fr; }
-    .safety-banner { flex-direction: column; gap: var(--space-4); }
+    .tips-grid,
+    .info-grid {
+      grid-template-columns: 1fr;
+    }
+    .safety-banner {
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+    .modern-table th{
+      padding:var(--space-2)
+    }
+    .modern-table td{
+      padding:var(--space-2)
+    }
   }
 
   /* Guide Footer */
@@ -564,28 +674,34 @@ p{
 
 <script>
   function setupSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (!href || href === '#') return;
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        const href = this.getAttribute("href");
+        if (!href || href === "#") return;
 
         const target = document.querySelector(href);
         if (target) {
           e.preventDefault();
-          
+
           // Obtenemos la altura del header desde la variable CSS o usamos 80 por defecto
-          const headerHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--height-header')) || 80;
+          const headerHeight =
+            parseInt(
+              getComputedStyle(document.documentElement).getPropertyValue(
+                "--height-header",
+              ),
+            ) || 80;
           const extraMargin = 20; // Margen adicional para que respire el título
-          
+
           // Calculamos la posición destino
-          const elementPosition = target.getBoundingClientRect().top + window.scrollY;
+          const elementPosition =
+            target.getBoundingClientRect().top + window.scrollY;
           const offsetPosition = elementPosition - headerHeight - extraMargin;
 
           window.scrollTo({
             top: offsetPosition,
-            behavior: 'smooth'
+            behavior: "smooth",
           });
-          
+
           // Opcional: Actualizar la URL sin saltar
           history.pushState(null, null, href);
         }
@@ -595,8 +711,7 @@ p{
 
   // Inicializar
   setupSmoothScroll();
-  
-  // Re-inicializar si usas Astro View Transitions
-  document.addEventListener('astro:after-swap', setupSmoothScroll);
-</script>
 
+  // Re-inicializar si usas Astro View Transitions
+  document.addEventListener("astro:after-swap", setupSmoothScroll);
+</script>

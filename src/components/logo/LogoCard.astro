@@ -17,7 +17,7 @@ console.log({image})
 <Element href={href} class={`${styles.card} ${className}`} >
   {image && (
     <div class={styles.imageWrapper}>
-      <img src={image} alt={title} class={styles.image} />
+      <img src={image} alt={title} class={styles.image} loading="lazy" decoding="async" />
     </div>
   )}
   <div class={styles.content}>

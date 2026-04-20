@@ -11,8 +11,10 @@ const __dirname = path.dirname(__filename);
 // https://astro.build/config
 export default defineConfig({
   site: 'https://indus3pro.com', // Cambia 'ProfesorJand' por tu usuario si es diferente
-   base: '/',
-
+  base: '/',
+  build: {
+    inlineStylesheets: 'auto'
+  },
   integrations: [react(), sitemap()],
   vite: {
     resolve: {

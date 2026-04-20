@@ -146,6 +146,7 @@ const seoDesc = "Sistema de plantillas modular y escalable para creación rápid
 // ];
 
 const projectRoot = process.cwd();
+const clientesDir = path.resolve(projectRoot, 'public/clientes');
 const clientsDir = path.resolve(projectRoot, 'public/clientes-venezolanos');
 const clientsDir2 = path.resolve(projectRoot, 'public/clientes-de-la-region');
 
@@ -204,6 +205,33 @@ const clientesDeLaRegion = files2
 
   )
 
+  let files3: string[] = [];
+  try {
+    files3 = fs.readdirSync(clientesDir);
+    if (files3.length === 0) console.warn('Warning: No files found in', clientesDir);
+  } catch (error) {
+    console.error('Error reading clients directory 3:', error);
+  }
+  const clientes = files3
+  .filter(file => /\.(webp|png|jpg|jpeg|svg)$/i.test(file))
+  .map(file => {
+    const nameWithoutExt = file.replace(/\.[^/.]+$/, "");
+    // Remove "Logo-" prefix and replace hyphens with spaces
+    const title = nameWithoutExt
+      .replace(/^Logo-/i, "")
+      .replace(/-/g, " ");
+
+    return {
+      image: `${baseUrl}/clientes/${file}`,
+      title: title,
+      link: "/#"
+    };
+
+  }
+
+  )
+
+
   const base = import.meta.env.BASE_URL;
 ---
 
@@ -255,7 +283,7 @@ const clientesDeLaRegion = files2
   </Section> -->
 
   <!-- Artistas Section -->
-  <Section>
+  <Section variant="alt">
     <Container>
       <h2 style="text-align: center; margin-bottom: var(--space-12); font-size: var(--font-size-3xl);">Nuestros Clientes y Aliados</h2>
       <div class="artist-grid">
@@ -268,7 +296,7 @@ const clientesDeLaRegion = files2
 
   
   <!-- Content with Sidebar Example -->
-  <Section variant="hero">
+  <!-- <Section variant="hero" > -->
     <!-- <BodyTwoColumns sidebarLeft={true}>
       <div slot="sidebar">
         <ul style="display: flex; flex-direction: column; gap: var(--space-2);">
@@ -287,7 +315,7 @@ const clientesDeLaRegion = files2
                 Este starter kit utiliza lo mejor del ecosistema moderno: Astro para el esqueleto y React par la interactividad donde sea estrictamente necesario.
                 </p> -->
                 
-      <h2 style="margin-bottom: var(--space-4);justify-self:center">Clientes Venezolanos</h2>
+      <!-- <h2 style="margin-bottom: var(--space-4);justify-self:center">Clientes Venezolanos</h2>
       <BodyGrid columns={4}>
         {
           clientesVenezolanos.map((cliente) => (
@@ -297,10 +325,10 @@ const clientesDeLaRegion = files2
             />
           ))
         }
-      </BodyGrid>
-  </Section>
+      </BodyGrid> -->
+  <!-- </Section> -->
 
-  <Section variant="compact">
+  <Section variant="alt">
     <!-- <BodyTwoColumns sidebarLeft={true}>
       <div slot="sidebar">
         <ul style="display: flex; flex-direction: column; gap: var(--space-2);">
@@ -319,16 +347,24 @@ const clientesDeLaRegion = files2
         Este starter kit utiliza lo mejor del ecosistema moderno: Astro para el esqueleto y React par la interactividad donde sea estrictamente necesario.
         </p> -->
         
-      <h2 style="margin-bottom: var(--space-4);justify-self:center">Clientes de la Región</h2>
+      <h2 style="margin-bottom: var(--space-12);justify-self:center;font-size: var(--font-size-3xl">Clientes</h2>
       <BodyGrid columns={4}>
         {
-          clientesDeLaRegion.map((cliente) => (
+          clientes.map((cliente) => (
             <LogoCard 
               title={cliente.title}
               image={cliente.image}
             />
           ))
         }
+        <!-- {
+          clientesDeLaRegion.map((cliente) => (
+            <LogoCard 
+              title={cliente.title}
+              image={cliente.image}
+            />
+          ))
+        } -->
         <!-- <Card 
           title="Componentes Base" 
           description="Botones, contenedores y secciones listos para usar con CSS Modules."

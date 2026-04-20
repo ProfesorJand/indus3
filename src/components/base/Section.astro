@@ -5,12 +5,13 @@ interface Props {
   variant?: 'alt' | 'compact' | 'hero' | 'fullHeightWithHeader';
   id?: string;
   className?: string;
+  padding?: string;
 }
 
-const { variant, id, className = '' } = Astro.props;
+const { variant, id, className = '', padding } = Astro.props;
 const classes = [styles.section, variant ? styles[variant] : '', className].join(' ');
 ---
 
-<section id={id} class={classes}>
+<section id={id} class={classes} style={{ padding: padding }}>
   <slot />
 </section>

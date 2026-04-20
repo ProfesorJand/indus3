@@ -5,15 +5,22 @@ import Container from '@components/base/Container.astro';
 interface Props {
   fullWidth?: boolean;
   columns?: number;
+  mobile?: number;
+  tablet?: number;
 }
 
-const { fullWidth = false, columns = 1 } = Astro.props;
+const { 
+  fullWidth = false, 
+  columns = 3, 
+  mobile = 1, 
+  tablet = 2 
+} = Astro.props;
 ---
 
 <Container variant={fullWidth ? 'full' : 'wide'}>
   <div 
     class={styles.grid} 
-    style={`grid-template-columns: repeat(${columns}, 1fr);`}
+    style={`--cols-desktop: ${columns}; --cols-tablet: ${tablet}; --cols-mobile: ${mobile};`}
   >
     <slot />
   </div>

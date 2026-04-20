@@ -13,7 +13,7 @@ export default defineConfig({
   site: 'https://indus3pro.com', // Cambia 'ProfesorJand' por tu usuario si es diferente
   base: '/',
   build: {
-    inlineStylesheets: 'auto'
+    inlineStylesheets: 'always'
   },
   integrations: [react(), sitemap()],
   vite: {

@@ -93,7 +93,8 @@ const EventForm = ({ eventToEdit = null }) => {
 
     try {
       // 1. Intentar guardar en el archivo local mediante la API (Solo funciona en desarrollo)
-      const response = await fetch('/api/save-event', {
+      const urlSaveEvent = "https://api.indus3pro.com/eventos/save-event.php";
+      const response = await fetch(urlSaveEvent, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)

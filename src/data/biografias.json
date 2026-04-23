@@ -36,6 +36,31 @@
 
   },
   {
+    "id": "juanes",
+    "type": "Artista",
+    "jobTitle":"Artista Musical",
+    "name": "Juanes",
+    "description": ["Desde joven mostró interés por la música y aprendió a tocar varios instrumentos. Durante su adolescencia formó la banda Ekhymosis, influenciada por el metal de los años 80, con la que lanzó varios discos antes de separarse.",
+      "Tras la disolución del grupo, inició su carrera como solista en el año 2000 con Fíjate Bien. Su reconocimiento internacional creció con Un día normal (2002) y se consolidó con Mi sangre (2004), que lo llevó a la fama mundial. Más adelante, lanzó La vida… es un ratico (2007), uno de sus trabajos más destacados, del cual surgió el éxito “Me enamora”.",
+      "A lo largo de su trayectoria ha realizado giras internacionales y ha popularizado canciones como “A Dios le pido” y “La camisa negra”. Además de su carrera musical, se ha involucrado activamente en causas humanitarias, participando en eventos por la paz y organizando conciertos solidarios. Su impacto cultural y social le ha valido numerosos premios, incluyendo múltiples Grammy Latinos, así como reconocimientos internacionales."
+    ],
+    "squareImg":"https://i.scdn.co/image/ab6761610000f1781455a186c8aaeb027ccfadb4",
+    "sameAs":[
+      "https://www.instagram.com/juanes/",
+      "https://open.spotify.com/artist/0UWZUmn7sybxMCqrw9tGa7"
+    ],
+    "foundingLocation":"Medellín, Colombia",
+    "foundingDate":"1994",
+    "genre": ["Rock", "Pop", "Balada"],
+
+    "urlSpotify": "https://open.spotify.com/embed/artist/0UWZUmn7sybxMCqrw9tGa7?utm_source=generator&theme=0",
+    "awards": [],
+    "instagramReelTitle":"Hecho Curioso",
+    "instagramReelId": "DWy3bQTkXWJ",
+    "instagramReelVideo": ""
+
+  },
+  {
     "id": "lgaplay",
     "type": "Organización",
     "name": "LGAPlay 2026",

@@ -9,9 +9,10 @@ interface Props {
   padding?: string;
   gap?: string;
   backgroundSidebar?:boolean;
+  flexDirection?: string;
 }
 
-const { width, height, sidebarLeft = false, padding = '', gap = '', backgroundSidebar = false } = Astro.props;
+const { width, height, sidebarLeft = false, padding = '', gap = '', backgroundSidebar = false, flexDirection = '' } = Astro.props;
 const classes = [styles.layout, sidebarLeft ? styles.flipped : ''].join(' ');
 const styleContainer = {
   '--grid-columns': width || (sidebarLeft ? '300px 1fr' : '1fr 300px'),
@@ -28,7 +29,7 @@ const styleContent ={
 }
 ---
 
-<Container padding={padding}>
+<Container padding={padding} flexDirection={flexDirection}>
   <div class={classes} style={styleContainer}>
     <main class={styles.content} style={styleSidebar}>
       <slot />

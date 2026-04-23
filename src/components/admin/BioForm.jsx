@@ -6,7 +6,9 @@ const BioForm = ({ bioToEdit = null }) => {
     type: bioToEdit?.type || 'artista',
     name: bioToEdit?.name || '',
     jobTitle: bioToEdit?.jobTitle || '',
-    description: bioToEdit?.description || '',
+    description: Array.isArray(bioToEdit?.description) 
+      ? bioToEdit.description.join('\n') 
+      : bioToEdit?.description || '',
     squareImg: bioToEdit?.squareImg || '',
     bannerImg: bioToEdit?.bannerImg || '',
     foundingLocation: bioToEdit?.foundingLocation || '',
@@ -65,11 +67,22 @@ const BioForm = ({ bioToEdit = null }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('Guardando...');
+
+    // Convertimos el string del textarea en un array de párrafos para el JSON
+    const payload = {
+      ...formData,
+      description: formData.description
+        .split('\n')
+        .map(p => p.trim())
+        .filter(p => p !== '')
+    };
+
     try {
-      const response = await fetch('/api/save-bio', {
+      const urlSaveBio = "https://api.indus3pro.com/biografias/save-bio.php";
+      const response = await fetch(urlSaveBio, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(payload)
       });
       if (response.ok) setStatus('¡Éxito! Guardado.');
       else setStatus('Error al guardar.');

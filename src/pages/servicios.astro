@@ -64,7 +64,7 @@ const base = import.meta.env.BASE_URL;
   <main>
     <!-- Hero Section -->
     <Section variant="hero" className="services-hero">
-      <Container>
+      <Container flexDirection="column">
         <div style="max-width: 800px; margin: 0 auto; text-align: center;">
           <h1>Nuestros Servicios</h1>
           <p style="font-size: var(--font-size-xl); margin-bottom: var(--space-8); font-weight: 500;">
@@ -78,7 +78,7 @@ const base = import.meta.env.BASE_URL;
 
     <!-- Detailed Services Grid -->
     <Section variant="alt">
-      <Container>
+      <Container flexDirection="column">
         <h2 style="text-align: center; margin-bottom: var(--space-12); font-size: var(--font-size-3xl);">Especialidades por Área</h2>
         <BodyGrid columns={3}>
           {serviceCategories.map(category => (

@@ -30,6 +30,43 @@ const EventForm = ({ eventToEdit = null }) => {
   const [formData, setFormData] = useState(eventToEdit || initialState);
   const [status, setStatus] = useState('');
 
+  const handleFileUpload = async (e, fieldName, type) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (!formData.nombreEvento) {
+      alert("Por favor ingresa primero el nombre del evento para nombrar correctamente la imagen.");
+      return;
+    }
+
+    const uploadData = new FormData();
+    uploadData.append('image', file);
+    uploadData.append('name', formData.nombreEvento);
+    uploadData.append('category', 'eventos');
+    uploadData.append('type', type);
+
+    setStatus('Subiendo imagen...');
+    try {
+      const res = await fetch('https://api.indus3pro.com/upload-image.php', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+        },
+        body: uploadData
+      });
+      const data = await res.json();
+      if (data.success) {
+        setFormData(prev => ({ ...prev, [fieldName]: data.url }));
+        setStatus('Imagen subida con éxito.');
+      } else {
+        setStatus('Error: ' + data.message);
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus('Error al conectar con el servidor de subida.');
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -132,20 +169,44 @@ const EventForm = ({ eventToEdit = null }) => {
           <h3>Multimedia y Links</h3>
           <div class={styles.grid}>
             <div class={styles.field}>
-              <label>Imagen Banner (URL)</label>
-              <input type="text" name="imagenBanner" value={formData.imagenBanner} onChange={handleChange} placeholder="https://..." />
+              <label>Imagen Banner (URL o Subir)</label>
+              <div class={styles.inputWithButton}>
+                <input type="text" name="imagenBanner" value={formData.imagenBanner} onChange={handleChange} placeholder="https://..." />
+                <label class={styles.uploadBtn}>
+                  <input type="file" onChange={(e) => handleFileUpload(e, 'imagenBanner', 'banner')} accept="image/*" style={{ display: 'none' }} />
+                  <span>Subir</span>
+                </label>
+              </div>
             </div>
             <div class={styles.field}>
-              <label>Imagen PR (URL)</label>
-              <input type="text" name="imagenPR" value={formData.imagenPR} onChange={handleChange} placeholder="https://..." />
+              <label>Imagen PR (URL o Subir)</label>
+              <div class={styles.inputWithButton}>
+                <input type="text" name="imagenPR" value={formData.imagenPR} onChange={handleChange} placeholder="https://..." />
+                <label class={styles.uploadBtn}>
+                  <input type="file" onChange={(e) => handleFileUpload(e, 'imagenPR', 'pr')} accept="image/*" style={{ display: 'none' }} />
+                  <span>Subir</span>
+                </label>
+              </div>
             </div>
             <div class={styles.field}>
-              <label>Flyer Vertical (URL)</label>
-              <input type="text" name="flyerEvento" value={formData.flyerEvento} onChange={handleChange} />
+              <label>Flyer Vertical (URL o Subir)</label>
+              <div class={styles.inputWithButton}>
+                <input type="text" name="flyerEvento" value={formData.flyerEvento} onChange={handleChange} />
+                <label class={styles.uploadBtn}>
+                  <input type="file" onChange={(e) => handleFileUpload(e, 'flyerEvento', 'flyer')} accept="image/*" style={{ display: 'none' }} />
+                  <span>Subir</span>
+                </label>
+              </div>
             </div>
             <div class={styles.field}>
-              <label>Imagen Ticketera (URL)</label>
-              <input type="text" name="imagenTicketera" value={formData.imagenTicketera} onChange={handleChange} />
+              <label>Imagen Ticketera (URL o Subir)</label>
+              <div class={styles.inputWithButton}>
+                <input type="text" name="imagenTicketera" value={formData.imagenTicketera} onChange={handleChange} />
+                <label class={styles.uploadBtn}>
+                  <input type="file" onChange={(e) => handleFileUpload(e, 'imagenTicketera', 'ticketera')} accept="image/*" style={{ display: 'none' }} />
+                  <span>Subir</span>
+                </label>
+              </div>
             </div>
             <div class={styles.field}>
               <label>Venta de Entradas (Link Externo)</label>
@@ -170,8 +231,14 @@ const EventForm = ({ eventToEdit = null }) => {
               <textarea name="historiaArtista" value={formData.historiaArtista} onChange={handleChange}></textarea>
             </div>
             <div class={styles.field}>
-              <label>Imagen Biografía (URL)</label>
-              <input type="text" name="imagenBiografia" value={formData.imagenBiografia} onChange={handleChange} />
+              <label>Imagen Biografía (URL o Subir)</label>
+              <div class={styles.inputWithButton}>
+                <input type="text" name="imagenBiografia" value={formData.imagenBiografia} onChange={handleChange} />
+                <label class={styles.uploadBtn}>
+                  <input type="file" onChange={(e) => handleFileUpload(e, 'imagenBiografia', 'bio')} accept="image/*" style={{ display: 'none' }} />
+                  <span>Subir</span>
+                </label>
+              </div>
             </div>
             <div class={styles.field}>
               <label>Link Biografía (ID o Slug)</label>

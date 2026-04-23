@@ -2,6 +2,7 @@
 import MainLayout from "@layouts/MainLayout.astro";
 import SEO from "@components/seo/SEO.astro";
 import DashboardComponent from "@components/admin/Dashboard.jsx";
+import HeaderSticky from "@components/headers/HeaderSticky.astro";
 
 // Fetch initial data
 import eventsData from "@data/events.json";
@@ -16,7 +17,7 @@ const seoTitle = "Dashboard Administrativo | Indus3";
     title={seoTitle} 
     description="Panel de control para la gestión de contenidos de Indus3." 
   />
-
+  <HeaderSticky slot="header" />
   <DashboardComponent 
     client:load 
     initialEvents={eventsData} 

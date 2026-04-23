@@ -8,6 +8,8 @@
   --color-text-light: #4d5461;
   --color-bg: #f4f4f4;
   --color-bg-alt: #c7c7c7;
+  --color-bg-alt-2: #c2c2c2;
+  --color-bg-alt-3: #a0a0a0;
   --color-border: #424242;
   --color-white: #ffffff;
   --color-black: #000000;
@@ -72,5 +74,7 @@ html.dark {
   --color-text-light: #768092;
   --color-bg: #0f0f0f;
   --color-bg-alt: #0d0d0d;
+  --color-bg-alt-2: #1a1a1a;
+  --color-bg-alt-3: #2e2e2e;
   --color-border: #334155;
 }

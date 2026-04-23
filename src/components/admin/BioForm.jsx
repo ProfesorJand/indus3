@@ -20,6 +20,43 @@ const BioForm = ({ bioToEdit = null }) => {
   const [formData, setFormData] = useState(initialState);
   const [status, setStatus] = useState('');
 
+  const handleFileUpload = async (e, fieldName, type) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (!formData.name) {
+      alert("Por favor ingresa primero el nombre para nombrar correctamente la imagen.");
+      return;
+    }
+
+    const uploadData = new FormData();
+    uploadData.append('image', file);
+    uploadData.append('name', formData.name);
+    uploadData.append('category', 'biografias');
+    uploadData.append('type', type);
+
+    setStatus('Subiendo imagen...');
+    try {
+      const res = await fetch('https://api.indus3pro.com/upload-image.php', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+        },
+        body: uploadData
+      });
+      const data = await res.json();
+      if (data.success) {
+        setFormData(prev => ({ ...prev, [fieldName]: data.url }));
+        setStatus('Imagen subida con éxito.');
+      } else {
+        setStatus('Error: ' + data.message);
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus('Error al conectar con el servidor.');
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -74,12 +111,24 @@ const BioForm = ({ bioToEdit = null }) => {
 
           <div className="form-row">
             <div className="form-group">
-              <label>Imagen Cuadrada (URL)</label>
-              <input type="text" name="squareImg" value={formData.squareImg} onChange={handleChange} placeholder="https://..." />
+              <label>Imagen Cuadrada (URL o Subir)</label>
+              <div className="input-with-button">
+                <input type="text" name="squareImg" value={formData.squareImg} onChange={handleChange} placeholder="https://..." />
+                <label className="upload-btn">
+                  <input type="file" onChange={(e) => handleFileUpload(e, 'squareImg', 'perfil')} accept="image/*" style={{ display: 'none' }} />
+                  <span>Subir</span>
+                </label>
+              </div>
             </div>
             <div className="form-group">
-              <label>Imagen Banner (URL)</label>
-              <input type="text" name="bannerImg" value={formData.bannerImg} onChange={handleChange} placeholder="https://..." />
+              <label>Imagen Banner (URL o Subir)</label>
+              <div className="input-with-button">
+                <input type="text" name="bannerImg" value={formData.bannerImg} onChange={handleChange} placeholder="https://..." />
+                <label className="upload-btn">
+                  <input type="file" onChange={(e) => handleFileUpload(e, 'bannerImg', 'banner')} accept="image/*" style={{ display: 'none' }} />
+                  <span>Subir</span>
+                </label>
+              </div>
             </div>
           </div>
         </div>
@@ -141,6 +190,30 @@ const BioForm = ({ bioToEdit = null }) => {
           font-size: 0.9rem;
           font-weight: 600;
           color: #aaa;
+        }
+        .input-with-button {
+          display: flex;
+          gap: 10px;
+        }
+        .input-with-button input {
+          flex: 1;
+        }
+        .upload-btn {
+          background: #007bff;
+          color: white;
+          padding: 0 15px;
+          border-radius: 8px;
+          cursor: pointer;
+          font-weight: 600;
+          font-size: 0.85rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s;
+          min-width: 70px;
+        }
+        .upload-btn:hover {
+          background: #0056b3;
         }
         input, select, textarea {
           background: #222;

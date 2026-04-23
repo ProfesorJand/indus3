@@ -26,6 +26,10 @@
   height: 100%;
 }
 
+.mid{
+  max-width: 900px;
+}
+
 @media (max-width: 1200px) {
   .container {
     padding: 0 var(--space-4);

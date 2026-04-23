@@ -51,47 +51,23 @@
   }
 </style>
 
-<script is:inline>
-  const storageKey = 'theme-preference';
-
-  const getColorPreference = () => {
-    if (localStorage.getItem(storageKey))
-      return localStorage.getItem(storageKey);
-    return window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
+<script>
+  const handleToggleClick = () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    const newTheme = isDark ? 'light' : 'dark';
+    
+    document.documentElement.classList[isDark ? 'remove' : 'add']('dark');
+    localStorage.setItem('theme-preference', newTheme);
   };
 
-  const setPreference = (theme) => {
-    localStorage.setItem(storageKey, theme);
-    reflectPreference();
+  const setupToggle = () => {
+    const toggle = document.querySelector('#theme-toggle');
+    if (toggle) {
+      toggle.addEventListener('click', handleToggleClick);
+    }
   };
 
-  const reflectPreference = () => {
-    const theme = getColorPreference();
-    document.documentElement.classList.remove('light', 'dark');
-    document.documentElement.classList.add(theme);
-    document.querySelector('#theme-toggle')?.setAttribute('aria-label', theme);
-  };
-
-  // Run on page load
-  reflectPreference();
-
-  window.onload = () => {
-    // Set initial dark mode on body element for smooth transition
-    reflectPreference();
-
-    document.querySelector('#theme-toggle')?.addEventListener('click', () => {
-      const currentTheme = getColorPreference();
-      setPreference(currentTheme === 'dark' ? 'light' : 'dark');
-    });
-  };
-
-  // Sync with system changes
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({ matches: isDark }) => {
-    setPreference(isDark ? 'dark' : 'light');
-  });
-
-  // Re-run on view transitions
-  document.addEventListener('astro:after-swap', reflectPreference);
+  // Initialize on every page load (including view transitions)
+  setupToggle();
+  document.addEventListener('astro:after-swap', setupToggle);
 </script>

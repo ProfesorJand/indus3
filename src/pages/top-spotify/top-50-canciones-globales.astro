@@ -1,0 +1,247 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import HeaderSticky from "@components/headers/HeaderSticky.astro";
+import FooterThreeCols from "@components/footers/FooterThreeCols.astro";
+import Section from "@components/base/Section.astro";
+import Container from "@components/base/Container.astro";
+import SEO from "@components/seo/SEO.astro";
+import { websiteSchema, organizationSchema, itemListSchema, musicRecordingSchema } from "@utils/seo";
+import songsData from "@spotify-data-global-songs";
+
+const top50 = songsData;
+const lastUpdateDate = top50[0]?.updatedAt || new Date().toISOString();
+
+// Formato de número para legibilidad
+const formatter = new Intl.NumberFormat('es-ES');
+
+// Generar Schema de la lista
+const rankingSchema = itemListSchema(
+  "Top 50 Canciones Globales más escuchadas en Spotify",
+  top50.map(song => ({
+    rank: song.rank,
+    schemaItem: musicRecordingSchema({
+      title: song.title,
+      artists: song.artists,
+      image: song.image,
+      album: song.album,
+      url: song.url
+    })
+  }))
+);
+
+const seoTitle = "Top 50 Canciones Globales más Escuchadas | Indus3";
+const seoDesc = "Ranking actualizado de las 50 canciones más escuchadas a nivel global en Spotify. Descubre los hits del momento.";
+
+---
+
+<MainLayout title={seoTitle}>
+  <SEO
+    slot="seo"
+    title={seoTitle}
+    description={seoDesc}
+    schemas={[websiteSchema, organizationSchema, rankingSchema]}
+  />
+  <HeaderSticky slot="header" />
+
+    <Section className="hero-section">
+      <div class="hero-glow"></div>
+      <Container variant="mid">
+        <div class="hero-content">
+          <h1>Top 50 Canciones Globales más escuchadas en Spotify</h1>
+          <p>
+            Explora las tendencias mundiales. Estas son las canciones que están dominando los charts globales hoy mismo.
+          </p>
+          <p>Última actualización: <span class="highlight">{new Date(lastUpdateDate).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })}</span></p>
+          
+        
+     
+        <div class="table-card glass-card">
+          <div class="table-container">
+            <table class="modern-table">
+              <thead>
+                <tr>
+                  <th class="rank-col">#</th>
+                  <th class="song-col">Canción</th>
+                  <th class="album-col desktop-only">Álbum</th>
+                  <th class="plays-col desktop-only">Plays</th>
+                  <th class="duration-col">Duración</th>
+                </tr>
+              </thead>
+              <tbody>
+                {top50.map((song) => (
+                  <tr class="row-song" data-href={song.url}>
+                    <td class="rank-cell">
+                      <div class="rank-container">
+                        <span class={`rank-badge ${song.rank <= 3 ? `top-${song.rank}` : ''}`}>
+                          {song.rank}
+                        </span>
+                      </div>
+                    </td>
+                    <td class="song-cell">
+                      <div class="song-info">
+                        <img src={song.image} alt={song.title} class="song-thumb" loading="lazy" />
+                        <div class="song-meta">
+                          <span class="song-title">{song.title}</span>
+                          <span class="song-artist">{song.artists}</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="album-cell desktop-only">
+                      <span class="album-name">{song.album}</span>
+                    </td>
+                    <td class="plays-cell desktop-only">
+                      <strong>{song.plays}</strong>
+                    </td>
+                    <td class="duration-cell">
+                      {song.duration}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p style="text-align:right;font-size:var(--font-size-sm);color:var(--color-text-light);">Fuente: Spotify</p>
+        </div>
+</Container>
+</Section>
+
+
+  <FooterThreeCols slot="footer" />
+</MainLayout>
+
+<script>
+  const rows = document.querySelectorAll('.row-song');
+  rows.forEach(row => {
+    row.addEventListener('click', () => {
+      const href = row.getAttribute('data-href');
+      if (href) {
+        window.open(href, '_blank', 'noopener,noreferrer');
+      }
+    });
+  });
+</script>
+
+<style>
+  /* Reuse styles from artists page but adapted */
+  .hero-section {
+    position: relative;
+    padding: var(--space-20) 0 var(--space-8);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 1000px;
+    background: radial-gradient(circle, rgba(29, 185, 84, 0.1) 0%, transparent 70%); /* Spotify Green */
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    gap:var(--space-4);
+    display:flex;
+    flex-direction: column;
+  }
+
+  h1 {
+    margin-bottom: var(--space-4);
+    letter-spacing: -2px;
+  }
+
+  .highlight {
+    color: #1db954; /* Spotify Green */
+    font-weight: 700;
+    text-transform: capitalize;
+  }
+
+  /* Table Style */
+  .table-card {
+    border-radius: var(--border-radius-2xl);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    box-shadow: var(--shadow-2xl);
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .modern-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    background: var(--color-bg-alt);
+  }
+
+  .modern-table th {
+    background: rgba(0,0,0,0.05);
+    padding: var(--space-6) var(--space-4);
+    font-weight: 700;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .modern-table td {
+    padding: var(--space-4);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    vertical-align: middle;
+  }
+
+  .rank-cell { width: 80px; text-align: center; }
+  .rank-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-weight: 800;
+    font-size: var(--font-size-sm);
+    background: rgba(255,255,255,0.05);
+    color: var(--color-text-light);
+  }
+  .rank-badge.top-1 { background: #ffd700; color: #000; box-shadow: 0 0 15px rgba(255,215,0,0.3); }
+  .rank-badge.top-2 { background: #c0c0c0; color: #000; }
+  .rank-badge.top-3 { background: #cd7f32; color: #000; }
+
+  .song-cell { min-width: 300px; }
+  .song-info { display: flex; align-items: center; gap: var(--space-4); }
+  .song-thumb {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--border-radius-md);
+    object-fit: cover;
+    background: #333;
+  }
+  .song-meta { display: flex; flex-direction: column; }
+  .song-title { font-weight: 700; font-size: var(--font-size-base); color: var(--color-text); }
+  .song-artist { font-size: var(--font-size-sm); color: var(--color-text-light); }
+
+  .album-cell { color: var(--color-text-light); font-size: var(--font-size-sm); }
+  .plays-cell { font-family: var(--font-family-mono); font-size: var(--font-size-sm); }
+  .duration-cell { font-family: var(--font-family-mono); font-size: var(--font-size-sm); color: var(--color-text-light); text-align: right; padding-right: var(--space-8); }
+
+  .row-song:hover {
+    background-color: var(--color-bg-alt-3);
+    transition: background-color var(--transition-fast);
+    cursor: pointer;
+  }
+
+  @media (max-width: 900px) {
+    .desktop-only { display: none; }
+    .song-cell { min-width: 200px; }
+    .rank-cell { width: 50px; }
+    .modern-table td, .modern-table th { padding: var(--space-3); }
+  }
+</style>

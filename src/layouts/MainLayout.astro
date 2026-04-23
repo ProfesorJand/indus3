@@ -32,17 +32,34 @@ const base = import.meta.env.BASE_URL;
     <slot name="seo" />
 
     <script is:inline>
-      // Lógica de tema ultra-simplificada para evitar errores de transformación de Vite
-      (function() {
-        const storageKey = 'theme-preference';
-        const theme = localStorage.getItem(storageKey) || 
-                     (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      const THEME_KEY = 'theme-preference';
+
+      const getTheme = () => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem(THEME_KEY)) {
+          return localStorage.getItem(THEME_KEY);
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      };
+
+      const setTheme = (theme) => {
         if (theme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
           document.documentElement.classList.remove('dark');
         }
-      })();
+        localStorage.setItem(THEME_KEY, theme);
+      };
+
+      // Initial application
+      setTheme(getTheme());
+
+      // Sync after View Transitions swap
+      document.addEventListener('astro:after-swap', () => setTheme(getTheme()));
+
+      // Sync across tabs
+      window.addEventListener('storage', (e) => {
+        if (e.key === THEME_KEY) setTheme(e.newValue);
+      });
     </script>
   </head>
   <body>

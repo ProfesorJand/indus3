@@ -7,13 +7,16 @@ interface Props {
   height?: string;
   sidebarLeft?: boolean;
   padding?: string;
+  gap?: string;
+  backgroundSidebar?:boolean;
 }
 
-const { width, height, sidebarLeft = false, padding = '' } = Astro.props;
+const { width, height, sidebarLeft = false, padding = '', gap = '', backgroundSidebar = false } = Astro.props;
 const classes = [styles.layout, sidebarLeft ? styles.flipped : ''].join(' ');
 const styleContainer = {
   '--grid-columns': width || (sidebarLeft ? '300px 1fr' : '1fr 300px'),
   '--min-height': height || 'auto',
+  '--gap': gap || 'var(--space-4)',
 };
 
 const styleSidebar ={
@@ -30,7 +33,7 @@ const styleContent ={
     <main class={styles.content} style={styleSidebar}>
       <slot />
     </main>
-    <aside class={styles.sidebar} style={styleContent}>
+    <aside class={backgroundSidebar ? styles.backgroundSidebar : ''} class={styles.sidebar} style={styleContent}>
       <slot name="sidebar" />
     </aside>
   </div>

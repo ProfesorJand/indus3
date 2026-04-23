@@ -62,3 +62,37 @@ export const articleSchema = (article) => ({
     "url": article.authorUrl
   }]
 });
+
+export const itemListSchema = (name, items) => ({
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": name,
+  "itemListElement": items.map((item, index) => ({
+    "@type": "ListItem",
+    "position": item.rank || index + 1,
+    "item": item.schemaItem
+  }))
+});
+
+export const musicArtistSchema = (artist) => ({
+  "@type": "MusicGroup",
+  "name": artist.name,
+  "image": artist.image,
+  "url": artist.url,
+  "description": artist.description
+});
+
+export const musicRecordingSchema = (song) => ({
+  "@type": "MusicRecording",
+  "name": song.title,
+  "image": song.image,
+  "url": song.url,
+  "byArtist": song.artists.split(',').map(name => ({
+    "@type": "MusicGroup",
+    "name": name.trim()
+  })),
+  "inAlbum": {
+    "@type": "MusicAlbum",
+    "name": song.album
+  }
+});

@@ -8,9 +8,13 @@
 
 .sidebar {
   order: 2;
-  background-color: var(--color-bg-alt);
+  /* background-color: var(--color-bg-alt); */
   padding: var(--space-6);
   border-radius: var(--border-radius-lg);
+}
+
+.background-sidebar {
+  background-color: var(--color-bg-alt);
 }
 
 .content {
@@ -19,6 +23,7 @@
   padding: var(--space-6);
   border-radius: var(--border-radius-lg);
 }
+
 
 @media (min-width: 1024px) {
   .layout {

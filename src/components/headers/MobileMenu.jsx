@@ -3,7 +3,7 @@ import { useStore } from '@nanostores/react';
 import { isMenuOpen, toggleMenu, closeMenu } from '@stores/ui';
 import styles from './MobileMenu.module.css';
 
-export default function MobileMenu({ items = [] }) {
+export default function MobileMenu({ items = [{label: 'Inicio', href: '/'}] }) {
   const $isMenuOpen = useStore(isMenuOpen);
 
   React.useEffect(() => {

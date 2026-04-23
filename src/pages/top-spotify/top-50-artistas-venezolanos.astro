@@ -1,0 +1,454 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import HeaderSticky from "@components/headers/HeaderSticky.astro";
+import FooterThreeCols from "@components/footers/FooterThreeCols.astro";
+import Section from "@components/base/Section.astro";
+import Container from "@components/base/Container.astro";
+import SEO from "@components/seo/SEO.astro";
+import { websiteSchema, organizationSchema, itemListSchema, musicArtistSchema } from "@utils/seo";
+import spotifyData from "@spotify-data";
+
+// Lógica para procesar los datos
+const allData = spotifyData;
+
+// Formato de moneda/número para legibilidad
+const formatter = new Intl.NumberFormat('es-ES');
+
+// Obtener meses únicos presentes en la data
+const uniqueMonths = [...new Set(allData.map(item => item.month))].sort().reverse();
+const currentMonth = uniqueMonths[0]; // El mes más reciente
+
+const previousMonth = uniqueMonths[1]; // El mes anterior (si existe)
+// Filtrar la data para el mes actual y anterior
+const currentMonthData = allData.filter(item => item.month === currentMonth);
+const prevMonthData = previousMonth ? allData.filter(item => item.month === previousMonth) : [];
+
+// Crear un mapa de ranking para el mes anterior (para búsqueda rápida)
+// Si el JSON ya tiene 'rank', lo usamos, si no, lo calculamos al vuelo
+const prevRankMap = new Map();
+prevMonthData
+  .sort((a, b) => (b.listeners || 0) - (a.listeners || 0))
+  .forEach((artist, index) => {
+    prevRankMap.set(artist.url, index + 1);
+  });
+
+// Ordenar por oyentes mensuales descendente el mes actual
+const sortedArtists = currentMonthData
+  .sort((a, b) => b.listeners - a.listeners)
+  .slice(0, 50);
+
+// Mapear con datos del mes anterior
+const lastUpdateDate = currentMonthData[0].month;
+const top50 = sortedArtists.map((artist, index) => {
+  const currentRank = index + 1;
+  const prevRank = prevRankMap.get(artist.url);
+  
+  // Cálculo de oyentes
+  const currentListeners = artist.listeners || 0;
+  const prevListeners = prevRank ? prevMonthData.find(a => a.url === artist.url)?.listeners || 0 : 0;
+  
+  const listenersDelta = prevListeners > 0 ? currentListeners - prevListeners : 0;
+  const listenersDeltaType = listenersDelta > 0 ? 'up' : listenersDelta < 0 ? 'down' : 'equal';
+
+  // Cálculo de posiciones
+  let rankDelta = 0;
+  let rankDeltaType = 'new'; // 'up', 'down', 'stable', 'new'
+
+  if (prevRank) {
+    rankDelta = prevRank - currentRank; // Si antes era 5 y ahora 3, subió 2 (+2)
+    rankDeltaType = rankDelta > 0 ? 'up' : rankDelta < 0 ? 'down' : 'stable';
+  }
+
+  return {
+    rank: currentRank,
+    name: artist.name,
+    image: artist.artistImage || artist.artistImageHistory || "/img/placeholder-artist.png",
+    currentListeners,
+    prevListeners,
+    listenersDelta,
+    listenersDeltaType,
+    rankDelta: Math.abs(rankDelta),
+    rankDeltaType,
+    url: artist.url
+  };
+});
+
+// Generar Schema de la lista
+const rankingSchema = itemListSchema(
+  "Top 50 Artistas Venezolanos más escuchados en Spotify",
+  top50.map(artist => ({
+    rank: artist.rank,
+    schemaItem: musicArtistSchema({
+      name: artist.name,
+      image: artist.image,
+      url: artist.url,
+      description: `Artista venezolano con ${formatter.format(artist.currentListeners)} oyentes mensuales en Spotify.`
+    })
+  }))
+);
+
+const seoTitle = "Top 50 Artistas Venezolanos más Escuchados | Indus3";
+const seoDesc = "Ranking actualizado mensualmente de los 50 artistas venezolanos con más oyentes en Spotify. Descubre quiénes dominan la escena musical.";
+
+---
+
+<MainLayout title={seoTitle}>
+  <SEO
+    slot="seo"
+    title={seoTitle}
+    description={seoDesc}
+    schemas={[websiteSchema, organizationSchema, rankingSchema]}
+  />
+  <HeaderSticky slot="header" />
+
+    <Section className="hero-section">
+      <div class="hero-glow"></div>
+      <Container variant="mid">
+        <div class="hero-content">
+          <h1>Top 50 Artistas Venezolanos más escuchados en Spotify</h1>
+          <p>
+            Monitoreamos el pulso de la música venezolana. Descubre qué artistas están creciendo este mes.
+          </p>
+          <p>Última actualización: <span class="highlight">{new Date(lastUpdateDate).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })}</span></p>
+          
+        
+     
+        <div class="table-card glass-card">
+          <div class="table-container">
+            <table class="modern-table">
+              <thead>
+                <tr>
+                  <th class="rank-col">#</th>
+                  <th class="artist-col">Artista</th>
+                  <th class="listeners-col desktop-only">Oyentes (Anterior)</th>
+                  <th class="listeners-col desktop-only">Oyentes (Actual)</th>
+                  <th class="delta-col">Evolución</th>
+                </tr>
+              </thead>
+              <tbody>
+                {top50.map((artist) => (
+                  <tr class="row-artist" data-href={artist?.url}>
+                    <td class="rank-cell">
+                      <div class="rank-container">
+                        <span class={`rank-badge ${artist.rank <= 3 ? `top-${artist.rank}` : ''}`}>
+                          {artist.rank}
+                        </span>
+                        <div class={`rank-evolution ${artist.rankDeltaType}`}>
+                          {artist.rankDeltaType === 'up' && <span class="evol-icon">▲ {artist.rankDelta}</span>}
+                          {artist.rankDeltaType === 'down' && <span class="evol-icon">▼ {artist.rankDelta}</span>}
+                          {artist.rankDeltaType === 'new' && <span class="evol-tag">NEW</span>}
+                        </div>
+                      </div>
+                    </td>
+                    <td class="artist-cell">
+                      <div class="artist-info">
+                        <img src={artist.image} alt={artist.name} class="artist-thumb" loading="lazy" />
+                        <div class="artist-meta">
+                          <span class="artist-name">{artist.name}</span>
+                          <span class="mobile-listeners">
+                            <strong>{formatter.format(artist.currentListeners)}</strong> oyentes
+                          </span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="listeners-cell prev-month desktop-only">
+                      {artist.prevListeners > 0 ? formatter.format(artist.prevListeners) : '---'}
+                    </td>
+                    <td class="listeners-cell current-month desktop-only">
+                      <strong>{formatter.format(artist.currentListeners)}</strong>
+                    </td>
+                    <td class={`delta-cell ${artist.listenersDeltaType}`}>
+                      <div class="delta-flex">
+                        {artist.listenersDeltaType === 'up' && <span class="icon">▲</span>}
+                        {artist.listenersDeltaType === 'down' && <span class="icon">▼</span>}
+                        {artist.listenersDeltaType === 'equal' && <span class="icon">-</span>}
+                        <span class="delta-value">
+                          {artist.listenersDelta !== 0 ? formatter.format(Math.abs(artist.listenersDelta)) : 'Sin cambio'}
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        </div>
+</Container>
+</Section>
+
+
+  <FooterThreeCols slot="footer" />
+</MainLayout>
+
+<script>
+  const rows = document.querySelectorAll('.row-artist');
+  rows.forEach(row => {
+    row.addEventListener('click', () => {
+      // Get the URL from data-href
+      const href = row.getAttribute('data-href');
+      if (href) {
+        window.open(href, '_blank', 'noopener,noreferrer');
+      }
+    });
+  });
+</script>
+
+<style>
+  .top50-page {
+    background-color: var(--color-bg);
+    min-height: 100vh;
+  }
+
+  /* Hero */
+  .hero-section {
+    position: relative;
+    padding: var(--space-20) 0 var(--space-8);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 1000px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    gap:var(--space-4);
+    display:flex;
+    flex-direction: column;
+  }
+
+  h1 {
+    margin-bottom: var(--space-4);
+    letter-spacing: -2px;
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-xl);
+    color: var(--color-text-light);
+    margin: 0 auto;
+  }
+
+  .highlight {
+    color: var(--color-primary);
+    font-weight: 700;
+    text-transform: capitalize;
+  }
+
+  /* Table Style */
+  .table-card {
+    border-radius: var(--border-radius-2xl);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    box-shadow: var(--shadow-2xl);
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .modern-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    background: var(--color-bg-alt);
+  }
+
+  .modern-table th {
+    background: rgba(0,0,0,0.05);
+    padding: var(--space-6) var(--space-4);
+    font-weight: 700;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .modern-table td {
+    padding: var(--space-4);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    vertical-align: middle;
+  }
+
+  /* Specific Cells */
+  .rank-cell {
+    width: 80px;
+    text-align: center;
+  }
+
+  .rank-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .rank-evolution {
+    font-size: 10px;
+    font-weight: 800;
+    font-family: var(--font-family-mono);
+  }
+
+  .rank-evolution.up { color: #10b981; }
+  .rank-evolution.down { color: #ef4444; }
+  .rank-evolution.new { color: var(--color-primary); }
+  .rank-evolution.stable { opacity: 0; }
+
+  .evol-tag {
+    background: rgba(59, 130, 246, 0.1);
+    padding: 1px 4px;
+    border-radius: 4px;
+    font-size: 8px;
+    text-transform: uppercase;
+  }
+
+  .rank-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-weight: 800;
+    font-size: var(--font-size-sm);
+    background: rgba(255,255,255,0.05);
+    color: var(--color-text-light);
+  }
+
+  .rank-badge.top-1 { background: #ffd700; color: #000; box-shadow: 0 0 15px rgba(255,215,0,0.3); }
+  .rank-badge.top-2 { background: #c0c0c0; color: #000; }
+  .rank-badge.top-3 { background: #cd7f32; color: #000; }
+
+  .artist-cell { min-width: 250px; }
+  
+  .artist-info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .artist-thumb {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--border-radius-lg);
+    object-fit: cover;
+    background: #333;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .artist-name {
+    font-weight: 700;
+    font-size: var(--font-size-base);
+  }
+
+  .listeners-cell {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-sm);
+  }
+
+  .prev-month {
+    opacity: 0.5;
+  }
+
+  /* Delta Colors */
+  .delta-cell.up { color: #10b981; }
+  .delta-cell.down { color: #ef4444; }
+  .delta-cell.equal { opacity: 0.3; }
+
+  .delta-flex {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+  }
+
+  .delta-value {
+    letter-spacing: -0.5px;
+  }
+
+  .row-artist:hover {
+    background-color: var(--color-bg-alt-3);
+    transition: background-color var(--transition-fast);
+    cursor: pointer;
+  }
+
+  /* Desktop/Mobile visibility */
+  .desktop-only {
+    display: table-cell;
+  }
+
+  .mobile-listeners {
+    display: none;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-light);
+    margin-top: 2px;
+  }
+
+  .artist-meta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  @media (max-width: 900px) {
+    .desktop-only {
+      display: none;
+    }
+
+    .mobile-listeners {
+      display: block;
+    }
+
+    .rank-cell {
+      width: 50px;
+    }
+
+    .artist-cell {
+      min-width: 150px;
+    }
+
+    .artist-name {
+      font-size: var(--font-size-sm);
+    }
+    
+    .hero-section {
+      padding: var(--space-12) 0;
+    }
+    
+    .modern-table td, .modern-table th {
+      padding: var(--space-3);
+    }
+
+    .rank-badge {
+      width: 24px;
+      height: 24px;
+      font-size: 10px;
+    }
+
+    .evol-icon {
+      font-size: 9px;
+    }
+  }
+
+  :global(html:not(.dark)) .modern-table {
+    background: #fff;
+  }
+  :global(html:not(.dark)) .rank-badge:not(.top-1):not(.top-2):not(.top-3) {
+    background: #eee;
+    color: #666;
+  }
+</style>

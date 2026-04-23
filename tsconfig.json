@@ -7,7 +7,9 @@
       "@layouts/*": ["src/layouts/*"],
       "@styles/*": ["src/styles/*"],
       "@stores/*": ["src/stores/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@spotify-data":["spotify-data.json"],
+      "@spotify-data-global-songs":["spotify-top-50-songs-global.json"],
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react"

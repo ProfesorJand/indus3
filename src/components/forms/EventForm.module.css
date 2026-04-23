@@ -149,9 +149,43 @@
   color: white;
 }
 
+.inputWithButton {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.inputWithButton input {
+  flex: 1;
+}
+
+.uploadBtn {
+  background: var(--color-primary);
+  color: white;
+  padding: 0.8rem 1.2rem;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  min-width: 80px;
+}
+
+.uploadBtn:hover {
+  filter: brightness(1.2);
+  transform: translateY(-1px);
+}
+
 .status {
   font-weight: 600;
   color: var(--color-primary);
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius-full);
 }
 
 @media (max-width: 768px) {

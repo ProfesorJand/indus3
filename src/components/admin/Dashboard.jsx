@@ -50,8 +50,8 @@ const Dashboard = ({ initialEvents = [], initialBios = [] }) => {
       {/* SIDEBAR */}
       <aside className={styles.sidebar}>
         <div className={styles.logoArea}>
-          <img src="/indus3/indus3-logo.webp" alt="Indus3" />
-          <span>INDUS3 ADMIN</span>
+          <span>Panel de Administración</span>
+          <img src="/indus3-logo.webp" alt="Indus3" />
         </div>
         
         <nav className={styles.nav}>

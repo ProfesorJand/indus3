@@ -1,57 +1,61 @@
 ---
 import MainLayout from "@layouts/MainLayout.astro";
-import SEO from "@components/seo/SEO.astro";
 import HeaderSticky from "@components/headers/HeaderSticky.astro";
 import FooterThreeCols from "@components/footers/FooterThreeCols.astro";
 import Section from "@components/base/Section.astro";
 import Container from "@components/base/Container.astro";
 import BodyGrid from "@components/body/BodyGrid.astro";
-import eventsData from "@data/events.json";
+import LogoCard from "@components/logo/LogoCard.astro";
 
-const seoTitle = "Eventos | Indus3";
-const seoDesc = "Próximos eventos, conciertos y festivales producidos por Indus3.";
+const cards = [
+  {
+    id:1,
+    title: "Top 50 Artistas Venezolanos",
+    image: "/img/guias/placeholder-guide.png",
+    href: "top-spotify/top-50-artistas-venezolanos",
+    description: "Ranking de los artistas venezolanos más escuchados en Spotify."
+  },
+  {
+    id:2,
+    title: "Top 50 Canciones Globales",
+    image: "/img/guias/placeholder-guide.png",
+    href: "top-spotify/top-50-canciones-globales",
+    description: "Los hits más populares en todo el mundo hoy mismo."
+  },
+]
 
 const base = import.meta.env.BASE_URL;
 ---
 
-<MainLayout title={seoTitle}>
-  <SEO slot="seo" title={seoTitle} description={seoDesc} />
-  
+<MainLayout title="Biografías y Perfiles">
   <HeaderSticky slot="header" />
 
+  <main>
+    <Section>
+      <Container>
+        <div class="bio-intro">
+          <h1>Lo que se escucha en Spotify</h1>
+          <p>Conoce los artistas más escuchados en Spotify.</p>
+        </div>
 
-    <Section variant="hero">
-      <Container variant="mid">
-        <h1 style="text-align: center; font-size: var(--font-size-4xl); margin-bottom: var(--space-4);">Cartelera de Eventos</h1>
-        <p style="text-align: center; color: var(--color-text-light); max-width: 600px; margin: 0 auto;">
-          Descubre las próximas experiencias que tenemos preparadas para ti.
-        </p>
-
-        {false && eventsData.length > 0 ? (
-          <BodyGrid columns={eventsData.length > 3 ? 3 : eventsData.length}>
-            {eventsData.map(event => (
-              <a href={`${base}eventos/${event.id}`} class="event-card">
+        <BodyGrid columns={cards.length > 3 ? 3 : cards.length}>
+            {cards.map(card => (
+              <a href={`${base}${card.href}`} class="event-card">
                 <div class="image-wrapper">
-                  <img src={event.imagenPR} alt={event.nombreEvento} />
-                  <div class="date-badge">{event.fechaEvento}</div>
+                  <img src={card.image} alt={card.title} />
                 </div>
                 <div class="content">
-                  <h3>{event.nombreEvento}</h3>
-                  <p class="location"><i class="fas fa-map-marker-alt"></i> {event.lugarEvento}</p>
-                  <p class="description">{event.descripcionEvento?.[0].substring(0, 100)}...</p>
+                  <h3>{card.title}</h3>
+                  <p class="description">{card.description?.substring(0, 100)}...</p>
                   <span class="btn-more">Más Información</span>
                 </div>
               </a>
             ))}
           </BodyGrid>
-        ) : (
-          <div style="text-align: center;justify-content: center;display: flex;flex-direction: column;align-items: center;">
-            <h3>No hay eventos programados en este momento.</h3>
-            <p>Vuelve pronto para enterarte de nuestras próximas producciones.</p>
-          </div>
-        )}
       </Container>
     </Section>
+  </main>
+
   <FooterThreeCols slot="footer" />
 </MainLayout>
 

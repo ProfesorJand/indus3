@@ -258,7 +258,15 @@ async function run() {
 
   await browser.close();
 
-  saveResults(results);
+  // 🏆 Calcular ranking basado en oyentes antes de guardar
+  const rankedResults = results
+    .sort((a, b) => (b.listeners || 0) - (a.listeners || 0))
+    .map((artist, index) => ({
+      ...artist,
+      rank: index + 1
+    }));
+
+  saveResults(rankedResults);
 }
 
 // 💾 guardar JSON seguro

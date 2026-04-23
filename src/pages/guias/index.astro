@@ -1,0 +1,197 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import HeaderSticky from "@components/headers/HeaderSticky.astro";
+import FooterThreeCols from "@components/footers/FooterThreeCols.astro";
+import Section from "@components/base/Section.astro";
+import Container from "@components/base/Container.astro";
+import SEO from "@components/seo/SEO.astro";
+import Card from "@components/base/Card.astro";
+import { websiteSchema, organizationSchema } from "@utils/seo";
+
+
+const allGuides = [{
+  title: "10 Consejos para ir a Conciertos",
+  description: "Prepárate para la mejor experiencia en vivo. Logística, seguridad y tips expertos para que disfrutes al máximo.",
+  image: "/img/guias/conciertos.webp",
+  date: "2026-04-21",
+  url: "/guias/consejos-para-ir-a-conciertos",
+}];
+
+
+const guides = allGuides
+  .map((guide) => ({
+    title: guide?.title || "Guía sin título",
+    description: guide?.description || "Haz clic para leer más sobre esta guía.",
+    image: guide?.image || "/img/guias/placeholder-guide.png",
+    url: guide?.url,
+    date: guide?.date || "",
+  }))
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+const seoTitle = "Guías de Conciertos y Música | Indus3";
+const seoDesc = "Explora nuestras guías expertas sobre conciertos, festivales y el mundo de la música. Todo lo que necesitas saber antes del show.";
+---
+
+<MainLayout title={seoTitle}>
+  <SEO
+    slot="seo"
+    title={seoTitle}
+    description={seoDesc}
+    schemas={[websiteSchema, organizationSchema]}
+  />
+  <HeaderSticky slot="header" />
+
+  <main class="guides-index">
+    <Section className="hero-section">
+      <div class="hero-glow"></div>
+      <Container>
+        <div class="hero-content">
+          <span class="badge">Recursos para Fans</span>
+          <h1>Nuestras Guías</h1>
+          <p class="hero-subtitle">
+            Recopilamos los mejores consejos, trucos y tutoriales para que tu única preocupación sea disfrutar de la música.
+          </p>
+        </div>
+      </Container>
+    </Section>
+
+    <Section className="guides-grid-section">
+      <Container>
+        <div class="grid">
+          {guides.map((guide) => (
+            <Card
+              title={guide.title}
+              description={guide.description}
+              image={guide.image}
+              href={guide.url}
+              className="guide-card"
+            >
+              <div slot="footer" class="card-footer">
+                <span class="read-more">Leer guía completa →</span>
+                {guide.date && <span class="date">{new Date(guide.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span>}
+              </div>
+            </Card>
+          ))}
+        </div>
+      </Container>
+    </Section>
+  </main>
+
+  <FooterThreeCols slot="footer" />
+</MainLayout>
+
+<style>
+  .guides-index {
+    min-height: 80vh;
+    background-color: var(--color-bg);
+  }
+
+  .hero-section {
+    position: relative;
+    padding: var(--space-20) 0 var(--space-12);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1000px;
+    height: 1000px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: var(--space-1) var(--space-3);
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--color-primary);
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    margin-bottom: var(--space-6);
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 900;
+    margin-bottom: var(--space-4);
+    background: linear-gradient(to bottom, var(--color-text), var(--color-text-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-light);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .guides-grid-section {
+    padding-bottom: var(--space-24);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: var(--space-8);
+  }
+
+  .guide-card {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .guide-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--color-primary);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .read-more {
+    font-weight: 600;
+    color: var(--color-primary);
+    font-size: var(--font-size-sm);
+  }
+
+  .date {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-light);
+    opacity: 0.6;
+  }
+
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .hero-section {
+      padding: var(--space-12) 0 var(--space-8);
+    }
+  }
+</style>

@@ -96,7 +96,7 @@ const base = import.meta.env.BASE_URL;
                 </div>
                 <div class="container-img-badge">
                   <h1 class="artist-name" transition:name={`title-${bio.id}`}>{bio.name}</h1>
-                  <div class="bio-badge">{bio.jobTitle.toUpperCase()}</div>
+                  <div class="bio-badge">{bio?.jobTitle?.toUpperCase()}</div>
                 </div>
             </div>
             <div class="intro-text-history">
@@ -184,7 +184,7 @@ const base = import.meta.env.BASE_URL;
                   </div>
                 <div class="container-img-badge">
                   <h1 class="artist-name" transition:name={`title-${bio.id}`}>{bio.name}</h1>
-                  <div class="bio-badge">{bio.jobTitle.toUpperCase()}</div>
+                  <div class="bio-badge">{bio?.jobTitle?.toUpperCase()}</div>
                 </div>
               </div>
               <div class="intro-text-history">

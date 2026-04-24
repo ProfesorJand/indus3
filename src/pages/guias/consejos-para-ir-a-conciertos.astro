@@ -42,6 +42,9 @@ const sections = [
           antes, durante y despues del evento y así vivas una experiencia
           brutal.
         </p>
+        <a href="https://api.indus3pro.com/guias/pdf/Conciertos-2026-INDUS3.pdf" download="Cómo-prepararte-para-ir-a-conciertos-en-2026.pdf" class="btn-descarga">
+          Descargar PDF
+        </a>
         <div class="recom-container">
           <h2>Recomendaciones para asistir conciertos</h2>
           <ol>
@@ -197,7 +200,7 @@ const sections = [
               </tr>
               <tr>
                 <td class="item-name">Comodidad</td>
-                <td>Sillas plegables, carpas o hieleras (coolers).</td>
+                <td>Sillas plegables, carpas o hieleras (cavas).</td>
                 <td>Por gestión de espacio y evacuación.</td>
               </tr>
               <tr>
@@ -355,6 +358,21 @@ const sections = [
 <style>
   html {
     scroll-behavior: smooth;
+  }
+  .btn-descarga {
+    background-color: var(--color-primary-dark);
+    color: var(--color-text);
+    border: none;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    transition: var(--transition-fast);
+  }
+  .btn-descarga:hover {
+    background-color: var(--color-secondary);
+    transform: translateY(-2px);
   }
   .recom-container {
     display: flex;

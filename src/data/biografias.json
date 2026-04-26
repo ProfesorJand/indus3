@@ -2,7 +2,7 @@
   {
     "id": "sanluis",
     "type": "Duo",
-    "jobTitle":"Artista Musical",
+    "jobTitle":"Grupo Musical",
     "name": "Sanluis",
     "bannerImg":"https://image-cdn-ak.spotifycdn.com/image/ab67618600000194a9ec7f058929d746921f66d2",
     "description": "SanLuis es un destacado dúo venezolano de pop balada formado por los hermanos Santiago y Luigi Castillo. Originarios de Maracaibo, son reconocidos por ser ex-líderes de la agrupación Voz Veis y por componer éxitos para artistas internacionales, acumulando varios premios Grammy.",
@@ -20,7 +20,7 @@
         "rol":"Voz"
       },
       {
-        "name":"Luis Fernando Castillo",
+        "name":"Luis Castillo",
         "rol":"Voz"
       }
     ],
@@ -32,8 +32,11 @@
     ],
     "instagramReelTitle":"Hecho Curioso",
     "instagramReelId": "DWy3bQTkXWJ",
-    "instagramReelVideo": "instagram/reels/bad-bunny.mp4"
-
+    
+    "imgVertical":"https://api.indus3pro.com/biografias/imagenes/flyer-gira-san-luis.webp",
+    "cancionesMasEscuchadas":[
+      "Se Acabó","Sin Miedo 2020","Como Yo (feat. Silvestre Dangong)","Mis Ilusiones","Donde Andabas Tú"
+    ]
   },
   {
     "id": "juanes",
@@ -84,5 +87,28 @@
     "primaryButtonText": "Comprar Ahora",
     "primaryButtonLink": "https://ticketera.com/lgaplay",
     "secondaryButtonText": "Ver Detalles"
+  },
+  {
+    "id":"elena-rose",
+    "type":"Artista",
+    "jobTitle":"Artista Musical",
+    "name": "Elena Rose",
+    "description": ["Elena Rose es una destacada cantautora venezolana de pop urbano, reconocida por su versatilidad y talento para componer éxitos para artistas internacionales. Originaria de Caracas, ha participado en la creación de canciones para figuras como Rauw Alejandro, Becky G, Maluma, y Daddy Yankee, consolidándose como una de las compositoras más influyentes de la música latina."],
+    "squareImg":"https://i.scdn.co/image/ab6761610000f1782948fdff5fcfa2303e18e12c",
+    "sameAs":[
+      "https://www.instagram.com/elenarose/",
+      "https://open.spotify.com/artist/0zO8yNnw5GQgutcIyXfGBY"
+    ],
+    "birthPlace":"Miami, Florida, Estados Unidos. Es de padres venezolanos y creció con una fuerte conexión cultural con Venezuela, a menudo citando a Caracas como parte de sus raíces y formación",
+    "birthday":"23 de Marzo de 1995",
+    "genre": ["Pop", "Urbano", "Balada"],
+    "urlSpotify": "https://open.spotify.com/embed/artist/0zO8yNnw5GQgutcIyXfGBY?utm_source=generator&theme=0",
+    "awards": [],
+    "instagramReelTitle":"Hecho Curioso",
+    "instagramReelId": "DWy3bQTkXWJ",
+    "instagramReelVideo": "",
+    "cancionesMasEscuchadas":[
+      "orióN","COSITA LINDA","TUTUTU","Me Lo Merezco","Caracas en el 2000"
+    ]
   }
 ]

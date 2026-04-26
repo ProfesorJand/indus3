@@ -34,185 +34,60 @@ const seoTitle = "Inicio";
 const seoDesc = "Sistema de plantillas modular y escalable para creación rápida de sitios web corporativos y landing pages.";
 
 
-// const cards = [
-//   {
-//     id: 1,
-//     image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=1200",
-//     title: "Innovación en Diseño",
-//     description: "Descubre nuestra nueva colección de calzado deportivo con tecnología de punta.",
-//     actions: [
-//       {
-//         label: "Ver Colección",
-//         url: "/contact",
-//         variant: "primary" as const
-//       },
-//       {
-//         label: "Saber más",
-//         url: "/contact",
-//         variant: "secondary" as const
-//       }
-//     ]
-//   },
-//   {
-//     id: 2,
-//     image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=1200",
-//     title: "Elegancia y Precisión",
-//     description: "Relojes inteligentes que combinan el estilo clásico con funciones modernas.",
-//     actions: [
-//       {
-//         label: "Comprar Ahora",
-//         url: "/contact",
-//         variant: "primary" as const
-//       },
-//       {
-//         label: "Ver Detalles",
-//         url: "/contact",
-//         variant: "secondary" as const
-//       }
-//     ]
-//   },
-//   {
-//     id: 3,
-//     image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=1200",
-//     title: "Elegancia y Precisión",
-//     description: "Relojes inteligentes que combinan el estilo clásico con funciones modernas.",
-//     actions: [
-//       {
-//         label: "Comprar Ahora",
-//         url: "/contact",
-//         variant: "primary" as const
-//       },
-//       {
-//         label: "Ver Detalles",
-//         url: "/contact",
-//         variant: "secondary" as const
-//       }
-//     ]
-//   },
-//   {
-//     id: 4,
-//     image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=1200",
-//     title: "Elegancia y Precisión",
-//     description: "Relojes inteligentes que combinan el estilo clásico con funciones modernas.",
-//     actions: [
-//       {
-//         label: "Comprar Ahora",
-//         url: "/contact",
-//         variant: "primary" as const
-//       },
-//       {
-//         label: "Ver Detalles",
-//         url: "/contact",
-//         variant: "secondary" as const
-//       }
-//     ]
-//   },
-//   {
-//     id: 5,
-//     image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=1200",
-//     title: "Elegancia y Precisión",
-//     description: "Relojes inteligentes que combinan el estilo clásico con funciones modernas.",
-//     actions: [
-//       {
-//         label: "Comprar Ahora",
-//         url: "/contact",
-//         variant: "primary" as const
-//       },
-//       {
-//         label: "Ver Detalles",
-//         url: "/contact",
-//         variant: "secondary" as const
-//       }
-//     ]
-//   },
-//   {
-//     id: 6,
-//     image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=1200",
-//     title: "Elegancia y Precisión",
-//     description: "Relojes inteligentes que combinan el estilo clásico con funciones modernas.",
-//     actions: [
-//       {
-//         label: "Comprar Ahora",
-//         url: "/contact",
-//         variant: "primary" as const
-//       },
-//       {
-//         label: "Ver Detalles",
-//         url: "/contact",
-//         variant: "secondary" as const
-//       }
-//     ]
-//   }
-// ];
+const cards = [
+  {
+    id: 1,
+    image: "https://api.indus3pro.com/eventos/banners/lgaplay.webp",
+    title: "LGAPlay 2026",
+    description: "LGAPlay, el evento más importante de la industria de los videojuegos.",
+    primaryButtonText: "Más detalles",
+    ventaEntradas: "/eventos/road-to-vgs",
+    actions: [
+      {
+        label: "Más detalles",
+        url: "/guias/consejos-para-ir-a-conciertos/",
+        variant: "primary" as const
+      }
+    ]
+  },
+  {
+    id: 2,
+    image: "https://indus3pro.com/img/guias/conciertos.webp",
+    title: "Guia de Conciertos 2026",
+    description: "Descubre que debes de tener en cuenta a la hora de asistir a un concierto.",
+    primaryButtonText: "Más detalles",
+    ventaEntradas: "/guias/consejos-para-ir-a-conciertos/",
+  },
+  {
+    id: 3,
+    image: "https://indus3pro.com/img/guias/placeholder-guide.png",
+    title: "Top 50 Artistas Venezolanos en Spotify",
+    description: "Descubre los artistas venezolanos más populares en Spotify.",
+    primaryButtonText: "Más detalles",
+    ventaEntradas: "/top-spotify/top-50-artistas-venezolanos/",
+  },
+  {
+    id: 4,
+    image: "https://indus3pro.com/img/guias/placeholder-guide.png",
+    title: "Top 50 Canciones Global en Spotify",
+    description: "Descubre las canciones más populares en Spotify a nivel mundial.",
+    primaryButtonText: "Más detalles",
+    ventaEntradas: "/top-spotify/top-50-canciones-globales/",
+  }
+];
 
 const projectRoot = process.cwd();
 const clientesDir = path.resolve(projectRoot, 'public/clientes');
-const clientsDir = path.resolve(projectRoot, 'public/clientes-venezolanos');
-const clientsDir2 = path.resolve(projectRoot, 'public/clientes-de-la-region');
-
-let files: string[] = [];
-
-try {
-  files = fs.readdirSync(clientsDir);
-  if (files.length === 0) console.warn('Warning: No files found in', clientsDir);
-} catch (error) {
-  console.error('Error reading clients directory:', error);
-}
-
 const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
-const clientesVenezolanos = files
-  .filter(file => /\.(webp|png|jpg|jpeg|svg)$/i.test(file))
-  .map(file => {
-    const nameWithoutExt = file.replace(/\.[^/.]+$/, "");
-    // Remove "Logo-" prefix and replace hyphens with spaces
-    const title = nameWithoutExt
-      .replace(/^Logo-/i, "")
-      .replace(/-/g, " ");
-    
-    return {
-      image: `${baseUrl}/clientes-venezolanos/${file}`,
-      title: title,
-      link: "/#"
-    };
-
-  });
-
-let files2: string[] = [];
+let files: string[] = [];
 try {
-  files2 = fs.readdirSync(clientsDir2);
-  if (files2.length === 0) console.warn('Warning: No files found in', clientsDir2);
+  files = fs.readdirSync(clientesDir);
+  if (files.length === 0) console.warn('Warning: No files found in', clientesDir);
 } catch (error) {
-  console.error('Error reading clients directory 2:', error);
+  console.error('Error reading clients directory 3:', error);
 }
-
-const clientesDeLaRegion = files2
-  .filter(file => /\.(webp|png|jpg|jpeg|svg)$/i.test(file))
-  .map(file => {
-    const nameWithoutExt = file.replace(/\.[^/.]+$/, "");
-    // Remove "Logo-" prefix and replace hyphens with spaces
-    const title = nameWithoutExt
-      .replace(/^Logo-/i, "")
-      .replace(/-/g, " ");
-
-    return {
-      image: `${baseUrl}/clientes-de-la-region/${file}`,
-      title: title,
-      link: "/#"
-    };
-
-  }
-
-  )
-
-  let files3: string[] = [];
-  try {
-    files3 = fs.readdirSync(clientesDir);
-    if (files3.length === 0) console.warn('Warning: No files found in', clientesDir);
-  } catch (error) {
-    console.error('Error reading clients directory 3:', error);
-  }
-  const clientes = files3
+const clientes = files
   .filter(file => /\.(webp|png|jpg|jpeg|svg)$/i.test(file))
   .map(file => {
     const nameWithoutExt = file.replace(/\.[^/.]+$/, "");
@@ -226,13 +101,10 @@ const clientesDeLaRegion = files2
       title: title,
       link: "/#"
     };
-
   }
+)
 
-  )
-
-
-  const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL;
 ---
 
 <MainLayout title={seoTitle}>
@@ -245,11 +117,11 @@ const clientesDeLaRegion = files2
 
   <HeaderSticky slot="header" />
 
-  <!-- <Section variant="fullHeightWithHeader">
+  <Section variant="fullHeightWithHeader">
     <Container fullHeight={true}>
-      <Slider slides={eventos} height="100%" heightMobile="100%"/>
+      <Slider slides={cards} height="100%" heightMobile="100%"/>
     </Container>
-  </Section> -->
+  </Section>
 
   <!-- Hero Section (Full Width example) -->
   <!-- <Section variant="fullHeightWithHeader">

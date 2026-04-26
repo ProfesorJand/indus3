@@ -6,12 +6,16 @@ import FooterThreeCols from "@components/footers/FooterThreeCols.astro";
 import Section from "@components/base/Section.astro";
 import Container from "@components/base/Container.astro";
 import BodyGrid from "@components/body/BodyGrid.astro";
-import eventsData from "@data/events.json";
-import biografiasArtistas from "@data/biografias.json";
+import { getEventos } from "@stores/eventos";
+import { getBiografias } from "@stores/biografias";
 import SpotifyPlayer from "@components/base/SpotifyPlayer.astro";
 import EventSchema from "@components/seo/EventSchema.astro";
 import BodyTwoColumns from "@components/body/BodyTwoColumns.astro";
+
+
 export async function getStaticPaths() {
+  const eventsData = await getEventos();
+  console.log({eventsData})
   return eventsData.map((event) => ({
     params: { id: event.id.toString() },
     props: { event },
@@ -19,9 +23,11 @@ export async function getStaticPaths() {
 }
 
 const { event } = Astro.props;
+console.log({preguntas: event.preguntas})
 const seoTitle = `${event.nombreEvento} | Indus3`;
-const seoDesc = event?.descripcionEvento?.[0] || "Mini Descripcion";
-const datosArtistas = biografiasArtistas.filter((artista) => event.artistas.includes(artista.id));
+const seoDesc = event?.descripcionEvento || "Mini Descripcion";
+const biografiasArtistas = await getBiografias();
+const datosArtistas = biografiasArtistas.filter((artista) => event?.artistas?.includes(artista.id));
 
 const base = import.meta.env.BASE_URL;
 ---
@@ -31,7 +37,7 @@ const base = import.meta.env.BASE_URL;
     <SEO title={seoTitle} description={seoDesc} />
     <EventSchema 
       name={event.nombreEvento}
-      description={event.descripcionEvento?.join(" ")}
+      description={event.descripcionEvento}
       startDate={event.fechaEvento}
       locationName={event.lugarEvento}
       image={event.imagenPR || event.imagenBanner}
@@ -51,15 +57,15 @@ const base = import.meta.env.BASE_URL;
         <div class="pr-overlay">
           <div class="pr-content">
             <h1 class="pr-title">{event.nombreEvento}</h1>
-            <div class="info-item info-place glass ">
+            {/* <div class="info-item info-place glass ">
               <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
               <div>
                 <span>Lugar</span>
                 <strong>{event.lugarEvento}</strong>
               </div>
-            </div>
+            </div> */}
           </div>
-          <div class="info-bar glass">
+          {/* <div class="info-bar glass">
             <div class="info-grid">
               <div class="info-item">
               </div>
@@ -97,7 +103,7 @@ const base = import.meta.env.BASE_URL;
                 </a>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     )}
@@ -105,21 +111,24 @@ const base = import.meta.env.BASE_URL;
     
     <!-- Main Content -->
     <Section>
-      <Container variant="full" flexDirection="column">
-          <div class="reveal-up">
-            <h2 class="section-title">Sobre el Evento</h2>
-            <div class="description-wrap">
-              {event.descripcionEvento.map(parrafo => (
-                <p class="description">{parrafo}</p>
-                ))}
-            </div>
-            <!-- <div class="flyer-container">
-              <img src={event.flyerEvento} alt="Flyer del Evento" class="flyer-img" />
-              <div class="flyer-overlay">
-                <a href={event.flyerEvento} target="_blank" class="btn-zoom"><i class="fas fa-search-plus"></i></a>
+      <Container variant="mid" flexDirection="column">
+        <div class="container"> 
+           {
+            event.preguntas.map((pregunta) => (
+              <div class="reveal-up question-block">
+                <h2 class="section-title">{pregunta.pregunta}</h2>
+                <div class="answer-wrapper">
+                  {
+                    // Dividimos la respuesta por cada salto de línea (\n)
+                    pregunta.respuesta.split('\n').map((linea) => (
+                      linea.trim() && <p class="answer-p">{linea}</p> 
+                    ))
+                  }
+                </div>
               </div>
-            </div> -->
-          </div>
+            ))
+           }
+
         <div class="content-left">
         
         {datosArtistas && datosArtistas.length > 0 && (
@@ -150,33 +159,8 @@ const base = import.meta.env.BASE_URL;
         ))}
       </div>
     )}
-            
-            <div class="logistics-card glass reveal-up">
-              <h3><i class="fas fa-shield-alt"></i> Logística y Seguridad</h3>
-              <p>{event.logisticaHigienicos}</p>
-              <div class="logistics-tags">
-                <span class="tag"><i class="fas fa-check"></i> Hidratación</span>
-                <span class="tag"><i class="fas fa-check"></i> Servicios Médicos</span>
-                <span class="tag"><i class="fas fa-check"></i> Estacionamiento</span>
-              </div>
-            </div>
-
-            
-
           </div>
-
-          <!-- Right Column: Context/Side Info -->
-          <div class="content-right">
-             <div class="curiosities-card glass reveal-up" style="margin-top: 2rem;">
-               <h3 class="subsection-title"><i class="fas fa-lightbulb"></i> ¿Sabías que?</h3>
-               <ul class="curiosities-list">
-                 {event.datosCuriosos?.split('.').filter(t => t.trim()).map(dato => (
-                   <li>{dato.trim()}.</li>
-                  ))}
-               </ul>
-             </div>
-          </div>
-                
+        </div>      
       </Container>
     </Section>
 
@@ -205,6 +189,17 @@ const base = import.meta.env.BASE_URL;
 </MainLayout>
 
 <style>
+
+  .answer-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  .container{
+    display: flex;
+    flex-direction: column;
+    gap:var(--space-4)
+  }
   main {
     background-color: var(--color-bg);
     color: var(--color-text);
@@ -373,7 +368,6 @@ const base = import.meta.env.BASE_URL;
   .section-title {
     font-size: var(--font-size-3xl);
     font-weight: 800;
-    margin-bottom: 2rem;
     color: var(--color-primary);
     display: flex;
     align-items: center;

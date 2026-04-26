@@ -68,4 +68,16 @@ export const ROL = [
   "Música",
   "Cantante",
 ]
-  
+
+export const urlBiografias = "http://api.indus3pro.com/biografias/get-biografias.php?t="+Date.now();
+
+export const getBiografias = async () => {
+  const response = await fetch(urlBiografias, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+    }
+  });
+  const data = await response.json();
+  return data.data;
+}

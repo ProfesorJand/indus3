@@ -13,19 +13,53 @@ const Dashboard = ({ initialEvents = [], initialBios = [] }) => {
   // Re-fetch data helper
   const refreshData = async () => {
     try {
-      // In a real app, we'd have GET endpoints. 
-      // For now, since it's local dev, we could rely on props or re-read files if needed.
-    } catch (e) { console.error(e); }
+      // Re-fetch biographies using the same logic as the initial load but client-side
+      const resBios = await fetch('https://api.indus3pro.com/biografias/get-biografias.php',
+        {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+          }
+        }
+      );
+      if (resBios.success) {
+        const updatedBios = await resBios.json();
+        setBios(updatedBios);
+      }
+
+      // Re-fetch events
+      const resEvents = await fetch('https://api.indus3pro.com/eventos/get-eventos.php',
+        {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+          }
+        }
+      );
+      if (resEvents.success) {
+        const updatedEvents = await resEvents.json();
+        setEvents(updatedEvents);
+      }
+    } catch (e) { 
+      console.error("Error refreshing dashboard data:", e); 
+    }
   };
 
   const handleDelete = async (type, id) => {
     if (!confirm('¿Estás seguro de eliminar este ítem?')) return;
     
-    const endpoint = type === 'event' ? '/api/delete-event' : '/api/delete-bio';
+    // Updated endpoints to match the new structure
+    const endpoint = type === 'event' 
+      ? 'https://api.indus3pro.com/eventos/delete-event.php' 
+      : 'https://api.indus3pro.com/biografias/delete-bio.php';
+
     try {
       const res = await fetch(endpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+        },
         body: JSON.stringify({ id })
       });
       if (res.ok) {
@@ -236,9 +270,9 @@ const Dashboard = ({ initialEvents = [], initialBios = [] }) => {
             <button className={styles.closeModal} onClick={() => setShowModal(false)}>&times;</button>
             <div style={{ padding: '20px' }}>
               {activeTab === 'events' ? (
-                <EventForm eventToEdit={editingItem} />
+                <EventForm eventToEdit={editingItem} onSuccess={refreshData} />
               ) : (
-                <BioForm bioToEdit={editingItem} />
+                <BioForm bioToEdit={editingItem} onSuccess={refreshData} />
               )}
             </div>
           </div>

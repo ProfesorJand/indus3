@@ -7,20 +7,26 @@ interface Props {
   columns?: number;
   mobile?: number;
   tablet?: number;
+  alignItems?: string;
+  justifyItems?: string;
+  justifyContent?: string;
 }
 
 const { 
   fullWidth = false, 
   columns = 3, 
   mobile = 1, 
-  tablet = 2 
+  tablet = 2,
+  alignItems = "flex-start",
+  justifyItems = "stretch",
+  justifyContent = "stretch"
 } = Astro.props;
 ---
 
 <Container variant={fullWidth ? 'full' : 'wide'}>
   <div 
     class={styles.grid} 
-    style={`--cols-desktop: ${columns}; --cols-tablet: ${tablet}; --cols-mobile: ${mobile};`}
+    style={`--cols-desktop: ${columns}; --cols-tablet: ${tablet}; --cols-mobile: ${mobile}; align-items:${alignItems}; justify-items:${justifyItems}; justify-content:${justifyContent}`}
   >
     <slot />
   </div>

@@ -6,10 +6,44 @@ import FooterThreeCols from "@components/footers/FooterThreeCols.astro";
 import Section from "@components/base/Section.astro";
 import Container from "@components/base/Container.astro";
 import BodyGrid from "@components/body/BodyGrid.astro";
-import eventsData from "@data/events.json";
+import fs from 'node:fs';
+import path from 'node:path';
+import LogoCard from "@components/logo/LogoCard.astro";
+
+import { getEventos } from "@stores/eventos.js";
+const eventsData = await getEventos();
+console.log(eventsData);
 
 const seoTitle = "Eventos | Indus3";
 const seoDesc = "Próximos eventos, conciertos y festivales producidos por Indus3.";
+const projectRoot = process.cwd();
+const clientesDir = path.resolve(projectRoot, 'public/eventos-pasados');
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+let files: string[] = [];
+try {
+  files = fs.readdirSync(clientesDir);
+  if (files.length === 0) console.warn('Warning: No files found in', clientesDir);
+} catch (error) {
+  console.error('Error reading clients directory 3:', error);
+}
+const eventosPasados = files
+  .filter(file => /\.(webp|png|jpg|jpeg|svg)$/i.test(file))
+  .map(file => {
+    const nameWithoutExt = file.replace(/\.[^/.]+$/, "");
+    // Remove "Logo-" prefix and replace hyphens with spaces
+    const title = nameWithoutExt
+      .replace(/^Logo-/i, "")
+      .replace(/-/g, " ");
+
+    return {
+      image: `${baseUrl}/eventos-pasados/${file}`,
+      title: title,
+      link: "/#"
+    };
+  }
+)
+
 
 const base = import.meta.env.BASE_URL;
 ---
@@ -22,13 +56,17 @@ const base = import.meta.env.BASE_URL;
 
     <Section variant="hero">
       <Container variant="mid" flexDirection="column">
+               
         <h1 style="text-align: center; font-size: var(--font-size-4xl); margin-bottom: var(--space-4);">Cartelera de Eventos</h1>
-        <p style="text-align: center; color: var(--color-text-light); max-width: 600px; margin: 0 auto;">
+        <p style="text-align: center; color: var(--color-text-light); max-width: 600px; margin: 0 auto;margin-bottom: var(--space-4);">
           Descubre las próximas experiencias que tenemos preparadas para ti.
         </p>
 
-        {false && eventsData.length > 0 ? (
-          <BodyGrid columns={eventsData.length > 3 ? 3 : eventsData.length}>
+        {eventsData.length > 0 ? (
+          <BodyGrid 
+            columns={eventsData.length > 3 ? 3 : eventsData.length} 
+            justifyContent="center"
+          >
             {eventsData.map(event => (
               <a href={`${base}eventos/${event.id}`} class="event-card">
                 <div class="image-wrapper">
@@ -38,10 +76,28 @@ const base = import.meta.env.BASE_URL;
                 <div class="content">
                   <h3>{event.nombreEvento}</h3>
                   <p class="location"><i class="fas fa-map-marker-alt"></i> {event.lugarEvento}</p>
-                  <p class="description">{event.descripcionEvento?.[0].substring(0, 100)}...</p>
+                  <p class="description">{event.descripcionEvento?.substring(0, 100)}...</p>
                   <span class="btn-more">Más Información</span>
                 </div>
               </a>
+            ))}
+          </BodyGrid>
+        ) : (
+          <div style="text-align: center;justify-content: center;display: flex;flex-direction: column;align-items: center;">
+            <h3>No hay eventos programados en este momento.</h3>
+            <p>Vuelve pronto para enterarte de nuestras próximas producciones.</p>
+          </div>
+        )}
+      </Container>
+    </Section>
+    <Section>
+      <Container variant="mid" flexDirection="column">
+        <h2>Eventos Pasados</h2>
+        <p>Descubre los eventos que hemos realizado en el pasado.</p>
+        {eventosPasados.length > 0 ? (
+          <BodyGrid columns={4}>
+            {eventosPasados.map(event => (
+              <img src={event.image} alt={event.title} />
             ))}
           </BodyGrid>
         ) : (
@@ -67,6 +123,9 @@ const base = import.meta.env.BASE_URL;
     height: 100%;
     display: flex;
     flex-direction: column;
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
   }
   .event-card:hover {
     transform: translateY(-10px);

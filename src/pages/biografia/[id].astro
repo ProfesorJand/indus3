@@ -88,109 +88,17 @@ const base = import.meta.env.BASE_URL;
     <Section variant="compact" className="intro-section">
       <Container variant="mid">
         <div style="display: flex; flex-direction: column; gap: var(--space-4);">
-        {
-          !bio.instagramReelVideo ? (
-            <div class="intro-text">
-            <div class="intro-text-header">
-                <div class="mini-img-container">
-                  <img src={bio.squareImg} alt={bio.name} class="artist-main-img" transition:name={`image-${bio.id}`} />
-                </div>
-                <div class="container-img-badge">
-                  <h1 class="artist-name" transition:name={`title-${bio.id}`}>{bio.name}</h1>
-                  <div class="bio-badge">{bio?.jobTitle?.toUpperCase()}</div>
-                </div>
-            </div>
-            <div class="intro-text-history">
-              <!-- <div class="intro-image-container">
-                <img src={bio.artistImg} alt={bio.name} class="artist-main-img" transition:name={`image-${bio.id}`} />
-                </div> -->
-                <div class="bio-text-container">
-                  <h2>Biografía</h2>
-                  {
-                    Array.isArray(bio.description) ? (
-                      bio.description.map((parrafo) => (
-                        <p class="artist-description">{parrafo}</p>
-                      ))
-                    ) : (
-                      <p class="artist-description">{bio.description}</p>
-                    )
-                  }
-                </div>
-              </div>
-            
-          
-          <div class="details-list">
-            {bio.type?.toLowerCase() ==="artista" && bio.artistDetails?.map((detail) => (
-              <div class="detail-card glass">
-                {detail.realName && <h3>{detail.realName}</h3>}
-                <ul>
-                  {detail.birthPlace && <li><strong>Origen:</strong> {detail.birthPlace}</li>}
-                  {detail.birthDate && <li><strong>Fecha de Nacimiento:</strong> {detail.birthDate}</li>}
-                  {detail.height && <li><strong>Estatura:</strong> {detail.height}</li>}
-                </ul>
-              </div>
-            ))}
-          </div>
-          </div>
-
-            <div class="details-list">
-
-              {
-                bio.alternateName && (
-                  <p class="info-text"><strong>Nombre Alternativo:</strong> {bio.alternateName}</p>
-                )
-              }
-              {
-                bio.foundingDate && (
-                  <p class="info-text"><strong>Fecha de Fundación:</strong> {bio.foundingDate}</p>
-                )
-              }
-              {
-                bio.foundingLocation && (
-                  <p class="info-text"><strong>Origen:</strong> {bio.foundingLocation}</p>
-                )
-              }
-              {
-                bio.members && (
-                  <p class="info-text"><strong>Integrantes:</strong> {bio.members.map(({name, rol}) => `${name} (${rol})`).join(", ")}</p>
-                )
-              }
-              {
-                bio.awards && bio.awards.length > 0 && (
-                  <p class="info-text"><strong>Premios:</strong> {bio.awards.join(", ")}</p>
-                )
-              }
-          
-          {bio.genre && bio.genre.length > 0 && (
-            <div class="genre-container">
-              <strong>Género:</strong> {bio.genre.join(", ")}
-            </div>
-          )}
-            </div>
-
-          ) : (
-
-          <BodyTwoColumns flexDirection="column" sidebarLeft={true} gap="var(--space-4)">
-            <div slot="sidebar">
-              <div class="video-wrapper shadow-xl" slot="sidebar">
-                <video controls loop playsinline class="my-reel">
-                  <source src={`${base}${bio.instagramReelVideo}`} type="video/mp4" />
-                  Tu navegador no soporta videos.
-                </video>
-              </div>
-              <p class="see-more" style="color: var(--color-primary);">
-                <a href={redes.instagram} target="_blank">Ver más contenido -> instagram/@indus3pro</a>
-              </p>
-            </div>
-            <div class="intro-text">
+          {
+            (!bio.instagramReelVideo && !bio.imgVertical)? (
+              <div class="intro-text">
               <div class="intro-text-header">
                   <div class="mini-img-container">
                     <img src={bio.squareImg} alt={bio.name} class="artist-main-img" transition:name={`image-${bio.id}`} />
                   </div>
-                <div class="container-img-badge">
-                  <h1 class="artist-name" transition:name={`title-${bio.id}`}>{bio.name}</h1>
-                  <div class="bio-badge">{bio?.jobTitle?.toUpperCase()}</div>
-                </div>
+                  <div class="container-img-badge">
+                    <h1 class="artist-name" transition:name={`title-${bio.id}`}>{bio.name}</h1>
+                    <div class="bio-badge">{bio?.jobTitle?.toUpperCase()}</div>
+                  </div>
               </div>
               <div class="intro-text-history">
                 <!-- <div class="intro-image-container">
@@ -224,7 +132,9 @@ const base = import.meta.env.BASE_URL;
               ))}
             </div>
             </div>
+
               <div class="details-list">
+
                 {
                   bio.alternateName && (
                     <p class="info-text"><strong>Nombre Alternativo:</strong> {bio.alternateName}</p>
@@ -257,39 +167,130 @@ const base = import.meta.env.BASE_URL;
               </div>
             )}
               </div>
-          </BodyTwoColumns>
-          )
 
-        }
-       <!-- Info De la Biografia -->
-        <div style="display: flex; flex-direction: column; gap: var(--space-4);">
-        <!-- 2. MÚSICA: Éxitos Destacados -->
-        <h2 class="section-title">5 Canciones más famosas de {bio.name}</h2>
-        <ol>
-          <li>
-            Se Acabó
-          </li>
-          <li>
-            Sin Miedo 2020
-          </li>
-          <li>
-            Como Yo (feat. Silvestre Dangong)
-          </li>
-          <li>
-            Mis Ilusiones
-          </li>
-          <li>
-            Donde Andabas Tú
-          </li>
-        </ol>
-        {bio.urlSpotify && (
-              <div class="music-section glass">
-                <div class="music-container">
-                  <SpotifyPlayer url={bio.urlSpotify} height={"100%"} title={`Spotify de ${bio.name}`} />
+            ) : (
+
+            <BodyTwoColumns flexDirection="column" sidebarLeft={true} gap="var(--space-4)">
+              <div slot="sidebar">
+                  {
+                    bio.instagramReelVideo ? (
+                <div class="video-wrapper shadow-xl" slot="sidebar">
+                      <video controls loop playsinline class="my-reel">
+                      <source src={`${base}${bio.instagramReelVideo}`} type="video/mp4" />
+                      Tu navegador no soporta videos.
+                    </video>
                 </div>
+                    ) : (
+                <div class="video-wrapper shadow-xl" slot="sidebar">
+                      <img src={`${bio.imgVertical}`} alt={bio.name} class="flyer-img" transition:name={`image-${bio.id}`} />
+                </div>
+                    )
+                  }
+                <p class="see-more" style="color: var(--color-primary);">
+                  <a href={redes.instagram} target="_blank">Ver más contenido -> instagram/@indus3pro</a>
+                </p>
               </div>
-        )}
-        </div>
+                <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+                    <div class="intro-text-header">
+                        <div class="mini-img-container">
+                          <img src={bio.squareImg} alt={bio.name} class="artist-main-img" transition:name={`image-${bio.id}`} />
+                        </div>
+                      <div class="container-img-badge">
+                        <h1 class="artist-name" transition:name={`title-${bio.id}`}>{bio.name}</h1>
+                        <div class="bio-badge">{bio?.jobTitle?.toUpperCase()}</div>
+                      </div>
+                    </div>
+                    <div class="intro-text-history">
+                     {/* <div class="intro-image-container">
+                        <img src={bio.artistImg} alt={bio.name} class="artist-main-img" transition:name={`image-${bio.id}`} />
+                      </div> */}
+                      <div class="bio-text-container">
+                        <h2>Biografía</h2>
+                        {
+                          Array.isArray(bio.description) ? (
+                            bio.description.map((parrafo) => (
+                              <p class="artist-description">{parrafo}</p>
+                            ))
+                          ) : (
+                            <p class="artist-description">{bio.description}</p>
+                          )
+                        }
+                      </div>
+                    </div>
+
+                  <div class="details-list">
+                    {bio.type?.toLowerCase() ==="artista" && bio.artistDetails?.map((detail) => (
+                      <div class="detail-card glass">
+                        {detail.realName && <h3>{detail.realName}</h3>}
+                        <ul>
+                          {detail.birthPlace && <li><strong>Origen:</strong> {detail.birthPlace}</li>}
+                          {detail.birthDate && <li><strong>Fecha de Nacimiento:</strong> {detail.birthDate}</li>}
+                          {detail.height && <li><strong>Estatura:</strong> {detail.height}</li>}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                  <div class="details-list">
+                    {
+                      bio.alternateName && (
+                        <p class="info-text"><strong>Nombre Alternativo:</strong> {bio.alternateName}</p>
+                      )
+                    }
+                    {
+                      bio.foundingDate && (
+                        <p class="info-text"><strong>Fecha de Fundación:</strong> {bio.foundingDate}</p>
+                      )
+                    }
+                    {
+                      bio.foundingLocation && (
+                        <p class="info-text"><strong>Origen:</strong> {bio.foundingLocation}</p>
+                      )
+                    }
+                    {
+                      bio.members && (
+                        <p class="info-text"><strong>Integrantes:</strong> {bio.members.map(({name, rol}) => `${name} (${rol})`).join(", ")}</p>
+                      )
+                    }
+                    {
+                      bio.awards && bio.awards.length > 0 && (
+                        <p class="info-text"><strong>Premios:</strong> {bio.awards.join(", ")}</p>
+                      )
+                    }
+                    {bio.genre && bio.genre.length > 0 && (
+                      <p class="info-text"><strong>Género:</strong> {bio.genre.join(", ")}</p>
+                    )}
+                  </div>
+                </div>
+            </BodyTwoColumns>
+            )
+
+          }
+        <!-- Info De la Biografia -->
+        {
+          bio?.cancionesMasEscuchadas?.length>0 && (
+
+          
+            <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+
+          <h2 class="section-title">5 Canciones más famosas de {bio.name}</h2>
+          <ol>
+            {
+              bio.cancionesMasEscuchadas.map((cancion) => (
+                <li>
+                  {cancion}
+                </li>
+              ))
+            }
+          </ol>
+          {bio.urlSpotify && (
+                <div class="music-section glass">
+                  <div class="music-container">
+                    <SpotifyPlayer url={bio.urlSpotify} height={"100%"} title={`Spotify de ${bio.name}`} />
+                  </div>
+                </div>
+          )}
+          </div>
+          )}
         </div>
       </Container>
     </Section>
@@ -302,12 +303,10 @@ const base = import.meta.env.BASE_URL;
   .bio-text-container{
     display: flex;
     flex-direction: column;
-    gap:var(--space-4)
   }
   .artist-description {
     font-size: var(--font-size-base);
     line-height: 1.6;
-    color: var(--color-text-light);
     margin: 0;
   }
   .container-img-badge{

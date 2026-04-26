@@ -43,7 +43,7 @@ const sections = [
           brutal.
         </p>
         <a href="https://api.indus3pro.com/guias/pdf/Conciertos-2026-INDUS3.pdf#zoom=75" download="Cómo-prepararte-para-ir-a-conciertos-en-2026.pdf" class="btn-descarga" target="_blank">
-          Descargar PDF
+          Descargar Guía de Conciertos 2026 (PDF)
         </a>
         <div class="recom-container">
           <h2>Recomendaciones para asistir conciertos</h2>
@@ -364,14 +364,16 @@ const sections = [
     color: var(--color-text);
     border: none;
     padding: var(--space-2) var(--space-4);
-    border-radius: var(--radius-md);
+    border-radius: var(--space-2);
     cursor: pointer;
     font-size: var(--font-size-sm);
     font-weight: 600;
     transition: var(--transition-fast);
+    width: fit-content;
+    align-self: center;
   }
   .btn-descarga:hover {
-    background-color: var(--color-secondary);
+    background-color: var(--color-primary);
     transform: translateY(-2px);
   }
   .recom-container {
@@ -675,6 +677,10 @@ const sections = [
   :global(html:not(.dark)) .modern-table th {
     background: #cccccc;
     color: #374151;
+  }
+
+  :global(html:not(.dark)) .btn-descarga {
+    background: var(--color-bg-alt);
   }
 
   @media (max-width: 768px) {

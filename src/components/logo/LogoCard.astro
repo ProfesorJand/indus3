@@ -11,7 +11,6 @@ interface Props {
 
 const { title, description, image, href, className = '' } = Astro.props;
 const Element = href ? 'a' : 'div';
-console.log({image})
 ---
 
 <Element href={href} class={`${styles.card} ${className}`} >

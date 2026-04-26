@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { JOB_TITLE, TYPE, GENRE, ROL } from '@stores/biografias';
 
-const BioForm = ({ bioToEdit = null }) => {
+const BioForm = ({ bioToEdit = null, onSuccess }) => {
   const initialState = {
     id: bioToEdit?.id || Date.now(),
-    type: bioToEdit?.type || 'artista',
+    type: bioToEdit?.type || TYPE[0],
     name: bioToEdit?.name || '',
     jobTitle: bioToEdit?.jobTitle || '',
     description: Array.isArray(bioToEdit?.description) 
@@ -14,6 +15,7 @@ const BioForm = ({ bioToEdit = null }) => {
     foundingLocation: bioToEdit?.foundingLocation || '',
     foundingDate: bioToEdit?.foundingDate || '',
     genre: bioToEdit?.genre || [],
+    members: bioToEdit?.members || [],
     urlSpotify: bioToEdit?.urlSpotify || '',
     awards: bioToEdit?.awards || [''],
     instagramReelId: bioToEdit?.instagramReelId || ''
@@ -81,10 +83,16 @@ const BioForm = ({ bioToEdit = null }) => {
       const urlSaveBio = "https://api.indus3pro.com/biografias/save-bio.php";
       const response = await fetch(urlSaveBio, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json' ,
+          'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+        },
         body: JSON.stringify(payload)
       });
-      if (response.ok) setStatus('¡Éxito! Guardado.');
+      if (response.success) {
+        setStatus('¡Éxito! Guardado.');
+        if (onSuccess) onSuccess(); // Trigger refresh in parent
+      }
       else setStatus('Error al guardar.');
     } catch (error) {
       console.error(error);
@@ -100,20 +108,28 @@ const BioForm = ({ bioToEdit = null }) => {
           <div className="form-group">
             <label>Tipo de Biografía</label>
             <select name="type" value={formData.type} onChange={handleChange}>
-              <option value="artista">Artista</option>
-              <option value="banda">Banda</option>
-              <option value="evento">Evento</option>
+              {TYPE.map(type => (
+                <option key={type} value={type}>{type}</option>
+              ))}
             </select>
           </div>
 
           <div className="form-row">
             <div className="form-group">
+              <label>Slug</label>
+              <input type="text" name="id" value={formData.id} onChange={handleChange} placeholder="Ej: bad-bunny" />
+            </div>
+            <div className="form-group">
               <label>Nombre / Título</label>
               <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Ej: Bad Bunny" />
             </div>
             <div className="form-group">
-              <label>Puesto / Título Secundario</label>
-              <input type="text" name="jobTitle" value={formData.jobTitle} onChange={handleChange} placeholder="Ej: Artista Musical" />
+              <label>Etiqueta</label>
+              <select name="jobTitle" value={formData.jobTitle} onChange={handleChange}>
+                {JOB_TITLE.map(jobTitle => (
+                  <option key={jobTitle} value={jobTitle}>{jobTitle}</option>
+                ))}
+              </select>
             </div>
           </div>
 
@@ -134,7 +150,7 @@ const BioForm = ({ bioToEdit = null }) => {
               </div>
             </div>
             <div className="form-group">
-              <label>Imagen Banner (URL o Subir)</label>
+              <label>Imagen Banner Horizontal (URL o Subir)</label>
               <div className="input-with-button">
                 <input type="text" name="bannerImg" value={formData.bannerImg} onChange={handleChange} placeholder="https://..." />
                 <label className="upload-btn">
@@ -151,6 +167,47 @@ const BioForm = ({ bioToEdit = null }) => {
           <div className="form-grid">
              <div className="form-group"><label>Ubicación</label><input type="text" name="foundingLocation" value={formData.foundingLocation} onChange={handleChange} /></div>
              <div className="form-group"><label>Fecha</label><input type="text" name="foundingDate" value={formData.foundingDate} onChange={handleChange} /></div>
+             <div className="form-group">
+              <label>Género</label>
+              <select name="genre" value={formData.genre} onChange={handleChange}>
+                {GENRE.map(genre => (
+                  <option key={genre} value={genre}>{genre}</option>
+                ))}
+              </select>
+             </div>
+             {/* si el jobTitle es banda o duo mostrar los campos de miembros */}
+             {(formData.jobTitle === JOB_TITLE[1] || formData.jobTitle === JOB_TITLE[2]) && (
+              <div className="form-group">
+                <label>Miembros</label>
+                {/* boton para añadir miembro y despues poder añadir sus campos de name y rol y debe tener boton tambien para eliminar*/}
+                <button type="button" onClick={() => setFormData(prev => ({ ...prev, members: [...prev.members, { name: '', rol: '' }] }))}>Añadir Miembro</button>
+                {/* crear un div con cantidad de inputs para los miembros */}
+                {formData.members.map((member, index) => (
+                  <div key={index} className="form-group">
+                    <label>Miembro {index + 1}</label>
+                    <input type="text" name={`member-${index}`} value={member.name} onChange={handleChange} />
+                    <select name={`rol-${index}`} value={member.rol} onChange={handleChange}>
+                      {ROL.map(rol => (
+                        <option key={rol} value={rol}>{rol}</option>
+                      ))}
+                    </select>
+                    <button type="button" onClick={() => setFormData(prev => ({ ...prev, members: prev.members.filter((_, i) => i !== index) }))}>Eliminar</button>
+                  </div>
+                ))}
+              </div>
+             )}
+             <div className="form-group"><label>Premios / Awards</label>
+             {/* boton para añadir premios donde solo tendra string y debe tener boton para eliminar tambien*/}
+             <button type="button" onClick={() => setFormData(prev => ({ ...prev, awards: [...prev.awards, ''] }))}>Añadir Premio</button>
+             {formData.awards.map((award, index) => (
+              <div key={index} className="form-group">
+                <label>Premio {index + 1}</label>
+                <input type="text" name={`award-${index}`} value={award} onChange={handleChange} />
+                <button type="button" onClick={() => setFormData(prev => ({ ...prev, awards: prev.awards.filter((_, i) => i !== index) }))}>Eliminar</button>
+              </div>
+             ))}
+             </div>
+             
              <div className="form-group"><label>URL Spotify Embed</label><input type="text" name="urlSpotify" value={formData.urlSpotify} onChange={handleChange} /></div>
              <div className="form-group"><label>Instagram Reel ID</label><input type="text" name="instagramReelId" value={formData.instagramReelId} onChange={handleChange} /></div>
           </div>

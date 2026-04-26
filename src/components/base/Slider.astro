@@ -3,10 +3,10 @@ import styles from './Slider.module.css';
 
 interface Slide {
   id: string;
-  nombreEvento: string;
+  title: string;
   fechaEvento?: string;
-  descripcionEvento: string[];
-  imagenPR: string;
+  description: string[];
+  image: string;
   subtitle?: string;
   primaryButtonText?: string;
   ventaEntradas?: string;
@@ -38,17 +38,17 @@ const base = import.meta.env.BASE_URL;
         class={`${styles.slide} ${index === 0 ? styles.active : ''}`} 
         data-index={index}
       >
-        <img src={slide.imagenPR} alt={slide.nombreEvento} class={styles.image} loading={index === 0 ? 'eager' : 'lazy'} />
+        <img src={slide.image} alt={slide.title} class={styles.image} loading={index === 0 ? 'eager' : 'lazy'} />
         <div class={styles.overlay} />
         <div class={styles.content}>
-          <h2 class={styles.title}>{slide.nombreEvento}</h2>
+          <h2 class={styles.title}>{slide.title}</h2>
           {slide.fechaEvento && (
               <div class={styles.date}>
                 <i class="fas fa-calendar-alt" />
                 {slide.fechaEvento}
               </div>
             )}
-          {slide.descripcionEvento && <p class={styles.subtitle}>{slide.descripcionEvento[0]}</p>}
+          {slide.description && <p class={styles.subtitle}>{slide.description}</p>}
           <div class={styles.buttons}>
             {slide.primaryButtonText && (
               <a href={slide.ventaEntradas} class={`${styles.btn} ${styles.btnPrimary}`}>

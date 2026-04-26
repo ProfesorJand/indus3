@@ -15,13 +15,13 @@ const allData = spotifyData;
 const formatter = new Intl.NumberFormat('es-ES');
 
 // Obtener meses únicos presentes en la data
-const uniqueMonths = [...new Set(allData.map(item => item.month))].sort().reverse();
+const uniqueMonths = [...new Set(allData.map(item => item.date))].sort().reverse();
 const currentMonth = uniqueMonths[0]; // El mes más reciente
 
 const previousMonth = uniqueMonths[1]; // El mes anterior (si existe)
 // Filtrar la data para el mes actual y anterior
-const currentMonthData = allData.filter(item => item.month === currentMonth);
-const prevMonthData = previousMonth ? allData.filter(item => item.month === previousMonth) : [];
+const currentMonthData = allData.filter(item => item.date === currentMonth);
+const prevMonthData = previousMonth ? allData.filter(item => item.date === previousMonth) : [];
 
 // Crear un mapa de ranking para el mes anterior (para búsqueda rápida)
 // Si el JSON ya tiene 'rank', lo usamos, si no, lo calculamos al vuelo
@@ -38,7 +38,7 @@ const sortedArtists = currentMonthData
   .slice(0, 50);
 
 // Mapear con datos del mes anterior
-const lastUpdateDate = currentMonthData[0].month;
+const lastUpdateDate = currentMonthData[0]?.date || "";
 const top50 = sortedArtists.map((artist, index) => {
   const currentRank = index + 1;
   const prevRank = prevRankMap.get(artist.url);
@@ -58,18 +58,22 @@ const top50 = sortedArtists.map((artist, index) => {
     rankDelta = prevRank - currentRank; // Si antes era 5 y ahora 3, subió 2 (+2)
     rankDeltaType = rankDelta > 0 ? 'up' : rankDelta < 0 ? 'down' : 'stable';
   }
+  const topMusic = artist.topTracks.reduce((prev, current) => {
+                        return (prev?.plays > current?.plays) ? {title: prev.title, plays: prev.plays} : {title: current.title, plays:current.plays};
+                      })
 
   return {
     rank: currentRank,
     name: artist.name,
-    image: artist.artistImage || artist.artistImageHistory || "/img/placeholder-artist.png",
+    image: artist.artistImage || artist.artistImageHistory || ["/img/placeholder-artist.png"],
     currentListeners,
     prevListeners,
     listenersDelta,
     listenersDeltaType,
     rankDelta: Math.abs(rankDelta),
     rankDeltaType,
-    url: artist.url
+    url: artist.url,
+    topMusic: topMusic
   };
 });
 
@@ -80,7 +84,7 @@ const rankingSchema = itemListSchema(
     rank: artist.rank,
     schemaItem: musicArtistSchema({
       name: artist.name,
-      image: artist.image,
+      image: artist.image || "/img/placeholder-artist.png",
       url: artist.url,
       description: `Artista venezolano con ${formatter.format(artist.currentListeners)} oyentes mensuales en Spotify.`
     })
@@ -89,6 +93,11 @@ const rankingSchema = itemListSchema(
 
 const seoTitle = "Top 50 Artistas Venezolanos más Escuchados | Indus3";
 const seoDesc = "Ranking actualizado mensualmente de los 50 artistas venezolanos con más oyentes en Spotify. Descubre quiénes dominan la escena musical.";
+
+// Formatear la fecha para mostrar en el título
+const formattedUpdateDate = lastUpdateDate 
+  ? new Date(lastUpdateDate + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })
+  : "Recientemente";
 
 ---
 
@@ -105,13 +114,12 @@ const seoDesc = "Ranking actualizado mensualmente de los 50 artistas venezolanos
       <div class="hero-glow"></div>
       <Container variant="mid">
         <div class="hero-content">
-          <h1>Top 50 Artistas Venezolanos más escuchados en Spotify</h1>
+          <h1>Top 50: Artistas Venezolanos más escuchados en Spotify (Ranking 2026)</h1>
           <p>
-            Monitoreamos el pulso de la música venezolana. Descubre qué artistas están creciendo este mes.
+            Analizamos diariamente la data oficial de Spotify para identificar quiénes lideran la escena musical de Venezuela. Desde el pop y el urbano hasta el folklore y el rock, este es el termómetro actual de nuestra música.
           </p>
-          <p>Última actualización: <span class="highlight">{new Date(lastUpdateDate).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })}</span></p>
-          
-        
+          <h2>El Ranking Oficial (Actualizado el {formattedUpdateDate})</h2>
+          <p>El ranking se basa en Oyentes Mensuales (Monthly Listeners) y no en reproducciones totales.</p>
      
         <div class="table-card glass-card">
           <div class="table-container">
@@ -120,9 +128,9 @@ const seoDesc = "Ranking actualizado mensualmente de los 50 artistas venezolanos
                 <tr>
                   <th class="rank-col">#</th>
                   <th class="artist-col">Artista</th>
-                  <th class="listeners-col desktop-only">Oyentes (Anterior)</th>
-                  <th class="listeners-col desktop-only">Oyentes (Actual)</th>
-                  <th class="delta-col">Evolución</th>
+                  <th class="listeners-col desktop-only">Oyentes Mensuales</th>
+                  <th class="listeners-col desktop-only">Top Canción</th>
+                  <th class="listeners-col desktop-only">Reproducciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -142,7 +150,7 @@ const seoDesc = "Ranking actualizado mensualmente de los 50 artistas venezolanos
                     </td>
                     <td class="artist-cell">
                       <div class="artist-info">
-                        <img src={artist.image} alt={artist.name} class="artist-thumb" loading="lazy" />
+                        <img src={artist.image || "/img/placeholder-artist.png"} alt={artist.name} class="artist-thumb" loading="lazy" />
                         <div class="artist-meta">
                           <span class="artist-name">{artist.name}</span>
                           <span class="mobile-listeners">
@@ -151,21 +159,14 @@ const seoDesc = "Ranking actualizado mensualmente de los 50 artistas venezolanos
                         </div>
                       </div>
                     </td>
-                    <td class="listeners-cell prev-month desktop-only">
-                      {artist.prevListeners > 0 ? formatter.format(artist.prevListeners) : '---'}
-                    </td>
                     <td class="listeners-cell current-month desktop-only">
                       <strong>{formatter.format(artist.currentListeners)}</strong>
                     </td>
-                    <td class={`delta-cell ${artist.listenersDeltaType}`}>
-                      <div class="delta-flex">
-                        {artist.listenersDeltaType === 'up' && <span class="icon">▲</span>}
-                        {artist.listenersDeltaType === 'down' && <span class="icon">▼</span>}
-                        {artist.listenersDeltaType === 'equal' && <span class="icon">-</span>}
-                        <span class="delta-value">
-                          {artist.listenersDelta !== 0 ? formatter.format(Math.abs(artist.listenersDelta)) : 'Sin cambio'}
-                        </span>
-                      </div>
+                    <td class="listeners-cell music-title desktop-only">
+                      <strong>{artist.topMusic.title}</strong>
+                    </td>
+                    <td class="listeners-cell music-plays desktop-only">
+                      <strong>{formatter.format(artist.topMusic.plays)}</strong>
                     </td>
                   </tr>
                 ))}
@@ -238,6 +239,14 @@ const seoDesc = "Ranking actualizado mensualmente de los 50 artistas venezolanos
     font-size: var(--font-size-xl);
     color: var(--color-text-light);
     margin: 0 auto;
+  }
+
+  .music-title{
+    color: var(--color-text-light);
+  }
+
+  .music-plays{
+    color: var(--color-text-light);
   }
 
   .highlight {
@@ -402,6 +411,10 @@ const seoDesc = "Ranking actualizado mensualmente de los 50 artistas venezolanos
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+
+  .rank-col{
+    text-align: center;
   }
 
   @media (max-width: 900px) {

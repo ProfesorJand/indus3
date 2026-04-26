@@ -2,12 +2,29 @@ import fs from "fs";
 
 const res = await fetch("https://api.indus3pro.com/eventos/get-eventos.php", {
   headers: {
-    Authorization: "Bearer TU_TOKEN"
+    Authorization: `Bearer ${process.env.PUBLIC_BACKEND_AUTH_KEY}`
   }
 });
 
-const data = await res.json();
+const text = await res.text();
 
-fs.writeFileSync("./src/data/eventos.json", JSON.stringify(data.data, null, 2));
+console.log("STATUS:", res.status);
+console.log("RAW:", text);
+
+let json;
+
+try {
+  json = JSON.parse(text);
+} catch (e) {
+  console.error("No es JSON válido");
+  process.exit(1);
+}
+
+if (!json || !json.data) {
+  console.error("Respuesta inválida:", json);
+  process.exit(1); // 👈 corta el build con error claro
+}
+
+fs.writeFileSync("../data/eventos.json", JSON.stringify(json.data, null, 2));
 
 console.log("Eventos guardados ✅");

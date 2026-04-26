@@ -4,7 +4,7 @@ import path from 'node:path';
 export const POST = async ({ request }) => {
   try {
     const data = await request.json();
-    const filePath = path.join(process.cwd(), 'src/data/events.json');
+    const filePath = path.join(process.cwd(), 'src/data/eventos.json');
     
     // Read existing file
     let events = [];

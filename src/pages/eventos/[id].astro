@@ -6,15 +6,16 @@ import FooterThreeCols from "@components/footers/FooterThreeCols.astro";
 import Section from "@components/base/Section.astro";
 import Container from "@components/base/Container.astro";
 import BodyGrid from "@components/body/BodyGrid.astro";
-import { getEventos } from "@stores/eventos";
+//import { getEventos } from "src/scripts/eventos";
 import { getBiografias } from "@stores/biografias";
 import SpotifyPlayer from "@components/base/SpotifyPlayer.astro";
 import EventSchema from "@components/seo/EventSchema.astro";
 import BodyTwoColumns from "@components/body/BodyTwoColumns.astro";
+import {eventsData} from "@data/eventos.json";
 
 
 export async function getStaticPaths() {
-  const eventsData = await getEventos();
+  //const eventsData = await getEventos();
   console.log({eventsData})
   return eventsData.map((event) => ({
     params: { id: event.id.toString() },

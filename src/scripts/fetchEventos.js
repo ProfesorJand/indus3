@@ -7,7 +7,7 @@ const res = await fetch("https://api.indus3pro.com/eventos/get-eventos.php?t="+D
 });
 
 const text = await res.text();
-
+console.log("TOKEN:", process.env.PUBLIC_BACKEND_AUTH_KEY);
 console.log("STATUS:", res.status);
 console.log("RAW:", text);
 

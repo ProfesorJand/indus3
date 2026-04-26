@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 env:
   PUBLIC_GOOGLE_CLIENT_ID: ${{ secrets.PUBLIC_GOOGLE_CLIENT_ID }}
-  BACKEND_AUTH_KEY: ${{ secrets.BACKEND_AUTH_KEY }}
+  BACKEND_AUTH_KEY: ${{ secrets.PUBLIC_BACKEND_AUTH_KEY }}
 
 on:
   push:

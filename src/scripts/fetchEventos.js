@@ -2,12 +2,12 @@ import fs from "fs";
 
 const res = await fetch("https://api.indus3pro.com/eventos/get-eventos.php?t="+Date.now(), {
   headers: {
-    Authorization: `Bearer ${process.env.PUBLIC_BACKEND_AUTH_KEY}`
+    Authorization: `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
   }
 });
 
 const text = await res.text();
-console.log("TOKEN:", process.env.PUBLIC_BACKEND_AUTH_KEY);
+console.log("TOKEN:", import.meta.env.PUBLIC_BACKEND_AUTH_KEY);
 console.log("STATUS:", res.status);
 console.log("RAW:", text);
 

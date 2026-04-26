@@ -1,6 +1,6 @@
 import fs from "fs";
 
-const res = await fetch("https://api.indus3pro.com/eventos/get-eventos.php", {
+const res = await fetch("https://api.indus3pro.com/eventos/get-eventos.php?t="+Date.now(), {
   headers: {
     Authorization: `Bearer ${process.env.PUBLIC_BACKEND_AUTH_KEY}`
   }

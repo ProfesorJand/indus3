@@ -1,4 +1,6 @@
 import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const res = await fetch("https://api.indus3pro.com/eventos/get-eventos.php?t="+Date.now(), {
   headers: {
@@ -7,7 +9,6 @@ const res = await fetch("https://api.indus3pro.com/eventos/get-eventos.php?t="+D
 });
 
 const text = await res.text();
-console.log("TOKEN:", process.env.PUBLIC_BACKEND_AUTH_KEY);
 console.log("STATUS:", res.status);
 console.log("RAW:", text);
 
@@ -25,6 +26,6 @@ if (!json || !json.data) {
   process.exit(1); // 👈 corta el build con error claro
 }
 
-fs.writeFileSync("../data/eventos.json", JSON.stringify(json.data, null, 2));
+fs.writeFileSync("./src/data/eventos.json", JSON.stringify(json.data, null, 2));
 
 console.log("Eventos guardados ✅");

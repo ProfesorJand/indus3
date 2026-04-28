@@ -1,14 +1,33 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import dns from "dns";
 
-const res = await fetch("https://api.indus3pro.com/eventos/get-eventos.php?t="+Date.now(), {
-  headers: {
-    Authorization: `Bearer ${process.env.PUBLIC_BACKEND_AUTH_KEY}`
+// Forzar IPv4 para evitar timeouts en GitHub Actions (Node 17+ usa IPv6 por defecto si hay registro AAAA)
+dns.setDefaultResultOrder("ipv4first");
+
+async function fetchWithRetry(url, options, retries = 3) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const res = await fetch(url, options);
+      if (!res.ok) throw new Error(`HTTP Error: ${res.status}`);
+      return res;
+    } catch (error) {
+      console.log(`Intento ${i + 1} falló: ${error.message}. Reintentando...`);
+      if (i === retries - 1) throw error;
+      await new Promise(res => setTimeout(res, 2000));
+    }
   }
-});
+}
 
-const text = await res.text();
+try {
+  const res = await fetchWithRetry("https://api.indus3pro.com/eventos/get-eventos.php?t="+Date.now(), {
+    headers: {
+      Authorization: `Bearer ${process.env.PUBLIC_BACKEND_AUTH_KEY}`
+    }
+  });
+
+  const text = await res.text();
 
 
 let json;
@@ -27,4 +46,7 @@ if (!json || !json.data) {
 
 fs.writeFileSync("./src/data/eventos.json", JSON.stringify(json.data, null, 2));
 
-console.log("Eventos guardados ✅");
+} catch (error) {
+  console.error("Fallo crítico al hacer fetch de Eventos:", error);
+  process.exit(1);
+}

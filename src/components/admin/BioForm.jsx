@@ -16,8 +16,9 @@ const BioForm = ({ bioToEdit = null, onSuccess }) => {
     foundingDate: bioToEdit?.foundingDate || '',
     genre: bioToEdit?.genre || [],
     members: bioToEdit?.members || [],
-    urlSpotify: bioToEdit?.urlSpotify || '',
+    idSpotify: bioToEdit?.idSpotify || '',
     awards: bioToEdit?.awards || [''],
+    cancionesMasEscuchadas: bioToEdit?.cancionesMasEscuchadas || [''],
     instagramReelId: bioToEdit?.instagramReelId || ''
   };
 
@@ -62,8 +63,13 @@ const BioForm = ({ bioToEdit = null, onSuccess }) => {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    const { name, value, type, selectedOptions } = e.target;
+    if (type === 'select-multiple') {
+      const values = Array.from(selectedOptions).map(opt => opt.value);
+      setFormData(prev => ({ ...prev, [name]: values }));
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -89,7 +95,9 @@ const BioForm = ({ bioToEdit = null, onSuccess }) => {
         },
         body: JSON.stringify(payload)
       });
-      if (response.success) {
+      const data = await response.json();
+      console.log({ data })
+      if (data.success) {
         setStatus('¡Éxito! Guardado.');
         if (onSuccess) onSuccess(); // Trigger refresh in parent
       }
@@ -169,7 +177,7 @@ const BioForm = ({ bioToEdit = null, onSuccess }) => {
              <div className="form-group"><label>Fecha</label><input type="text" name="foundingDate" value={formData.foundingDate} onChange={handleChange} /></div>
              <div className="form-group">
               <label>Género</label>
-              <select name="genre" value={formData.genre} onChange={handleChange}>
+              <select name="genre" multiple value={formData.genre} onChange={handleChange} style={{ height: '100px' }}>
                 {GENRE.map(genre => (
                   <option key={genre} value={genre}>{genre}</option>
                 ))}
@@ -185,8 +193,16 @@ const BioForm = ({ bioToEdit = null, onSuccess }) => {
                 {formData.members.map((member, index) => (
                   <div key={index} className="form-group">
                     <label>Miembro {index + 1}</label>
-                    <input type="text" name={`member-${index}`} value={member.name} onChange={handleChange} />
-                    <select name={`rol-${index}`} value={member.rol} onChange={handleChange}>
+                    <input type="text" value={member.name} onChange={(e) => {
+                      const newMembers = [...formData.members];
+                      newMembers[index] = { ...newMembers[index], name: e.target.value };
+                      setFormData(prev => ({ ...prev, members: newMembers }));
+                    }} />
+                    <select value={member.rol} onChange={(e) => {
+                      const newMembers = [...formData.members];
+                      newMembers[index] = { ...newMembers[index], rol: e.target.value };
+                      setFormData(prev => ({ ...prev, members: newMembers }));
+                    }}>
                       {ROL.map(rol => (
                         <option key={rol} value={rol}>{rol}</option>
                       ))}
@@ -202,13 +218,34 @@ const BioForm = ({ bioToEdit = null, onSuccess }) => {
              {formData.awards.map((award, index) => (
               <div key={index} className="form-group">
                 <label>Premio {index + 1}</label>
-                <input type="text" name={`award-${index}`} value={award} onChange={handleChange} />
+                <input type="text" value={award} onChange={(e) => {
+                  const newAwards = [...formData.awards];
+                  newAwards[index] = e.target.value;
+                  setFormData(prev => ({ ...prev, awards: newAwards }));
+                }} />
                 <button type="button" onClick={() => setFormData(prev => ({ ...prev, awards: prev.awards.filter((_, i) => i !== index) }))}>Eliminar</button>
               </div>
              ))}
              </div>
              
-             <div className="form-group"><label>URL Spotify Embed</label><input type="text" name="urlSpotify" value={formData.urlSpotify} onChange={handleChange} /></div>
+             <div className="form-group"><label>Spotify Artist ID</label><input type="text" name="idSpotify" value={formData.idSpotify} onChange={handleChange} /></div>
+
+             <div className="form-group"><label>Canciones Más Escuchadas</label>
+             <button type="button" onClick={() => setFormData(prev => ({ ...prev, cancionesMasEscuchadas: [...(prev.cancionesMasEscuchadas || []), ''] }))}>Añadir Canción</button>
+             {(formData.cancionesMasEscuchadas || []).map((cancion, index) => (
+              <div key={index} className="form-group">
+                <label>Canción {index + 1}</label>
+                <div className="input-with-button">
+                  <input type="text" value={cancion} onChange={(e) => {
+                    const newCanciones = [...(formData.cancionesMasEscuchadas || [])];
+                    newCanciones[index] = e.target.value;
+                    setFormData(prev => ({ ...prev, cancionesMasEscuchadas: newCanciones }));
+                  }} />
+                  <button type="button" onClick={() => setFormData(prev => ({ ...prev, cancionesMasEscuchadas: prev.cancionesMasEscuchadas.filter((_, i) => i !== index) }))}>Eliminar</button>
+                </div>
+              </div>
+             ))}
+             </div>
              <div className="form-group"><label>Instagram Reel ID</label><input type="text" name="instagramReelId" value={formData.instagramReelId} onChange={handleChange} /></div>
           </div>
         </div>
@@ -219,7 +256,7 @@ const BioForm = ({ bioToEdit = null, onSuccess }) => {
         </div>
       </form>
 
-      <style jsx>{`
+      <style>{`
         .admin-form-container {
           max-width: 900px;
           margin: 0 auto;

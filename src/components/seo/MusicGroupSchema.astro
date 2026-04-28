@@ -38,7 +38,7 @@ const cleanValue = (val: any) => {
   return val;
 };
 
-const processedMembers = members.map(member => {
+const processedMembers = Array.isArray(members) ? members.map(member => {
   if (typeof member === 'string') {
     return {
       "@type": "Person",
@@ -50,7 +50,7 @@ const processedMembers = members.map(member => {
     "name": member.name,
     "jobTitle": member.role
   };
-});
+}) : [];
 
 const schema = {
   "@context": "https://schema.org",

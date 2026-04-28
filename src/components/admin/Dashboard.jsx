@@ -5,11 +5,16 @@ import BioForm from './BioForm.jsx';
 
 const Dashboard = ({ initialEvents = [], initialBios = [] }) => {
   const [activeTab, setActiveTab] = useState('events'); // 'overview', 'events', 'bios'
-  const [events, setEvents] = useState(initialEvents);
-  const [bios, setBios] = useState(initialBios);
+  const [events, setEvents] = useState([]);
+  const [bios, setBios] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
+  const [isDeploying, setIsDeploying] = useState(false);
 
+  useEffect(()=>{
+    refreshData();
+    console.log("useEfffect")
+  },[])
   // Re-fetch data helper
   const refreshData = async () => {
     try {
@@ -22,9 +27,11 @@ const Dashboard = ({ initialEvents = [], initialBios = [] }) => {
           }
         }
       );
-      if (resBios.success) {
+      console.log({resBios})
+      if (resBios.ok) {
         const updatedBios = await resBios.json();
-        setBios(updatedBios);
+        console.log({updatedBios})
+        setBios(updatedBios.data);
       }
 
       // Re-fetch events
@@ -36,9 +43,10 @@ const Dashboard = ({ initialEvents = [], initialBios = [] }) => {
           }
         }
       );
-      if (resEvents.success) {
+      console.log({resEvents})
+      if (resEvents.ok) {
         const updatedEvents = await resEvents.json();
-        setEvents(updatedEvents);
+        setEvents(updatedEvents.data);
       }
     } catch (e) { 
       console.error("Error refreshing dashboard data:", e); 
@@ -46,6 +54,7 @@ const Dashboard = ({ initialEvents = [], initialBios = [] }) => {
   };
 
   const handleDelete = async (type, id) => {
+    console.log("handleDelete",type,id)
     if (!confirm('¿Estás seguro de eliminar este ítem?')) return;
     
     // Updated endpoints to match the new structure
@@ -62,7 +71,10 @@ const Dashboard = ({ initialEvents = [], initialBios = [] }) => {
         },
         body: JSON.stringify({ id })
       });
-      if (res.ok) {
+      console.log({res})
+      const data = await res.json();
+      console.log({data})
+      if (data.success) {
         if (type === 'event') setEvents(prev => prev.filter(e => e.id !== id));
         else setBios(prev => prev.filter(b => b.id !== id));
       }
@@ -77,6 +89,33 @@ const Dashboard = ({ initialEvents = [], initialBios = [] }) => {
   const addNew = () => {
     setEditingItem(null);
     setShowModal(true);
+  };
+
+  const handleDeploy = async () => {
+    if (!confirm('¿Deseas compilar y publicar los últimos cambios en la web pública? Esto tardará unos minutos en reflejarse.')) return;
+    
+    setIsDeploying(true);
+    try {
+      // Llama a tu backend PHP para que él ejecute la petición a GitHub de forma segura.
+      const res = await fetch('https://api.indus3pro.com/trigger-deploy.php', {
+        method: 'POST',
+        headers: { 
+          'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+        }
+      });
+      console.log({token: import.meta.env.PUBLIC_BACKEND_AUTH_KEY, res})
+      const data = await res.json();
+      console.log({data})
+      if (res.ok) {
+        alert('¡Despliegue iniciado correctamente! Los cambios estarán en vivo en unos minutos.');
+      } else {
+        alert('Hubo un error al iniciar el despliegue.');
+      }
+    } catch (e) {
+      alert('Error de conexión al intentar desplegar.');
+    } finally {
+      setIsDeploying(false);
+    }
   };
 
   return (
@@ -120,14 +159,21 @@ const Dashboard = ({ initialEvents = [], initialBios = [] }) => {
 
       {/* BODY */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <header className={styles.header}>
+
           <div className={styles.breadcrumb}>
             <span>Admin</span> / <span>{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}</span>
           </div>
           <div className={styles.userArea}>
+             <button 
+               className={styles.btnPrimary} 
+               onClick={handleDeploy} 
+               disabled={isDeploying}
+               style={{ marginRight: '15px', backgroundColor: isDeploying ? '#555' : '#10b981', border: 'none', color: 'white' }}
+             >
+               {isDeploying ? 'Publicando...' : 'Publicar Cambios'}
+             </button>
              <button className={styles.logoutBtn} onClick={() => window.location.href = '/admin'}>Cerrar Sesión</button>
           </div>
-        </header>
 
         <main className={styles.main}>
           {/* OVERVIEW VIEW */}
@@ -228,7 +274,7 @@ const Dashboard = ({ initialEvents = [], initialBios = [] }) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {bios.map((bio) => (
+                    {bios.length>0 && bios?.map((bio) => (
                       <tr key={bio.id}>
                         <td>
                           <div className={styles.itemInfo}>

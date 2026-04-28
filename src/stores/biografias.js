@@ -76,7 +76,7 @@ export const getBiografias = async () => {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
-    }
+    },
   });
   const data = await response.json();
   return data.data;

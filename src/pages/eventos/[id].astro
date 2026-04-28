@@ -15,7 +15,7 @@ import eventsData from "@data/eventos.json";
 
 
 export async function getStaticPaths() {
-  //const eventsData = await getEventos();
+  const eventsData = await getEventos();
   console.log({eventsData})
   return eventsData.map((event) => ({
     params: { id: event.id.toString() },

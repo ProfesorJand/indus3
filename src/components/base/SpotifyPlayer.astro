@@ -1,11 +1,11 @@
 ---
 interface Props {
-  url: string;
+  idSpotify: string;
   height?: string | number;
   title?: string;
 }
 
-const { url, height = "352", title = "Spotify Player" } = Astro.props;
+const { idSpotify, height = "352", title = "Spotify Player" } = Astro.props;
 ---
 
 <div class="spotify-wrapper" style={`min-height: ${height}px;`}>
@@ -23,7 +23,7 @@ const { url, height = "352", title = "Spotify Player" } = Astro.props;
   
   <iframe 
     class="spotify-iframe"
-    data-src={url}
+    data-src={"https://open.spotify.com/embed/artist/" + idSpotify + "?utm_source=generator&theme=0"}
     title={title}
     width="100%" 
     height={height}

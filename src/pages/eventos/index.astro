@@ -9,12 +9,10 @@ import BodyGrid from "@components/body/BodyGrid.astro";
 import fs from "node:fs";
 import path from "node:path";
 import LogoCard from "@components/logo/LogoCard.astro";
-
-//import { getEventos } from "src/scripts/eventos.js";
-import eventsData from "@data/eventos.json";
+import { getEventos } from "@stores/eventos";
 
 
-//const eventsData = await getEventos();
+const eventsData = await getEventos();
 console.log(eventsData);
 
 const seoTitle = "Eventos | Indus3";

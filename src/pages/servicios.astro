@@ -65,7 +65,7 @@ const base = import.meta.env.BASE_URL;
   <main>
     <!-- Hero Section -->
     <Section className="services-hero">
-      <Container flexDirection="column">
+      <Container flexDirection="column" variant="mid">
         <div class="container">
           <h1 class="text-center">Nuestros Servicios</h1>
           <p class="text-center">
@@ -73,52 +73,102 @@ const base = import.meta.env.BASE_URL;
           </p>
           
           <!-- <PrestamosServiciosDe/> -->
-           <h2>Experiencias de Entretenimiento:</h2>
-            <p>Líderes en la creación de espacios para exposiciones , deporte, Esports y shows de alto impacto (circos y temáticos) 
-              <a href={`${base}eventos`} >
-                Ver eventos
-              </a>
-            </p>
-            <h2>Booking & Giras Musicales:</h2>
-            <p>
-              Gestión de talento nacional e internacional y producción general de conciertos y festivales. 
-            </p>
+           <div class="container-2">
+             <h2>Experiencias de Entretenimiento:</h2>
+             <p>Líderes en la creación de espacios para exposiciones , deporte, Esports y shows de alto impacto.<br>
+               <a href={`${base}eventos`} >
+                 Ver eventos
+                </a>
+              </p>
+              <div class="container-3">
+              <ul>
+                  <li>
+                    <span class="li-icon"></span>
+                    Exposiciones
+                  </li>
+                  <li>
+                    <span class="li-icon"></span>
+                    Charlas y conferencias
+                  </li>
+                  <li>
+                    <span class="li-icon"></span>
+                    Deporte
+                  </li>
+                  <li>
+                    <span class="li-icon"></span>
+                    Esports
+                  </li>
+                  <li>
+                    <span class="li-icon"></span>
+                    Circos y shows temáticos
+                  </li>
+              </ul>
+            </div>
+
+
+            </div>
+            <div class="container-2">
+              <h2>Producción Corporativa:</h2>
+              <p>
+                Lanzamientos, Promociones y convenciones con enfoque en retorno de inversión. 
+              </p>
+              <div class="container-3">
+                <ul>
+                    <li>
+                      <span class="li-icon"></span>
+                      Eventos (lanzamientos, ruedas de prensa, fiestas)
+                    </li>
+                    <li>
+                      <span class="li-icon"></span>
+                      Promociones en PDV
+                    </li>
+                    <li>
+                      <span class="li-icon"></span>
+                      Actividades BTL
+                    </li>
+                    <li>
+                      <span class="li-icon"></span>
+                       Convenciones de ventas
+                    </li>
+
+                </ul>
+              </div>
+             
+            </div>
+            <div class="container-2">
+              <h2>Giras Musicales & Booking:</h2>
+              <p>
+                Producción general de conciertos y gestión de talento. 
+              </p>
+              <div class="container-3">
+                <ul>
+                    <li>
+                      <span class="li-icon"></span>
+                      Conciertos
+                    </li>
+                    <li>
+                      <span class="li-icon"></span>
+                      Festivales
+                    </li>
+                    <li>
+                      <span class="li-icon"></span>
+                      Giras nacionales e internacionales
+                    </li>
+                    <li>
+                      <span class="li-icon"></span>
+                      Booking artistas (nacionales e internacionales)
+                    </li>
+
+                </ul>
+              </div>
+            </div>
             <div class="artist-grid">
               {artistas.map((artista) => (
                 <CardArtista name={artista.name} image={artista.image} />
               ))}
             </div>
-            <h2>Producción Corporativa:</h2>
-            <p>
-              Lanzamientos (evento, rueda de presna, fiestas), Promociones en punto PDV y BTL y convenciones con enfoque de ventas en retorno de inversión. 
-            </p>
               
         </div>
-      </Container>
-    </Section>
-
-    <!-- Detailed Services Grid -->
-    <Section variant="alt">
-      <Container flexDirection="column">
-        <h2 style="text-align: center; margin-bottom: var(--space-12); font-size: var(--font-size-3xl);">Especialidades por Área</h2>
-        <BodyGrid columns={3} justifyContent="center" alignItems="center">
-          {serviceCategories.map(category => (
-            <div style="background: var(--color-bg); padding: var(--space-8); border-radius: var(--border-radius-lg); border: 1px solid var(--color-border); transition: transform 0.3s ease; height: 100%;" class="service-category-card">
-              <div style="width: 60px; height: 60px; justify-self:center; background: var(--color-primary-light); color: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-2); font-size: 1.5rem;">
-                <i class={category.icon}></i>
-              </div>
-              <h3 style="justify-self:center; font-size: var(--font-size-2xl); margin-bottom: var(--space-4);">{category.title}</h3>
-              <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--space-3);">
-                {category.items.map(item => (
-                  <li style="color: var(--color-text-light); display: flex; align-items: center; gap: var(--space-2);">
-                    <span style="width: 6px; height: 6px; background: var(--color-primary); border-radius: 50%;"></span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </BodyGrid>
       </Container>
     </Section>
 
@@ -148,6 +198,39 @@ const base = import.meta.env.BASE_URL;
     display: flex; 
     flex-direction: column;
     gap: var(--space-4);
+  }
+  .container-2{
+    display: flex; 
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+  .container-3{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  ul{
+    list-style: none; 
+    padding: 0; 
+    display: flex; 
+    flex-direction: column; 
+    gap: var(--space-3);
+  }
+  li{
+
+    display: flex; 
+    align-items: center; 
+    gap: var(--space-2);
+  }
+  li span.li-icon{
+    width: 6px; 
+    height: 6px; 
+    background: var(--color-primary); 
+    border-radius: 50%;
   }
   .text-center{
     text-align: center; 

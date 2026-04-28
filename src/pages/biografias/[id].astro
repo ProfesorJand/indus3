@@ -253,7 +253,7 @@ const base = import.meta.env.BASE_URL;
           
             <div style="display: flex; flex-direction: column; gap: var(--space-4);">
 
-          <h2 class="section-title">{bio.cancionesMasEscuchadas.length} Canciones más famosas de {bio.name}</h2>
+          <h2 class="section-title">{bio.cancionesMasEscuchadas.length} Canciones más populares de {bio.name}</h2>
           <ol>
             {
               Array.isArray(bio.cancionesMasEscuchadas) && bio.cancionesMasEscuchadas.map((cancion) => (
@@ -272,6 +272,7 @@ const base = import.meta.env.BASE_URL;
           )}
           </div>
           )}
+          <p >Si buscas la contratación de {bio.name} o una empresa de booking en Venezuela para tu próximo evento, en Indus3 te ofrecemos la solución integral. <a href="/contacto"><span>Contactanos</span></a></p>
         </div>
       </Container>
     </Section>
@@ -376,7 +377,7 @@ const base = import.meta.env.BASE_URL;
     display: flex;
     flex-wrap: wrap;
     flex-direction:column;
-    gap: var(--space-6);
+    gap: var(--space-4);
   }
 
   .detail-card {

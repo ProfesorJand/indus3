@@ -26,7 +26,7 @@ const {
 <Container variant={fullWidth ? 'full' : 'wide'} justifyContent={justifyContent}>
   <div 
     class={styles.grid} 
-    style={`--cols-desktop: ${columns}; --cols-tablet: ${tablet}; --cols-mobile: ${mobile}; align-items:${alignItems}; justify-items:${justifyItems};`}
+    style={`--cols-desktop: ${columns}; --cols-tablet: ${tablet}; --cols-mobile: ${mobile}; align-items:${alignItems}; justify-items:${justifyItems}; width:${fullWidth ? '100%' : ''};`}
   >
     <slot />
   </div>

@@ -1,7 +1,7 @@
 ---
 import MainLayout from "@layouts/MainLayout.astro";
 import SEO from "@components/seo/SEO.astro";
-import { websiteSchema, organizationSchema } from "@utils/seo";
+import { websiteSchema, organizationSchema, localBusinessSchema } from "@utils/seo";
 import HeaderSticky from "@components/headers/HeaderSticky.astro";
 import FooterThreeCols from "@components/footers/FooterThreeCols.astro";
 import Section from "@components/base/Section.astro";
@@ -19,6 +19,27 @@ const formatNumberMobile = (number: string) => {
 const formatNumberLandline = (number: string) => {
   return `${number.slice(0, 4)}-${number.slice(4)}`;
 }
+
+const localBusinessData = localBusinessSchema({
+  name: "Indus3",
+  description: "Empresa dedicada a la contratación (booking) de artistas, producción de eventos y desarrollo en la industria musical a nivel nacional e internacional.",
+  image: new URL("/indus3-logo.webp", Astro.url).toString(),
+  url: Astro.url.href,
+  telephone: redes.numeroTel || redes.numeroWsp ? `+${redes.numeroTel || redes.numeroWsp}` : "",
+  email: redes.email,
+  address: {
+    streetAddress: "Av. Principal de El Hatillo, C.C TRINIDAD TEPUY, piso 1, oficina 102",
+    addressLocality: "Caracas",
+    addressRegion: "Miranda",
+    postalCode: "1080",
+    addressCountry: "VE"
+  },
+  sameAs: [
+    redes.instagram,
+    redes.facebook,
+    redes.x
+  ].filter(Boolean)
+});
 ---
 
 <MainLayout title={seoTitle}>
@@ -26,7 +47,7 @@ const formatNumberLandline = (number: string) => {
     slot="seo" 
     title={seoTitle} 
     description={seoDesc} 
-    schemas={[websiteSchema, organizationSchema]} 
+    schemas={[websiteSchema, organizationSchema, localBusinessData]} 
   />
 
   <HeaderSticky slot="header" />

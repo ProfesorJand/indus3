@@ -21,11 +21,11 @@ const base = import.meta.env.BASE_URL;
     <Section variant="hero">
       <Container variant="mid" flexDirection="column">
         <div class="bio-intro">
-          <h1>Biografías de los artistas y eventos que Indus3 ha traído para ti</h1>
-          <p>Conoce la historia detrás de tus artistas y festivales favoritos.</p>
+          <h1>Perfiles de Artistas</h1>
+          <p>Nuestro directorio oficial de artistas: una selección exhaustiva de las trayectorias que definen nuestro ecosistema. Desde los referentes que marcan la pauta en Venezuela hasta las figuras globales de la industria musical.</p>
         </div>
 
-        <BodyGrid columns={biografias.length >= 4 ? 4 : biografias.length} justifyContent="center" alignItems="stretch">
+        <BodyGrid columns={biografias.length >= 4 ? 4 : biografias.length} justifyContent="center" alignItems="stretch" fullWidth={true}>
           {biografias?.map((bio) => (
             <div class="bio-card-wrapper">
               <a href={`${base}biografias/${bio.id}`} class="bio-link">
@@ -46,22 +46,19 @@ const base = import.meta.env.BASE_URL;
 <style>
   .bio-intro {
     text-align: center;
-    margin-bottom: var(--space-12);
+    margin-bottom: var(--space-4);
     display:flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
-
-  .bio-intro h1 {
-    font-size: var(--font-size-4xl);
-    margin-bottom: var(--space-4);
+    gap: var(--space-4);
   }
 
   .bio-intro p {
-    color: var(--color-text-light);
-    font-size: var(--font-size-lg);
+   text-align: center;
   }
+
+
 
   .bio-card-wrapper {
     position: relative;
@@ -116,7 +113,6 @@ const base = import.meta.env.BASE_URL;
 
   .bio-name {
     font-weight: 600;
-    margin-top: var(--space-4);
     text-align: center;
   }
 </style>

@@ -1,21 +1,17 @@
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "Your Company Name",
-  "url": "https://yourwebsite.com",
-  "logo": "https://yourwebsite.com/logo.png"
+  "name": "Indus3",
+  "description": "Indus3 Entertainment Group es una agencia de producción de eventos y booking de artistas líder en la industria del entretenimiento. Ofrecemos soluciones integrales 360° en producción técnica, gestión de talento y comunicación estratégica, conectando marcas con audiencias a través de ejecuciones de alto impacto en Venezuela y el mercado internacional.",
+  "url": "https://indus3pro.com",
+  "logo": "https://indus3pro.com/indus3-logo.webp"
 };
 
 export const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Your Website Name",
-  "url": "https://yourwebsite.com",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://yourwebsite.com/search?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
+  "name": "Indus3",
+  "url": "https://indus3pro.com",
 };
 
 export const breadcrumbSchema = (items) => ({
@@ -95,4 +91,25 @@ export const musicRecordingSchema = (song) => ({
     "@type": "MusicAlbum",
     "name": song.album
   }
+});
+
+export const localBusinessSchema = (businessInfo) => ({
+  "@context": "https://schema.org",
+  "@type": "EntertainmentBusiness",
+  "name": businessInfo.name,
+  "description": businessInfo.description,
+  "image": businessInfo.image,
+  "@id": businessInfo.url,
+  "url": businessInfo.url,
+  "telephone": businessInfo.telephone,
+  "email": businessInfo.email,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": businessInfo.address?.streetAddress,
+    "addressLocality": businessInfo.address?.addressLocality,
+    "addressRegion": businessInfo.address?.addressRegion,
+    "postalCode": businessInfo.address?.postalCode,
+    "addressCountry": businessInfo.address?.addressCountry
+  },
+  "sameAs": businessInfo.sameAs
 });

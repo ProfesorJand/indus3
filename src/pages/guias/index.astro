@@ -42,36 +42,30 @@ const seoDesc = "Explora nuestras guías expertas sobre conciertos, festivales y
   <HeaderSticky slot="header" />
 
   <main class="guides-index">
-    <Section className="hero-section">
-      <div class="hero-glow"></div>
-      <Container>
+    <Section variant="hero">
+      <Container variant="mid" padding="padding-0-32">
         <div class="hero-content">
-          <span class="badge">Recursos para Fans</span>
-          <h1>Nuestras Guías</h1>
+          <h1>Guías Indus3: Inteligencia en Entretenimiento</h1>
           <p class="hero-subtitle">
-            Recopilamos los mejores consejos, trucos y tutoriales para que tu única preocupación sea disfrutar de la música.
+            Queremos que vivas cada momento al máximo. En esta sección compartimos guías esenciales, consejos de expertos y recursos educativos para que navegues el mundo de los eventos y la música con total confianza.
           </p>
-        </div>
-      </Container>
-    </Section>
-
-    <Section className="guides-grid-section">
-      <Container>
-        <div class="grid">
-          {guides.map((guide) => (
-            <Card
-              title={guide.title}
-              description={guide.description}
-              image={guide.image}
-              href={guide.url}
-              className="guide-card"
-            >
-              <div slot="footer" class="card-footer">
-                <span class="read-more">Leer guía completa →</span>
-                {guide.date && <span class="date">{new Date(guide.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span>}
-              </div>
-            </Card>
-          ))}
+          <span class="badge">Recursos para Fans</span>
+          <div class="grid">
+            {guides.map((guide) => (
+              <Card
+                title={guide.title}
+                description={guide.description}
+                image={guide.image}
+                href={guide.url}
+                className="guide-card"
+              >
+                <div slot="footer" class="card-footer">
+                  <span class="read-more">Leer guía completa →</span>
+                  {guide.date && <span class="date">{new Date(guide.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span>}
+                </div>
+              </Card>
+            ))}
+          </div>
         </div>
       </Container>
     </Section>
@@ -124,23 +118,7 @@ const seoDesc = "Explora nuestras guías expertas sobre conciertos, festivales y
     letter-spacing: 1.5px;
     border: 1px solid rgba(59, 130, 246, 0.2);
     margin-bottom: var(--space-6);
-  }
-
-  h1 {
-    font-size: clamp(2.5rem, 8vw, 4rem);
-    font-weight: 900;
-    margin-bottom: var(--space-4);
-    background: linear-gradient(to bottom, var(--color-text), var(--color-text-light));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .hero-subtitle {
-    font-size: var(--font-size-lg);
-    color: var(--color-text-light);
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.6;
+    width: fit-content;
   }
 
   .guides-grid-section {

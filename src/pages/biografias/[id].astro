@@ -242,6 +242,16 @@ const base = import.meta.env.BASE_URL;
                       )
                     }
                     {
+                      bio.birthPlace && (
+                        <p class="info-text"><strong>Lugar de Nacimiento:</strong> {bio.birthPlace}</p>
+                      )
+                    }
+                    {
+                      bio.birthDate && (
+                        <p class="info-text"><strong>Fecha de Nacimiento:</strong> {bio.birthDate}</p>
+                      )
+                    }
+                    {
                       bio.foundingLocation && (
                         <p class="info-text"><strong>Origen:</strong> {bio.foundingLocation}</p>
                       )

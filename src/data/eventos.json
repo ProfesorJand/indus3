@@ -1,47 +1,57 @@
 [
   {
-    "id": "indus3fest",
-    "nombreEvento": "Indus3 Festival",
-    "fechaEvento": "2026",
-    "descripcionEvento": ["El Indus3 Festival es un evento que se lleva a cabo en el C.C.T. Caracas, Venezuela. Es un evento que se lleva a cabo en el C.C.T. Caracas, Venezuela."],
-    "imagenBanner": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=2000",
-    "imagenPR": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=1200",    "aperturaPuertas": "16:00",
-    "comienzoShow": "18:00",
-    "lugarEvento": "C.C.T. Caracas, Venezuela",
-    "flyerEvento": "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?auto=format&fit=crop&q=80&w=1000",
-    "patrocinadores": ["https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=2000", "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=1200", "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?auto=format&fit=crop&q=80&w=1000"],
-    "restriccionesEdad": "Mayores de 18 años",
-    "logisticaHigienicos": "Contamos con amplias zonas de hidratación, servicios médicos de emergencia 24/7, y protocolos de seguridad de alto nivel. Estacionamiento disponible en el sótano del Centro Comercial.",
-    "datosCuriosos": "Es el primer festival en usar energía solar para el 30% de su iluminación.",
-    "imagenTicketera": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=800",
-    "artistas": ["sanluis"],
-    "primaryButtonText": "Comprar Ahora",
-    "ventaEntradas": "https://ticketera.com/indus3fest",
-    "secondaryButtonText": "Ver Detalles"
-  },
-  {
-    "id": "lgaplay",
-    "nombreEvento": "LGAPlay 2026",
-    "fechaEvento": "2026",
-    "fechaEventoFin": "2026",
-    "descripcionEvento": ["LGAplay, la productora líder en organización de eventos de deportes electrónicos (esports) se prepara para iniciar con su ciclo competitivo de 2026 con un montón de novedades y sorpresas para continuar seguir haciendo crecer esta escena durante todo 2026.",
-    "al igual que en el recorrido pasado, todas las competencias de LGAplay contarán con el apoyo de INDUS3, por lo que todas las ligas forman parte del #RoadToVGS2026 por cuarto año consecutivo .Además de ellos, Movilnet-e y Golden Sabores también regresan como patrocinantes de todas las competencias que se llevarán a cabo a lo largo de este año.",
-    "Entre las competencias principales que se llevarán a cabo están: la Temporada 7 de la Star Pro League (Counter Strike 2), la Temporada 9 de la Spiritual Rift Series (League of Legends) y la Temporada 6 de la Spike Pro League (Valorant). Sin embargo, 2026 trae consigo una increíble noticia: LGAplay está más que listo para incursionar en el competitivo mobile con la Lord Eternal Series, el primer torneo de Mobile Legends: Bang Bang de esta casa productora."],
+    "id": "road-to-vgs",
+    "nombreEvento": "Road To VGS 2026",
+    "fechaEvento": "Lunes 27 de Abril de 2026",
+    "descripcionEvento": "Es el circuito competitivo oficial venezolano que sirve como antesala al evento de GAMING, ESPORTS y COSPLAY más gande del país, el Venezuela Game Show",
     "imagenBanner": "https://api.indus3pro.com/eventos/banners/lgaplay.webp",
     "imagenPR": "https://api.indus3pro.com/eventos/banners/lgaplay.webp",
-    "aperturaPuertas": "16:00",
-    "comienzoShow": "18:00",
-    "lugarEvento": "C.C.T. Caracas, Venezuela",
-    "ventaEntradas": "https://ticketera.com/indus3fest",
-    "flyerEvento": "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?auto=format&fit=crop&q=80&w=1000",
-    "patrocinadores": ["https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=2000", "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=1200", "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?auto=format&fit=crop&q=80&w=1000"],
-    "restriccionesEdad": "Mayores de 18 años",
-    "logisticaHigienicos": "Contamos con amplias zonas de hidratación, servicios médicos de emergencia 24/7, y protocolos de seguridad de alto nivel. Estacionamiento disponible en el sótano del Centro Comercial.",
-    "datosCuriosos": "Es el primer festival en usar energía solar para el 30% de su iluminación.",
-    "imagenTicketera": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=800",
-    "artistas": ["sanluis"],
-    "primaryButtonText": "Comprar Ahora",
-    "primaryButtonLink": "https://ticketera.com/lgaplay",
-    "secondaryButtonText": "Ver Detalles"
+    "aperturaPuertas": "",
+    "comienzoShow": "",
+    "lugarEvento": "Caracas, Venezuela",
+    "flyerEvento": "",
+    "patrocinadores": [],
+    "preguntas": [
+      {
+        "pregunta": "¿Qué es Road to VGS?",
+        "respuesta": "Es el circuito competitivo oficial venezolano que sirve como antesala al evento de GAMING, ESPORTS y COSPLAY más gande del país, el Venezuela Game Show\n\nEsencialmente, es la etapa donde los jugadores pasan de ser aficionados a competir en un entorno profesional para asegurar su lugar en el escenario principal de la VGS.\n\nPilares principales:\n\n1. El Filtro Competitivo\nA través de los Circuitos Nacionales organizados por LGAplay e Indus3, el Road to VGS reúne a los mejores talentos en distintas disciplinas para competir en ligas estructuradas. Para 2026, los juegos principales incluyen:\n\nLeague of Legends con la Spiritual Rift Series.\n\nValorant con la Spike Pro League\n\nCounter-Strike 2 con la (Star Pro League.\n\nMobile Legends: La gran incorporación de este año para el sector móvil.\n\n2. Profesionalización y Alcance\nNo es solo un torneo; es una plataforma de visibilidad. Las eliminatorias superaron el medio millón de visualizaciones y contó con más de 1.000 jugadores inscritos.\n\nEl objetivo es elevar el nivel de Esports de Venezuela: Brindar una estructura de liga profesional con casters, transmisiones de alta calidad y reglamentos oficiales.\n\nConectar con marcas: Servir de puente para que aliados como Movilnet_e y Golden conecten con la Generación Z y otros que se quieran sumar.\n\n3. El Camino a la Gran Final\nEl \"Road\" marca la cuenta regresiva. Los equipos que logran destacar en estas ligas son los que finalmente se enfrentarán en vivo durante los días del evento principal en Caracas, compitiendo por bolsas de premios.\n\nEn resumen, es la fase de ligas y clasificación nacional que define quiénes son los verdaderos profesionales que representarán a la comunidad gamer en la tarima del VGS."
+      },
+      {
+        "pregunta": "¿Donde es el Road To VGS?",
+        "respuesta": "La fase de liga y ciruito nacional será online.\nLa final presencial será en Caracas - Venezuela."
+      },
+      {
+        "pregunta": "¿Cúando es el Road to VGS?",
+        "respuesta": "La fase de ligas y circuitos nacionales arranca el 27 de abril.\nLa final presencial se espera para fines de Julio."
+      },
+      {
+        "pregunta": "¿Qué (artistas/Equipos) se presentan/compiten?",
+        "respuesta": "Por definir"
+      },
+      {
+        "pregunta": "¿Quien hace el Road to VGS?",
+        "respuesta": "Es parte del Venezuela Game Show producido en asociación por Indus3 y LGAPlay."
+      },
+      {
+        "pregunta": "¿Quien patrocina el Road To VGS?",
+        "respuesta": "Las marcas Movilnet_e, Golden."
+      },
+      {
+        "pregunta": "¿Como y donde compro las entradas al Road to VGS?",
+        "respuesta": "La etapa de ligas la puedes ver de forma gratuita por los canales de transmisión oficiales.\nLas finales presenciales están por definirse."
+      }
+    ],
+    "linkBiografia": "",
+    "restriccionesEdad": "",
+    "logisticaHigienicos": "",
+    "imagenTicketera": "https://api.indus3pro.com/eventos/banners/lgaplay.webp",
+    "imagenBiografia": "",
+    "quienEsArtista": "",
+    "mejoresCanciones": [
+      ""
+    ],
+    "historiaArtista": "",
+    "ventaEntradas": "",
+    "datosCuriosos": ""
   }
 ]

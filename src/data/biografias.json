@@ -2,113 +2,150 @@
   {
     "id": "sanluis",
     "type": "Duo",
-    "jobTitle":"Grupo Musical",
+    "jobTitle": "Artista Musical",
     "name": "Sanluis",
-    "bannerImg":"https://image-cdn-ak.spotifycdn.com/image/ab67618600000194a9ec7f058929d746921f66d2",
+    "bannerImg": "https://image-cdn-ak.spotifycdn.com/image/ab67618600000194a9ec7f058929d746921f66d2",
     "description": "SanLuis es un destacado dúo venezolano de pop balada formado por los hermanos Santiago y Luigi Castillo. Originarios de Maracaibo, son reconocidos por ser ex-líderes de la agrupación Voz Veis y por componer éxitos para artistas internacionales, acumulando varios premios Grammy.",
     "squareImg": "https://i.scdn.co/image/ab6761610000f178432d1de7b231d65629485085",
-    "sameAs":[
+    "sameAs": [
       "https://www.instagram.com/sanluismusic/",
       "https://open.spotify.com/embed/artist/3b2zi4PtiILG4Iyswyk4LW?utm_source=generator&theme=0"
     ],
-    "foundingLocation":"Maracaibo, Venezuela",
-    "foundingDate":"2010",
-    "genre": ["Pop Rock"],
-    "members":[
+    "foundingLocation": "Maracaibo, Venezuela",
+    "foundingDate": "2010",
+    "genre": [
+      "Pop Rock"
+    ],
+    "members": [
       {
-        "name":"Santiago Castillo",
-        "rol":"Voz"
+        "name": "Santiago Castillo",
+        "rol": "Voz"
       },
       {
-        "name":"Luis Castillo",
-        "rol":"Voz"
+        "name": "Luis Fernando Castillo",
+        "rol": "Voz"
       }
     ],
-
     "urlSpotify": "https://open.spotify.com/embed/artist/3b2zi4PtiILG4Iyswyk4LW?utm_source=generator&theme=0",
     "awards": [
       "Grammy al Mejor Álbum de Música Urbana (2021)",
       "Latin Grammy al Mejor Álbum de Música Urbana"
     ],
-    "instagramReelTitle":"Hecho Curioso",
+    "instagramReelTitle": "Hecho Curioso",
     "instagramReelId": "DWy3bQTkXWJ",
-    
-    "imgVertical":"https://api.indus3pro.com/biografias/imagenes/flyer-gira-san-luis.webp",
-    "cancionesMasEscuchadas":[
-      "Se Acabó","Sin Miedo 2020","Como Yo (feat. Silvestre Dangong)","Mis Ilusiones","Donde Andabas Tú"
-    ]
+    "instagramReelVideo": "instagram/reels/bad-bunny.mp4"
   },
   {
     "id": "juanes",
     "type": "Artista",
-    "jobTitle":"Artista Musical",
+    "jobTitle": "Artista Musical",
     "name": "Juanes",
-    "description": ["Desde joven mostró interés por la música y aprendió a tocar varios instrumentos. Durante su adolescencia formó la banda Ekhymosis, influenciada por el metal de los años 80, con la que lanzó varios discos antes de separarse.",
+    "description": [
+      "Desde joven mostró interés por la música y aprendió a tocar varios instrumentos. Durante su adolescencia formó la banda Ekhymosis, influenciada por el metal de los años 80, con la que lanzó varios discos antes de separarse.",
       "Tras la disolución del grupo, inició su carrera como solista en el año 2000 con Fíjate Bien. Su reconocimiento internacional creció con Un día normal (2002) y se consolidó con Mi sangre (2004), que lo llevó a la fama mundial. Más adelante, lanzó La vida… es un ratico (2007), uno de sus trabajos más destacados, del cual surgió el éxito “Me enamora”.",
       "A lo largo de su trayectoria ha realizado giras internacionales y ha popularizado canciones como “A Dios le pido” y “La camisa negra”. Además de su carrera musical, se ha involucrado activamente en causas humanitarias, participando en eventos por la paz y organizando conciertos solidarios. Su impacto cultural y social le ha valido numerosos premios, incluyendo múltiples Grammy Latinos, así como reconocimientos internacionales."
     ],
-    "squareImg":"https://i.scdn.co/image/ab6761610000f1781455a186c8aaeb027ccfadb4",
-    "sameAs":[
+    "squareImg": "https://i.scdn.co/image/ab6761610000f1781455a186c8aaeb027ccfadb4",
+    "sameAs": [
       "https://www.instagram.com/juanes/",
       "https://open.spotify.com/artist/0UWZUmn7sybxMCqrw9tGa7"
     ],
-    "foundingLocation":"Medellín, Colombia",
-    "foundingDate":"1994",
-    "genre": ["Rock", "Pop", "Balada"],
-
+    "foundingLocation": "Medellín, Colombia",
+    "foundingDate": "1994",
+    "genre": [
+      "Rock",
+      "Pop",
+      "Balada"
+    ],
     "urlSpotify": "https://open.spotify.com/embed/artist/0UWZUmn7sybxMCqrw9tGa7?utm_source=generator&theme=0",
     "awards": [],
-    "instagramReelTitle":"Hecho Curioso",
+    "instagramReelTitle": "Hecho Curioso",
     "instagramReelId": "DWy3bQTkXWJ",
     "instagramReelVideo": ""
-
   },
   {
     "id": "lgaplay",
     "type": "Organización",
     "name": "LGAPlay 2026",
     "fechaEvento": "2026",
-    "description": ["LGAplay, la productora líder en organización de eventos de deportes electrónicos (esports) se prepara para iniciar con su ciclo competitivo de 2026 con un montón de novedades y sorpresas para continuar seguir haciendo crecer esta escena durante todo 2026.",
-    "al igual que en el recorrido pasado, todas las competencias de LGAplay contarán con el apoyo de INDUS3, por lo que todas las ligas forman parte del #RoadToVGS2026 por cuarto año consecutivo .Además de ellos, Movilnet-e y Golden Sabores también regresan como patrocinantes de todas las competencias que se llevarán a cabo a lo largo de este año.",
-    "Entre las competencias principales que se llevarán a cabo están: la Temporada 7 de la Star Pro League (Counter Strike 2), la Temporada 9 de la Spiritual Rift Series (League of Legends) y la Temporada 6 de la Spike Pro League (Valorant). Sin embargo, 2026 trae consigo una increíble noticia: LGAplay está más que listo para incursionar en el competitivo mobile con la Lord Eternal Series, el primer torneo de Mobile Legends: Bang Bang de esta casa productora."],
-    "squareImg":"https://pbs.twimg.com/profile_images/1322931144657129472/HqbNhwgA_400x400.png",
+    "description": [
+      "LGAplay, la productora líder en organización de eventos de deportes electrónicos (esports) se prepara para iniciar con su ciclo competitivo de 2026 con un montón de novedades y sorpresas para continuar seguir haciendo crecer esta escena durante todo 2026.",
+      "al igual que en el recorrido pasado, todas las competencias de LGAplay contarán con el apoyo de INDUS3, por lo que todas las ligas forman parte del #RoadToVGS2026 por cuarto año consecutivo .Además de ellos, Movilnet-e y Golden Sabores también regresan como patrocinantes de todas las competencias que se llevarán a cabo a lo largo de este año.",
+      "Entre las competencias principales que se llevarán a cabo están: la Temporada 7 de la Star Pro League (Counter Strike 2), la Temporada 9 de la Spiritual Rift Series (League of Legends) y la Temporada 6 de la Spike Pro League (Valorant). Sin embargo, 2026 trae consigo una increíble noticia: LGAplay está más que listo para incursionar en el competitivo mobile con la Lord Eternal Series, el primer torneo de Mobile Legends: Bang Bang de esta casa productora."
+    ],
+    "squareImg": "https://pbs.twimg.com/profile_images/1322931144657129472/HqbNhwgA_400x400.png",
     "imagenBanner": "https://lgaplay.com/wp-content/uploads/2026/04/534534535.png",
-    "imagenPR": "https://lgaplay.com/wp-content/uploads/2026/04/534534535.png",    "aperturaPuertas": "16:00",
+    "imagenPR": "https://lgaplay.com/wp-content/uploads/2026/04/534534535.png",
+    "aperturaPuertas": "16:00",
     "comienzoShow": "18:00",
     "lugarEvento": "C.C.T. Caracas, Venezuela",
     "ventaEntradas": "https://ticketera.com/indus3fest",
     "flyerEvento": "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?auto=format&fit=crop&q=80&w=1000",
-    "patrocinadores": ["https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=2000", "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=1200", "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?auto=format&fit=crop&q=80&w=1000"],
+    "patrocinadores": [
+      "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=1200",
+      "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?auto=format&fit=crop&q=80&w=1000"
+    ],
     "restriccionesEdad": "Mayores de 18 años",
     "logisticaHigienicos": "Contamos con amplias zonas de hidratación, servicios médicos de emergencia 24/7, y protocolos de seguridad de alto nivel. Estacionamiento disponible en el sótano del Centro Comercial.",
     "datosCuriosos": "Es el primer festival en usar energía solar para el 30% de su iluminación.",
     "imagenTicketera": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=800",
-    "artistas": ["sanluis"],
+    "artistas": [
+      "sanluis"
+    ],
     "primaryButtonText": "Comprar Ahora",
     "primaryButtonLink": "https://ticketera.com/lgaplay",
     "secondaryButtonText": "Ver Detalles"
   },
   {
-    "id":"elena-rose",
-    "type":"Artista",
-    "jobTitle":"Artista Musical",
+    "id": "elena-rose",
+    "type": "Artista",
+    "jobTitle": "Artista Musical",
     "name": "Elena Rose",
-    "description": ["Elena Rose es una destacada cantautora venezolana de pop urbano, reconocida por su versatilidad y talento para componer éxitos para artistas internacionales. Originaria de Caracas, ha participado en la creación de canciones para figuras como Rauw Alejandro, Becky G, Maluma, y Daddy Yankee, consolidándose como una de las compositoras más influyentes de la música latina."],
-    "squareImg":"https://i.scdn.co/image/ab6761610000f1782948fdff5fcfa2303e18e12c",
-    "sameAs":[
+    "description": [
+      "Elena Rose es una destacada cantautora venezolana de pop urbano, reconocida por su versatilidad y talento para componer éxitos para artistas internacionales. Originaria de Caracas, ha participado en la creación de canciones para figuras como Rauw Alejandro, Becky G, Maluma, y Daddy Yankee, consolidándose como una de las compositoras más influyentes de la música latina."
+    ],
+    "squareImg": "https://i.scdn.co/image/ab6761610000f1782948fdff5fcfa2303e18e12c",
+    "sameAs": [
       "https://www.instagram.com/elenarose/",
       "https://open.spotify.com/artist/0zO8yNnw5GQgutcIyXfGBY"
     ],
-    "birthPlace":"Miami, Florida, Estados Unidos. Es de padres venezolanos y creció con una fuerte conexión cultural con Venezuela, a menudo citando a Caracas como parte de sus raíces y formación",
-    "birthday":"23 de Marzo de 1995",
-    "genre": ["Pop", "Urbano", "Balada"],
+    "birthPlace": "Miami, Florida, Estados Unidos. Es de padres venezolanos y creció con una fuerte conexión cultural con Venezuela, a menudo citando a Caracas como parte de sus raíces y formación",
+    "birthday": "23 de Marzo de 1995",
+    "genre": [
+      "Pop",
+      "Urbano",
+      "Balada"
+    ],
     "urlSpotify": "https://open.spotify.com/embed/artist/0zO8yNnw5GQgutcIyXfGBY?utm_source=generator&theme=0",
     "awards": [],
-    "instagramReelTitle":"Hecho Curioso",
+    "instagramReelTitle": "Hecho Curioso",
     "instagramReelId": "DWy3bQTkXWJ",
-    "instagramReelVideo": "",
-    "cancionesMasEscuchadas":[
-      "orióN","COSITA LINDA","TUTUTU","Me Lo Merezco","Caracas en el 2000"
+    "instagramReelVideo": "/instagram/reels/elena-rose.mp4",
+    "cancionesMasEscuchadas": [
+      "orióN",
+      "COSITA LINDA",
+      "TUTUTU",
+      "Me Lo Merezco",
+      "Caracas en el 2000"
     ]
+  },
+  {
+    "id": "greeicy",
+    "type": "artista",
+    "name": "Greeicy",
+    "jobTitle": "",
+    "description": [
+      "Greeicy Yeliana Rendón Ceballos, conocida artísticamente como Greeicy, es una exitosa actriz y cantante colombiana nacida el 30 de octubre de 1992 en Cali. Saltó a la fama por su papel protagónico en la serie Chica Vampiro (2013) y consolidó su carrera musical con éxitos como \"Amantes\"."
+    ],
+    "squareImg": "https://i.scdn.co/image/ab6761610000f178e61e455c71409acc91810b3e",
+    "bannerImg": "",
+    "foundingLocation": "Colombia",
+    "foundingDate": "30 de octubre de 1992",
+    "genre": "Reggaeton",
+    "members": [],
+    "urlSpotify": "https://open.spotify.com/artist/5dbaLmK5SHLLg8Z4CcTJpX",
+    "awards": [],
+    "instagramReelId": ""
   }
 ]

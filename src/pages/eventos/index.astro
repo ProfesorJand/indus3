@@ -46,6 +46,30 @@ const eventosPasados = files
     };
   });
 
+const clientesDir2 = path.resolve(projectRoot, "public/eventos-pasados/eventos-mas-antiguos");
+let files2: string[] = [];
+try {
+  files2 = fs.readdirSync(clientesDir2);
+  if (files2.length === 0)
+    console.warn("Warning: No files found in", clientesDir);
+} catch (error) {
+  console.error("Error reading clients directory 3:", error);
+}
+const eventosPasados2 = files2
+  .filter((file) => /\.(webp|png|jpg|jpeg|svg)$/i.test(file))
+  .map((file) => {
+    const nameWithoutExt = file.replace(/\.[^/.]+$/, "");
+    // Remove "Logo-" prefix and replace hyphens with spaces
+    const title = nameWithoutExt.replace(/^Logo-/i, "").replace(/-/g, " ");
+
+    return {
+      image: `${baseUrl}/eventos-pasados/eventos-mas-antiguos/${file}`,
+      title: title,
+      link: "/#",
+    };
+  });
+
+
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -71,6 +95,8 @@ const base = import.meta.env.BASE_URL;
         eventsData.length > 0 ? (
           <BodyGrid
             columns={eventsData.length > 3 ? 3 : eventsData.length}
+            tablet={eventsData.length > 2 ? 2 : eventsData.length}
+            mobile={1}
             justifyContent="center"
           >
             {eventsData.map((event) => (
@@ -84,9 +110,13 @@ const base = import.meta.env.BASE_URL;
                   <p class="location">
                     <i class="fas fa-map-marker-alt" /> {event.lugarEvento}
                   </p>
-                  <p class="description">
-                    {event.descripcionEvento?.substring(0, 100)}...
-                  </p>
+                  {
+                    event?.descripcionEvento?.length > 0 && (
+                      <p class="description">
+                        {event.descripcionEvento?.substring(0, 100)}...
+                      </p>
+                    )
+                  }
                   <span class="btn-more">Más Información</span>
                 </div>
               </a>
@@ -103,15 +133,18 @@ const base = import.meta.env.BASE_URL;
       }
     </Container>
   </Section>
-  <Section>
+  <Section paddingTop="0">
     <Container variant="mid" flexDirection="column">
       <h2>Eventos Pasados</h2>
       <p>Descubre los eventos que hemos realizado en el pasado.</p>
       {
         eventosPasados.length > 0 ? (
-          <BodyGrid columns={4}>
+          <BodyGrid columns={3} >
             {eventosPasados.map((event) => (
-              <img src={event.image} alt={event.title} />
+              <img src={event.image} alt={event.title} class="past-event-img" />
+            ))}
+            {eventosPasados2.map((event) => (
+              <img src={event.image} alt={event.title} class="past-event-img" />
             ))}
           </BodyGrid>
         ) : (
@@ -126,7 +159,35 @@ const base = import.meta.env.BASE_URL;
     </Container>
   </Section>
   <FooterThreeCols slot="footer" />
+
+  <!-- Modal para ver imágenes grandes -->
+  <div id="image-modal" class="modal">
+    <img id="modal-img" class="modal-content" src="" alt="Evento Pasado" />
+  </div>
 </MainLayout>
+
+<script>
+  const modal = document.getElementById("image-modal");
+  const modalImg = (document.getElementById("modal-img") as HTMLImageElement);
+  const pastEvents = document.querySelectorAll(".past-event-img");
+
+  pastEvents.forEach(img => {
+    img.addEventListener("click", () => {
+      if (modal && modalImg) {
+        modal.style.display = "flex";
+        modalImg.src = (img as HTMLImageElement).src;
+        document.body.style.overflow = "hidden"; // Desactivar scroll al abrir
+      }
+    });
+  });
+
+  if (modal) {
+    modal.addEventListener("click", () => {
+      modal.style.display = "none";
+      document.body.style.overflow = "auto"; // Reactivar scroll al cerrar
+    });
+  }
+</script>
 
 <style>
   .event-card {
@@ -140,9 +201,7 @@ const base = import.meta.env.BASE_URL;
     height: 100%;
     display: flex;
     flex-direction: column;
-    max-width: 400px;
     width: 100%;
-    margin: 0 auto;
   }
   .event-card:hover {
     transform: translateY(-10px);
@@ -212,5 +271,56 @@ const base = import.meta.env.BASE_URL;
   }
   .event-card:hover .btn-more::after {
     transform: translateX(5px);
+  }
+
+  /* Estilos para Eventos Pasados y Modal */
+  .past-event-img {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: var(--border-radius-lg);
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+  }
+ 
+  .past-event-img:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 2000; /* Por encima del header sticky */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+  }
+
+  .modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    animation: zoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes zoom {
+    from {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 </style>

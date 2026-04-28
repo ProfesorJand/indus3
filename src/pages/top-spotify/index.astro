@@ -25,17 +25,18 @@ const cards = [
 ]
 
 const base = import.meta.env.BASE_URL;
+const year= new Date().getFullYear();
 ---
 
 <MainLayout title="Biografías y Perfiles">
   <HeaderSticky slot="header" />
-
-  <main>
     <Section>
       <Container flexDirection="column" variant="mid">
         <div class="bio-intro">
-          <h1>Lo que se escucha en Spotify</h1>
-          <p>Conoce los artistas más escuchados en Spotify.</p>
+          <h1>Top Spotify {year}</h1>
+          <p>
+            Sincronizamos diariamente con Spotify para traerte los rankings oficiales de los artistas y canciones que están rompiendo récords en Venezuela y el mundo.
+          </p>
         </div>
 
         <BodyGrid columns={cards.length > 3 ? 3 : cards.length}>
@@ -54,8 +55,6 @@ const base = import.meta.env.BASE_URL;
           </BodyGrid>
       </Container>
     </Section>
-  </main>
-
   <FooterThreeCols slot="footer" />
 </MainLayout>
 

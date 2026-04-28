@@ -7,12 +7,13 @@ interface Props {
   fullHeight?: boolean;
   padding?: string;
   flexDirection?: 'row' | 'column';
+  justifyContent?: string;
 }
 
-const { variant, className = '', fullHeight, padding, flexDirection } = Astro.props;
+const { variant, className = '', fullHeight, padding, flexDirection, justifyContent } = Astro.props;
 const classes = [styles.container, variant ? styles[variant] : '', className, fullHeight ? styles.fullHeight : '', padding ? styles[padding] : ''].join(' ');
 ---
 
-<div class={classes} style={flexDirection ? `flex-direction: ${flexDirection}` : ''}>
+<div class={classes} style={flexDirection ? `flex-direction: ${flexDirection}` : justifyContent ? `justify-content: ${justifyContent}` : ''}>
   <slot />
 </div>

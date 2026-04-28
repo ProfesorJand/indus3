@@ -16,21 +16,19 @@ const base = import.meta.env.BASE_URL;
 
   <main>
     <Section variant="hero">
-      <Container>
+      <Container variant="mid" flexDirection="column">
         <div class="bio-intro">
-          <h1>Directorio de Artistas y Eventos</h1>
+          <h1>Biografías de los artistas y eventos que Indus3 ha traído para ti</h1>
           <p>Conoce la historia detrás de tus artistas y festivales favoritos.</p>
         </div>
 
-        <BodyGrid columns={3}>
+        <BodyGrid columns={biografias.length >= 3 ? 10 : biografias.length} justifyContent="center">
           {biografias.map((bio) => (
             <div class="bio-card-wrapper">
-              <a href={`${base}biografia/${bio.id}`} class="bio-link">
-                <LogoCard 
-                  title={bio.name} 
-                  image={bio.image}
-                />
-                <div class="bio-type-tag">{bio.type}</div>
+              <a href={`${base}biografias/${bio.id}`} class="bio-link">
+                <img src={bio.squareImg} alt={bio.name} class="bio-square" />
+                <h2 class="bio-name">{bio.name}</h3>
+                {/* <div class="bio-type-tag">{bio.type}</div> */}
               </a>
             </div>
           ))}
@@ -46,6 +44,10 @@ const base = import.meta.env.BASE_URL;
   .bio-intro {
     text-align: center;
     margin-bottom: var(--space-12);
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .bio-intro h1 {
@@ -85,5 +87,19 @@ const base = import.meta.env.BASE_URL;
     font-weight: 800;
     text-transform: uppercase;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  .bio-square {
+    border-radius: var(--border-radius-lg);
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+  }
+
+  .bio-name {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin-top: var(--space-2);
   }
 </style>

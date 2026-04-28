@@ -8,8 +8,9 @@ import Section from "@components/base/Section.astro";
 import Container from "@components/base/Container.astro";
 import BodyGrid from "@components/body/BodyGrid.astro";
 import PrestamosServiciosDe from "@components/banners/servicios/PrestamosServiciosDe.astro";
-
+import artistas from "@data/artistas.json";
 import Card from "@components/base/Card.astro";
+import CardArtista from "@components/base/CardArtista.astro";
 
 const seoTitle = "Nuestros Servicios";
 const seoDesc = "Agencia 360 de comunicaciones, marketing y producción de eventos. Booking, conciertos, festivales y mucho más.";
@@ -63,15 +64,35 @@ const base = import.meta.env.BASE_URL;
 
   <main>
     <!-- Hero Section -->
-    <Section variant="hero" className="services-hero">
+    <Section className="services-hero">
       <Container flexDirection="column">
-        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-          <h1>Nuestros Servicios</h1>
-          <p style="font-size: var(--font-size-xl); margin-bottom: var(--space-8); font-weight: 500;">
+        <div class="container">
+          <h1 class="text-center">Nuestros Servicios</h1>
+          <p class="text-center">
             Somos los arquitectos de la emoción, transformando ideas en experiencias que trascienden.
           </p>
           
-          <PrestamosServiciosDe/>
+          <!-- <PrestamosServiciosDe/> -->
+           <h2>Experiencias de Entretenimiento:</h2>
+            <p>Líderes en la creación de espacios para exposiciones , deporte, Esports y shows de alto impacto (circos y temáticos) 
+              <a href={`${base}eventos`} >
+                Ver eventos
+              </a>
+            </p>
+            <h2>Booking & Giras Musicales:</h2>
+            <p>
+              Gestión de talento nacional e internacional y producción general de conciertos y festivales. 
+            </p>
+            <div class="artist-grid">
+              {artistas.map((artista) => (
+                <CardArtista name={artista.name} image={artista.image} />
+              ))}
+            </div>
+            <h2>Producción Corporativa:</h2>
+            <p>
+              Lanzamientos (evento, rueda de presna, fiestas), Promociones en punto PDV y BTL y convenciones con enfoque de ventas en retorno de inversión. 
+            </p>
+              
         </div>
       </Container>
     </Section>
@@ -80,7 +101,7 @@ const base = import.meta.env.BASE_URL;
     <Section variant="alt">
       <Container flexDirection="column">
         <h2 style="text-align: center; margin-bottom: var(--space-12); font-size: var(--font-size-3xl);">Especialidades por Área</h2>
-        <BodyGrid columns={3}>
+        <BodyGrid columns={3} justifyContent="center" alignItems="center">
           {serviceCategories.map(category => (
             <div style="background: var(--color-bg); padding: var(--space-8); border-radius: var(--border-radius-lg); border: 1px solid var(--color-border); transition: transform 0.3s ease; height: 100%;" class="service-category-card">
               <div style="width: 60px; height: 60px; justify-self:center; background: var(--color-primary-light); color: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-2); font-size: 1.5rem;">
@@ -123,6 +144,14 @@ const base = import.meta.env.BASE_URL;
 </MainLayout>
 
 <style>
+  .container{
+    display: flex; 
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  .text-center{
+    text-align: center; 
+  }
   .service-category-card:hover {
     transform: translateY(-8px);
     border-color: var(--color-primary);
@@ -155,7 +184,16 @@ const base = import.meta.env.BASE_URL;
     border-radius: var(--border-radius-2xl);
     box-shadow: var(--shadow-xl);
   }
+
+  .artist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--space-4);
+  margin: var(--space-4) 0;
+}
+
   :global(html.dark) .container-degradado {
     background: linear-gradient(90deg, var(--color-bg-alt) 0%, var(--color-bg) 100%); 
   }
+
 </style>

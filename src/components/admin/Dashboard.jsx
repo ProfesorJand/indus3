@@ -14,7 +14,7 @@ const Dashboard = ({ initialEvents = [], initialBios = [] }) => {
   const refreshData = async () => {
     try {
       // Re-fetch biographies using the same logic as the initial load but client-side
-      const resBios = await fetch('https://api.indus3pro.com/biografias/get-biografias.php',
+      const resBios = await fetch('https://api.indus3pro.com/biografias/get-biografias.php?t='+Date.now(),
         {
           method: 'GET',
           headers: {
@@ -28,7 +28,7 @@ const Dashboard = ({ initialEvents = [], initialBios = [] }) => {
       }
 
       // Re-fetch events
-      const resEvents = await fetch('https://api.indus3pro.com/eventos/get-eventos.php',
+      const resEvents = await fetch('https://api.indus3pro.com/eventos/get-eventos.php?t='+Date.now(),
         {
           method: 'GET',
           headers: {

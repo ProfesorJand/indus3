@@ -23,10 +23,10 @@ const {
 } = Astro.props;
 ---
 
-<Container variant={fullWidth ? 'full' : 'wide'}>
+<Container variant={fullWidth ? 'full' : 'wide'} justifyContent={justifyContent}>
   <div 
     class={styles.grid} 
-    style={`--cols-desktop: ${columns}; --cols-tablet: ${tablet}; --cols-mobile: ${mobile}; align-items:${alignItems}; justify-items:${justifyItems}; justify-content:${justifyContent}`}
+    style={`--cols-desktop: ${columns}; --cols-tablet: ${tablet}; --cols-mobile: ${mobile}; align-items:${alignItems}; justify-items:${justifyItems};`}
   >
     <slot />
   </div>

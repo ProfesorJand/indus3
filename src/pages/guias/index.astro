@@ -28,8 +28,8 @@ const guides = allGuides
   }))
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-const seoTitle = "Guías de Conciertos y Música | Indus3";
-const seoDesc = "Explora nuestras guías expertas sobre conciertos, festivales y el mundo de la música. Todo lo que necesitas saber antes del show.";
+const seoTitle = "Guías Indus3: Inteligencia en Entretenimiento";
+const seoDesc = "En esta sección compartimos guías esenciales, consejos de expertos y recursos educativos para que navegues el mundo de los eventos y la música con total confianza.";
 ---
 
 <MainLayout title={seoTitle}>
@@ -45,7 +45,7 @@ const seoDesc = "Explora nuestras guías expertas sobre conciertos, festivales y
     <Section variant="hero">
       <Container variant="mid" padding="padding-0-32">
         <div class="hero-content">
-          <h1>Guías Indus3: Inteligencia en Entretenimiento</h1>
+          <h1>Guías Indus3:</br>Inteligencia en Entretenimiento</h1>
           <p class="hero-subtitle">
             Queremos que vivas cada momento al máximo. En esta sección compartimos guías esenciales, consejos de expertos y recursos educativos para que navegues el mundo de los eventos y la música con total confianza.
           </p>
@@ -80,6 +80,10 @@ const seoDesc = "Explora nuestras guías expertas sobre conciertos, festivales y
     background-color: var(--color-bg);
   }
 
+  h1{
+    text-align:center
+  }
+
   .hero-section {
     position: relative;
     padding: var(--space-20) 0 var(--space-12);
@@ -100,10 +104,13 @@ const seoDesc = "Explora nuestras guías expertas sobre conciertos, festivales y
   }
 
   .hero-content {
+    display:flex;
+    flex-direction:column;
     position: relative;
     z-index: 1;
     max-width: 800px;
     margin: 0 auto;
+    gap:var(--space-4)
   }
 
   .badge {

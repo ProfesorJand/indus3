@@ -29,7 +29,7 @@ const rankingSchema = itemListSchema(
   }))
 );
 
-const seoTitle = "Top 50 Canciones Globales más Escuchadas | Indus3";
+const seoTitle = "Top 50 Canciones Globales más escuchadas en Spotify | Indus3";
 const seoDesc = "Ranking actualizado de las 50 canciones más escuchadas a nivel global en Spotify. Descubre los hits del momento.";
 
 // Formatear la fecha para mostrar en el título
@@ -68,8 +68,8 @@ const formattedUpdateDate = lastUpdateDate
                   <th class="rank-col">#</th>
                   <th class="song-col">Canción</th>
                   <th class="album-col desktop-only">Álbum</th>
-                  <th class="plays-col desktop-only">Plays</th>
-                  <th class="duration-col">Duración</th>
+                  <th class="plays-col">Plays</th>
+                  <th class="duration-col desktop-only">Duración</th>
                 </tr>
               </thead>
               <tbody>
@@ -94,10 +94,10 @@ const formattedUpdateDate = lastUpdateDate
                     <td class="album-cell desktop-only">
                       <span class="album-name">{song.album}</span>
                     </td>
-                    <td class="plays-cell desktop-only">
+                    <td class="plays-cell ">
                       <strong>{song.plays}</strong>
                     </td>
-                    <td class="duration-cell">
+                    <td class="duration-cell desktop-only">
                       {song.duration}
                     </td>
                   </tr>

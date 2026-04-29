@@ -25,7 +25,7 @@ const base = import.meta.env.BASE_URL;
           <p>Nuestro directorio oficial de artistas: una selección exhaustiva de las trayectorias que definen nuestro ecosistema. Desde los referentes que marcan la pauta en Venezuela hasta las figuras globales de la industria musical.</p>
         </div>
 
-        <BodyGrid columns={biografias.length >= 4 ? 4 : biografias.length} justifyContent="center" alignItems="stretch" fullWidth={true}>
+        <BodyGrid columns={biografias.length >= 4 ? 4 : biografias.length} justifyContent="center" alignItems="stretch" fullWidth={true} mobile={2}>
           {biografias?.map((bio) => (
             <div class="bio-card-wrapper">
               <a href={`${base}biografias/${bio.id}`} class="bio-link">

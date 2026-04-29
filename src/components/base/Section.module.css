@@ -13,17 +13,17 @@
 }
 
 .hero {
-  padding: var(--space-2) 0;
+  padding: var(--space-4) 0;
 }
 
 .fullHeightWithHeader{
-  height: var(--height-full-screen-with-header);
+  height: calc(var(--height-full-screen-with-header) / 2);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1200px) {
   .section{
     padding: var(--space-12) var(--space-32);
   }
@@ -37,5 +37,12 @@
 
   .hero {
     padding: var(--space-16) 0;
+  }
+
+  .fullHeightWithHeader{
+    height: var(--height-full-screen-with-header) ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

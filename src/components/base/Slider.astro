@@ -113,6 +113,22 @@ const base = import.meta.env.BASE_URL;
       const totalSlides = slides.length;
       let autoPlayInterval: number | undefined;
 
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > swipeThreshold) {
+          if (diff > 0) {
+            updateSlider(currentIndex + 1);
+          } else {
+            updateSlider(currentIndex - 1);
+          }
+          startAutoPlay();
+        }
+      }
+
       function startAutoPlay() {
         stopAutoPlay();
         autoPlayInterval = window.setInterval(() => {
@@ -175,6 +191,18 @@ const base = import.meta.env.BASE_URL;
 
       playBtn?.addEventListener('click', () => togglePlay('play'));
       pauseBtn?.addEventListener('click', () => togglePlay('pause'));
+
+      container.addEventListener('touchstart', (e: Event) => {
+        const touchEvent = e as TouchEvent;
+        touchStartX = touchEvent.changedTouches[0].screenX;
+        stopAutoPlay();
+      }, { passive: true });
+
+      container.addEventListener('touchend', (e: Event) => {
+        const touchEvent = e as TouchEvent;
+        touchEndX = touchEvent.changedTouches[0].screenX;
+        handleSwipe();
+      }, { passive: true });
 
       startAutoPlay();
 

@@ -133,11 +133,12 @@ const base = import.meta.env.BASE_URL;
   </Section>
   <Section paddingTop="0">
     <Container variant="mid" flexDirection="column">
+      <div class="hero-content">
       <h2>Eventos Pasados</h2>
       <p>Descubre los eventos que hemos realizado en el pasado.</p>
       {
         eventosPasados.length > 0 ? (
-          <BodyGrid columns={3} >
+          <BodyGrid columns={3} mobile={2} >
             {eventosPasados.map((event) => (
               <img src={event.image} alt={event.title} class="past-event-img" />
             ))}
@@ -154,6 +155,7 @@ const base = import.meta.env.BASE_URL;
           </div>
         )
       }
+      </div>
     </Container>
   </Section>
   <FooterThreeCols slot="footer" />
@@ -188,6 +190,13 @@ const base = import.meta.env.BASE_URL;
 </script>
 
 <style>
+  .hero-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+  }
   .event-card {
     background: var(--color-bg);
     border-radius: var(--border-radius-xl);

@@ -54,7 +54,7 @@ const cards = [
   {
     id: 2,
     image: "https://indus3pro.com/img/guias/conciertos.webp",
-    title: "Guia de Conciertos 2026",
+    title: "Guía de Conciertos 2026",
     description: "Descubre que debes de tener en cuenta a la hora de asistir a un concierto",
     primaryButtonText: "Más detalles",
     ventaEntradas: "/guias/consejos-para-ir-a-conciertos/",
@@ -146,7 +146,7 @@ const eventosPasados = eventosPasadosFiles
   <HeaderSticky slot="header" />
 
   <Section variant="fullHeightWithHeader">
-    <Container fullHeight={true}>
+    <Container fullHeight={true} justifyContent="center">
       <Slider slides={cards} height="100%" heightMobile="100%"/>
     </Container>
   </Section>
@@ -289,7 +289,7 @@ const eventosPasados = eventosPasadosFiles
 
   <Section >
         
-      <h2 style="margin-bottom: var(--space-4);justify-self:center;font-size: var(--font-size-3xl)">Marcas que definen nuestra trayectoria</h2>
+      <h2 style="text-align: center;margin-bottom: var(--space-4);justify-self:center;font-size: var(--font-size-3xl)">Marcas que definen nuestra trayectoria</h2>
       <p style="margin-bottom: var(--space-4);text-align: center;">A lo largo de nuestra historia, hemos colaborado con líderes de la industria, integrando sus objetivos de marca en nuestro ecosistema de producción y booking.</p>
       <BodyGrid mobile={2} columns={4} justifyContent="center" alignItems="center" >
         {

@@ -366,21 +366,19 @@ const base = import.meta.env.BASE_URL;
   }
 
   /* Content Sections */
-  .section-title {
-    font-size: var(--font-size-3xl);
-    font-weight: 800;
-    color: var(--color-primary);
+  .section-title {  
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: var(--space-1);
+    text-align: justify;
   }
-  .section-title::after {
+  /* .section-title::after {
     content: "";
     height: 2px;
     flex-grow: 1;
     background: linear-gradient(90deg, var(--color-primary), transparent);
     opacity: 0.3;
-  }
+  } */
   .description-wrap {
     margin-bottom: 3rem;
   }

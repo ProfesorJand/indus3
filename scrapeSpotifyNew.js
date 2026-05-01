@@ -212,17 +212,20 @@ async function scrapeArtist(browser, url) {
 
 async function scraptArtistImageFromMusic(browser, url) {
   // Reutilizamos el navegador, solo creamos una nueva página
+  console.log("scraptArtistImageFromMusic")
   const page = await browser.newPage();
   try {
     await page.goto(url, { waitUntil: "domcontentloaded", timeout: 15000 });
-    
+
     const seeAllButton = page.locator('button:has-text("See all artists")');
     if (await seeAllButton.isVisible({ timeout: 3000 })) {
       await seeAllButton.click();
       await page.waitForTimeout(1000);
     }
 
-    const imgs = await page.locator('.S9MGX4rjHQQhXDFm img').all();
+    await page.waitForSelector('[data-testid="track-artist-link-card"] img', { timeout: 5000 }).catch(() => {});
+
+    const imgs = await page.locator('[data-testid="track-artist-link-card"] img').all();
     let getSRC = [];
     for (const img of imgs) {
       getSRC.push({
@@ -230,11 +233,15 @@ async function scraptArtistImageFromMusic(browser, url) {
         name: await img.getAttribute("alt")
       });
     }
+    console.log({ getSRC })
     return getSRC;
   } catch (e) {
+    console.log("no se encontro la imagen del artista")
     return null;
   } finally {
-    await page.close();
+    try {
+      await page.close();
+    } catch (e) {}
   }
 }
 

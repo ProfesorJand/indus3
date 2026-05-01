@@ -37,8 +37,9 @@ const sortedArtists = currentMonthData
   .sort((a, b) => b.listeners - a.listeners)
   .slice(0, 50);
 
+
 // Mapear con datos del mes anterior
-const lastUpdateDate = currentMonthData[0]?.date || "";
+const lastUpdateDate = currentMonthData[currentMonthData.length-1]?.date || "";
 const top50 = sortedArtists.map((artist, index) => {
   const currentRank = index + 1;
   const prevRank = prevRankMap.get(artist.url);
@@ -98,6 +99,7 @@ const seoDesc = "Ranking actualizado mensualmente de los 50 artistas venezolanos
 const formattedUpdateDate = lastUpdateDate 
   ? new Date(lastUpdateDate + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })
   : "Recientemente";
+
 
 ---
 

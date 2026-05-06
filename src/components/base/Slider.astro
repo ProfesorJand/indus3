@@ -38,7 +38,14 @@ const base = import.meta.env.BASE_URL;
         class={`${styles.slide} ${index === 0 ? styles.active : ''}`} 
         data-index={index}
       >
-        <img src={slide.image} alt={slide.title} class={styles.image} loading={index === 0 ? 'eager' : 'lazy'} />
+        <img 
+          src={slide.image} 
+          alt={slide.title} 
+          class={styles.image} 
+          loading={index === 0 ? 'eager' : 'lazy'} 
+          fetchpriority={index === 0 ? 'high' : 'auto'} 
+          decoding={index === 0 ? 'sync' : 'async'} 
+        />
         <div class={styles.overlay} />
         <div class={styles.content}>
           <h2 class={styles.title}>{slide.title}</h2>

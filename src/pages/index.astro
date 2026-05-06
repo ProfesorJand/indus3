@@ -142,6 +142,9 @@ const eventosPasados = eventosPasadosFiles
     description={seoDesc} 
     schemas={[websiteSchema, organizationSchema]} 
   />
+  {cards.length > 0 && (
+    <link slot="seo" rel="preload" as="image" href={cards[0].image} fetchpriority="high" />
+  )}
 
   <HeaderSticky slot="header" />
 

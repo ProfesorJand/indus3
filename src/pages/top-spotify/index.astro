@@ -16,7 +16,7 @@ const cards = [
     title: "Top 50 Artistas Venezolanos",
     image: "/img/guias/placeholder-guide.png",
     images: artistasData.slice(0, 3).map((a: any) => a.artistImage.filter((artista: any) => artista?.name === a.name)[0]?.img || a.backgroundArtistImage),
-    href: "top-spotify/top-50-artistas-venezolanos",
+    href: "top-spotify/artistas-venezolanos",
     description: "Ranking de los artistas venezolanos más escuchados en Spotify."
   },
   {
@@ -24,7 +24,7 @@ const cards = [
     title: "Top 50 Canciones Globales",
     image: "/img/guias/placeholder-guide.png",
     images: cancionesData.slice(0, 3).map((c: any) => c.image),
-    href: "top-spotify/top-50-canciones-globales",
+    href: "top-spotify/canciones-globales",
     description: "Los hits más populares en todo el mundo hoy mismo."
   },
 ]

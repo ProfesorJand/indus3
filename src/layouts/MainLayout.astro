@@ -61,6 +61,18 @@ const base = import.meta.env.BASE_URL;
         if (e.key === THEME_KEY) setTheme(e.newValue);
       });
     </script>
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-29TGVTWF6F"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      // Envolvemos la configuración en este evento para que se dispare
+      // tanto en la carga inicial como en cada navegación interna
+      document.addEventListener('astro:page-load', () => {
+        gtag('config', 'G-29TGVTWF6F');
+      });
+    </script>
   </head>
   <body>
     <slot name="header" />

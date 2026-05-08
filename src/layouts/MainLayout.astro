@@ -64,14 +64,17 @@ const base = import.meta.env.BASE_URL;
     <!-- Google tag (gtag.js) -->
     <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-29TGVTWF6F"></script>
     <script is:inline>
+      declare global {
+        interface Window {
+          dataLayer: any[];
+          gtag: (...args: any[]) => void; 
+        }
+      }
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      // Envolvemos la configuración en este evento para que se dispare
-      // tanto en la carga inicial como en cada navegación interna
-      document.addEventListener('astro:page-load', () => {
-        gtag('config', 'G-29TGVTWF6F');
-      });
+      window.gtag = function gtag(){window.dataLayer.push(arguments);}  // Añadir gtag a window
+      window.gtag('js', new Date());
+
+      window.gtag('config', 'G-29TGVTWF6F');
     </script>
   </head>
   <body>

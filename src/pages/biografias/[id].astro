@@ -74,10 +74,13 @@ const base = import.meta.env.BASE_URL;
         name={bio.name}
         description={bio.description}
         startDate={bio.details?.eventDate || bio.fechaEvento}
+        endDate={bio.details?.endDate || bio.fechaFinEvento}
         url={href}
         locationName={bio.details?.location || bio.lugarEvento}
+        locationAddress={bio.details?.address || bio.direccionEvento}
         image={bio.image || bio.banner || bio.imagenPR}
-        organizerName={bio.details?.organizer}
+        organizerName={bio.details?.organizer || bio.organizador}
+        offersUrl={bio.details?.ticketsUrl || bio.ticketsUrl}
       />
     ) : null}
   </Fragment>

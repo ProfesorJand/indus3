@@ -8,7 +8,7 @@ interface Props {
   locationName?: string;
   locationAddress?: string;
   image?: string;
-  organizerName?: string[];
+  organizerName?: string | string[];
   offersUrl?: string;
   performers?: { name: string; type: "Person" | "MusicGroup" }[];
   status?: "EventScheduled" | "EventCancelled" | "EventMovedOnline" | "EventPostponed" | "EventRescheduled";
@@ -37,11 +37,42 @@ const cleanValue = (val: any) => {
   return val;
 };
 
-// Ensure date is ISO format if possible, otherwise leave it (though it might invalidate schema)
 const formatSchemaDate = (dateStr: string) => {
   if (!dateStr || dateStr === "desconocido") return undefined;
+  
   // If it's just a year like "2026", schema requires more. Try to make it first of year if just year.
   if (/^\d{4}$/.test(dateStr)) return `${dateStr}-01-01T00:00:00Z`;
+
+  let cleanStr = dateStr.toLowerCase().trim();
+  
+  // Match "Lunes 27 de Abril de 2026", "27 de abril de 2026"
+  const matchEs = cleanStr.match(/(?:[a-záéíóúñ]+\s+)?(\d{1,2})\s+de\s+([a-z]+)\s+de(?:l)?\s+(\d{4})/);
+  if (matchEs) {
+    const [_, dayStr, monthStr, yearStr] = matchEs;
+    const months: Record<string, string> = {
+      'enero': '01', 'febrero': '02', 'marzo': '03', 'abril': '04',
+      'mayo': '05', 'junio': '06', 'julio': '07', 'agosto': '08',
+      'septiembre': '09', 'octubre': '10', 'noviembre': '11', 'diciembre': '12'
+    };
+    const month = months[monthStr];
+    if (month) {
+      return `${yearStr}-${month}-${dayStr.padStart(2, '0')}T00:00:00Z`;
+    }
+  }
+  
+  // Match DD/MM/YYYY or DD-MM-YYYY
+  const matchSlash = cleanStr.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
+  if (matchSlash) {
+    const [_, d, m, y] = matchSlash;
+    return `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}T00:00:00Z`;
+  }
+  
+  // Try standard parsing if it's already an ISO or valid standard date format
+  const parsed = Date.parse(dateStr);
+  if (!isNaN(parsed)) {
+    return new Date(parsed).toISOString();
+  }
+
   return dateStr;
 };
 
@@ -64,10 +95,11 @@ const schema = {
       "streetAddress": cleanValue(locationAddress)
     } : undefined
   } : undefined,
-  "organizer": organizerName ? {
-    "@type": "Organization",
-    "name": cleanValue(organizerName)
-  } : undefined,
+  "organizer": organizerName ? (
+    Array.isArray(organizerName) 
+      ? organizerName.map(org => ({ "@type": "Organization", "name": cleanValue(org) }))
+      : { "@type": "Organization", "name": cleanValue(organizerName) }
+  ) : undefined,
   "offers": offersUrl ? {
     "@type": "Offer",
     "url": cleanValue(offersUrl),

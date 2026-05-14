@@ -133,9 +133,10 @@ const eventosPasados = eventosPasadosFiles
       title: title,
     };
   });
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
-<MainLayout title={seoTitle}>
+<MainLayout title={seoTitle} canonical={canonicalURL}>
   <SEO 
     slot="seo" 
     title={seoTitle} 
@@ -290,7 +291,7 @@ const eventosPasados = eventosPasadosFiles
     </Container>
   </Section> -->
 
-  <Section >
+  <!-- <Section >
         
       <h2 style="text-align: center;margin-bottom: var(--space-4);justify-self:center;font-size: var(--font-size-3xl)">Marcas que definen nuestra trayectoria</h2>
       <p style="margin-bottom: var(--space-4);text-align: center;">A lo largo de nuestra historia, hemos colaborado con líderes de la industria, integrando sus objetivos de marca en nuestro ecosistema de producción y booking.</p>
@@ -304,7 +305,7 @@ const eventosPasados = eventosPasadosFiles
           ))
         }
       </BodyGrid>
-  </Section>
+  </Section> -->
 
   <FooterThreeCols slot="footer" />
 </MainLayout>

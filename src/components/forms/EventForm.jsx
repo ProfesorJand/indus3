@@ -216,7 +216,7 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
             <p>¿Cúando es el [NOMBRE DEL EVENTO]?</p>
             <p>¿Qué (artistas/Equipos) se presentan/compiten en [NOMBRE DEL EVENTO]?</p>
             <p>¿Quien hace [NOMBRE DEL EVENTO]?</p>
-            <p> Como y donde compro las entradas al [NOMBRE DEL EVENTO]?</p>
+            <p>¿Cómo y dónde compro las entradas al [NOMBRE DEL EVENTO]?</p>
           </div>
           {/* boton de añadir pregunta */}
          <button type="button" onClick={() => setFormData(prev => ({ ...prev, preguntas: [...prev.preguntas, { pregunta: '', respuesta: '' }] }))}>Añadir Pregunta</button>

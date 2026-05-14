@@ -30,9 +30,10 @@ const guides = allGuides
 
 const seoTitle = "Guías Indus3: Inteligencia en Entretenimiento";
 const seoDesc = "En esta sección compartimos guías esenciales, consejos de expertos y recursos educativos para que navegues el mundo de los eventos y la música con total confianza.";
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 ---
 
-<MainLayout title={seoTitle}>
+<MainLayout title={seoTitle} canonical={canonicalUrl}>
   <SEO
     slot="seo"
     title={seoTitle}

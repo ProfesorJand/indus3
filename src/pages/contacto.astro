@@ -40,9 +40,10 @@ const localBusinessData = localBusinessSchema({
     redes.x
   ].filter(Boolean)
 });
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
-<MainLayout title={seoTitle}>
+<MainLayout title={seoTitle} canonical={canonicalURL}>
   <SEO 
     slot="seo" 
     title={seoTitle} 

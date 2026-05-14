@@ -10,7 +10,7 @@ import { websiteSchema, organizationSchema } from "@utils/seo";
 
 const seoTitle = `Guías y Consejos para ir a Conciertos en 2026 | Indus3`;
 const seoDesc = `Prepárate para la mejor experiencia en vivo. Logística, seguridad y tips expertos para tus conciertos en 2026.`;
-
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const sections = [
   { id: "antes", title: "Antes del evento", icon: "calendar" },
   { id: "durante", title: "Durante el show", icon: "music" },
@@ -18,7 +18,7 @@ const sections = [
 ];
 ---
 
-<MainLayout title={seoTitle}>
+<MainLayout title={seoTitle} canonical={canonicalUrl}>
   <SEO
     slot="seo"
     title={seoTitle}

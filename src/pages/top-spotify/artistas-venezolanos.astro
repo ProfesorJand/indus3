@@ -100,10 +100,10 @@ const formattedUpdateDate = lastUpdateDate
   ? new Date(lastUpdateDate + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })
   : "Recientemente";
 
-
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 ---
 
-<MainLayout title={seoTitle}>
+<MainLayout title={seoTitle} canonical={canonicalUrl}>
   <SEO
     slot="seo"
     title={seoTitle}

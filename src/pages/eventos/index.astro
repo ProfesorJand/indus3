@@ -13,7 +13,6 @@ import { getEventos } from "@stores/eventos";
 
 
 const eventsData = await getEventos();
-console.log(eventsData);
 
 const seoTitle = "Eventos | Indus3";
 const seoDesc =
@@ -69,9 +68,10 @@ const eventosPasados2 = files2
 
 
 const base = import.meta.env.BASE_URL;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
-<MainLayout title={seoTitle}>
+<MainLayout title={seoTitle} canonical={canonicalURL}>
   <SEO slot="seo" title={seoTitle} description={seoDesc} />
 
   <HeaderSticky slot="header" />

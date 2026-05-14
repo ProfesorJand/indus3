@@ -22,7 +22,6 @@ export async function getStaticPaths() {
 }
 
 const { bio } = Astro.props;
-console.log({bio})
 const { pathname, href } = Astro.url;
 
 const seoTitle = `${bio.name} - Biografía`;

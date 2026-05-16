@@ -92,7 +92,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       {
         eventsData.length > 0 ? (
           <BodyGrid
-            columns={eventsData.length > 3 ? 3 : eventsData.length}
+            columns={eventsData.length > 2 ? 2 : eventsData.length}
             tablet={eventsData.length > 2 ? 2 : eventsData.length}
             mobile={1}
             justifyContent="center"
@@ -101,13 +101,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
               <a href={`${base}eventos/${event.id}`} class="event-card">
                 <div class="image-wrapper">
                   <img src={event.imagenPR} alt={event.nombreEvento} />
-                  <div class="date-badge">{event.fechaEvento}</div>
                 </div>
                 <div class="content">
                   <h3>{event.nombreEvento}</h3>
                   <p class="location">
                     <i class="fas fa-map-marker-alt" /> {event.lugarEvento}
                   </p>
+                  <div class="date-badge">{event.fechaEvento}</div>
                   {
                     event?.descripcionEvento?.length > 0 && (
                       <p class="description">
@@ -230,15 +230,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     transform: scale(1.1);
   }
   .date-badge {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
+    position: relative;
     background: var(--color-primary);
     color: white;
     padding: 0.4rem 0.8rem;
     border-radius: var(--border-radius-md);
     font-size: 0.8rem;
     font-weight: 700;
+    width: fit-content;
+    margin-bottom: 1rem;
   }
   .content {
     padding: 1.5rem;

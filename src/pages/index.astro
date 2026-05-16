@@ -30,6 +30,7 @@ import CardArtista from "@components/base/CardArtista.astro";
 import artistas from "../data/artistas.json";
 import { getEventos } from "@stores/eventos";
 import { getBiografias } from "@stores/biografias";
+import { getSliders } from "@stores/slider";
 
 const seoTitle = "Inicio";
 const seoDesc = "Sistema de plantillas modular y escalable para creación rápida de sitios web corporativos y landing pages.";
@@ -91,6 +92,15 @@ const cards = [
     ventaEntradas: "/top-spotify/canciones-globales/",
   }
 ];
+
+const backendSliders = await getSliders();
+let finalCards = backendSliders && backendSliders.length > 0 ? backendSliders : cards;
+
+finalCards = finalCards.sort((a, b) => {
+  const orderA = parseInt(a.order) || 0;
+  const orderB = parseInt(b.order) || 0;
+  return orderA - orderB;
+});
 
 const projectRoot = process.cwd();
 const clientesDir = path.resolve(projectRoot, 'public/clientes');
@@ -158,15 +168,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     description={seoDesc} 
     schemas={[websiteSchema, organizationSchema]} 
   />
-  {cards.length > 0 && (
-    <link slot="seo" rel="preload" as="image" href={cards[0].image} fetchpriority="high" />
+  {finalCards.length > 0 && (
+    <link slot="seo" rel="preload" as="image" href={finalCards[0].image} fetchpriority="high" />
   )}
 
   <HeaderSticky slot="header" />
 
   <Section variant="fullHeightWithHeader">
     <Container fullHeight={true} justifyContent="center">
-      <Slider slides={cards} height="100%" heightMobile="100%"/>
+      <Slider slides={finalCards} height="100%" heightMobile="100%"/>
     </Container>
   </Section>
 

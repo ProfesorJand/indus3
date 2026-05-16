@@ -2,18 +2,22 @@ import React, { useState, useEffect } from 'react';
 import styles from './Dashboard.module.css';
 import EventForm from '../forms/EventForm.jsx';
 import BioForm from './BioForm.jsx';
+import SliderForm from './SliderForm.jsx';
 
-const Dashboard = ({ initialEvents = [], initialBios = [] }) => {
-  const [activeTab, setActiveTab] = useState('events'); // 'overview', 'events', 'bios'
+const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [] }) => {
+  const [activeTab, setActiveTab] = useState('events'); // 'overview', 'events', 'bios', 'sliders'
   const [events, setEvents] = useState([]);
   const [bios, setBios] = useState([]);
+  const [sliders, setSliders] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
   const [isDeploying, setIsDeploying] = useState(false);
 
   useEffect(()=>{
+    if (initialEvents.length) setEvents(initialEvents);
+    if (initialBios.length) setBios(initialBios);
+    if (initialSliders.length) setSliders(initialSliders);
     refreshData();
-    console.log("useEfffect")
   },[])
   // Re-fetch data helper
   const refreshData = async () => {
@@ -48,6 +52,21 @@ const Dashboard = ({ initialEvents = [], initialBios = [] }) => {
         const updatedEvents = await resEvents.json();
         setEvents(updatedEvents.data);
       }
+
+      // Re-fetch sliders
+      const resSliders = await fetch('https://api.indus3pro.com/sliders/get-sliders.php?t='+Date.now(),
+        {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+          }
+        }
+      );
+      if (resSliders.ok) {
+        const updatedSliders = await resSliders.json();
+        setSliders(updatedSliders.data || []);
+        console.log({updatedSliders})
+      }
     } catch (e) { 
       console.error("Error refreshing dashboard data:", e); 
     }
@@ -58,9 +77,10 @@ const Dashboard = ({ initialEvents = [], initialBios = [] }) => {
     if (!confirm('¿Estás seguro de eliminar este ítem?')) return;
     
     // Updated endpoints to match the new structure
-    const endpoint = type === 'event' 
-      ? 'https://api.indus3pro.com/eventos/delete-event.php' 
-      : 'https://api.indus3pro.com/biografias/delete-bio.php';
+    let endpoint;
+    if (type === 'event') endpoint = 'https://api.indus3pro.com/eventos/delete-event.php';
+    else if (type === 'bio') endpoint = 'https://api.indus3pro.com/biografias/delete-bio.php';
+    else if (type === 'slider') endpoint = 'https://api.indus3pro.com/slider/delete-slider.php';
 
     try {
       const res = await fetch(endpoint, {
@@ -76,7 +96,8 @@ const Dashboard = ({ initialEvents = [], initialBios = [] }) => {
       console.log({data})
       if (data.success) {
         if (type === 'event') setEvents(prev => prev.filter(e => e.id !== id));
-        else setBios(prev => prev.filter(b => b.id !== id));
+        else if (type === 'bio') setBios(prev => prev.filter(b => b.id !== id));
+        else if (type === 'slider') setSliders(prev => prev.filter(s => s.id !== id));
       }
     } catch (e) { alert('Error al eliminar'); }
   };
@@ -149,6 +170,13 @@ const Dashboard = ({ initialEvents = [], initialBios = [] }) => {
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
             <span>Biografías</span>
           </div>
+          <div 
+            className={`${styles.navItem} ${activeTab === 'sliders' ? styles.active : ''}`}
+            onClick={() => setActiveTab('sliders')}
+          >
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+            <span>Sliders de Inicio</span>
+          </div>
         </nav>
 
         <div className={styles.navItem} onClick={() => window.location.href = '/'}>
@@ -190,6 +218,10 @@ const Dashboard = ({ initialEvents = [], initialBios = [] }) => {
                 <div className={styles.statCard}>
                   <div className={styles.statTitle}>Biografías</div>
                   <div className={styles.statValue}>{bios.length}</div>
+                </div>
+                <div className={styles.statCard}>
+                  <div className={styles.statTitle}>Sliders de Inicio</div>
+                  <div className={styles.statValue}>{sliders.length}</div>
                 </div>
                 <div className={styles.statCard}>
                   <div className={styles.statTitle}>Próximo Evento</div>
@@ -306,6 +338,62 @@ const Dashboard = ({ initialEvents = [], initialBios = [] }) => {
               </div>
             </div>
           )}
+
+          {/* SLIDERS VIEW */}
+          {activeTab === 'sliders' && (
+            <div>
+              <div className={styles.viewHeader}>
+                <h1>Sliders de Inicio</h1>
+                <button className={styles.btnPrimary} onClick={addNew}>
+                  <span>+</span> Nuevo Slide
+                </button>
+              </div>
+
+              <div className={styles.contentCard}>
+                <table className={styles.table}>
+                  <thead>
+                    <tr>
+                      <th>Slide</th>
+                      <th>Orden</th>
+                      <th>Botones</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {sliders.length>0 && [...sliders].sort((a,b) => (parseInt(a.order)||0) - (parseInt(b.order)||0)).map((slide) => (
+                      <tr key={slide.id}>
+                        <td>
+                          <div className={styles.itemInfo}>
+                            <img src={slide.image} className={styles.itemThumb} alt="" style={{ objectFit: 'cover' }} />
+                            <div>
+                              <span className={styles.itemName}>{slide.title}</span>
+                              <span className={styles.itemMeta}>{slide.fechaEvento || 'Sin fecha'}</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div className={styles.itemMeta}>{slide.order || 0}</div>
+                        </td>
+                        <td>
+                          <div className={styles.itemMeta}>{slide.actions?.length || 0} botón(es)</div>
+                        </td>
+                        <td>
+                          <div className={styles.actions}>
+                            <button className={`${styles.btnAction} ${styles.edit}`} onClick={() => handleEdit(slide)}>
+                              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                            </button>
+                            <button className={`${styles.btnAction} ${styles.delete}`} onClick={() => handleDelete('slider', slide.id)}>
+                              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
         </main>
       </div>
 
@@ -317,6 +405,8 @@ const Dashboard = ({ initialEvents = [], initialBios = [] }) => {
             <div style={{ padding: '20px' }}>
               {activeTab === 'events' ? (
                 <EventForm eventToEdit={editingItem} onSuccess={refreshData} />
+              ) : activeTab === 'sliders' ? (
+                <SliderForm sliderToEdit={editingItem} onSuccess={refreshData} />
               ) : (
                 <BioForm bioToEdit={editingItem} onSuccess={refreshData} />
               )}

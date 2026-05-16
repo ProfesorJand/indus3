@@ -1,16 +1,21 @@
 ---
 import styles from './Slider.module.css';
 
+interface SlideAction {
+  label: string;
+  url: string;
+  variant?: 'primary' | 'secondary';
+  target?: string;
+}
+
 interface Slide {
   id: string;
   title: string;
   fechaEvento?: string;
-  description: string[];
+  description: string;
   image: string;
   subtitle?: string;
-  primaryButtonText?: string;
-  ventaEntradas?: string;
-  secondaryButtonText?: string;
+  actions?: SlideAction[];
 }
 
 interface Props {
@@ -57,18 +62,16 @@ const base = import.meta.env.BASE_URL;
             )}
           {slide.description && <p class={styles.subtitle}>{slide.description}</p>}
           <div class={styles.buttons}>
-            {slide.primaryButtonText && (
-              <a href={slide.ventaEntradas} class={`${styles.btn} ${styles.btnPrimary}`}>
-                {slide.primaryButtonText}
+            {slide.actions && slide.actions.length > 0 && slide.actions.map(action => (
+              <a 
+                href={action.url} 
+                class={`${styles.btn} ${action.variant === 'secondary' ? styles.btnSecondary : styles.btnPrimary}`}
+                target={action.target || '_self'}
+                rel={action.target === '_blank' ? 'noopener noreferrer' : undefined}
+              >
+                {action.label}
               </a>
-            )}
-
-            {slide.secondaryButtonText && (
-              <a href={`${base}eventos/${slide.id}`} class={`${styles.btn} ${styles.btnSecondary}`}>
-                {slide.secondaryButtonText}
-              </a>
-            )}
-
+            ))}
           </div>
         </div>
       </div>

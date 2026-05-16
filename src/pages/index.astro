@@ -237,13 +237,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             <a href={`${base}eventos/${event.id}`} class="event-card">
               <div class="image-wrapper">
                 <img src={event.imagenPR} alt={event.nombreEvento} />
-                <div class="date-badge">{event.fechaEvento}</div>
               </div>
               <div class="content">
                 <h3>{event.nombreEvento}</h3>
                 <p class="location">
                   <i class="fas fa-map-marker-alt" /> {event.lugarEvento}
                 </p>
+                <div class="date-badge">{event.fechaEvento}</div>
                 {
                   event?.descripcionEvento?.length > 0 && (
                     <p class="description">
@@ -370,15 +370,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       transform: scale(1.1);
     }
     .date-badge {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
+      position: relative;
       background: var(--color-primary);
       color: white;
       padding: 0.4rem 0.8rem;
       border-radius: var(--border-radius-md);
       font-size: 0.8rem;
       font-weight: 700;
+      margin-bottom: 1rem;
+      width: fit-content;
     }
     .content {
       padding: 1.5rem;

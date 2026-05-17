@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { JOB_TITLE, TYPE, GENRE, ROL } from '@stores/biografias';
+import { getEventos } from '@stores/eventos';
 
 const BioForm = ({ bioToEdit = null, onSuccess }) => {
   const initialState = {
@@ -19,11 +20,20 @@ const BioForm = ({ bioToEdit = null, onSuccess }) => {
     idSpotify: bioToEdit?.idSpotify || '',
     awards: bioToEdit?.awards || [''],
     cancionesMasEscuchadas: bioToEdit?.cancionesMasEscuchadas || [''],
-    instagramReelId: bioToEdit?.instagramReelId || ''
+    instagramReelId: bioToEdit?.instagramReelId || '',
+    relatedEventUrl: bioToEdit?.relatedEventUrl || '',
+    relatedEventName: bioToEdit?.relatedEventName || ''
   };
 
   const [formData, setFormData] = useState(initialState);
   const [status, setStatus] = useState('');
+  const [eventos, setEventos] = useState([]);
+
+  useEffect(() => {
+    getEventos().then(data => {
+      if (Array.isArray(data)) setEventos(data);
+    }).catch(console.error);
+  }, []);
 
   const handleFileUpload = async (e, fieldName, type) => {
     const file = e.target.files[0];
@@ -139,6 +149,27 @@ const BioForm = ({ bioToEdit = null, onSuccess }) => {
                 ))}
               </select>
             </div>
+          </div>
+
+          <div className="form-group">
+            <label>Evento Relacionado</label>
+            <select 
+              value={formData.relatedEventUrl} 
+              onChange={(e) => {
+                const url = e.target.value;
+                const eventName = e.target.options[e.target.selectedIndex].text;
+                setFormData(prev => ({ 
+                  ...prev, 
+                  relatedEventUrl: url, 
+                  relatedEventName: url === '' ? '' : eventName 
+                }));
+              }}
+            >
+              <option value="">Ninguno</option>
+              {eventos.map(ev => (
+                <option key={ev.id} value={`/eventos/${ev.id}`}>{ev.nombreEvento}</option>
+              ))}
+            </select>
           </div>
 
           <div className="form-group">

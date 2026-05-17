@@ -10,8 +10,8 @@ import { getEventos } from "@stores/eventos";
 import { getBiografias } from "@stores/biografias";
 import SpotifyPlayer from "@components/base/SpotifyPlayer.astro";
 import EventSchema from "@components/seo/EventSchema.astro";
-import BodyTwoColumns from "@components/body/BodyTwoColumns.astro";
-import eventsData from "@data/eventos.json";
+// import BodyTwoColumns from "@components/body/BodyTwoColumns.astro";
+// import eventsData from "@data/eventos.json";
 
 
 export async function getStaticPaths() {
@@ -24,7 +24,6 @@ export async function getStaticPaths() {
 }
 
 const { event } = Astro.props;
-console.log({preguntas: event.preguntas})
 const seoTitle = `${event.nombreEvento} | Indus3`;
 const seoDesc = event?.descripcionEvento || "Mini Descripcion";
 const biografiasArtistas = await getBiografias();
@@ -607,6 +606,7 @@ const base = import.meta.env.BASE_URL;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    max-width: 900px;
   }
   .pr-title {
     font-size: clamp(2rem, 5vw, 4rem);
@@ -614,7 +614,10 @@ const base = import.meta.env.BASE_URL;
     font-weight: 900;
     max-width: 800px;
     line-height: 1.1;
-        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 3px 3px 0 #000;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 3px 3px 0 #000;
+  }
+  .pr-description {
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 3px 3px 0 #000;
   }
 
   /* Sponsors */
@@ -658,7 +661,7 @@ const base = import.meta.env.BASE_URL;
   .reveal-up { opacity: 1; transform: translateY(0); }
 
   /* Mobile Adjustments */
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .event-hero { height: 60vh; }
     .hero-meta { flex-direction: column; gap: 0.5rem; }
     .info-bar-container { margin-top: -2rem; padding: 0 1rem; }

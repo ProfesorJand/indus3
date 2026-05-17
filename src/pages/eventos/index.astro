@@ -108,13 +108,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
                     <i class="fas fa-map-marker-alt" /> {event.lugarEvento}
                   </p>
                   <div class="date-badge">{event.fechaEvento}</div>
-                  {
-                    event?.descripcionEvento?.length > 0 && (
-                      <p class="description">
-                        {event.descripcionEvento?.substring(0, 100)}...
-                      </p>
-                    )
-                  }
                   <span class="btn-more">Más Información</span>
                 </div>
               </a>

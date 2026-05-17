@@ -1,4 +1,4 @@
-export const urlEventos = "http://api.indus3pro.com/eventos/get-eventos.php?t="+Date.now();
+export const urlEventos = "https://api.indus3pro.com/eventos/get-eventos.php?t="+Date.now();
 
 export const getEventos = async () => {
   const response = await fetch(urlEventos, {

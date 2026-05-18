@@ -16,6 +16,9 @@ export default defineConfig({
     inlineStylesheets: 'always'
   },
   integrations: [react(), sitemap()],
+  redirects: {
+    "/eventos/san-luis": "/eventos/sanluis"
+  },
   vite: {
     resolve: {
       alias: {

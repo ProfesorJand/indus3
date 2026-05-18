@@ -19,11 +19,15 @@ const Element = href ? 'a' : 'div';
       <img src={image} alt={title} class={styles.image} />
     </div>
   )}
-  <div class={styles.content}>
-    <h3 class={styles.title}>{title}</h3>
-    <p class={styles.description}>{description}</p>
-  </div>
-  <div class={styles.footer}>
-    <slot name="footer" />
-  </div>
+  {(title || description) && (
+    <div class={styles.content}>
+      {title && <h3 class={styles.title}>{title}</h3>}
+      {description && <p class={styles.description}>{description}</p>}
+    </div>
+  )}
+  {Astro.slots.has('footer') && (
+    <div class={styles.footer}>
+      <slot name="footer" />
+    </div>
+  )}
 </Element>

@@ -113,6 +113,7 @@ const base = import.meta.env.BASE_URL;
     <Section>
       <Container variant="mid" flexDirection="column">
         <div class="container"> 
+          <p class="text-center" style="white-space: pre-wrap;">{event.descripcionEvento}</p>
            {
             event.preguntas.map((pregunta) => (
               <div class="reveal-up question-block">

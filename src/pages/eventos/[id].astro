@@ -115,6 +115,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
       <Container variant="mid" flexDirection="column">
         <div class="container"> 
           <p class="text-center" style="white-space: pre-wrap;">{event.descripcionEvento}</p>
+          {event.imagenDespuesDescripcion && <img src={event?.imagenDespuesDescripcion} alt="Imagen despues de la descripcion" />}
            {
             event.preguntas.map((pregunta) => (
               <div class="reveal-up question-block">
@@ -157,6 +158,9 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
                       );
                     })
                   }
+                  {pregunta.imagen && (
+                    <img src={pregunta.imagen} alt={pregunta.pregunta} class="answer-image" />
+                  )}
                 </div>
               </div>
             ))
@@ -227,6 +231,13 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
+  }
+  .answer-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius-md, 8px);
+    margin-top: 1rem;
+    object-fit: cover;
   }
   .container{
     display: flex;

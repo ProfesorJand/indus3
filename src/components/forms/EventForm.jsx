@@ -56,7 +56,26 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
       });
       const data = await res.json();
       if (data.success) {
-        setFormData(prev => ({ ...prev, [fieldName]: data.url }));
+        if (fieldName.includes("-")) {
+          const parts = fieldName.split("-");
+          if (parts.length === 3) {
+            const [arrayName, i, field] = parts;
+            const index = parseInt(i, 10);
+            setFormData(prev => {
+              const updatedArray = [...prev[arrayName]];
+              updatedArray[index] = {
+                ...updatedArray[index],
+                [field]: data.url
+              };
+              return {
+                ...prev,
+                [arrayName]: updatedArray
+              };
+            });
+          }
+        } else {
+          setFormData(prev => ({ ...prev, [fieldName]: data.url }));
+        }
         setStatus('Imagen subida con éxito.');
       } else {
         setStatus('Error: ' + data.message);
@@ -204,6 +223,14 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
             <label>Descripción del Evento</label>
             <textarea name="descripcionEvento" value={formData.descripcionEvento} onChange={handleChange} rows="4"></textarea>
           </div>
+
+          <div className={styles.field}>
+            <input type="text" name="imagenDespuesDescripcion" value={formData.imagenDespuesDescripcion} onChange={handleChange} placeholder="https://..." />
+            <label className={styles.uploadBtn}>
+              <input type="file" onChange={(e) => handleFileUpload(e, 'imagenDespuesDescripcion', 'vertical')} accept="image/*" style={{ display: 'none' }} />
+              <span>Subir</span>
+            </label>
+          </div>
         </div>
 
         <div className={styles.section}>
@@ -219,7 +246,7 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
             <p>¿Cómo y dónde compro las entradas al [NOMBRE DEL EVENTO]?</p>
           </div>
           {/* boton de añadir pregunta */}
-         <button type="button" onClick={() => setFormData(prev => ({ ...prev, preguntas: [...prev.preguntas, { pregunta: '', respuesta: '' }] }))}>Añadir Pregunta</button>
+         <button type="button" onClick={() => setFormData(prev => ({ ...prev, preguntas: [...prev.preguntas, { pregunta: '', respuesta: '', imagen: '' }] }))}>Añadir Pregunta</button>
           {/* lista de preguntas */}
           {formData.preguntas.map((pregunta, index) => (
             <div key={index} className={styles.field}>
@@ -227,6 +254,14 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
               <input type="text" name={`preguntas-${index}-pregunta`} value={pregunta.pregunta} onChange={handleChange} />
               <label>Respuesta</label>
               <textarea name={`preguntas-${index}-respuesta`} value={pregunta.respuesta} onChange={handleChange} rows="4" ></textarea>
+              <label>Imagen después de la respuesta (URL o Subir)</label>
+              <div className={styles.inputWithButton}>
+                <input type="text" name={`preguntas-${index}-imagen`} value={pregunta.imagen || ''} onChange={handleChange} placeholder="https://..." />
+                <label className={styles.uploadBtn}>
+                  <input type="file" onChange={(e) => handleFileUpload(e, `preguntas-${index}-imagen`, 'pregunta')} accept="image/*" style={{ display: 'none' }} />
+                  <span>Subir</span>
+                </label>
+              </div>
               <button type="button" onClick={() => setFormData(prev => ({ ...prev, preguntas: prev.preguntas.filter((_, i) => i !== index) }))}>Eliminar</button>
             </div>
           ))}

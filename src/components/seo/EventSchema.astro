@@ -45,16 +45,27 @@ const formatSchemaDate = (dateStr: string) => {
 
   let cleanStr = dateStr.toLowerCase().trim();
   
-  // Match "Lunes 27 de Abril de 2026", "27 de abril de 2026"
-  const matchEs = cleanStr.match(/(?:[a-záéíóúñ]+\s+)?(\d{1,2})\s+de\s+([a-z]+)\s+de(?:l)?\s+(\d{4})/);
+  // Match "Lunes 27 de Abril de 2026", "27 de abril de 2026", "24 de Novimienbre 2026"
+  // Hacemos el " de " antes del año opcional con (?:\s+de(?:l)?)?
+  const matchEs = cleanStr.match(/(?:[a-záéíóúñ]+\s+)?(\d{1,2})\s+de\s+([a-z]+)(?:\s+de(?:l)?)?\s+(\d{4})/);
   if (matchEs) {
     const [_, dayStr, monthStr, yearStr] = matchEs;
-    const months: Record<string, string> = {
-      'enero': '01', 'febrero': '02', 'marzo': '03', 'abril': '04',
-      'mayo': '05', 'junio': '06', 'julio': '07', 'agosto': '08',
-      'septiembre': '09', 'octubre': '10', 'noviembre': '11', 'diciembre': '12'
-    };
-    const month = months[monthStr];
+    
+    // Usar startsWith para tolerar errores tipográficos (ej: 'novimienbre' -> 'novi')
+    let month = '';
+    if (monthStr.startsWith('ener')) month = '01';
+    else if (monthStr.startsWith('febr')) month = '02';
+    else if (monthStr.startsWith('marz')) month = '03';
+    else if (monthStr.startsWith('abri')) month = '04';
+    else if (monthStr.startsWith('may')) month = '05';
+    else if (monthStr.startsWith('juni')) month = '06';
+    else if (monthStr.startsWith('juli')) month = '07';
+    else if (monthStr.startsWith('agos')) month = '08';
+    else if (monthStr.startsWith('sept') || monthStr.startsWith('set')) month = '09';
+    else if (monthStr.startsWith('octu')) month = '10';
+    else if (monthStr.startsWith('novi')) month = '11';
+    else if (monthStr.startsWith('dici')) month = '12';
+
     if (month) {
       return `${yearStr}-${month}-${dayStr.padStart(2, '0')}T00:00:00Z`;
     }

@@ -58,7 +58,18 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
       if (data.success) {
         if (fieldName.includes("-")) {
           const parts = fieldName.split("-");
-          if (parts.length === 3) {
+          if (parts.length === 4) {
+            const [arrayName, i, field, subI] = parts;
+            const index = parseInt(i, 10);
+            const subIndex = parseInt(subI, 10);
+            setFormData(prev => {
+              const updatedArray = [...prev[arrayName]];
+              const subArray = [...(updatedArray[index][field] || [])];
+              subArray[subIndex] = data.url;
+              updatedArray[index] = { ...updatedArray[index], [field]: subArray };
+              return { ...prev, [arrayName]: updatedArray };
+            });
+          } else if (parts.length === 3) {
             const [arrayName, i, field] = parts;
             const index = parseInt(i, 10);
             setFormData(prev => {
@@ -98,7 +109,20 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
     if (name.includes("-")) {
       const parts = name.split("-");
 
-      if (parts.length === 3) {
+      if (parts.length === 4) {
+        const [arrayName, i, field, subI] = parts;
+        const index = parseInt(i, 10);
+        const subIndex = parseInt(subI, 10);
+
+        setFormData(prev => {
+          const updatedArray = [...prev[arrayName]];
+          const subArray = [...(updatedArray[index][field] || [])];
+          subArray[subIndex] = value;
+          updatedArray[index] = { ...updatedArray[index], [field]: subArray };
+
+          return { ...prev, [arrayName]: updatedArray };
+        });
+      } else if (parts.length === 3) {
         const [arrayName, i, field] = parts;
         const index = parseInt(i, 10);
 
@@ -246,25 +270,61 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
             <p>¿Cómo y dónde compro las entradas al [NOMBRE DEL EVENTO]?</p>
           </div>
           {/* boton de añadir pregunta */}
-         <button type="button" onClick={() => setFormData(prev => ({ ...prev, preguntas: [...prev.preguntas, { pregunta: '', respuesta: '', imagen: '' }] }))}>Añadir Pregunta</button>
+         <button type="button" onClick={() => setFormData(prev => ({ ...prev, preguntas: [...prev.preguntas, { pregunta: '', respuesta: '', imagenes: [], columnasImagenes: '1' }] }))}>Añadir Pregunta</button>
           {/* lista de preguntas */}
-          {formData.preguntas.map((pregunta, index) => (
-            <div key={index} className={styles.field}>
+          {formData.preguntas.map((pregunta, index) => {
+            const imagenes = pregunta.imagenes || (pregunta.imagen ? [pregunta.imagen] : []);
+            
+            return (
+            <div key={index} className={styles.field} style={{ border: '1px solid rgba(255,255,255,0.1)', padding: '1rem', borderRadius: '8px', marginBottom: '1rem' }}>
               <label>Pregunta</label>
               <input type="text" name={`preguntas-${index}-pregunta`} value={pregunta.pregunta} onChange={handleChange} />
+              
               <label>Respuesta</label>
               <textarea name={`preguntas-${index}-respuesta`} value={pregunta.respuesta} onChange={handleChange} rows="4" ></textarea>
-              <label>Imagen después de la respuesta (URL o Subir)</label>
-              <div className={styles.inputWithButton}>
-                <input type="text" name={`preguntas-${index}-imagen`} value={pregunta.imagen || ''} onChange={handleChange} placeholder="https://..." />
-                <label className={styles.uploadBtn}>
-                  <input type="file" onChange={(e) => handleFileUpload(e, `preguntas-${index}-imagen`, 'pregunta')} accept="image/*" style={{ display: 'none' }} />
-                  <span>Subir</span>
-                </label>
+              
+              <div style={{ marginTop: '1rem' }}>
+                <label>Columnas para imágenes</label>
+                <select name={`preguntas-${index}-columnasImagenes`} value={pregunta.columnasImagenes || '1'} onChange={handleChange} style={{ width: '100%', padding: '12px', borderRadius: '8px', background: 'var(--color-bg-alt)', color: 'white', border: '1px solid rgba(255,255,255,0.1)', marginBottom: '1rem' }}>
+                  <option value="1">1 Columna</option>
+                  <option value="2">2 Columnas</option>
+                  <option value="3">3 Columnas</option>
+                  <option value="4">4 Columnas</option>
+                </select>
               </div>
-              <button type="button" onClick={() => setFormData(prev => ({ ...prev, preguntas: prev.preguntas.filter((_, i) => i !== index) }))}>Eliminar</button>
+
+              <label>Imágenes después de la respuesta</label>
+              {imagenes.map((img, imgIndex) => (
+                <div key={imgIndex} className={styles.inputWithButton} style={{ marginBottom: '10px' }}>
+                  <input type="text" name={`preguntas-${index}-imagenes-${imgIndex}`} value={img} onChange={handleChange} placeholder="https://..." />
+                  <label className={styles.uploadBtn}>
+                    <input type="file" onChange={(e) => handleFileUpload(e, `preguntas-${index}-imagenes-${imgIndex}`, 'pregunta')} accept="image/*" style={{ display: 'none' }} />
+                    <span>Subir</span>
+                  </label>
+                  <button type="button" onClick={() => {
+                    setFormData(prev => {
+                      const newPreguntas = [...prev.preguntas];
+                      const currentImgs = [...(newPreguntas[index].imagenes || (newPreguntas[index].imagen ? [newPreguntas[index].imagen] : []))];
+                      currentImgs.splice(imgIndex, 1);
+                      newPreguntas[index] = { ...newPreguntas[index], imagenes: currentImgs, imagen: '' };
+                      return { ...prev, preguntas: newPreguntas };
+                    });
+                  }}>Eliminar Imagen</button>
+                </div>
+              ))}
+              <button type="button" onClick={() => {
+                  setFormData(prev => {
+                    const newPreguntas = [...prev.preguntas];
+                    const currentImgs = [...(newPreguntas[index].imagenes || (newPreguntas[index].imagen ? [newPreguntas[index].imagen] : []))];
+                    currentImgs.push('');
+                    newPreguntas[index] = { ...newPreguntas[index], imagenes: currentImgs, imagen: '' };
+                    return { ...prev, preguntas: newPreguntas };
+                  });
+              }}>+ Añadir Nueva Imagen a la Respuesta</button>
+
+              <button type="button" onClick={() => setFormData(prev => ({ ...prev, preguntas: prev.preguntas.filter((_, i) => i !== index) }))} style={{ marginTop: '1.5rem', backgroundColor: '#dc3545' }}>Eliminar Pregunta Completa</button>
             </div>
-          ))}
+          )})}
         </div>
 
         <div className={styles.section}>

@@ -25,7 +25,7 @@ export async function getStaticPaths() {
 
 const { event } = Astro.props;
 const seoTitle = `${event.nombreEvento} | Indus3`;
-const seoDesc = event?.descripcionEvento || "Mini Descripcion";
+const seoDesc = event?.descripcionEvento || "Nuevo evento en Indus3";
 const biografiasArtistas = await getBiografias();
 const datosArtistas = biografiasArtistas.filter((artista) => event?.artistas?.includes(artista.id));
 
@@ -158,9 +158,21 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
                       );
                     })
                   }
-                  {pregunta.imagen && (
-                    <img src={pregunta.imagen} alt={pregunta.pregunta} class="answer-image" />
-                  )}
+                  {
+                    (() => {
+                      const imagenes = pregunta.imagenes || (pregunta.imagen ? [pregunta.imagen] : []);
+                      if (imagenes.length === 0) return null;
+                      
+                      const cols = pregunta.columnasImagenes || '1';
+                      return (
+                        <div class="answer-images-grid" style={`--grid-cols: ${cols};`}>
+                          {imagenes.map(img => (
+                            <img src={img} alt={pregunta.pregunta} class="answer-image" />
+                          ))}
+                        </div>
+                      );
+                    })()
+                  }
                 </div>
               </div>
             ))
@@ -232,11 +244,17 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     flex-direction: column;
     gap: var(--space-4);
   }
+  .answer-images-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols, 1), 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+  }
   .answer-image {
     max-width: 100%;
+    width: 100%;
     height: auto;
     border-radius: var(--border-radius-md, 8px);
-    margin-top: 1rem;
     object-fit: cover;
   }
   .container{
@@ -682,6 +700,14 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     .hide-mobile { display: none; }
     .btn-tickets { width: 100%; }
     .logistics-card { padding: 1.5rem; }
+    .answer-images-grid {
+      grid-template-columns: repeat(min(var(--grid-cols, 1), 2), 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    .answer-images-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
 

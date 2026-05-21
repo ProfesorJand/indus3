@@ -13,7 +13,14 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [] }
   const [editingItem, setEditingItem] = useState(null);
   const [isDeploying, setIsDeploying] = useState(false);
 
+  const [authorized, setAuthorized] = useState(false);
+
   useEffect(()=>{
+    if (sessionStorage.getItem('indus3_admin_session') !== 'true') {
+      window.location.replace('/admin');
+      return;
+    }
+    setAuthorized(true);
     if (initialEvents.length) setEvents(initialEvents);
     if (initialBios.length) setBios(initialBios);
     if (initialSliders.length) setSliders(initialSliders);
@@ -139,6 +146,15 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [] }
     }
   };
 
+  const handleLogout = () => {
+    sessionStorage.removeItem('indus3_admin_session');
+    window.location.href = '/admin';
+  };
+
+  if (!authorized) {
+    return <div style={{ minHeight: '100vh', background: '#0f172a', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontFamily: 'sans-serif' }}>Verificando credenciales...</div>;
+  }
+
   return (
     <div className={styles.dashboard}>
       {/* SIDEBAR */}
@@ -200,7 +216,7 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [] }
              >
                {isDeploying ? 'Publicando...' : 'Publicar Cambios'}
              </button>
-             <button className={styles.logoutBtn} onClick={() => window.location.href = '/admin'}>Cerrar Sesión</button>
+             <button className={styles.logoutBtn} onClick={handleLogout}>Cerrar Sesión</button>
           </div>
 
         <main className={styles.main}>

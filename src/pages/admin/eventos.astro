@@ -10,6 +10,11 @@ const seoTitle = "Gestión de Eventos | Indus3 Admin";
 ---
 
 <MainLayout title={seoTitle}>
+  <script is:inline slot="seo">
+    if (sessionStorage.getItem('indus3_admin_session') !== 'true') {
+      window.location.replace('/admin');
+    }
+  </script>
   <HeaderSticky slot="header" />
 
   <main>

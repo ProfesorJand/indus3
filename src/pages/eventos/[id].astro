@@ -35,7 +35,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 
 <MainLayout title={seoTitle} canonical={canonicalUrl}>
   <Fragment slot="seo">
-    <SEO title={seoTitle} description={seoDesc} />
+    <SEO title={seoTitle} description={seoDesc} keywords={event.keywords} />
     <EventSchema 
       name={event.nombreEvento}
       description={event.descripcionEvento}

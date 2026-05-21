@@ -34,6 +34,7 @@ const LoginForm = ({ backendUrl, googleClientId }) => {
       const data = await res.json();
 
       if (data.success) {
+        sessionStorage.setItem('indus3_admin_session', 'true');
         showFeedback("Acceso concedido. Redirigiendo...", "success");
         setTimeout(() => window.location.href = "/admin/dashboard", 1500);
       } else {
@@ -118,6 +119,7 @@ const LoginForm = ({ backendUrl, googleClientId }) => {
 
       const data = await res.json();
       if (data.success) {
+        sessionStorage.setItem('indus3_admin_session', 'true');
         showFeedback("Código verificado. Redirigiendo...", "success");
         setTimeout(() => window.location.href = "/admin/dashboard", 1500);
       } else {

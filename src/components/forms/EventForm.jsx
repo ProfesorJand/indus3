@@ -24,7 +24,8 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
     mejoresCanciones: [''], // Array for Spotify URLs
     historiaArtista: '',
     ventaEntradas: '',
-    datosCuriosos: ''
+    datosCuriosos: '',
+    keywords: '' // Palabras clave para SEO. Ejemplo: "concierto, bad bunny, caracas, 2026, reggaeton"
   };
 
   const [formData, setFormData] = useState(eventToEdit || initialState);
@@ -240,6 +241,18 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
             <div className={styles.field}>
               <label>Comienzo del Show</label>
               <input type="time" name="comienzoShow" value={formData.comienzoShow} onChange={handleChange} />
+            </div>
+            <div className={styles.field}>
+              <label>Keywords SEO</label>
+              {/* Ejemplo de cómo escribir las palabras clave:
+                  "concierto, rock, caracas, indus3, 2026, dante gebel" (separadas por comas) */}
+              <input 
+                type="text" 
+                name="keywords" 
+                value={formData.keywords || ''} 
+                onChange={handleChange} 
+                placeholder="Ej: concierto, rock, caracas, 2026"
+              />
             </div>
           </div>
           

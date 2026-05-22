@@ -7,12 +7,23 @@ interface Props {
   url?: string;
   locationName?: string;
   locationAddress?: string;
-  image?: string;
+  image?: string | string[];
   organizerName?: string | string[];
   offersUrl?: string;
-  performers?: { name: string; type: "Person" | "MusicGroup" }[];
+  performers?: { name: string; type: string; sport?: string; jobTitle?: string }[];
   status?: "EventScheduled" | "EventCancelled" | "EventMovedOnline" | "EventPostponed" | "EventRescheduled";
   attendanceMode?: "OfflineEventAttendanceMode" | "OnlineEventAttendanceMode" | "MixedEventAttendanceMode";
+  locationStreetAddress?: string;
+  locationAddressLocality?: string;
+  locationAddressRegion?: string;
+  locationPostalCode?: string;
+  locationAddressCountry?: string;
+  offersPrice?: number | string;
+  offersPriceCurrency?: string;
+  offersAvailability?: string;
+  offersValidFrom?: string;
+  organizerUrl?: string;
+  organizers?: { name: string; url?: string }[];
 }
 
 const {
@@ -29,6 +40,17 @@ const {
   performers = [],
   status = "EventScheduled",
   attendanceMode = "OfflineEventAttendanceMode",
+  locationStreetAddress,
+  locationAddressLocality,
+  locationAddressRegion,
+  locationPostalCode,
+  locationAddressCountry,
+  offersPrice,
+  offersPriceCurrency,
+  offersAvailability,
+  offersValidFrom,
+  organizerUrl,
+  organizers = [],
 } = Astro.props;
 
 // Helper to filter out "desconocido" and empty values
@@ -87,6 +109,12 @@ const formatSchemaDate = (dateStr: string) => {
   return dateStr;
 };
 
+const formatAvailability = (availability?: string) => {
+  if (!availability) return undefined;
+  if (availability.startsWith("http")) return availability;
+  return `https://schema.org/${availability}`;
+};
+
 const schema = {
   "@context": "https://schema.org",
   "@type": "Event",
@@ -96,29 +124,40 @@ const schema = {
   "endDate": formatSchemaDate(endDate),
   "url": cleanValue(url),
   "image": cleanValue(image),
-  "eventStatus": `https://schema.org/${status}`,
-  "eventAttendanceMode": `https://schema.org/${attendanceMode}`,
-  "location": (locationName || locationAddress) ? {
+  "eventStatus": status ? `https://schema.org/${status}` : `https://schema.org/EventScheduled`,
+  "eventAttendanceMode": attendanceMode ? `https://schema.org/${attendanceMode}` : `https://schema.org/OfflineEventAttendanceMode`,
+  "location": (locationName || locationAddress || locationStreetAddress) ? {
     "@type": "Place",
     "name": cleanValue(locationName),
-    "address": locationAddress ? {
+    "address": (locationAddress || locationStreetAddress) ? {
       "@type": "PostalAddress",
-      "streetAddress": cleanValue(locationAddress)
+      "streetAddress": cleanValue(locationStreetAddress || locationAddress),
+      "addressLocality": cleanValue(locationAddressLocality),
+      "addressRegion": cleanValue(locationAddressRegion),
+      "postalCode": cleanValue(locationPostalCode),
+      "addressCountry": cleanValue(locationAddressCountry)
     } : undefined
   } : undefined,
-  "organizer": organizerName ? (
-    Array.isArray(organizerName) 
-      ? organizerName.map(org => ({ "@type": "Organization", "name": cleanValue(org) }))
-      : { "@type": "Organization", "name": cleanValue(organizerName) }
-  ) : undefined,
+  "organizer": (organizers && organizers.length > 0)
+    ? organizers.map(org => ({ "@type": "Organization", "name": cleanValue(org.name), "url": cleanValue(org.url) }))
+    : organizerName ? (
+      Array.isArray(organizerName) 
+        ? organizerName.map(org => ({ "@type": "Organization", "name": cleanValue(org), "url": cleanValue(organizerUrl) }))
+        : { "@type": "Organization", "name": cleanValue(organizerName), "url": cleanValue(organizerUrl) }
+    ) : undefined,
   "offers": offersUrl ? {
     "@type": "Offer",
     "url": cleanValue(offersUrl),
-    "availability": "https://schema.org/InStock"
+    "price": cleanValue(offersPrice),
+    "priceCurrency": cleanValue(offersPriceCurrency || "USD"),
+    "availability": formatAvailability(offersAvailability) || "https://schema.org/InStock",
+    "validFrom": cleanValue(offersValidFrom)
   } : undefined,
   "performer": performers.length > 0 ? performers.map(p => ({
     "@type": p.type,
-    "name": p.name
+    "name": p.name,
+    ...(p.sport && p.type === "SportsTeam" ? { "sport": p.sport } : {}),
+    ...(p.jobTitle && p.type === "Person" ? { "jobTitle": p.jobTitle } : {})
   })) : undefined
 };
 

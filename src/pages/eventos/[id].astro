@@ -37,13 +37,40 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
   <Fragment slot="seo">
     <SEO title={seoTitle} description={seoDesc} keywords={event.keywords} />
     <EventSchema 
-      name={event.nombreEvento}
-      description={event.descripcionEvento}
-      startDate={event.fechaEvento}
-      locationName={event.lugarEvento}
-      image={event.imagenPR || event.imagenBanner}
-      offersUrl={event.ventaEntradas}
-      performers={datosArtistas.map(a => ({ name: a.name, type: a.type === "Grupo Musical" ? "MusicGroup" : "Person" }))}
+      name={event.schemaNombre || event.nombreEvento}
+      description={event.schemaDescripcion || event.descripcionEvento}
+      startDate={event.schemaFechaInicio || event.fechaEvento}
+      endDate={event.schemaFechaFin || undefined}
+      status={event.schemaEventStatus || "EventScheduled"}
+      attendanceMode={event.schemaAttendanceMode || "OfflineEventAttendanceMode"}
+      locationName={event.schemaPlaceName || event.lugarEvento}
+      locationStreetAddress={event.schemaStreetAddress || undefined}
+      locationAddressLocality={event.schemaAddressLocality || undefined}
+      locationAddressRegion={event.schemaAddressRegion || undefined}
+      locationPostalCode={event.schemaPostalCode || undefined}
+      locationAddressCountry={event.schemaAddressCountry || undefined}
+      image={
+        (event.schemaImagen1x1 || event.schemaImagen4x3 || event.schemaImagen16x9)
+          ? [event.schemaImagen1x1, event.schemaImagen4x3, event.schemaImagen16x9].filter(Boolean)
+          : (event.schemaImage ? [event.schemaImage] : (event.imagenPR || event.imagenBanner))
+      }
+      offersUrl={event.schemaOfferUrl || event.ventaEntradas}
+      offersPrice={event.schemaOfferPrice || undefined}
+      offersPriceCurrency={event.schemaOfferPriceCurrency || undefined}
+      offersAvailability={event.schemaOfferAvailability || undefined}
+      offersValidFrom={event.schemaOfferValidFrom || undefined}
+      organizerName={event.schemaOrganizerName || "Indus3"}
+      organizerUrl={event.schemaOrganizerUrl || "https://indus3pro.com"}
+      organizers={event.schemaOrganizers || []}
+      performers={
+        (event.schemaPerformers && event.schemaPerformers.length > 0)
+          ? event.schemaPerformers
+          : event.schemaPerformerName
+            ? [{ name: event.schemaPerformerName, type: event.schemaPerformerType || "PerformingGroup" }]
+            : (datosArtistas && datosArtistas.length > 0)
+              ? datosArtistas.map(a => ({ name: a.name, type: a.type === "Grupo Musical" ? "MusicGroup" : "Person" }))
+              : []
+      }
     />
   </Fragment>
   

@@ -13,6 +13,8 @@ import PersonSchema from "@components/seo/PersonSchema.astro";
 import MusicGroupSchema from "@components/seo/MusicGroupSchema.astro";
 import EventSchema from "@components/seo/EventSchema.astro";
 import OrganizationSchema from "@components/seo/OrganizationSchema.astro";
+import InstagramReel from "@components/base/InstagramReel.astro";
+
 export async function getStaticPaths() {
   const biografias = await getBiografias();
   return biografias.map((bio) => ({
@@ -29,6 +31,15 @@ const seoDesc = bio?.description || `Conoce la trayectoria de ${bio.name}`;
 const bioType = bio.type?.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
 const base = import.meta.env.BASE_URL;
+
+const cleanCanciones = (bio?.cancionesMasEscuchadas || [])
+  .map((s) => typeof s === "string" ? s.trim() : s)
+  .filter((s) => s !== "");
+
+const cleanAwards = (bio?.awards || [])
+  .map((a) => typeof a === "string" ? a.trim() : a)
+  .filter((a) => a !== "");
+
 ---
 
 <MainLayout title={seoTitle}>
@@ -41,7 +52,7 @@ const base = import.meta.env.BASE_URL;
         image={bio.artistImg || bio.banner}
         url={href}
         genres={bio.genre}
-        awards={bio.awards}
+        awards={cleanAwards}
         birthPlace={bio.artistDetails?.[0]?.birthPlace}
         birthDate={bio.artistDetails?.[0]?.birthDate}
         height={bio.artistDetails?.[0]?.height}
@@ -54,7 +65,7 @@ const base = import.meta.env.BASE_URL;
         url={href}
         foundingLocation={bio.foundingLocation || bio.lugarEvento}
         foundingDate={bio.foundingDate}
-        awards={bio.awards}
+        awards={cleanAwards}
       />
     ) : (bioType === "banda" || bioType === "duo") ? (
       <MusicGroupSchema 
@@ -63,7 +74,7 @@ const base = import.meta.env.BASE_URL;
         image={bio.image || bio.banner}
         url={href}
         genres={bio.genre}
-        awards={bio.awards}
+        awards={cleanAwards}
         foundingLocation={bio.foundingLocation}
         foundingDate={bio.foundingDate}
         members={bio.members}
@@ -92,7 +103,7 @@ const base = import.meta.env.BASE_URL;
       <Container variant="mid">
         <div style="display: flex; flex-direction: column; gap: var(--space-4);">
           {
-            (!bio.instagramReelVideo && !bio.imgVertical)? (
+            (!bio.instagramReelId && !bio.instagramReelVideo && !bio.imgVertical)? (
               <div class="intro-text">
                 <div class="intro-text-header">
                     <div class="mini-img-container">
@@ -153,8 +164,8 @@ const base = import.meta.env.BASE_URL;
                   )
                 }
                 {
-                  bio?.awards && bio.awards.length > 0 && (
-                    <p class="info-text"><strong>Premios:</strong> {Array.isArray(bio.awards) ? bio.awards.join(", ") : bio.awards}</p>
+                  cleanAwards.length > 0 && (
+                    <p class="info-text"><strong>Premios:</strong> {cleanAwards.join(", ")}</p>
                   )
                 }
             
@@ -169,16 +180,18 @@ const base = import.meta.env.BASE_URL;
               <div slot="sidebar">
                   {
                     bio.instagramReelVideo ? (
-                <div class="video-wrapper shadow-xl" slot="sidebar">
-                      <video controls loop playsinline class="my-reel">
-                      <source src={`${bio.instagramReelVideo}`} type="video/mp4" />
-                      Tu navegador no soporta videos.
-                    </video>
-                </div>
+                      <div class="video-wrapper shadow-xl" slot="sidebar">
+                        <video controls loop playsinline class="my-reel">
+                          <source src={`${bio.instagramReelVideo}`} type="video/mp4" />
+                          Tu navegador no soporta videos.
+                        </video>
+                      </div>
+                    ) : bio.instagramReelId ? (
+                      <InstagramReel instagramReelId={bio.instagramReelId} instagramReelTitle={bio.instagramReelTitle || "Instagram Reel"} />
                     ) : (
-                <div class="video-wrapper shadow-xl" slot="sidebar">
-                      <img src={`${bio.imgVertical}`} alt={bio.name} class="flyer-img" transition:name={`image-${bio.id}`} />
-                </div>
+                      <div class="video-wrapper shadow-xl" slot="sidebar">
+                        <img src={`${bio.imgVertical}`} alt={bio.name} class="flyer-img" transition:name={`image-${bio.id}`} />
+                      </div>
                     )
                   }
                 <p class="see-more" style="color: var(--color-primary);">
@@ -253,8 +266,8 @@ const base = import.meta.env.BASE_URL;
                       )
                     }
                     {
-                      bio?.awards && bio.awards.length > 0 && (
-                        <p class="info-text"><strong>Premios:</strong> {Array.isArray(bio.awards) ? bio.awards.join(", ") : bio.awards}</p>
+                      cleanAwards.length > 0 && (
+                        <p class="info-text"><strong>Premios:</strong> {cleanAwards.join(", ")}</p>
                       )
                     }
                     {bio?.genre && bio?.genre?.length > 0 && (
@@ -268,15 +281,15 @@ const base = import.meta.env.BASE_URL;
           }
         <!-- Info De la Biografia -->
         {
-          bio?.cancionesMasEscuchadas?.length>0 && (
+          cleanCanciones.length > 0 && (
 
           
             <div style="display: flex; flex-direction: column; gap: var(--space-4);">
 
-          <h2 class="section-title">{bio.cancionesMasEscuchadas.length} Canciones más populares de {bio.name}</h2>
+          <h2 class="section-title">{cleanCanciones.length} Canciones más populares de {bio.name}</h2>
           <ol>
             {
-              Array.isArray(bio.cancionesMasEscuchadas) && bio.cancionesMasEscuchadas.map((cancion) => (
+              cleanCanciones.map((cancion) => (
                 <li>
                   {cancion}
                 </li>

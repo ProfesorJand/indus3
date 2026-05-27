@@ -21,6 +21,7 @@ const BioForm = ({ bioToEdit = null, onSuccess }) => {
     awards: bioToEdit?.awards || [''],
     cancionesMasEscuchadas: bioToEdit?.cancionesMasEscuchadas || [''],
     instagramReelId: bioToEdit?.instagramReelId || '',
+    instagramReelVideo: bioToEdit?.instagramReelVideo || '',
     relatedEventUrl: bioToEdit?.relatedEventUrl || '',
     relatedEventName: bioToEdit?.relatedEventName || ''
   };
@@ -40,7 +41,7 @@ const BioForm = ({ bioToEdit = null, onSuccess }) => {
     if (!file) return;
 
     if (!formData.name) {
-      alert("Por favor ingresa primero el nombre para nombrar correctamente la imagen.");
+      alert("Por favor ingresa primero el nombre para nombrar correctamente el archivo.");
       return;
     }
 
@@ -50,7 +51,8 @@ const BioForm = ({ bioToEdit = null, onSuccess }) => {
     uploadData.append('category', 'biografias');
     uploadData.append('type', type);
 
-    setStatus('Subiendo imagen...');
+    const isVideo = type === 'video' || file.type.startsWith('video/');
+    setStatus(isVideo ? 'Subiendo video...' : 'Subiendo imagen...');
     try {
       const res = await fetch('https://api.indus3pro.com/upload-image.php', {
         method: 'POST',
@@ -62,7 +64,7 @@ const BioForm = ({ bioToEdit = null, onSuccess }) => {
       const data = await res.json();
       if (data.success) {
         setFormData(prev => ({ ...prev, [fieldName]: data.url }));
-        setStatus('Imagen subida con éxito.');
+        setStatus(isVideo ? 'Video subido con éxito.' : 'Imagen subida con éxito.');
       } else {
         setStatus('Error: ' + data.message);
       }
@@ -86,13 +88,19 @@ const BioForm = ({ bioToEdit = null, onSuccess }) => {
     e.preventDefault();
     setStatus('Guardando...');
 
-    // Convertimos el string del textarea en un array de párrafos para el JSON
+    // Convertimos el string del textarea en un array de párrafos y limpiamos arreglos vacíos para el JSON
     const payload = {
       ...formData,
       description: formData.description
         .split('\n')
         .map(p => p.trim())
-        .filter(p => p !== '')
+        .filter(p => p !== ''),
+      awards: (formData.awards || [])
+        .map(a => typeof a === 'string' ? a.trim() : a)
+        .filter(a => a !== ''),
+      cancionesMasEscuchadas: (formData.cancionesMasEscuchadas || [])
+        .map(s => typeof s === 'string' ? s.trim() : s)
+        .filter(s => s !== '')
     };
 
     try {
@@ -277,7 +285,17 @@ const BioForm = ({ bioToEdit = null, onSuccess }) => {
               </div>
              ))}
              </div>
-             <div className="form-group"><label>Instagram Reel ID</label><input type="text" name="instagramReelId" value={formData.instagramReelId} onChange={handleChange} /></div>
+             <div className="form-group"><label>Instagram Reel ID</label><input type="text" name="instagramReelId" value={formData.instagramReelId} onChange={handleChange} placeholder="Ej: DWy3bQTkXWJ" /></div>
+             <div className="form-group">
+               <label>Video MP4 (URL o Subir)</label>
+               <div className="input-with-button">
+                 <input type="text" name="instagramReelVideo" value={formData.instagramReelVideo} onChange={handleChange} placeholder="https://..." />
+                 <label className="upload-btn">
+                   <input type="file" onChange={(e) => handleFileUpload(e, 'instagramReelVideo', 'video')} accept="video/*" style={{ display: 'none' }} />
+                   <span>Subir</span>
+                 </label>
+               </div>
+             </div>
           </div>
         </div>
 

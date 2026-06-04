@@ -1,0 +1,152 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import SEO from "@components/seo/SEO.astro";
+// import { websiteSchema, organizationSchema } from "@utils/seo";
+import HeaderSticky from "@components/headers/HeaderSticky.astro";
+import Container from "@components/base/Container.astro";
+import Section from "@components/base/Section.astro";
+
+
+
+const title = "Booking y Contratación de Artistas en Venezuela y LATAM";
+const description = "En Indus3 gestionamos booking y contratación de artistas nacionales e internacionales para conciertos, festivales, eventos corporativos y experiencias de entretenimiento en Venezuela y LATAM.";
+const base = import.meta.env.BASE_URL;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<MainLayout title={title} canonical={canonicalURL}>
+  <SEO slot="seo" title={title} description={description} />
+  <HeaderSticky slot="header" />
+
+  <main>
+    <Section>
+      <Container variant="mid" flexDirection="column">
+        <div style="display:flex; flex-direction:column; gap:var(--space-4)">
+
+        <h1>Booking y Contratación de Artistas en Venezuela y LATAM</h1>
+        <p>
+          En Indus3 gestionamos booking y contratación de artistas nacionales e internacionales para conciertos, festivales, eventos corporativos y experiencias de entretenimiento en Venezuela y LATAM. Coordinamos cada etapa del proceso artístico y operativo para garantizar producciones alineadas con las necesidades de cada evento.
+        </p>
+        <div class="btn">
+          <a href={`${base}contacto`} style="display: inline-block; padding: var(--space-4) var(--space-10); text-decoration: none; border-radius: var(--border-radius-full); font-weight: 700; transition: all 0.3s ease;">
+            Contáctanos hoy
+          </a>
+        </div>
+        <h2>Gestión Integral de Booking Artístico</h2>
+        <p>
+          Coordinamos procesos de contratación, negociación y operación artística para eventos de distintos formatos y escalas. Nuestro equipo trabaja en conjunto con managers, agencias, promotores y productores para desarrollar experiencias alineadas con los objetivos de cada proyecto.
+        </p>
+        <h3>Contratación de artistas nacionales</h3>
+        <p>
+          Gestión y coordinación de talento venezolano para conciertos, festivales, eventos corporativos y activaciones de marca.
+        </p>
+        <h3>Gestión de riders y hospitality</h3>
+        <p>
+          Planificación técnica y operativa de requerimientos artísticos, camerinos, transporte, hospedaje y atención de talento.
+        </p>
+        <h3>Coordinación logística y operacional</h3>
+        <p>
+          Integración entre producción, venues, vuelos, traslados, horarios y operación general del artista durante el evento.
+        </p>
+        <h3>Eventos corporativos y privados</h3>
+        <p>
+          Contratación de artistas para lanzamientos, convenciones, experiencias de marca y eventos empresariales.
+        </p>
+        <h3>Festivales y conciertos</h3>
+        <p>
+          Coordinación de talento para conciertos, festivales y espectáculos musicales de gran formato.
+        </p>
+        <h3>Artistas y Experiencias Relacionadas</h3>
+        <p>
+          A lo largo de distintos proyectos y producciones, en Indus3 hemos trabajado junto a artistas, talentos y espectáculos nacionales e internacionales en conciertos, festivales y experiencias desarrolladas en Venezuela.
+        </p>
+
+        <!-- Cards visuales o fotos de artistas -->
+
+        <h2>Producción y Operación para Talento en Vivo</h2>
+        <p>
+          Además de la contratación artística, coordinamos aspectos técnicos, logísticos y operativos necesarios para la correcta ejecución del evento, integrando producción, hospitalidad, coordinación de venues, tiempos operativos y requerimientos técnicos del talento.
+        </p>
+        <ul>
+          <li>Hospitality</li>
+          <li>Transporte</li>
+          <li>Stage management</li>
+          <li>Scheduling</li>
+          <li>Producción técnica</li>
+          <li>Coordinación backstage</li>
+          <li>Camerinos</li>
+          <li>Seguridad</li>
+        </ul>
+
+        <h2>Booking para Eventos en Venezuela y LATAM</h2>
+        <p>
+          Desarrollamos proyectos de booking y coordinación artística para conciertos, festivales, eventos corporativos y experiencias de entretenimiento en Caracas y distintas ciudades de Venezuela, así como producciones vinculadas a mercados de LATAM.
+        </p>
+        <!-- 📍 -->
+        <ul class="lista-icon">
+          <li>Caracas</li>
+          <li>Valencia</li>
+          <li>Maracaibo</li>
+          <li>Margarita</li>
+          <li>Lechería</li>
+        </ul>
+
+        <h2>Preguntas Frecuentes sobre Booking de Artistas</h2>
+        <h3>¿Qué tipo de artistas puede gestionar Indus3?</h3>
+        <p>Trabajamos con artistas nacionales e internacionales para conciertos, festivales, eventos corporativos y experiencias privadas</p>
+        <h3>¿Indus3 representa artistas de forma exclusiva?</h3>
+        <p>
+          Dependiendo del proyecto, participamos en procesos de booking, coordinación y producción artística junto a managers y equipos de representación.
+        </p>
+        <h3>¿Pueden coordinar producción y booking al mismo tiempo?</h3>
+        <p>
+          Sí. Integramos contratación artística, logística y producción operativa dentro de una misma estructura de trabajo.
+        </p>
+        <h3>¿Trabajan solo en Venezuela?</h3>
+        <p>
+        Desarrollamos proyectos en Venezuela y colaboraciones vinculadas a producciones y experiencias en LATAM.
+        </p>
+        <h3>¿Cómo puedo solicitar una cotización?</h3>
+        <p>
+        Puedes contactarnos a través de nuestros <a href={`${base}contacto`}>canales oficiales</a> para evaluar las necesidades de tu evento y recibir una propuesta personalizada.
+        </p>
+
+          
+        </div>
+
+      </Container>
+    </Section>
+    
+  </main>
+
+
+</MainLayout>
+
+
+<style>
+  .lista-icon li {
+    display: flex;
+    align-items: center;
+  }
+
+  .lista-icon li::before {
+    content: "📍";
+    margin-right: var(--space-2);
+  }
+
+  a{
+    text-decoration: underline;
+  }
+
+
+  .btn a {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .btn a:hover {
+    background-color: var(--color-primary-dark);
+  }
+
+</style>
+

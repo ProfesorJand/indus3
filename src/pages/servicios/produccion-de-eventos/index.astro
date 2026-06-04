@@ -1,0 +1,233 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import SEO from "@components/seo/SEO.astro";
+import Container from "@components/base/Container.astro";
+import HeaderSticky from "@components/headers/HeaderSticky.astro";
+import Section from "@components/base/Section.astro";
+import BodyGrid from "@components/body/BodyGrid.astro";
+import { getEventos } from "@stores/eventos";
+import Card from "@components/base/Card.astro";
+const eventsData = (await getEventos()).filter(e => e.status !== 'draft');
+
+const base = import.meta.env.BASE_URL;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+---
+
+<MainLayout title="Producción de Eventos en Venezuela y LATAM" canonical={canonicalUrl}>
+    <SEO 
+      title="Producción de Eventos en Venezuela y LATAM" 
+      description="Producción integral de conciertos, eventos corporativos, experiencias de marca, esports, exposiciones y espectáculos masivos." 
+      
+      />
+      <HeaderSticky slot="header" />
+<main>
+  <Section >
+    <Container variant="mid" flexDirection="column">
+      <div style="display:flex; flex-direction:column; gap:var(--space-4)">
+        <h1>Producción de Eventos en Venezuela y LATAM</h1>
+        <p>Producción integral de conciertos, eventos corporativos, experiencias de marca, esports, exposiciones y espectáculos masivos.</p>
+        <div class="btn">
+          <a href={`${base}contacto`} style="display: inline-block; padding: var(--space-4) var(--space-10); text-decoration: none; border-radius: var(--border-radius-full); font-weight: 700; transition: all 0.3s ease;">
+            Contáctanos hoy
+          </a>
+        </div>
+        <h2>Producción Integral de Eventos</h2>
+        <p>
+          Desde la planificación estratégica hasta la ejecución en terreno, en Indus3 coordinamos cada área necesaria para producir eventos de manera eficiente, segura y alineada con los objetivos de cada proyecto. Nuestro equipo integra operación, logística, producción técnica y coordinación general para desarrollar experiencias de alto impacto en Venezuela y LATAM.
+        </p>
+        <h3>Permisos y coordinación institucional</h3>
+        <p>
+        Gestión de permisos, relaciones institucionales y coordinación operativa con autoridades locales para garantizar el correcto desarrollo del evento.
+      </p>
+      <h3>Logística y operación en terreno</h3>
+      <p>
+        Planificación logística, coordinación de proveedores, transporte, accesos, carga, descarga y operación integral antes, durante y después del evento.
+      </p>
+      <h3>Venue Management & operaciones</h3>
+      <p>
+        Coordinación de venues, control de accesos, circulación, tiempos operativos, camerinos, hospitality y administración técnica del recinto.
+      </p>
+      
+      <h3>Seguridad y personal médico</h3>
+      <p>
+        Implementación de protocolos de seguridad, control de público, personal especializado, planes de contingencia y cobertura médica para eventos de diferentes escalas.
+      </p>
+      <h3>Producción técnica y audiovisual</h3>
+      <p>
+        Diseño y ejecución técnica de audio, iluminación, video, pantallas, estructuras y soluciones audiovisuales para experiencias presenciales e híbridas.
+      </p>
+      <h3>Streaming y broadcasting</h3>
+      <p>
+        Producción de transmisiones en vivo para plataformas digitales, eventos híbridos, cobertura multicámara y streaming profesional para YouTube, Twitch y redes sociales.
+      </p>
+      <h3>Ticketing y control de acceso</h3>
+      <p>
+        Integración de sistemas de ticketing, validación de entradas, acreditaciones, control de aforo y gestión de acceso para asistentes y staff.
+      </p>
+      <h3>Staff y coordinación operativa</h3>
+      <p>
+        Coordinación de equipos operativos, stage managers, producción de campo, personal técnico y supervisión general de ejecución.
+      </p>
+      <h3>Gestión de talento y artistas</h3>
+      <p>
+        Coordinación artística, hospitality, riders técnicos y logística de talento nacional e internacional para conciertos, festivales y eventos corporativos.
+      </p>
+
+      <p>
+        Trabajamos de forma integral para que cada área del evento funcione de manera sincronizada, optimizando tiempos, recursos y operación. Desde conciertos y festivales hasta eventos corporativos, esports y experiencias inmersivas, desarrollamos producciones adaptadas a la magnitud y necesidades de cada proyecto.
+      </p>
+
+      <h2>Producción Especializada para Cada Tipo de Evento</h2>
+      <p>
+        Desarrollamos producciones adaptadas a distintos formatos, audiencias y objetivos, integrando operación, creatividad y ejecución técnica para eventos presenciales, híbridos y de gran escala.
+      </p>
+      <ul>
+        <li><a href="/servicios/produccion-de-eventos/conciertos-y-festivales">Conciertos y festivales</a></li>
+        <li><a href="/servicios/produccion-de-eventos/eventos-corporativos">Corporativos</a></li>
+        <li><a href="/servicios/produccion-de-eventos/esports">Esports</a></li>
+        <li><a href="/servicios/produccion-de-eventos/eventos-deportivos">Deportivos</a></li>
+        <li><a href="/servicios/produccion-de-eventos/exposiciones">Exposiciones</a></li>
+        <li><a href="/servicios/produccion-de-eventos/family-entertainment">Family Entertainment</a></li>
+      </ul>
+
+      <h2>Producción de Eventos en Caracas y Principales Ciudades de Venezuela</h2>
+      <p>
+        En Indus3 desarrollamos producciones en Caracas y distintas ciudades de Venezuela, adaptándonos a la logística, operación y necesidades de cada venue, audiencia y tipo de evento. Nuestro equipo coordina proyectos presenciales, híbridos y masivos en escenarios culturales, corporativos, deportivos y de entretenimiento a nivel nacional.
+      </p>
+      <ul class="list-icon" style="list-style-type: none;">
+        <li>Caracas</li>
+        <li>Valencia</li>
+        <li>Maracaibo</li>
+        <li>Lechería</li>
+        <li>Barquisimeto</li>
+        <li>Margarita</li>
+      </ul>
+
+      <p>
+        Además de Venezuela, desarrollamos proyectos y producciones para eventos y experiencias en distintos mercados de LATAM.
+      </p>
+      
+      <h2>Experiencias y Producciones Realizadas</h2>
+      <p>
+        A lo largo de los años, en Indus3 hemos participado en la producción y ejecución de conciertos, espectáculos internacionales, exposiciones inmersivas, eventos gaming y experiencias de entretenimiento desarrolladas para distintas audiencias en Venezuela.
+      </p>
+
+      {
+        eventsData.length > 0 ? (
+          <div style="display: grid;grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));gap: 1rem;justify-content: center;">
+          {eventsData.map((event) => (
+            <Card
+              title={""}
+              description={event.descripcion}
+              image={event.imagenPR}
+              href={`${base}eventos/${event.id}`}
+              className="event-card"
+              >
+              </Card>
+          ))
+        }
+          </div>
+        ) : (
+          <div style="text-align: center;justify-content: center;display: flex;flex-direction: column;align-items: center;">
+            <h3>No hay eventos programados en este momento.</h3>
+            <p>
+              Vuelve pronto para enterarte de nuestras próximas producciones.
+            </p>
+          </div>
+        )
+      }
+
+
+
+      <!-- {
+        eventsData.length > 0 ? (
+          <BodyGrid
+            columns={eventsData.length > 3 ? 3 : eventsData.length}
+            tablet={eventsData.length > 2 ? 2 : eventsData.length}
+            mobile={1}
+            justifyContent="center"
+          >
+            {eventsData.map((event) => (
+              <a href={`${base}eventos/${event.id}`} class="event-card">
+                <div class="image-wrapper">
+                  <img src={event.imagenPR} alt={event.nombreEvento} />
+                </div>
+                <div class="content">
+                  <h3>{event.nombreEvento}</h3>
+                  <p class="location">
+                    <i class="fas fa-map-marker-alt" /> {event.lugarEvento}
+                  </p>
+                  <div class="date-badge">{event.fechaEvento}</div>
+                  <span class="btn-more">Más Información</span>
+                </div>
+              </a>
+            ))}
+          </BodyGrid>
+        ) : (
+          <div style="text-align: center;justify-content: center;display: flex;flex-direction: column;align-items: center;">
+            <h3>No hay eventos programados en este momento.</h3>
+            <p>
+              Vuelve pronto para enterarte de nuestras próximas producciones.
+            </p>
+          </div>
+        )
+      } -->
+
+
+
+      <h2>Preguntas Frecuentes sobre Producción de Eventos</h2>
+      <h3>¿Qué tipos de eventos produce Indus3?</h3>
+      <p>
+        Producimos conciertos, festivales, eventos corporativos, exposiciones, experiencias inmersivas, eventos deportivos, esports y espectáculos familiares en Venezuela y LATAM.
+      </p>
+      <h3>¿Indus3 trabaja solo en Caracas?</h3>
+      <p>
+        No. Desarrollamos producciones en Caracas y distintas ciudades de Venezuela, adaptándonos a las necesidades logísticas y operativas de cada proyecto.
+      </p>
+      <h3>¿Indus3 puede encargarse de toda la producción del evento?</h3>
+      <p>
+        Sí. Coordinamos producción integral incluyendo logística, permisos, operación técnica, seguridad, audiovisual, streaming, staff y gestión general del evento.
+      </p>
+      <h3>¿Trabajan con artistas nacionales e internacionales?</h3>
+      <p>
+        Sí. Contamos con experiencia en coordinación y producción de eventos con artistas, talentos y espectáculos nacionales e internacionales.
+      </p>
+      <h3>¿Cómo puedo cotizar un evento con Indus3?</h3>
+      <p>
+        Puedes contactarnos a través de los <a href={`${base}contacto`}>canales oficiales</a> para evaluar las necesidades de tu proyecto y desarrollar una propuesta personalizada.
+      </p>
+
+    </div>
+  </Container>
+  </Section>
+</main>
+</MainLayout>
+
+<style>
+  .list-icon {
+    list-style-type: none;
+    padding: 0 var(--space-4);
+  }
+  .list-icon li::before {
+    content: "\1F4CD";
+    margin-right: var(--space-2);
+    color: var(--color-primary);
+  }
+
+  a{
+    text-decoration: underline;
+  }
+
+  .btn a {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .btn a:hover {
+    background-color: var(--color-primary-dark);
+  }
+
+</style>
+
+

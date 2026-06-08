@@ -1,14 +1,14 @@
 [
   {
     "rank": 1,
-    "title": "I Knew It, I Knew You",
-    "artists": "Taylor Swift",
-    "image": "https://i.scdn.co/image/ab67616d00004851a35a1d4983e2b4fd0094f910",
-    "album": "I Knew It, I Knew You",
-    "duration": "2:58",
-    "url": "https://open.spotify.com/track/5uPaqMMt59KGrdKIitDRqa",
-    "plays": "8,777,161",
-    "updatedAt": "2026-06-07"
+    "title": "Billie Jean",
+    "artists": "Michael Jackson",
+    "image": "https://i.scdn.co/image/ab67616d0000485132a7d87248d1b75463483df5",
+    "album": "Thriller",
+    "duration": "4:53",
+    "url": "https://open.spotify.com/track/7J1uxwnxfQLu4APicE5Rnj",
+    "plays": "5,516,760",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 2,
@@ -18,30 +18,30 @@
     "album": "hate that i made you love me",
     "duration": "3:17",
     "url": "https://open.spotify.com/track/20jbSiX29FDX4oQxBXyUEi",
-    "plays": "6,350,396",
-    "updatedAt": "2026-06-07"
+    "plays": "5,335,228",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 3,
-    "title": "Billie Jean",
-    "artists": "Michael Jackson",
-    "image": "https://i.scdn.co/image/ab67616d0000485132a7d87248d1b75463483df5",
-    "album": "Thriller",
-    "duration": "4:53",
-    "url": "https://open.spotify.com/track/7J1uxwnxfQLu4APicE5Rnj",
-    "plays": "5,527,898",
-    "updatedAt": "2026-06-07"
-  },
-  {
-    "rank": 4,
     "title": "Beauty And A Beat",
     "artists": "Justin Bieber, Nicki Minaj",
     "image": "https://i.scdn.co/image/ab67616d00004851f1d02a6cec967f8b6b78f76e",
     "album": "Believe",
     "duration": "3:47",
     "url": "https://open.spotify.com/track/6QFCMUUq1T2Vf5sFUXcuQ7",
-    "plays": "5,264,209",
-    "updatedAt": "2026-06-07"
+    "plays": "5,198,728",
+    "updatedAt": "2026-06-08"
+  },
+  {
+    "rank": 4,
+    "title": "I Knew It, I Knew You",
+    "artists": "Taylor Swift",
+    "image": "https://i.scdn.co/image/ab67616d00004851a35a1d4983e2b4fd0094f910",
+    "album": "I Knew It, I Knew You",
+    "duration": "2:58",
+    "url": "https://open.spotify.com/track/5uPaqMMt59KGrdKIitDRqa",
+    "plays": "4,739,669",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 5,
@@ -51,8 +51,8 @@
     "album": "ARIRANG",
     "duration": "2:39",
     "url": "https://open.spotify.com/track/68lbSrXDORS51pmyjZv712",
-    "plays": "4,826,430",
-    "updatedAt": "2026-06-07"
+    "plays": "4,535,482",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 6,
@@ -62,8 +62,8 @@
     "album": "Don't Forget About Me, Demos",
     "duration": "1:37",
     "url": "https://open.spotify.com/track/7yNf9YjeO5JXUE3JEBgnYc",
-    "plays": "4,490,909",
-    "updatedAt": "2026-06-07"
+    "plays": "4,330,295",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 7,
@@ -73,41 +73,41 @@
     "album": "Thriller",
     "duration": "4:18",
     "url": "https://open.spotify.com/track/3BovdzfaX4jb5KFQwoPfAw",
-    "plays": "4,220,936",
-    "updatedAt": "2026-06-07"
+    "plays": "4,209,026",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 8,
-    "title": "the cure",
-    "artists": "Olivia Rodrigo",
-    "image": "https://i.scdn.co/image/ab67616d0000485179e480cbab8c7b86d277841a",
-    "album": "the cure",
-    "duration": "4:57",
-    "url": "https://open.spotify.com/track/4EoJ151oQ5jY48z4RhSE96",
-    "plays": "3,988,015",
-    "updatedAt": "2026-06-07"
-  },
-  {
-    "rank": 9,
-    "title": "Janice STFU",
-    "artists": "Drake",
-    "image": "https://i.scdn.co/image/ab67616d00004851fe9d3ab9adb1d3b59835b81c",
-    "album": "ICEMAN",
-    "duration": "3:57",
-    "url": "https://open.spotify.com/track/514joG57v4yKTsfQmz7stz",
-    "plays": "3,916,008",
-    "updatedAt": "2026-06-07"
-  },
-  {
-    "rank": 10,
     "title": "Earrings",
     "artists": "Malcolm Todd",
     "image": "https://i.scdn.co/image/ab67616d000048512c1f34ecc1929fb59908aad1",
     "album": "Sweet Boy",
     "duration": "2:31",
     "url": "https://open.spotify.com/track/0eAuGrXyGFYwur9ARUe7LJ",
-    "plays": "3,701,618",
-    "updatedAt": "2026-06-07"
+    "plays": "3,538,027",
+    "updatedAt": "2026-06-08"
+  },
+  {
+    "rank": 9,
+    "title": "the cure",
+    "artists": "Olivia Rodrigo",
+    "image": "https://i.scdn.co/image/ab67616d0000485179e480cbab8c7b86d277841a",
+    "album": "the cure",
+    "duration": "4:57",
+    "url": "https://open.spotify.com/track/4EoJ151oQ5jY48z4RhSE96",
+    "plays": "3,536,608",
+    "updatedAt": "2026-06-08"
+  },
+  {
+    "rank": 10,
+    "title": "Janice STFU",
+    "artists": "Drake",
+    "image": "https://i.scdn.co/image/ab67616d00004851fe9d3ab9adb1d3b59835b81c",
+    "album": "ICEMAN",
+    "duration": "3:57",
+    "url": "https://open.spotify.com/track/514joG57v4yKTsfQmz7stz",
+    "plays": "3,529,820",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 11,
@@ -117,30 +117,30 @@
     "album": "Teenage Dream",
     "duration": "3:47",
     "url": "https://open.spotify.com/track/2009X8GyWTqyxIdzAEYW6N",
-    "plays": "3,257,092",
-    "updatedAt": "2026-06-07"
+    "plays": "3,136,162",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 12,
-    "title": "back to friends",
-    "artists": "sombr",
-    "image": "https://i.scdn.co/image/ab67616d000048514229702de91cb3d3a4383302",
-    "album": "I Barely Know Her",
-    "duration": "3:19",
-    "url": "https://open.spotify.com/track/7qjZnBKE73H4Oxkopwulqe",
-    "plays": "3,233,026",
-    "updatedAt": "2026-06-07"
-  },
-  {
-    "rank": 13,
     "title": "Chicago",
     "artists": "Michael Jackson",
     "image": "https://i.scdn.co/image/ab67616d0000485135f36cb686b0d5a12ab3a9f0",
     "album": "XSCAPE",
     "duration": "4:05",
     "url": "https://open.spotify.com/track/5BKKy9fIJL5uM9fz1SnqyP",
-    "plays": "3,223,287",
-    "updatedAt": "2026-06-07"
+    "plays": "3,099,938",
+    "updatedAt": "2026-06-08"
+  },
+  {
+    "rank": 13,
+    "title": "back to friends",
+    "artists": "sombr",
+    "image": "https://i.scdn.co/image/ab67616d000048514229702de91cb3d3a4383302",
+    "album": "I Barely Know Her",
+    "duration": "3:19",
+    "url": "https://open.spotify.com/track/7qjZnBKE73H4Oxkopwulqe",
+    "plays": "3,068,521",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 14,
@@ -150,52 +150,52 @@
     "album": "DECIDE",
     "duration": "2:39",
     "url": "https://open.spotify.com/track/3qhlB30KknSejmIvZZLjOD",
-    "plays": "3,164,280",
-    "updatedAt": "2026-06-07"
+    "plays": "2,996,354",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 15,
-    "title": "Self Aware",
-    "artists": "Temper City",
-    "image": "https://i.scdn.co/image/ab67616d00004851d6c26d2ae723f7ab553d64cc",
-    "album": "Self Aware",
-    "duration": "3:00",
-    "url": "https://open.spotify.com/track/4qW3BbQAwZsrnu8a3ZRdyT",
-    "plays": "3,071,348",
-    "updatedAt": "2026-06-07"
+    "title": "Choosin' Texas",
+    "artists": "Ella Langley",
+    "image": "https://i.scdn.co/image/ab67616d000048518606848da949bbaddf447d87",
+    "album": "Dandelion",
+    "duration": "3:51",
+    "url": "https://open.spotify.com/track/7scFxt9VhL4FJwuPSfRlfN",
+    "plays": "2,977,697",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 16,
-    "title": "Man I Need",
-    "artists": "Olivia Dean",
-    "image": "https://i.scdn.co/image/ab67616d00004851e3d69e17dde129037a1f09e2",
-    "album": "Man I Need",
-    "duration": "3:04",
-    "url": "https://open.spotify.com/track/1qbmS6ep2hbBRaEZFpn7BX",
-    "plays": "3,069,749",
-    "updatedAt": "2026-06-07"
-  },
-  {
-    "rank": 17,
     "title": "DtMF",
     "artists": "Bad Bunny",
     "image": "https://i.scdn.co/image/ab67616d00004851bbd45c8d36e0e045ef640411",
     "album": "DeBÍ TiRAR MáS FOToS",
     "duration": "3:57",
     "url": "https://open.spotify.com/track/3sK8wGT43QFpWrvNQsrQya",
-    "plays": "3,012,030",
-    "updatedAt": "2026-06-07"
+    "plays": "2,965,192",
+    "updatedAt": "2026-06-08"
+  },
+  {
+    "rank": 17,
+    "title": "Man I Need",
+    "artists": "Olivia Dean",
+    "image": "https://i.scdn.co/image/ab67616d00004851e3d69e17dde129037a1f09e2",
+    "album": "Man I Need",
+    "duration": "3:04",
+    "url": "https://open.spotify.com/track/1qbmS6ep2hbBRaEZFpn7BX",
+    "plays": "2,923,523",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 18,
-    "title": "drop dead",
-    "artists": "Olivia Rodrigo",
-    "image": "https://i.scdn.co/image/ab67616d000048511a1495ff41046065b9475366",
-    "album": "drop dead (taken that eurostar to france video)",
-    "duration": "3:44",
-    "url": "https://open.spotify.com/track/7Hc6qcJG4NtyZgbNvQyd8U",
-    "plays": "3,011,097",
-    "updatedAt": "2026-06-07"
+    "title": "Self Aware",
+    "artists": "Temper City",
+    "image": "https://i.scdn.co/image/ab67616d00004851d6c26d2ae723f7ab553d64cc",
+    "album": "Self Aware",
+    "duration": "3:00",
+    "url": "https://open.spotify.com/track/4qW3BbQAwZsrnu8a3ZRdyT",
+    "plays": "2,907,421",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 19,
@@ -205,19 +205,19 @@
     "album": "The Life of a Showgirl",
     "duration": "3:46",
     "url": "https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W",
-    "plays": "3,008,152",
-    "updatedAt": "2026-06-07"
+    "plays": "2,867,555",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 20,
-    "title": "Choosin' Texas",
-    "artists": "Ella Langley",
-    "image": "https://i.scdn.co/image/ab67616d000048518606848da949bbaddf447d87",
-    "album": "Dandelion",
-    "duration": "3:51",
-    "url": "https://open.spotify.com/track/7scFxt9VhL4FJwuPSfRlfN",
-    "plays": "3,005,524",
-    "updatedAt": "2026-06-07"
+    "title": "drop dead",
+    "artists": "Olivia Rodrigo",
+    "image": "https://i.scdn.co/image/ab67616d000048511a1495ff41046065b9475366",
+    "album": "drop dead (taken that eurostar to france video)",
+    "duration": "3:44",
+    "url": "https://open.spotify.com/track/7Hc6qcJG4NtyZgbNvQyd8U",
+    "plays": "2,829,170",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 21,
@@ -227,8 +227,8 @@
     "album": "Bird's Eye",
     "duration": "3:33",
     "url": "https://open.spotify.com/track/4WFgvKVfEhb3IUAFGrutTR",
-    "plays": "2,973,329",
-    "updatedAt": "2026-06-07"
+    "plays": "2,820,619",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 22,
@@ -238,8 +238,8 @@
     "album": "Dracula (Remix)",
     "duration": "3:29",
     "url": "https://open.spotify.com/track/5yvVYFDUpbnjcnRBgjwTzM",
-    "plays": "2,906,238",
-    "updatedAt": "2026-06-07"
+    "plays": "2,754,167",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 23,
@@ -249,41 +249,41 @@
     "album": "Love?",
     "duration": "4:44",
     "url": "https://open.spotify.com/track/3C0nOe05EIt1390bVABLyN",
-    "plays": "2,819,206",
-    "updatedAt": "2026-06-07"
+    "plays": "2,709,624",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 24,
-    "title": "Iris",
-    "artists": "The Goo Goo Dolls",
-    "image": "https://i.scdn.co/image/ab67616d00004851eda9478c39a21e1cdc6609ca",
-    "album": "Dizzy up the Girl",
-    "duration": "4:49",
-    "url": "https://open.spotify.com/track/6Qyc6fS4DsZjB2mRW9DsQs",
-    "plays": "2,807,441",
-    "updatedAt": "2026-06-07"
-  },
-  {
-    "rank": 25,
     "title": "Don't Stop 'Til You Get Enough",
     "artists": "Michael Jackson",
     "image": "https://i.scdn.co/image/ab67616d000048512b74bf21c7e4f56758610949",
     "album": "Off the Wall",
     "duration": "6:04",
     "url": "https://open.spotify.com/track/46eu3SBuFCXWsPT39Yg3tJ",
-    "plays": "2,780,498",
-    "updatedAt": "2026-06-07"
+    "plays": "2,709,416",
+    "updatedAt": "2026-06-08"
+  },
+  {
+    "rank": 25,
+    "title": "Lush Life",
+    "artists": "Zara Larsson",
+    "image": "https://i.scdn.co/image/ab67616d00004851401bf6103d4b7f5230a21582",
+    "album": "So Good",
+    "duration": "3:20",
+    "url": "https://open.spotify.com/track/1rIKgCH4H52lrvDcz50hS8",
+    "plays": "2,701,663",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 26,
-    "title": "Raindance (feat. Tems)",
-    "artists": "Dave, Tems",
-    "image": "https://i.scdn.co/image/ab67616d00004851fecaa7826bb0cbe139a8cb83",
-    "album": "The Boy Who Played the Harp",
-    "duration": "3:39",
-    "url": "https://open.spotify.com/track/3oTuTpF1F3A7rEC6RKsMRz",
-    "plays": "2,743,793",
-    "updatedAt": "2026-06-07"
+    "title": "Iris",
+    "artists": "The Goo Goo Dolls",
+    "image": "https://i.scdn.co/image/ab67616d00004851eda9478c39a21e1cdc6609ca",
+    "album": "Dizzy up the Girl",
+    "duration": "4:49",
+    "url": "https://open.spotify.com/track/6Qyc6fS4DsZjB2mRW9DsQs",
+    "plays": "2,668,049",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 27,
@@ -293,8 +293,8 @@
     "album": "Thriller",
     "duration": "4:05",
     "url": "https://open.spotify.com/track/4cgjA7B4fJBHyB9Ya2bu0t",
-    "plays": "2,742,410",
-    "updatedAt": "2026-06-07"
+    "plays": "2,653,430",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 28,
@@ -304,19 +304,19 @@
     "album": "The Romantic",
     "duration": "3:24",
     "url": "https://open.spotify.com/track/5y2ijHECwFYWqcAHKTZgzD",
-    "plays": "2,716,645",
-    "updatedAt": "2026-06-07"
+    "plays": "2,638,610",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 29,
-    "title": "Lush Life",
-    "artists": "Zara Larsson",
-    "image": "https://i.scdn.co/image/ab67616d00004851401bf6103d4b7f5230a21582",
-    "album": "So Good",
-    "duration": "3:20",
-    "url": "https://open.spotify.com/track/1rIKgCH4H52lrvDcz50hS8",
-    "plays": "2,683,734",
-    "updatedAt": "2026-06-07"
+    "title": "Raindance (feat. Tems)",
+    "artists": "Dave, Tems",
+    "image": "https://i.scdn.co/image/ab67616d00004851fecaa7826bb0cbe139a8cb83",
+    "album": "The Boy Who Played the Harp",
+    "duration": "3:39",
+    "url": "https://open.spotify.com/track/3oTuTpF1F3A7rEC6RKsMRz",
+    "plays": "2,636,636",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 30,
@@ -326,8 +326,8 @@
     "album": "DeBÍ TiRAR MáS FOToS",
     "duration": "6:07",
     "url": "https://open.spotify.com/track/2lTm559tuIvatlT1u0JYG2",
-    "plays": "2,621,737",
-    "updatedAt": "2026-06-07"
+    "plays": "2,548,088",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 31,
@@ -337,52 +337,52 @@
     "album": "MAYHEM",
     "duration": "4:11",
     "url": "https://open.spotify.com/track/7so0lgd0zP2Sbgs2d7a1SZ",
-    "plays": "2,619,550",
-    "updatedAt": "2026-06-07"
+    "plays": "2,532,202",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 32,
-    "title": "Stateside + Zara Larsson",
-    "artists": "PinkPantheress, Zara Larsson",
-    "image": "https://i.scdn.co/image/ab67616d00004851684ecc5bc1b724d0106ad694",
-    "album": "Fancy Some More?",
-    "duration": "3:04",
-    "url": "https://open.spotify.com/track/1DwscornXpj8fmOmYVlqZt",
-    "plays": "2,527,915",
-    "updatedAt": "2026-06-07"
-  },
-  {
-    "rank": 33,
     "title": "So Easy (To Fall In Love)",
     "artists": "Olivia Dean",
     "image": "https://i.scdn.co/image/ab67616d000048519a336bfb6d40bbd90a507417",
     "album": "The Art of Loving",
     "duration": "2:49",
     "url": "https://open.spotify.com/track/6sGIMrtIzQjdzNndVxe397",
-    "plays": "2,526,245",
-    "updatedAt": "2026-06-07"
+    "plays": "2,460,993",
+    "updatedAt": "2026-06-08"
+  },
+  {
+    "rank": 33,
+    "title": "Stateside + Zara Larsson",
+    "artists": "PinkPantheress, Zara Larsson",
+    "image": "https://i.scdn.co/image/ab67616d00004851684ecc5bc1b724d0106ad694",
+    "album": "Fancy Some More?",
+    "duration": "3:04",
+    "url": "https://open.spotify.com/track/1DwscornXpj8fmOmYVlqZt",
+    "plays": "2,415,081",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 34,
+    "title": "Golden",
+    "artists": "HUNTR/X, EJAE, AUDREY NUNA, REI AMI, KPop Demon Hunters Cast",
+    "image": "https://i.scdn.co/image/ab67616d000048514dcb6c5df15cf74596ab25a4",
+    "album": "KPop Demon Hunters (Soundtrack from the Netflix Film)",
+    "duration": "3:14",
+    "url": "https://open.spotify.com/track/1CPZ5BxNNd0n0nF4Orb9JS",
+    "plays": "2,391,792",
+    "updatedAt": "2026-06-08"
+  },
+  {
+    "rank": 35,
     "title": "WHERE IS MY HUSBAND!",
     "artists": "RAYE",
     "image": "https://i.scdn.co/image/ab67616d0000485197c0928704e5a2bd8d4c5b90",
     "album": "THIS MUSIC MAY CONTAIN HOPE.",
     "duration": "3:17",
     "url": "https://open.spotify.com/track/7eYzn1CuiJK6VvUhf8zA6k",
-    "plays": "2,442,012",
-    "updatedAt": "2026-06-07"
-  },
-  {
-    "rank": 35,
-    "title": "Mr. Brightside",
-    "artists": "The Killers",
-    "image": "https://i.scdn.co/image/ab67616d00004851ccdddd46119a4ff53eaf1f5d",
-    "album": "Hot Fuss",
-    "duration": "3:42",
-    "url": "https://open.spotify.com/track/003vvx7Niy0yvhvHt4a68B",
-    "plays": "2,355,851",
-    "updatedAt": "2026-06-07"
+    "plays": "2,354,490",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 36,
@@ -392,19 +392,19 @@
     "album": "DeBÍ TiRAR MáS FOToS",
     "duration": "3:03",
     "url": "https://open.spotify.com/track/5TFD2bmFKGhoCRbX61nXY5",
-    "plays": "2,328,773",
-    "updatedAt": "2026-06-07"
+    "plays": "2,347,471",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 37,
-    "title": "Ordinary",
-    "artists": "Alex Warren",
-    "image": "https://i.scdn.co/image/ab67616d000048518d18d73bbfc8985d52865edf",
-    "album": "You'll Be Alright, Kid (Chapter 1)",
-    "duration": "3:06",
-    "url": "https://open.spotify.com/track/2RkZ5LkEzeHGRsmDqKwmaJ",
-    "plays": "2,320,259",
-    "updatedAt": "2026-06-07"
+    "title": "Mr. Brightside",
+    "artists": "The Killers",
+    "image": "https://i.scdn.co/image/ab67616d00004851ccdddd46119a4ff53eaf1f5d",
+    "album": "Hot Fuss",
+    "duration": "3:42",
+    "url": "https://open.spotify.com/track/003vvx7Niy0yvhvHt4a68B",
+    "plays": "2,286,595",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 38,
@@ -414,63 +414,63 @@
     "album": "HIT ME HARD AND SOFT",
     "duration": "3:30",
     "url": "https://open.spotify.com/track/6dOtVTDdiauQNBQEDOtlAB",
-    "plays": "2,316,878",
-    "updatedAt": "2026-06-07"
+    "plays": "2,252,809",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 39,
-    "title": "DAISIES",
-    "artists": "Justin Bieber",
-    "image": "https://i.scdn.co/image/ab67616d00004851d65c4773bc5061fd27facc5b",
-    "album": "SWAG",
-    "duration": "2:56",
-    "url": "https://open.spotify.com/track/5BZsQlgw21vDOAjoqkNgKb",
-    "plays": "2,304,738",
-    "updatedAt": "2026-06-07"
-  },
-  {
-    "rank": 40,
-    "title": "Golden",
-    "artists": "HUNTR/X, EJAE, AUDREY NUNA, REI AMI, KPop Demon Hunters Cast",
-    "image": "https://i.scdn.co/image/ab67616d000048514dcb6c5df15cf74596ab25a4",
-    "album": "KPop Demon Hunters (Soundtrack from the Netflix Film)",
-    "duration": "3:14",
-    "url": "https://open.spotify.com/track/1CPZ5BxNNd0n0nF4Orb9JS",
-    "plays": "2,273,287",
-    "updatedAt": "2026-06-07"
-  },
-  {
-    "rank": 41,
-    "title": "Sweater Weather",
-    "artists": "The Neighbourhood",
-    "image": "https://i.scdn.co/image/ab67616d000048518265a736a1eb838ad5a0b921",
-    "album": "I Love You.",
-    "duration": "4:00",
-    "url": "https://open.spotify.com/track/2QjOHCTQ1Jl3zawyYOpxh6",
-    "plays": "2,258,562",
-    "updatedAt": "2026-06-07"
-  },
-  {
-    "rank": 42,
-    "title": "White Keys",
-    "artists": "Dominic Fike",
-    "image": "https://i.scdn.co/image/ab67616d000048513696096119ef08824cf85ede",
-    "album": "White Keys",
-    "duration": "2:24",
-    "url": "https://open.spotify.com/track/5ViLKrbyL3HD6wsq3AB9eI",
-    "plays": "2,245,373",
-    "updatedAt": "2026-06-07"
-  },
-  {
-    "rank": 43,
     "title": "Smooth Criminal - 2012 Remaster",
     "artists": "Michael Jackson",
     "image": "https://i.scdn.co/image/ab67616d00004851eb2087dcd1eb61f833bdedff",
     "album": "Bad (Remastered)",
     "duration": "4:17",
     "url": "https://open.spotify.com/track/5T7ywazdGIydr6JCW6t02j",
-    "plays": "2,212,550",
-    "updatedAt": "2026-06-07"
+    "plays": "2,199,011",
+    "updatedAt": "2026-06-08"
+  },
+  {
+    "rank": 40,
+    "title": "DAISIES",
+    "artists": "Justin Bieber",
+    "image": "https://i.scdn.co/image/ab67616d00004851d65c4773bc5061fd27facc5b",
+    "album": "SWAG",
+    "duration": "2:56",
+    "url": "https://open.spotify.com/track/5BZsQlgw21vDOAjoqkNgKb",
+    "plays": "2,188,944",
+    "updatedAt": "2026-06-08"
+  },
+  {
+    "rank": 41,
+    "title": "Ordinary",
+    "artists": "Alex Warren",
+    "image": "https://i.scdn.co/image/ab67616d000048518d18d73bbfc8985d52865edf",
+    "album": "You'll Be Alright, Kid (Chapter 1)",
+    "duration": "3:06",
+    "url": "https://open.spotify.com/track/2RkZ5LkEzeHGRsmDqKwmaJ",
+    "plays": "2,179,327",
+    "updatedAt": "2026-06-08"
+  },
+  {
+    "rank": 42,
+    "title": "TU SANCHO",
+    "artists": "Fuerza Regida",
+    "image": "https://i.scdn.co/image/ab67616d00004851a2e90fbdec84b25e46573469",
+    "album": "111XPANTIA",
+    "duration": "2:57",
+    "url": "https://open.spotify.com/track/6eLQXa6uk2EW8drsiKbABZ",
+    "plays": "2,179,123",
+    "updatedAt": "2026-06-08"
+  },
+  {
+    "rank": 43,
+    "title": "Sweater Weather",
+    "artists": "The Neighbourhood",
+    "image": "https://i.scdn.co/image/ab67616d000048518265a736a1eb838ad5a0b921",
+    "album": "I Love You.",
+    "duration": "4:00",
+    "url": "https://open.spotify.com/track/2QjOHCTQ1Jl3zawyYOpxh6",
+    "plays": "2,147,698",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 44,
@@ -480,73 +480,73 @@
     "album": "At The Beach, In Every Life",
     "duration": "3:31",
     "url": "https://open.spotify.com/track/21IYMdzTrzSe191Cy5eMap",
-    "plays": "2,196,456",
-    "updatedAt": "2026-06-07"
+    "plays": "2,146,825",
+    "updatedAt": "2026-06-08"
   },
   {
     "rank": 45,
-    "title": "Locked out of Heaven",
-    "artists": "Bruno Mars",
-    "image": "https://i.scdn.co/image/ab67616d00004851926f43e7cce571e62720fd46",
-    "album": "Unorthodox Jukebox",
-    "duration": "3:53",
-    "url": "https://open.spotify.com/track/3w3y8KPTfNeOKPiqUTakBh",
-    "plays": "2,169,750",
-    "updatedAt": "2026-06-07"
-  },
-  {
-    "rank": 46,
-    "title": "Riptide",
-    "artists": "Vance Joy",
-    "image": "https://i.scdn.co/image/ab67616d0000485105d081cbdc2f67d37a364d63",
-    "album": "Dream Your Life Away (Deluxe Edition)",
-    "duration": "3:24",
-    "url": "https://open.spotify.com/track/2uXlHCUbq9OMUwx3hrk06o",
-    "plays": "2,133,685",
-    "updatedAt": "2026-06-07"
-  },
-  {
-    "rank": 47,
-    "title": "Beautiful Things",
-    "artists": "Benson Boone",
-    "image": "https://i.scdn.co/image/ab67616d00004851831949037a1db10b87b005fa",
-    "album": "Fireworks & Rollerblades",
-    "duration": "3:00",
-    "url": "https://open.spotify.com/track/3xkHsmpQCBMytMJNiDf3Ii",
-    "plays": "2,112,289",
-    "updatedAt": "2026-06-07"
-  },
-  {
-    "rank": 48,
-    "title": "NOBLE",
-    "artists": "F3miii",
-    "image": "https://i.scdn.co/image/ab67616d000048513e2c1f8bb3f146186e2a1dc5",
-    "album": "NOBLE (Slowed Down)",
-    "duration": "3:05",
-    "url": "https://open.spotify.com/track/4Jsus7N4d8hFB2G9gcRdBv",
-    "plays": "2,086,095",
-    "updatedAt": "2026-06-07"
-  },
-  {
-    "rank": 49,
     "title": "Dai Dai",
     "artists": "Shakira, Burna Boy",
     "image": "https://i.scdn.co/image/ab67616d0000485103cadf1b3fe324c1dc710ed4",
     "album": "Dai Dai",
     "duration": "3:43",
     "url": "https://open.spotify.com/track/0kosUz0jePvjiz4ctmR6wL",
-    "plays": "2,084,560",
-    "updatedAt": "2026-06-07"
+    "plays": "2,116,559",
+    "updatedAt": "2026-06-08"
   },
   {
-    "rank": 50,
-    "title": "Cuando No Era Cantante - Remix",
+    "rank": 46,
+    "title": "White Keys",
+    "artists": "Dominic Fike",
+    "image": "https://i.scdn.co/image/ab67616d000048513696096119ef08824cf85ede",
+    "album": "White Keys",
+    "duration": "2:24",
+    "url": "https://open.spotify.com/track/5ViLKrbyL3HD6wsq3AB9eI",
+    "plays": "2,083,854",
+    "updatedAt": "2026-06-08"
+  },
+  {
+    "rank": 47,
+    "title": "Locked out of Heaven",
+    "artists": "Bruno Mars",
+    "image": "https://i.scdn.co/image/ab67616d00004851926f43e7cce571e62720fd46",
+    "album": "Unorthodox Jukebox",
+    "duration": "3:53",
+    "url": "https://open.spotify.com/track/3w3y8KPTfNeOKPiqUTakBh",
+    "plays": "2,070,130",
+    "updatedAt": "2026-06-08"
+  },
+  {
+    "rank": 48,
+    "title": "Cuando No Era Cantante RMX - Remix",
     "artists": "El Bogueto, Anuel AA, Fuerza Regida, Yung Beef",
-    "image": "https://i.scdn.co/image/ab67616d00004851883f1033e2ffc09d7e8b8e42",
+    "image": "https://i.scdn.co/image/ab67616d00004851a4aa9b1ee2aac62621c49160",
     "album": "Eso Si Es De Gangster",
     "duration": "5:27",
     "url": "https://open.spotify.com/track/5sX4UiPdOdndSEWA6asUgh",
-    "plays": "2,079,830",
-    "updatedAt": "2026-06-07"
+    "plays": "2,057,536",
+    "updatedAt": "2026-06-08"
+  },
+  {
+    "rank": 49,
+    "title": "Riptide",
+    "artists": "Vance Joy",
+    "image": "https://i.scdn.co/image/ab67616d0000485105d081cbdc2f67d37a364d63",
+    "album": "Dream Your Life Away (Deluxe Edition)",
+    "duration": "3:24",
+    "url": "https://open.spotify.com/track/2uXlHCUbq9OMUwx3hrk06o",
+    "plays": "2,002,661",
+    "updatedAt": "2026-06-08"
+  },
+  {
+    "rank": 50,
+    "title": "Every Breath You Take",
+    "artists": "The Police",
+    "image": "https://i.scdn.co/image/ab67616d00004851c8e97cafeb2acb85b21a777e",
+    "album": "Synchronicity (Remastered 2003)",
+    "duration": "4:13",
+    "url": "https://open.spotify.com/track/1JSTJqkT5qHq8MDJnJbRE1",
+    "plays": "1,995,757",
+    "updatedAt": "2026-06-08"
   }
 ]

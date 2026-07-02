@@ -14,14 +14,27 @@ const allData = spotifyData;
 // Formato de moneda/número para legibilidad
 const formatter = new Intl.NumberFormat('es-ES');
 
-// Obtener meses únicos presentes en la data
-const uniqueMonths = [...new Set(allData.map(item => item.date))].sort().reverse();
+// Obtener meses únicos presentes en la data (soportando formato viejo "month" y nuevo "date")
+const uniqueMonths = [...new Set(allData.map(item => item.date || item.month))].sort().reverse();
 const currentMonth = uniqueMonths[0]; // El mes más reciente
 
 const previousMonth = uniqueMonths[1]; // El mes anterior (si existe)
-// Filtrar la data para el mes actual y anterior
-const currentMonthData = allData.filter(item => item.date === currentMonth);
-const prevMonthData = previousMonth ? allData.filter(item => item.date === previousMonth) : [];
+
+// Función para evitar duplicados si hay corridas de scrapers repetidas en el mismo mes
+const getUniqueData = (dataArray) => {
+  const map = new Map();
+  dataArray.forEach(item => {
+    // Preferimos guardar la entrada más reciente o que tenga 'date' definido
+    if (!map.has(item.url) || item.date) {
+      map.set(item.url, item);
+    }
+  });
+  return Array.from(map.values());
+};
+
+// Filtrar la data para el mes actual y anterior, y remover duplicados
+const currentMonthData = getUniqueData(allData.filter(item => (item.date || item.month) === currentMonth));
+const prevMonthData = previousMonth ? getUniqueData(allData.filter(item => (item.date || item.month) === previousMonth)) : [];
 
 // Crear un mapa de ranking para el mes anterior (para búsqueda rápida)
 // Si el JSON ya tiene 'rank', lo usamos, si no, lo calculamos al vuelo
@@ -66,7 +79,7 @@ const top50 = sortedArtists.map((artist, index) => {
   return {
     rank: currentRank,
     name: artist.name,
-    image: artist.artistImage || artist.artistImageHistory || ["/img/placeholder-artist.png"],
+    image: (Array.isArray(artist.artistImage) ? artist.artistImage.find((image)=> image.name === artist.name)?.img : artist.artistImage) || artist.artistImageHistory || "/img/placeholder-artist.png",
     currentListeners,
     prevListeners,
     listenersDelta,

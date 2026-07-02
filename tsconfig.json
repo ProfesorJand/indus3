@@ -8,7 +8,7 @@
       "@styles/*": ["src/styles/*"],
       "@stores/*": ["src/stores/*"],
       "@utils/*": ["src/utils/*"],
-      "@spotify-data":["spotify-data.json"],
+      "@spotify-data":["spotify-data-new.json"],
       "@spotify-data-global-songs":["spotify-top-50-songs-global.json"],
     },
     "jsx": "react-jsx",

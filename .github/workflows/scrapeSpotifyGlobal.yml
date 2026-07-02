@@ -32,9 +32,9 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       # 🟢 Script día 1
-      - name: Ejecutar scrapeSpotify.js
+      - name: Ejecutar scrapeSpotifyNew.js
         if: github.event.schedule == '0 0 1 * *'
-        run: node scrapeSpotify.js
+        run: node scrapeSpotifyNew.js
 
       # 🔵 Script diario / General
       - name: Ejecutar scrapeSpotifyGlobalSimple.js

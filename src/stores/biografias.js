@@ -69,7 +69,7 @@ export const ROL = [
   "Cantante",
 ]
 
-export const urlBiografias = "http://api.indus3pro.com/biografias/get-biografias.php?t="+Date.now();
+export const urlBiografias = "https://api.indus3pro.com/biografias/get-biografias.php?t="+Date.now();
 
 export const getBiografias = async () => {
   const response = await fetch(urlBiografias, {

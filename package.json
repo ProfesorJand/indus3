@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "prebuild": "node --env-file-if-exists=.env src/scripts/fetchEventos.js",
+    "prebuild": "node --env-file-if-exists=.env src/scripts/fetchEventos.js && node --env-file-if-exists=.env src/scripts/fetchBiografias.js",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",

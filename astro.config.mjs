@@ -2,6 +2,11 @@ import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import dns from 'node:dns';
+
+try {
+  dns.setDefaultResultOrder('ipv4first');
+} catch (e) {}
 
 import sitemap from '@astrojs/sitemap';
 

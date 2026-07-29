@@ -9,7 +9,7 @@ import LogoCard from "@components/logo/LogoCard.astro";
 //import biografias from "@data/biografias.json";
 import { getBiografias} from "@stores/biografias";
 
-const biografias = await getBiografias();
+const biografias = (await getBiografias()).filter(b => b.status !== 'draft');
 
 const base = import.meta.env.BASE_URL;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);

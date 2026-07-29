@@ -3,8 +3,47 @@ import MainLayout from "@layouts/MainLayout.astro";
 import SEO from "@components/seo/SEO.astro";
 import DashboardComponent from "@components/admin/Dashboard.jsx";
 import HeaderSticky from "@components/headers/HeaderSticky.astro";
+import fs from "node:fs";
+import path from "node:path";
 
 const seoTitle = "Dashboard Administrativo | Indus3";
+
+const projectRoot = process.cwd();
+const dirPasados = path.resolve(projectRoot, "public/eventos-pasados");
+const dirAntiguos = path.resolve(projectRoot, "public/eventos-pasados/eventos-mas-antiguos");
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+let filesPasados: any[] = [];
+try {
+  filesPasados = fs.readdirSync(dirPasados)
+    .filter((file) => /\.(webp|png|jpg|jpeg|svg)$/i.test(file))
+    .map((file) => ({
+      id: `pasado-${file}`,
+      image: `${baseUrl}/eventos-pasados/${file}`,
+      title: file.replace(/\.[^/.]+$/, "").replace(/^Logo-/i, "").replace(/-/g, " "),
+      category: 'Eventos Pasados',
+      file
+    }));
+} catch (e) {
+  console.error("Error reading eventos-pasados in dashboard.astro", e);
+}
+
+let filesAntiguos: any[] = [];
+try {
+  filesAntiguos = fs.readdirSync(dirAntiguos)
+    .filter((file) => /\.(webp|png|jpg|jpeg|svg)$/i.test(file))
+    .map((file) => ({
+      id: `antiguo-${file}`,
+      image: `${baseUrl}/eventos-pasados/eventos-mas-antiguos/${file}`,
+      title: file.replace(/\.[^/.]+$/, "").replace(/^Logo-/i, "").replace(/-/g, " "),
+      category: 'Eventos Más Antiguos',
+      file
+    }));
+} catch (e) {
+  console.error("Error reading eventos-mas-antiguos in dashboard.astro", e);
+}
+
+const initialPastFiles = [...filesPasados, ...filesAntiguos];
 ---
 
 <MainLayout title={seoTitle}>
@@ -23,6 +62,7 @@ const seoTitle = "Dashboard Administrativo | Indus3";
     client:load
     initialEvents={[]}
     initialBios={[]}
+    initialPastFiles={initialPastFiles}
   />
 </MainLayout>
 

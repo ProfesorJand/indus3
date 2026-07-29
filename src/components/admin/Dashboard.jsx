@@ -4,11 +4,12 @@ import EventForm from '../forms/EventForm.jsx';
 import BioForm from './BioForm.jsx';
 import SliderForm from './SliderForm.jsx';
 
-const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [] }) => {
-  const [activeTab, setActiveTab] = useState('events'); // 'overview', 'events', 'bios', 'sliders'
+const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], initialPastFiles = [] }) => {
+  const [activeTab, setActiveTab] = useState('events'); // 'overview', 'events', 'bios', 'sliders', 'pastEvents'
   const [events, setEvents] = useState([]);
   const [bios, setBios] = useState([]);
   const [sliders, setSliders] = useState([]);
+  const [pastEventsList, setPastEventsList] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
   const [isDeploying, setIsDeploying] = useState(false);
@@ -87,7 +88,7 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [] }
     let endpoint;
     if (type === 'event') endpoint = 'https://api.indus3pro.com/eventos/delete-event.php';
     else if (type === 'bio') endpoint = 'https://api.indus3pro.com/biografias/delete-bio.php';
-    else if (type === 'slider') endpoint = 'https://api.indus3pro.com/slider/delete-slider.php';
+    else if (type === 'slider') endpoint = 'https://api.indus3pro.com/sliders/delete-slider.php';
 
     try {
       const res = await fetch(endpoint, {
@@ -107,6 +108,131 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [] }
         else if (type === 'slider') setSliders(prev => prev.filter(s => s.id !== id));
       }
     } catch (e) { alert('Error al eliminar'); }
+  };
+
+  useEffect(() => {
+    const orderObj = events.find(e => e.id === '__indus3_past_events_order__');
+    const savedOrder = orderObj?.orderList || JSON.parse(localStorage.getItem('indus3_past_events_order') || '[]');
+
+    const apiPastEvents = events
+      .filter(e => e.esPasado && e.id !== '__indus3_past_events_order__')
+      .map(e => ({
+        id: String(e.id),
+        image: e.flyerEvento || e.imagenPR || e.imagenBanner,
+        title: e.nombreEvento,
+        category: 'Evento API'
+      }));
+
+    const combined = [...apiPastEvents, ...initialPastFiles];
+    const orderMap = new Map();
+    savedOrder.forEach((id, idx) => orderMap.set(String(id), idx));
+
+    const sorted = [...combined].sort((a, b) => {
+      const indexA = orderMap.has(String(a.id)) ? orderMap.get(String(a.id)) : -1;
+      const indexB = orderMap.has(String(b.id)) ? orderMap.get(String(b.id)) : -1;
+      if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+      if (indexA !== -1) return -1;
+      if (indexB !== -1) return 1;
+      return 0;
+    });
+
+    setPastEventsList(sorted);
+  }, [events, initialPastFiles]);
+
+  const movePastEvent = (index, direction) => {
+    const newIndex = index + direction;
+    if (newIndex < 0 || newIndex >= pastEventsList.length) return;
+    const newList = [...pastEventsList];
+    const [removed] = newList.splice(index, 1);
+    newList.splice(newIndex, 0, removed);
+    setPastEventsList(newList);
+  };
+
+  const movePastEventToEdge = (index, toTop) => {
+    const newList = [...pastEventsList];
+    const [removed] = newList.splice(index, 1);
+    if (toTop) {
+      newList.unshift(removed);
+    } else {
+      newList.push(removed);
+    }
+    setPastEventsList(newList);
+  };
+
+  const savePastEventsOrder = async () => {
+    const orderList = pastEventsList.map(item => String(item.id));
+    const orderPayload = {
+      id: "__indus3_past_events_order__",
+      nombreEvento: "__indus3_past_events_order__",
+      status: "draft",
+      orderList
+    };
+    try {
+      localStorage.setItem('indus3_past_events_order', JSON.stringify(orderList));
+      const res = await fetch("https://api.indus3pro.com/eventos/save-event.php", {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+        },
+        body: JSON.stringify(orderPayload)
+      });
+      if (res.ok) {
+        alert("¡Orden de Eventos Pasados guardado con éxito! Recuerda hacer 'Publicar Cambios' para aplicarlo en el sitio público.");
+        refreshData();
+      } else {
+        alert("Guardado en almacenamiento local (hubo un detalle al contactar el servidor).");
+      }
+    } catch (e) {
+      console.error("Error saving order:", e);
+      alert("Orden guardado en localStorage.");
+    }
+  };
+
+  const handleTogglePastEvent = async (event) => {
+    const nextEsPasado = !event.esPasado;
+    const confirmMsg = nextEsPasado 
+      ? `¿Deseas marcar "${event.nombreEvento}" como EVENTO PASADO?\n- Su fila se distinguirá con fondo gris claro y pasará al final de la tabla.\n- Su Flyer Vertical pasará automáticamente a ser de los primeros Eventos Pasados a mostrarse.\n- Se eliminará de los Sliders de inicio.`
+      : `¿Deseas desmarcar "${event.nombreEvento}" como Evento Pasado? Volverá a la cartelera activa.`;
+    if (!confirm(confirmMsg)) return;
+
+    const updatedEvent = { ...event, esPasado: nextEsPasado };
+    
+    try {
+      const res = await fetch("https://api.indus3pro.com/eventos/save-event.php", {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+        },
+        body: JSON.stringify(updatedEvent)
+      });
+      if (res.ok) {
+        setEvents(prev => prev.map(ev => ev.id === event.id ? updatedEvent : ev));
+        
+        if (nextEsPasado) {
+          const matchingSlider = sliders.find(s => 
+            (s.title || '').toLowerCase().trim() === (event.nombreEvento || '').toLowerCase().trim()
+          );
+          if (matchingSlider) {
+            await fetch('https://api.indus3pro.com/sliders/delete-slider.php', {
+              method: 'POST',
+              headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+              },
+              body: JSON.stringify({ id: matchingSlider.id })
+            });
+            setSliders(prev => prev.filter(s => s.id !== matchingSlider.id));
+          }
+        }
+      } else {
+        alert("Error al actualizar el evento en el servidor.");
+      }
+    } catch (err) {
+      console.error("Error al cambiar estado de evento pasado:", err);
+      alert("Error de red al actualizar el evento.");
+    }
   };
 
   const handleEdit = (item) => {
@@ -193,6 +319,13 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [] }
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
             <span>Sliders de Inicio</span>
           </div>
+          <div 
+            className={`${styles.navItem} ${activeTab === 'pastEvents' ? styles.active : ''}`}
+            onClick={() => setActiveTab('pastEvents')}
+          >
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span>Eventos Pasados</span>
+          </div>
         </nav>
 
         <div className={styles.navItem} onClick={() => window.location.href = '/'}>
@@ -269,13 +402,42 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [] }
                     </tr>
                   </thead>
                   <tbody>
-                    {events.map((event) => (
-                      <tr key={event.id}>
+                    {events
+                      .filter(e => e.id !== '__indus3_past_events_order__')
+                      .slice()
+                      .sort((a, b) => {
+                        const aPasado = a.esPasado ? 1 : 0;
+                        const bPasado = b.esPasado ? 1 : 0;
+                        if (aPasado !== bPasado) return aPasado - bPasado;
+                        return 0;
+                      })
+                      .map((event) => (
+                      <tr
+                        key={event.id}
+                        className={event.status === 'draft' ? styles.draftRow : ''}
+                        style={event.esPasado ? { backgroundColor: '#334155', opacity: 0.95 } : {}}
+                      >
                         <td>
                           <div className={styles.itemInfo}>
-                            <img src={event.imagenBanner} className={styles.itemThumb} alt="" />
+                            <img src={event.flyerEvento || event.imagenBanner || event.imagenPR} className={styles.itemThumb} alt="" />
                             <div>
-                              <span className={styles.itemName}>{event.nombreEvento}</span>
+                              <span className={styles.itemName}>
+                                {event.nombreEvento}
+                                {event.status === 'draft' && <span className={styles.draftBadge}>Draft</span>}
+                                {event.esPasado && (
+                                  <span style={{
+                                    marginLeft: '8px',
+                                    backgroundColor: '#64748b',
+                                    color: '#fff',
+                                    fontSize: '0.7rem',
+                                    padding: '2px 6px',
+                                    borderRadius: '4px',
+                                    fontWeight: '600'
+                                  }}>
+                                    Pasado
+                                  </span>
+                                )}
+                              </span>
                               <span className={styles.itemMeta}>{event.identificacionEvento}</span>
                             </div>
                           </div>
@@ -286,6 +448,14 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [] }
                         </td>
                         <td>
                           <div className={styles.actions}>
+                            <button
+                              className={styles.btnAction}
+                              style={{ backgroundColor: event.esPasado ? '#64748b' : '#3b82f6', color: 'white', marginRight: '4px' }}
+                              onClick={() => handleTogglePastEvent(event)}
+                              title={event.esPasado ? "Quitar de Eventos Pasados" : "Marcar como Evento Pasado"}
+                            >
+                              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            </button>
                             <button className={`${styles.btnAction} ${styles.edit}`} onClick={() => handleEdit(event)}>
                               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                             </button>
@@ -323,12 +493,15 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [] }
                   </thead>
                   <tbody>
                     {bios.length>0 && bios?.map((bio) => (
-                      <tr key={bio.id}>
+                      <tr key={bio.id} className={bio.status === 'draft' ? styles.draftRow : ''}>
                         <td>
                           <div className={styles.itemInfo}>
                             <img src={bio.squareImg} className={styles.itemThumb} alt="" />
                             <div>
-                              <span className={styles.itemName}>{bio.name}</span>
+                              <span className={styles.itemName}>
+                                {bio.name}
+                                {bio.status === 'draft' && <span className={styles.draftBadge}>Draft</span>}
+                              </span>
                               <span className={styles.itemMeta}>{bio.jobTitle || 'Artista'}</span>
                             </div>
                           </div>
@@ -377,12 +550,15 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [] }
                   </thead>
                   <tbody>
                     {sliders.length>0 && [...sliders].sort((a,b) => (parseInt(a.order)||0) - (parseInt(b.order)||0)).map((slide) => (
-                      <tr key={slide.id}>
+                      <tr key={slide.id} className={slide.status === 'draft' ? styles.draftRow : ''}>
                         <td>
                           <div className={styles.itemInfo}>
                             <img src={slide.image} className={styles.itemThumb} alt="" style={{ objectFit: 'cover' }} />
                             <div>
-                              <span className={styles.itemName}>{slide.title}</span>
+                              <span className={styles.itemName}>
+                                {slide.title}
+                                {slide.status === 'draft' && <span className={styles.draftBadge}>Draft</span>}
+                              </span>
                               <span className={styles.itemMeta}>{slide.fechaEvento || 'Sin fecha'}</span>
                             </div>
                           </div>
@@ -405,6 +581,114 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [] }
                         </td>
                       </tr>
                     ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {/* PAST EVENTS VIEW */}
+          {activeTab === 'pastEvents' && (
+            <div>
+              <div className={styles.viewHeader}>
+                <div>
+                  <h1>Gestión de Eventos Pasados</h1>
+                  <p style={{ color: '#94a3b8', fontSize: '0.95rem', marginTop: '4px' }}>
+                    Organiza el orden en que aparecerán los eventos pasados en la sección de Cartelera de Eventos. Puedes reordenar usando los botones de posición.
+                  </p>
+                </div>
+                <button
+                  className={styles.btnPrimary}
+                  onClick={savePastEventsOrder}
+                  style={{ backgroundColor: '#10b981', border: 'none' }}
+                >
+                  Guardar Orden
+                </button>
+              </div>
+
+              <div className={styles.contentCard} style={{ marginTop: '20px' }}>
+                <table className={styles.table}>
+                  <thead>
+                    <tr>
+                      <th style={{ width: '60px' }}>Orden</th>
+                      <th>Evento Pasado</th>
+                      <th>Origen</th>
+                      <th style={{ textAlign: 'right' }}>Reordenar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {pastEventsList.map((item, index) => (
+                      <tr key={item.id}>
+                        <td style={{ fontWeight: 'bold', color: '#94a3b8' }}>#{index + 1}</td>
+                        <td>
+                          <div className={styles.itemInfo}>
+                            <img src={item.image} className={styles.itemThumb} alt="" style={{ objectFit: 'cover' }} />
+                            <div>
+                              <span className={styles.itemName}>{item.title}</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <span style={{
+                            backgroundColor: item.category === 'Evento API' ? '#3b82f6' : '#475569',
+                            color: 'white',
+                            padding: '3px 8px',
+                            borderRadius: '12px',
+                            fontSize: '0.75rem',
+                            fontWeight: '600'
+                          }}>
+                            {item.category || 'Eventos Pasados'}
+                          </span>
+                        </td>
+                        <td>
+                          <div className={styles.actions} style={{ justifyContent: 'flex-end', gap: '6px' }}>
+                            <button
+                              className={styles.btnAction}
+                              onClick={() => movePastEventToEdge(index, true)}
+                              disabled={index === 0}
+                              title="Mover al principio"
+                              style={{ backgroundColor: '#334155', color: '#fff', opacity: index === 0 ? 0.3 : 1 }}
+                            >
+                              🔝
+                            </button>
+                            <button
+                              className={styles.btnAction}
+                              onClick={() => movePastEvent(index, -1)}
+                              disabled={index === 0}
+                              title="Subir"
+                              style={{ backgroundColor: '#334155', color: '#fff', opacity: index === 0 ? 0.3 : 1 }}
+                            >
+                              ⬆️
+                            </button>
+                            <button
+                              className={styles.btnAction}
+                              onClick={() => movePastEvent(index, 1)}
+                              disabled={index === pastEventsList.length - 1}
+                              title="Bajar"
+                              style={{ backgroundColor: '#334155', color: '#fff', opacity: index === pastEventsList.length - 1 ? 0.3 : 1 }}
+                            >
+                              ⬇️
+                            </button>
+                            <button
+                              className={styles.btnAction}
+                              onClick={() => movePastEventToEdge(index, false)}
+                              disabled={index === pastEventsList.length - 1}
+                              title="Mover al final"
+                              style={{ backgroundColor: '#334155', color: '#fff', opacity: index === pastEventsList.length - 1 ? 0.3 : 1 }}
+                            >
+                              🔻
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                    {pastEventsList.length === 0 && (
+                      <tr>
+                        <td colSpan="4" style={{ textAlign: 'center', padding: '30px', color: '#94a3b8' }}>
+                          No hay eventos pasados disponibles para organizar.
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>

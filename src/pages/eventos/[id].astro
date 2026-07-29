@@ -15,7 +15,7 @@ import EventSchema from "@components/seo/EventSchema.astro";
 
 
 export async function getStaticPaths() {
-  const eventsData = await getEventos();
+  const eventsData = (await getEventos()).filter(e => e.status !== 'draft');
   return eventsData.map((event) => ({
     params: { id: event.id.toString() },
     props: { event },
@@ -142,6 +142,14 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
         <div class="container"> 
           <p class="text-center" style="white-space: pre-wrap;">{event.descripcionEvento}</p>
           {event.imagenDespuesDescripcion && <img src={event?.imagenDespuesDescripcion} alt="Imagen despues de la descripcion" />}
+          {event.videoDespuesDescripcion && (
+            <div class="video-container-after-desc shadow-xl">
+              <video controls playsinline class="video-after-desc">
+                <source src={event.videoDespuesDescripcion} type="video/mp4" />
+                Tu navegador no soporta la reproducción de video.
+              </video>
+            </div>
+          )}
            {
             event.preguntas.map((pregunta) => (
               <div class="reveal-up question-block">
@@ -732,6 +740,25 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     .answer-images-grid {
       grid-template-columns: 1fr;
     }
+  }
+
+  .video-container-after-desc {
+    max-width: 800px;
+    width: 100%;
+    margin: var(--space-4) auto;
+    border-radius: var(--border-radius-xl, 16px);
+    overflow: hidden;
+    background: #000;
+    line-height: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  }
+
+  .video-after-desc {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: contain;
   }
 </style>
 

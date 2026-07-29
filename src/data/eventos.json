@@ -2,7 +2,7 @@
   {
     "id": "road-to-vgs",
     "nombreEvento": "Road To VGS 2026",
-    "fechaEvento": "Lunes 27 de Abril de 2026",
+    "fechaEvento": "Jueves 25 de Julio 2026",
     "descripcionEvento": "Es el circuito competitivo oficial venezolano que sirve como antesala al evento de GAMING, ESPORTS y COSPLAY más gande del país, el Venezuela Game Show",
     "imagenBanner": "https://api.indus3pro.com/eventos/banners/lgaplay.webp",
     "imagenPR": "https://api.indus3pro.com/eventos/banners/lgaplay.webp",
@@ -22,7 +22,7 @@
       },
       {
         "pregunta": "¿Cuándo es el Road to VGS?",
-        "respuesta": "La fase de ligas y circuitos nacionales arranca el 27 de abril.\nLa final presencial se espera para fines de Julio."
+        "respuesta": "La fase de ligas y circuitos nacionales arranca el Lunes 27 de Abril 2026.\nLa final presencial el Jueves 25 de Julio 2026"
       },
       {
         "pregunta": "¿Qué (artistas/Equipos) se presentan/compiten?",
@@ -30,11 +30,11 @@
       },
       {
         "pregunta": "¿Quién hace el Road to VGS?",
-        "respuesta": "Es parte del Venezuela Game Show producido en asociación por Indus3 y LGAPlay."
+        "respuesta": "Es parte del [Venezuela Game Show](https://www.instagram.com/venezuelagameshow/) producido en asociación por [Indus3](https://www.instagram.com/indus3pro/) y [LGAPlay](https://www.instagram.com/lgaplay/)."
       },
       {
         "pregunta": "¿Quién patrocina el Road To VGS?",
-        "respuesta": "Las marcas Movilnet_e, Golden."
+        "respuesta": "Las marcas [Movilnet_e](https://www.instagram.com/movilnet_e/), Golden."
       },
       {
         "pregunta": "¿Cómo y dónde compro las entradas al Road to VGS?",
@@ -52,6 +52,557 @@
     ],
     "historiaArtista": "",
     "ventaEntradas": "",
-    "datosCuriosos": ""
+    "datosCuriosos": "",
+    "keywords": "road to vgs, eventos de juegos en linea venezuela, eventos de juegos online en venezuela, Esports Venezuela, Venezuela Game Show, Circuito competitivo en Venezuela",
+    "schemaActivo": false,
+    "schemaNombre": "",
+    "schemaDescripcion": "",
+    "schemaTipoFechaInicio": "completa",
+    "schemaFechaInicioVal": "",
+    "schemaHoraInicioVal": "",
+    "schemaTimezoneInicio": "-04:00",
+    "schemaTipoFechaFin": "completa",
+    "schemaFechaFinVal": "",
+    "schemaHoraFinVal": "",
+    "schemaTimezoneFin": "-04:00",
+    "schemaEventStatus": "EventScheduled",
+    "schemaAttendanceMode": "OfflineEventAttendanceMode",
+    "schemaPlaceName": "",
+    "schemaStreetAddress": "",
+    "schemaAddressLocality": "Caracas",
+    "schemaPostalCode": "1060",
+    "schemaAddressRegion": "Miranda",
+    "schemaAddressCountry": "VE",
+    "schemaImagen1x1": "",
+    "schemaImagen4x3": "",
+    "schemaImagen16x9": "",
+    "schemaOfferUrl": "",
+    "schemaOfferPrice": "",
+    "schemaOfferPriceCurrency": "USD",
+    "schemaOfferAvailability": "InStock",
+    "schemaOfferValidFrom": "",
+    "schemaPerformerType": "PerformingGroup",
+    "schemaPerformerName": "",
+    "schemaPerformers": [
+      {
+        "type": "PerformingGroup",
+        "name": "",
+        "sport": "",
+        "jobTitle": ""
+      }
+    ],
+    "schemaOrganizerName": "Indus3",
+    "schemaOrganizerUrl": "https://indus3pro.com",
+    "schemaOrganizers": [
+      {
+        "name": "Indus3",
+        "url": "https://indus3pro.com"
+      }
+    ],
+    "schemaFechaInicio": "",
+    "schemaFechaFin": "",
+    "imagenDespuesDescripcion": "",
+    "videoDespuesDescripcion": "https://api.indus3pro.com/eventos/imagenes/video-road-to-vgs-2026.mp4",
+    "status": "publicado"
+  },
+  {
+    "id": "dante",
+    "nombreEvento": "Dante Gebel - Presidante World Tour Despedida",
+    "fechaEvento": "Miercoles 3 y Jueves 4 de Junio 2026",
+    "descripcionEvento": "",
+    "imagenDespuesDescripcion": "",
+    "videoDespuesDescripcion": "",
+    "imagenBanner": "https://api.indus3pro.com/eventos/imagenes/banner-dante-gebel---presidente-world-tour-despedida.webp",
+    "imagenPR": "https://api.indus3pro.com/eventos/imagenes/pr-dante-gebel---presidente-world-tour-despedida.webp",
+    "aperturaPuertas": "",
+    "comienzoShow": "19:30",
+    "lugarEvento": "Aula Magna Universidad Central de Venezuela, Caracas, Venezuela",
+    "flyerEvento": "https://api.indus3pro.com/eventos/imagenes/flyer-dante-gebel---presidente-world-tour-despedida.webp",
+    "patrocinadores": [],
+    "preguntas": [
+      {
+        "pregunta": "¿Qué es Presidante World Tour Despedida 2026?",
+        "respuesta": "En este espectáculo, Dante Gebel comparte historias que van desde la risa hasta las lágrimas, abordando temas como la vida, el barrio, la muerte, la nostalgia y relatos cotidianos que nos llevan a reflexiones profundas del alma."
+      },
+      {
+        "pregunta": "¿Dónde se presenta Dante Gebel - Presidante World Tour Despedida 2026 en Venezuela?",
+        "respuesta": "Aula Magna Universidad Central de Venezuela, Caracas, Venezuela"
+      },
+      {
+        "pregunta": "¿Cúando es el Dante Gebel - Presidante World Tour Despedida 2026 en Venezuela?",
+        "respuesta": "Miercoles 3 y Jueves 4 de Junio 2026"
+      },
+      {
+        "pregunta": "¿Cómo y dónde compro las entradas al Presidante World Tour Despedida 2026?",
+        "respuesta": "Ya se encuentran agotadas las entradas al Presidante World Tour Despedida 2026 en Venezuela [tickets.liveri.com.ve](https://tickets.liveri.com.ve/main-event/6998acf784c5de49f345262d). Acá puedes encontrar otras opciones [ticketera presidantetour](https://presidantetour.com/)"
+      },
+      {
+        "pregunta": "¿Pueden ir menores de edad al Presidante World Tour Despedida 2026?",
+        "respuesta": "No se permite el ingreso a menores de 8 años."
+      }
+    ],
+    "linkBiografia": "",
+    "restriccionesEdad": "",
+    "logisticaHigienicos": "",
+    "imagenTicketera": "https://api.indus3pro.com/eventos/imagenes/ticketera-dante-gebel---presidente-world-tour-despedida.webp",
+    "imagenBiografia": "",
+    "quienEsArtista": "",
+    "mejoresCanciones": [
+      ""
+    ],
+    "historiaArtista": "",
+    "ventaEntradas": "https://presidantetour.com/",
+    "datosCuriosos": "",
+    "keywords": "Evento de Dante Gebel Presidante en Venezuela, Dante Gebel en Caracas, Dante Gebel 2026",
+    "schemaActivo": false,
+    "schemaNombre": "",
+    "schemaDescripcion": "",
+    "schemaTipoFechaInicio": "completa",
+    "schemaFechaInicioVal": "",
+    "schemaHoraInicioVal": "",
+    "schemaTimezoneInicio": "-04:00",
+    "schemaTipoFechaFin": "completa",
+    "schemaFechaFinVal": "",
+    "schemaHoraFinVal": "",
+    "schemaTimezoneFin": "-04:00",
+    "schemaEventStatus": "EventScheduled",
+    "schemaAttendanceMode": "OfflineEventAttendanceMode",
+    "schemaPlaceName": "",
+    "schemaStreetAddress": "",
+    "schemaAddressLocality": "Caracas",
+    "schemaPostalCode": "1060",
+    "schemaAddressRegion": "Miranda",
+    "schemaAddressCountry": "VE",
+    "schemaImagen1x1": "",
+    "schemaImagen4x3": "",
+    "schemaImagen16x9": "",
+    "schemaOfferUrl": "",
+    "schemaOfferPrice": "",
+    "schemaOfferPriceCurrency": "USD",
+    "schemaOfferAvailability": "InStock",
+    "schemaOfferValidFrom": "",
+    "schemaPerformerType": "PerformingGroup",
+    "schemaPerformerName": "",
+    "schemaPerformers": [
+      {
+        "type": "PerformingGroup",
+        "name": "",
+        "sport": "",
+        "jobTitle": ""
+      }
+    ],
+    "schemaOrganizerName": "Indus3",
+    "schemaOrganizerUrl": "https://indus3pro.com",
+    "schemaOrganizers": [
+      {
+        "name": "Indus3",
+        "url": "https://indus3pro.com"
+      }
+    ],
+    "schemaFechaInicio": "",
+    "schemaFechaFin": "",
+    "status": "publicado",
+    "esPasado": true
+  },
+  {
+    "id": "sanluis",
+    "nombreEvento": "SanLuis en Caracas / Venezuela 2026 – Aunque Sea Todo World Tour",
+    "fechaEvento": "24 de Novimienbre 2026",
+    "descripcionEvento": "SanLuis regresa a Caracas con el #AunqueSeaTodoWorldTour este próximo 24 de noviembre en el Teatro Teresa Carreño, en un concierto que promete reunir emoción, recuerdos y todas esas canciones que han acompañado a su público durante años. ✨\n\nSanti y Luigi volverán a encontrarse con sus fanáticos venezolanos en una noche especial donde sonarán éxitos como Se Acabó, Mis Ilusiones, Como Yo y muchos más, en un show pensado para cantar de principio a fin y vivir una experiencia inolvidable en vivo.",
+    "imagenDespuesDescripcion": "",
+    "videoDespuesDescripcion": "",
+    "imagenBanner": "https://api.indus3pro.com/eventos/imagenes/banner-aunque-sea-todo-world-tour---sanluis.webp",
+    "imagenPR": "https://api.indus3pro.com/eventos/imagenes/pr-aunque-sea-todo-world-tour---sanluis.webp",
+    "aperturaPuertas": "",
+    "comienzoShow": "",
+    "lugarEvento": "Teatro Teresa Carreño, Caracas, Venezuela",
+    "flyerEvento": "https://api.indus3pro.com/eventos/imagenes/flyer-aunque-sea-todo-world-tour---sanluis.webp",
+    "patrocinadores": [],
+    "preguntas": [
+      {
+        "pregunta": "¿Cuándo es el concierto de SanLuis en Caracas?",
+        "respuesta": "24 de Noviembre de 2026"
+      },
+      {
+        "pregunta": "¿Dónde será el concierto de SanLuis en Venezuela?",
+        "respuesta": "Teatro Teresa Carreño, Caracas, Venezuela."
+      },
+      {
+        "pregunta": "¿Cómo comprar entradas para SanLuis en Caracas?",
+        "respuesta": "Entradas disponibles en [ticketplate.com](https://ticketplate.com/checkout/san-luis-aunque-sea-todo-world-tour-Caracas-2611142000)\nInformación importante:\n-Hora de acceso: 7:00 pm\n-Inicio del show: 8:00 pm\n-Edad mínima permitida: 14 años",
+        "imagen": "",
+        "imagenes": [
+          "https://api.indus3pro.com/eventos/imagenes/pregunta-sanluis-en-caracas-2026--aunque-sea-todo-world-tour.webp",
+          "https://api.indus3pro.com/eventos/imagenes/vertical-sanluis-en-caracas-2026--aunque-sea-todo-world-tour.webp"
+        ],
+        "columnasImagenes": "2"
+      },
+      {
+        "pregunta": "¿Qué es el Aunque Sea Todo World Tour de SanLuis?",
+        "respuesta": "Es una gira del grupo musical SanLuis, con un itinerario que contempla 40 fechas confirmadas a través de más de 10 países, abarcando territorios en Latinoamérica, Estados Unidos y Europa."
+      },
+      {
+        "pregunta": "¿Quienes producen el evento de SanLuis Aunque Sea Todo World Tour en Caracas?",
+        "respuesta": "[Indus3](https://www.instagram.com/indus3pro/) y [Oz Shows](https://www.instagram.com/ozshows/).",
+        "imagenes": [],
+        "columnasImagenes": "1"
+      }
+    ],
+    "linkBiografia": "",
+    "restriccionesEdad": "",
+    "logisticaHigienicos": "",
+    "imagenTicketera": "",
+    "imagenBiografia": "",
+    "quienEsArtista": "",
+    "mejoresCanciones": [
+      ""
+    ],
+    "historiaArtista": "",
+    "ventaEntradas": "https://ticketplate.com/checkout/san-luis-aunque-sea-todo-world-tour-Caracas-2611142000",
+    "datosCuriosos": "",
+    "keywords": "Sanluis en Venezuela, Sanluis en Caracas, Evento de Sanluis en Venezuela, Evento Sanluis, Sanluis Venezuela 2026, Sanluis Aunque Sea Todo World Tour, Sanluis en Teatro Teresa Carreño, Concierto Sanluis",
+    "schemaActivo": true,
+    "schemaNombre": "SanLuis en Caracas / Venezuela 2026 – Aunque Sea Todo World Tour",
+    "schemaDescripcion": "SanLuis regresa a Caracas con el #AunqueSeaTodoWorldTour este próximo 24 de noviembre en el Teatro Teresa Carreño, en un concierto que promete reunir emoción, recuerdos y todas esas canciones que han acompañado a su público durante años.",
+    "schemaTipoFechaInicio": "completa",
+    "schemaFechaInicioVal": "2026-11-24",
+    "schemaHoraInicioVal": "20:00",
+    "schemaTimezoneInicio": "-04:00",
+    "schemaTipoFechaFin": "completa",
+    "schemaFechaFinVal": "2026-11-24",
+    "schemaHoraFinVal": "22:30",
+    "schemaTimezoneFin": "-04:00",
+    "schemaEventStatus": "EventScheduled",
+    "schemaAttendanceMode": "OfflineEventAttendanceMode",
+    "schemaPlaceName": "Teatro Teresa Carreño",
+    "schemaStreetAddress": "Final Av Paseo Colón, Calle Las Artes, Nivel PB",
+    "schemaAddressLocality": "Caracas",
+    "schemaPostalCode": "1010",
+    "schemaAddressRegion": "Distrito Capital",
+    "schemaAddressCountry": "VE",
+    "schemaImagen1x1": "",
+    "schemaImagen4x3": "https://api.indus3pro.com/eventos/imagenes/pregunta-sanluis-en-caracas-2026--aunque-sea-todo-world-tour.webp",
+    "schemaImagen16x9": "https://api.indus3pro.com/eventos/imagenes/vertical-sanluis-en-caracas-2026--aunque-sea-todo-world-tour.webp",
+    "schemaOfferUrl": "https://ticketplate.com/checkout/san-luis-aunque-sea-todo-world-tour-Caracas-2611142000",
+    "schemaOfferPrice": "54",
+    "schemaOfferPriceCurrency": "EUR",
+    "schemaOfferAvailability": "PreOrder",
+    "schemaOfferValidFrom": "2026-05-18",
+    "schemaPerformerType": "PerformingGroup",
+    "schemaPerformerName": "",
+    "schemaPerformers": [
+      {
+        "type": "PerformingGroup",
+        "name": "SanLuis",
+        "sport": "",
+        "jobTitle": ""
+      }
+    ],
+    "schemaOrganizerName": "Indus3",
+    "schemaOrganizerUrl": "https://indus3pro.com",
+    "schemaOrganizers": [
+      {
+        "name": "Indus3",
+        "url": "https://indus3pro.com"
+      }
+    ],
+    "schemaFechaInicio": "2026-11-24T20:00:00-04:00",
+    "schemaFechaFin": "2026-11-24T22:30:00-04:00",
+    "status": "publicado"
+  },
+  {
+    "id": "greeicy",
+    "nombreEvento": "Greeicy en Caracas y Maracaibo / Venezuela 2026 – Candela World Tour",
+    "fechaEvento": "Sabado 24 y Domingo 25 de Octubre 2026",
+    "descripcionEvento": "Venezuela tendrá dos fechas en su gira mundial, así que pendientes que pronto inicia la venta de entradas y más sorpresas de lo que nos trae en está oportunidad nuestra consentida.",
+    "imagenBanner": "https://api.indus3pro.com/eventos/imagenes/banner-greeicy-en-caracas-y-maracaibo--venezuela-2026--candela-world-tour.webp",
+    "imagenPR": "https://api.indus3pro.com/eventos/imagenes/banner-greeicy-en-caracas-y-maracaibo--venezuela-2026--candela-world-tour.webp",
+    "aperturaPuertas": "",
+    "comienzoShow": "",
+    "lugarEvento": "Poliedro de Caracas y Palacio de los Eventos",
+    "flyerEvento": "https://api.indus3pro.com/eventos/imagenes/banner-greeicy-en-caracas-y-maracaibo--venezuela-2026--candela-world-tour.webp",
+    "patrocinadores": [],
+    "preguntas": [
+      {
+        "pregunta": "¿Dónde y Cuándo es Greeicy Candela World Tour en Venezuela?",
+        "respuesta": "El 24 de Octubre del 2026, Poliedro de Caracas, Caracas, Venezuela.\nEl 25 de Octubre del 2026, Palacio de Eventos, Maracaibo, Venezuela.",
+        "imagenes": [
+          "https://api.indus3pro.com/eventos/imagenes/flyer-greeicy-en-caracas-y-maracaibo--venezuela-2026--candela-world-tour.webp",
+          "https://api.indus3pro.com/eventos/imagenes/pregunta-greeicy-en-caracas-y-maracaibo--venezuela-2026--candela-world-tour.webp"
+        ],
+        "columnasImagenes": "2",
+        "imagen": ""
+      },
+      {
+        "pregunta": "¿Quienes producen el evento de Greeicy Candela World Tour en Venezuela?",
+        "respuesta": "[Indus3](https://www.instagram.com/indus3pro/), [Oz Shows](https://www.instagram.com/ozshows/), [Massivo](https://www.instagram.com/massivo_/) y [Daher Live](https://www.instagram.com/daherlive/).",
+        "imagenes": [],
+        "columnasImagenes": "1"
+      },
+      {
+        "pregunta": "¿Cómo y dónde compro las entradas al concierto de Greeicy en Caracas y Maracaibo en Venezuela?",
+        "respuesta": "Caracas [tickets.liveri.com.ve](https://tickets.liveri.com.ve/tickets/6a1e4141d2e51ea331288a57)\nMaracaibo [MDTicket.com](https://www.mdticket.com/tienda/evento/greeicycandelaworldtour/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGn_0WDRfjxehiyGfRZfaLbdXAvhd8apS_a1kSnxCaavrUWFvfp6O0K0anngVo_aem_JleQELZI4pbH0jt6Y4BQLA)",
+        "imagenes": [],
+        "columnasImagenes": "1"
+      }
+    ],
+    "linkBiografia": "",
+    "restriccionesEdad": "",
+    "logisticaHigienicos": "",
+    "imagenTicketera": "https://api.indus3pro.com/eventos/imagenes/banner-greeicy-en-caracas-y-maracaibo--venezuela-2026--candela-world-tour.webp",
+    "imagenBiografia": "",
+    "quienEsArtista": "",
+    "mejoresCanciones": [
+      ""
+    ],
+    "historiaArtista": "",
+    "ventaEntradas": "",
+    "datosCuriosos": "",
+    "keywords": "Greeicy, Greeicy en Caracas, Evento Greeicy, Indus3 Greeicy",
+    "schemaActivo": false,
+    "schemaNombre": "",
+    "schemaDescripcion": "",
+    "schemaTipoFechaInicio": "completa",
+    "schemaFechaInicioVal": "",
+    "schemaHoraInicioVal": "",
+    "schemaTimezoneInicio": "-04:00",
+    "schemaTipoFechaFin": "completa",
+    "schemaFechaFinVal": "",
+    "schemaHoraFinVal": "",
+    "schemaTimezoneFin": "-04:00",
+    "schemaEventStatus": "EventScheduled",
+    "schemaAttendanceMode": "OfflineEventAttendanceMode",
+    "schemaPlaceName": "",
+    "schemaStreetAddress": "",
+    "schemaAddressLocality": "Caracas",
+    "schemaPostalCode": "1060",
+    "schemaAddressRegion": "Miranda",
+    "schemaAddressCountry": "VE",
+    "schemaImagen1x1": "",
+    "schemaImagen4x3": "",
+    "schemaImagen16x9": "",
+    "schemaOfferUrl": "",
+    "schemaOfferPrice": "",
+    "schemaOfferPriceCurrency": "USD",
+    "schemaOfferAvailability": "InStock",
+    "schemaOfferValidFrom": "",
+    "schemaPerformerType": "PerformingGroup",
+    "schemaPerformerName": "",
+    "schemaPerformers": [
+      {
+        "type": "PerformingGroup",
+        "name": "",
+        "sport": "",
+        "jobTitle": ""
+      }
+    ],
+    "schemaOrganizerName": "Indus3",
+    "schemaOrganizerUrl": "https://indus3pro.com",
+    "schemaOrganizers": [
+      {
+        "name": "Indus3",
+        "url": "https://indus3pro.com"
+      }
+    ],
+    "schemaFechaInicio": "",
+    "schemaFechaFin": "",
+    "imagenDespuesDescripcion": "",
+    "videoDespuesDescripcion": "",
+    "status": "publicado"
+  },
+  {
+    "id": "vgs",
+    "nombreEvento": "Venezuela Game Show 2026",
+    "fechaEvento": "16, 17 y 18 de Octubre 2026",
+    "descripcionEvento": "La 6ta edición del Venezuela Game Show",
+    "imagenBanner": "https://api.indus3pro.com/eventos/imagenes/banner-venezuela-game-show-2026.webp",
+    "imagenPR": "https://api.indus3pro.com/eventos/imagenes/banner-venezuela-game-show-2026.webp",
+    "aperturaPuertas": "",
+    "comienzoShow": "",
+    "lugarEvento": "Centro Comercial Parque Cerro Verde",
+    "flyerEvento": "",
+    "patrocinadores": [],
+    "preguntas": [
+      {
+        "pregunta": "¿Qué es el Venezuela Game Show?",
+        "respuesta": "El evento GAMER, ESPORTS & COSPLAY más grande de Venezuela.",
+        "imagenes": [],
+        "columnasImagenes": "1"
+      },
+      {
+        "pregunta": "¿Donde es el Venezuela Game Show 2026?",
+        "respuesta": "Centro Comercial Parque Cerro Verde.",
+        "imagenes": [],
+        "columnasImagenes": "1"
+      },
+      {
+        "pregunta": "¿Cúando es el Venezuela Game Show 2026?",
+        "respuesta": "16, 17 y 18 de Octubre 2026",
+        "imagenes": [],
+        "columnasImagenes": "1"
+      },
+      {
+        "pregunta": "¿Quien hace/produce la Venezuela Game Show 2026?",
+        "respuesta": "[Indus3](https://www.instagram.com/indus3pro/) y [Daher Live](https://www.instagram.com/daherlive/).",
+        "imagenes": [],
+        "columnasImagenes": "1"
+      }
+    ],
+    "linkBiografia": "",
+    "restriccionesEdad": "",
+    "logisticaHigienicos": "",
+    "imagenTicketera": "https://api.indus3pro.com/eventos/imagenes/banner-venezuela-game-show-2026.webp",
+    "imagenBiografia": "",
+    "quienEsArtista": "",
+    "mejoresCanciones": [
+      ""
+    ],
+    "historiaArtista": "",
+    "ventaEntradas": "",
+    "datosCuriosos": "",
+    "keywords": "Venezuela Game Show, Cosplay, VGS, VGS E6",
+    "schemaActivo": false,
+    "schemaNombre": "",
+    "schemaDescripcion": "",
+    "schemaTipoFechaInicio": "completa",
+    "schemaFechaInicioVal": "",
+    "schemaHoraInicioVal": "",
+    "schemaTimezoneInicio": "-04:00",
+    "schemaTipoFechaFin": "completa",
+    "schemaFechaFinVal": "",
+    "schemaHoraFinVal": "",
+    "schemaTimezoneFin": "-04:00",
+    "schemaEventStatus": "EventScheduled",
+    "schemaAttendanceMode": "OfflineEventAttendanceMode",
+    "schemaPlaceName": "",
+    "schemaStreetAddress": "",
+    "schemaAddressLocality": "Caracas",
+    "schemaPostalCode": "1060",
+    "schemaAddressRegion": "Miranda",
+    "schemaAddressCountry": "VE",
+    "schemaImagen1x1": "",
+    "schemaImagen4x3": "",
+    "schemaImagen16x9": "",
+    "schemaOfferUrl": "",
+    "schemaOfferPrice": "",
+    "schemaOfferPriceCurrency": "USD",
+    "schemaOfferAvailability": "InStock",
+    "schemaOfferValidFrom": "",
+    "schemaPerformerType": "PerformingGroup",
+    "schemaPerformerName": "",
+    "schemaPerformers": [
+      {
+        "type": "PerformingGroup",
+        "name": "",
+        "sport": "",
+        "jobTitle": ""
+      }
+    ],
+    "schemaOrganizerName": "Indus3",
+    "schemaOrganizerUrl": "https://indus3pro.com",
+    "schemaOrganizers": [
+      {
+        "name": "Indus3",
+        "url": "https://indus3pro.com"
+      }
+    ],
+    "schemaFechaInicio": "",
+    "schemaFechaFin": ""
+  },
+  {
+    "id": "andres-parra",
+    "nombreEvento": "Andrés Parra Venga Que Si Es Pa' Eso",
+    "fechaEvento": "25 de Noviembre 2026",
+    "descripcionEvento": "Andrés Parra llega con \"Venga que sí es pa' eso\", un espectáculo único donde el humor, la reflexión y las experiencias personales se unen para ofrecer una noche diferente. A través de anécdotas, observaciones sobre la vida cotidiana y momentos profundamente humanos, el reconocido actor colombiano invita al público a reír, pensar y conectar consigo mismo en una experiencia llena de autenticidad y emoción.",
+    "imagenBanner": "https://api.indus3pro.com/eventos/imagenes/banner-andres-parra-venga-que-si-es-pa-eso.webp",
+    "imagenPR": "https://api.indus3pro.com/eventos/imagenes/banner-andres-parra-venga-que-si-es-pa-eso.webp",
+    "aperturaPuertas": "17:30",
+    "comienzoShow": "19:30",
+    "lugarEvento": "Teatro Teresa Carreño, Caracas, Venezuela",
+    "flyerEvento": "https://api.indus3pro.com/eventos/imagenes/flyer-andres-parra-venga-que-si-es-pa-eso.webp",
+    "patrocinadores": [],
+    "preguntas": [
+      {
+        "pregunta": "¿Qué es \"Venga que sí es pa' eso\" de Andrés Parra?",
+        "respuesta": "\"Venga que sí es pa' eso\" es el espectáculo unipersonal del actor colombiano Andrés Parra, reconocido internacionalmente por sus interpretaciones en cine, televisión y teatro. En esta propuesta, Parra se aleja de los personajes para compartir su propia historia, combinando humor, vulnerabilidad y reflexiones sobre los desafíos que todos enfrentamos en algún momento de la vida.\n\nA lo largo del show, el actor aborda temas como el miedo, la soledad, la ansiedad, la búsqueda de propósito y el encuentro con uno mismo, siempre desde una perspectiva cercana, entretenida y cargada de humanidad. Con su característico carisma, transforma experiencias personales y situaciones cotidianas en relatos que generan risas, identificación y momentos de profunda reflexión.\n\nMás que un espectáculo de comedia tradicional, \"Venga que sí es pa' eso\" es una invitación a observar la vida desde otro lugar. Andrés Parra comparte parte de su propio proceso de transformación personal, mostrando cómo incluso los momentos más difíciles pueden convertirse en oportunidades de crecimiento y aprendizaje.\n\nEl resultado es una experiencia emotiva, divertida e inspiradora que conecta con públicos de todas las edades y que ha sido recibida con entusiasmo en diferentes escenarios de Latinoamérica.",
+        "imagenes": [
+          "https://api.indus3pro.com/eventos/imagenes/flyer-andres-parra-venga-que-si-es-pa-eso.webp"
+        ],
+        "columnasImagenes": "1",
+        "imagen": ""
+      },
+      {
+        "pregunta": "Sobre Andrés Parra",
+        "respuesta": "Andrés Parra es uno de los actores colombianos más reconocidos de Latinoamérica. A lo largo de su carrera ha protagonizado exitosas producciones de cine, televisión y teatro, alcanzando reconocimiento internacional por interpretaciones memorables que lo han convertido en una de las figuras más destacadas de la actuación en habla hispana.\n\nAdemás de su trayectoria artística, Parra ha desarrollado una faceta más personal y reflexiva que hoy comparte con el público a través de \"Venga que sí es pa' eso\", un espectáculo donde combina humor, experiencias de vida y aprendizaje personal en una propuesta única.\n\nConoce la biografía completa de [Andrés Parra](https://indus3pro.com/biografias/andres-parra/)",
+        "imagenes": [],
+        "columnasImagenes": "1"
+      },
+      {
+        "pregunta": "¿Cómo y dónde compro las entradas al Venga que si es pa' eso de Andrés Parra?",
+        "respuesta": "Ya se encuentran disponibles las entradas al Venga que si es pa' eso de Andrés Parra en Venezuela [tickets.indus3pro.com](https://tickets.indus3pro.com/checkout/andres-parra-venga-que-si-es-pa-eso-202611251930).",
+        "imagenes": [],
+        "columnasImagenes": "1"
+      }
+    ],
+    "linkBiografia": "",
+    "restriccionesEdad": "",
+    "logisticaHigienicos": "",
+    "imagenTicketera": "https://api.indus3pro.com/eventos/imagenes/banner-andres-parra-venga-que-si-es-pa-eso.webp",
+    "imagenBiografia": "",
+    "quienEsArtista": "",
+    "mejoresCanciones": [
+      ""
+    ],
+    "historiaArtista": "",
+    "ventaEntradas": "",
+    "datosCuriosos": "",
+    "keywords": "andres parra en venezuela, andres parra en caracas, andres parra concierto, andres parra tour venezuela",
+    "schemaActivo": true,
+    "schemaNombre": "Venga Que Si Es Pa' Eso",
+    "schemaDescripcion": "Andrés Parra llega con \"Venga que sí es pa' eso\", un espectáculo único donde el humor, la reflexión y las experiencias personales se unen para ofrecer una noche diferente. A través de anécdotas, observaciones sobre la vida cotidiana y momentos profundamente humanos, el reconocido actor colombiano invita al público a reír, pensar y conectar consigo mismo en una experiencia llena de autenticidad y emoción.",
+    "schemaTipoFechaInicio": "completa",
+    "schemaFechaInicioVal": "2026-09-25",
+    "schemaHoraInicioVal": "19:30",
+    "schemaTimezoneInicio": "-04:00",
+    "schemaTipoFechaFin": "completa",
+    "schemaFechaFinVal": "",
+    "schemaHoraFinVal": "22:30",
+    "schemaTimezoneFin": "-04:00",
+    "schemaEventStatus": "EventScheduled",
+    "schemaAttendanceMode": "OfflineEventAttendanceMode",
+    "schemaPlaceName": "Teatro Teresa Carreño",
+    "schemaStreetAddress": "avenida Paseo de la Resistencia Indígena, en el sector de Bellas Artes",
+    "schemaAddressLocality": "Caracas",
+    "schemaPostalCode": "1010",
+    "schemaAddressRegion": "Miranda",
+    "schemaAddressCountry": "VE",
+    "schemaImagen1x1": "",
+    "schemaImagen4x3": "https://api.indus3pro.com/eventos/imagenes/schema-andrs-parra-venga-que-si-es-pa-eso.webp",
+    "schemaImagen16x9": "https://api.indus3pro.com/eventos/imagenes/schema-andrs-parra-venga-que-si-es-pa-eso.webp",
+    "schemaOfferUrl": "https://tickets.indus3pro.com/checkout/andres-parra-venga-que-si-es-pa-eso-202611251930",
+    "schemaOfferPrice": "30",
+    "schemaOfferPriceCurrency": "USD",
+    "schemaOfferAvailability": "InStock",
+    "schemaOfferValidFrom": "2026-06-10",
+    "schemaPerformerType": "PerformingGroup",
+    "schemaPerformerName": "",
+    "schemaPerformers": [
+      {
+        "type": "Person",
+        "name": "Andrés Parra",
+        "sport": "",
+        "jobTitle": "Artista"
+      }
+    ],
+    "schemaOrganizerName": "Indus3",
+    "schemaOrganizerUrl": "https://indus3pro.com",
+    "schemaOrganizers": [
+      {
+        "name": "Indus3",
+        "url": "https://indus3pro.com"
+      }
+    ],
+    "schemaFechaInicio": "2026-09-25T19:30:00-04:00",
+    "schemaFechaFin": ""
   }
 ]

@@ -12,7 +12,10 @@ import LogoCard from "@components/logo/LogoCard.astro";
 import { getEventos } from "@stores/eventos";
 
 
-const eventsData = await getEventos();
+const allEvents = await getEventos();
+const eventsData = allEvents.filter(e => e.status !== 'draft' && e.id !== '__indus3_past_events_order__' && !e.esPasado);
+const orderObj = allEvents.find(e => e.id === '__indus3_past_events_order__');
+const savedOrder: string[] = orderObj?.orderList || [];
 
 const seoTitle = "Eventos | Indus3";
 const seoDesc =
@@ -29,6 +32,16 @@ try {
 } catch (error) {
   console.error("Error reading clients directory 3:", error);
 }
+
+const apiPastEvents = allEvents
+  .filter(e => e.status !== 'draft' && e.id !== '__indus3_past_events_order__' && e.esPasado)
+  .map(e => ({
+    id: String(e.id),
+    image: e.flyerEvento || e.imagenPR || e.imagenBanner,
+    title: e.nombreEvento,
+    link: `${baseUrl}/eventos/${e.id}`,
+  }));
+
 const eventosPasados = files
   .filter((file) => /\.(webp|png|jpg|jpeg|svg)$/i.test(file))
   .map((file) => {
@@ -37,6 +50,7 @@ const eventosPasados = files
     const title = nameWithoutExt.replace(/^Logo-/i, "").replace(/-/g, " ");
 
     return {
+      id: `pasado-${file}`,
       image: `${baseUrl}/eventos-pasados/${file}`,
       title: title,
       link: "/#",
@@ -48,7 +62,7 @@ let files2: string[] = [];
 try {
   files2 = fs.readdirSync(clientesDir2);
   if (files2.length === 0)
-    console.warn("Warning: No files found in", clientesDir);
+    console.warn("Warning: No files found in", clientesDir2);
 } catch (error) {
   console.error("Error reading clients directory 3:", error);
 }
@@ -60,11 +74,25 @@ const eventosPasados2 = files2
     const title = nameWithoutExt.replace(/^Logo-/i, "").replace(/-/g, " ");
 
     return {
+      id: `antiguo-${file}`,
       image: `${baseUrl}/eventos-pasados/eventos-mas-antiguos/${file}`,
       title: title,
       link: "/#",
     };
   });
+
+const combinedPastEvents = [...apiPastEvents, ...eventosPasados, ...eventosPasados2];
+const orderMap = new Map();
+savedOrder.forEach((id, idx) => orderMap.set(String(id), idx));
+
+const sortedPastEvents = [...combinedPastEvents].sort((a, b) => {
+  const indexA = orderMap.has(String(a.id)) ? orderMap.get(String(a.id)) : -1;
+  const indexB = orderMap.has(String(b.id)) ? orderMap.get(String(b.id)) : -1;
+  if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+  if (indexA !== -1) return -1;
+  if (indexB !== -1) return 1;
+  return 0;
+});
 
 
 const base = import.meta.env.BASE_URL;
@@ -130,12 +158,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       <h2>Eventos Pasados</h2>
       <p>Descubre los eventos que hemos realizado en el pasado.</p>
       {
-        eventosPasados.length > 0 ? (
+        sortedPastEvents.length > 0 ? (
           <BodyGrid columns={3} mobile={2} >
-            {eventosPasados.map((event) => (
-              <img src={event.image} alt={event.title} class="past-event-img" />
-            ))}
-            {eventosPasados2.map((event) => (
+            {sortedPastEvents.map((event) => (
               <img src={event.image} alt={event.title} class="past-event-img" />
             ))}
           </BodyGrid>

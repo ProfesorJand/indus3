@@ -93,8 +93,20 @@ const cards = [
   }
 ];
 
+const allEventsHome = await getEventos();
+const pastEventTitlesHome = allEventsHome
+  .filter(e => e.esPasado)
+  .map(e => (e.nombreEvento || '').toLowerCase().trim());
+
 const backendSliders = await getSliders();
 let finalCards = backendSliders && backendSliders.length > 0 ? backendSliders : cards;
+
+finalCards = finalCards.filter(c => {
+  if (c.status === 'draft') return false;
+  const slideTitle = (c.title || '').toLowerCase().trim();
+  if (pastEventTitlesHome.includes(slideTitle)) return false;
+  return true;
+});
 
 finalCards = finalCards.sort((a, b) => {
   const orderA = parseInt(a.order) || 0;
@@ -132,10 +144,10 @@ const clientes = files
 
 const base = import.meta.env.BASE_URL;
 
-const eventsData = await getEventos();
+const eventsData = allEventsHome.filter(e => e.status !== 'draft' && e.id !== '__indus3_past_events_order__' && !e.esPasado);
 const recentEvents = eventsData.slice(0, 3);
 
-const biografiasData = await getBiografias();
+const biografiasData = (await getBiografias()).filter(b => b.status !== 'draft');
 const recentBios = biografiasData.slice(0, 5);
 
 const eventosPasadosDir = path.resolve(projectRoot, "public/eventos-pasados");
@@ -146,18 +158,44 @@ try {
 } catch (error) {
   console.error("Error reading eventos-pasados directory:", error);
 }
-const eventosPasados = eventosPasadosFiles
+
+const apiPastEventsHome = allEventsHome
+  .filter(e => e.status !== 'draft' && e.id !== '__indus3_past_events_order__' && e.esPasado)
+  .map(e => ({
+    id: String(e.id),
+    image: e.flyerEvento || e.imagenPR || e.imagenBanner,
+    title: e.nombreEvento,
+  }));
+
+const staticPastEventsHome = eventosPasadosFiles
   .filter((file) => /\.(webp|png|jpg|jpeg|svg)$/i.test(file))
-  .slice(0, 4)
   .map((file) => {
     const nameWithoutExt = file.replace(/\.[^/.]+$/, "");
     const title = nameWithoutExt.replace(/-/g, " ");
 
     return {
+      id: `pasado-${file}`,
       image: `${baseUrl}/eventos-pasados/${file}`,
       title: title,
     };
   });
+
+const pastOrderObj = allEventsHome.find(e => e.id === '__indus3_past_events_order__');
+const pastOrderList = pastOrderObj?.orderList || [];
+const pastOrderMap = new Map();
+pastOrderList.forEach((id, idx) => pastOrderMap.set(String(id), idx));
+
+const combinedPastEventsHome = [...apiPastEventsHome, ...staticPastEventsHome];
+const sortedPastEventsHome = combinedPastEventsHome.sort((a, b) => {
+  const indexA = pastOrderMap.has(String(a.id)) ? pastOrderMap.get(String(a.id)) : -1;
+  const indexB = pastOrderMap.has(String(b.id)) ? pastOrderMap.get(String(b.id)) : -1;
+  if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+  if (indexA !== -1) return -1;
+  if (indexB !== -1) return 1;
+  return 0;
+});
+
+const eventosPasados = sortedPastEventsHome.slice(0, 4);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 

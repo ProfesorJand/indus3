@@ -7,6 +7,8 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
     nombreEvento: '',
     fechaEvento: '',
     descripcionEvento: '',
+    imagenDespuesDescripcion: '',
+    videoDespuesDescripcion: '',
     imagenBanner: '',
     imagenPR: '',
     aperturaPuertas: '',
@@ -66,7 +68,8 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
       { name: 'Indus3', url: 'https://indus3pro.com' }
     ],
     schemaFechaInicio: '', // Campo consolidado final
-    schemaFechaFin: '' // Campo consolidado final
+    schemaFechaFin: '', // Campo consolidado final
+    status: 'publicado'
   };
 
   const [formData, setFormData] = useState(() => {
@@ -101,7 +104,7 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
     if (!file) return;
 
     if (!formData.nombreEvento) {
-      alert("Por favor ingresa primero el nombre del evento para nombrar correctamente la imagen.");
+      alert("Por favor ingresa primero el nombre del evento para nombrar correctamente la imagen o video.");
       return;
     }
 
@@ -111,7 +114,8 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
     uploadData.append('category', 'eventos');
     uploadData.append('type', type);
 
-    setStatus('Subiendo imagen...');
+    const isVideo = file.type.startsWith('video/') || type === 'video';
+    setStatus(isVideo ? 'Subiendo video...' : 'Subiendo imagen...');
     try {
       const res = await fetch('https://api.indus3pro.com/upload-image.php', {
         method: 'POST',
@@ -153,13 +157,13 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
         } else {
           setFormData(prev => ({ ...prev, [fieldName]: data.url }));
         }
-        setStatus('Imagen subida con éxito.');
+        setStatus(isVideo ? 'Video subido con éxito.' : 'Imagen subida con éxito.');
       } else {
         setStatus('Error: ' + data.message);
       }
     } catch (err) {
       console.error(err);
-      setStatus('Error al conectar con el servidor de subida.');
+      setStatus(isVideo ? 'Error al conectar con el servidor de subida de video.' : 'Error al conectar con el servidor de subida.');
     }
   };
 
@@ -416,11 +420,25 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
           </div>
 
           <div className={styles.field}>
-            <input type="text" name="imagenDespuesDescripcion" value={formData.imagenDespuesDescripcion} onChange={handleChange} placeholder="https://..." />
-            <label className={styles.uploadBtn}>
-              <input type="file" onChange={(e) => handleFileUpload(e, 'imagenDespuesDescripcion', 'vertical')} accept="image/*" style={{ display: 'none' }} />
-              <span>Subir</span>
-            </label>
+            <label>Imagen Después de la Descripción (URL o Subir)</label>
+            <div className={styles.inputWithButton}>
+              <input type="text" name="imagenDespuesDescripcion" value={formData.imagenDespuesDescripcion || ''} onChange={handleChange} placeholder="https://..." />
+              <label className={styles.uploadBtn}>
+                <input type="file" onChange={(e) => handleFileUpload(e, 'imagenDespuesDescripcion', 'vertical')} accept="image/*" style={{ display: 'none' }} />
+                <span>Subir</span>
+              </label>
+            </div>
+          </div>
+
+          <div className={styles.field}>
+            <label>Video Después de la Descripción (MP4 u otros formatos)</label>
+            <div className={styles.inputWithButton}>
+              <input type="text" name="videoDespuesDescripcion" value={formData.videoDespuesDescripcion || ''} onChange={handleChange} placeholder="https://..." />
+              <label className={styles.uploadBtn}>
+                <input type="file" onChange={(e) => handleFileUpload(e, 'videoDespuesDescripcion', 'video')} accept="video/*" style={{ display: 'none' }} />
+                <span>Subir</span>
+              </label>
+            </div>
           </div>
         </div>
 
@@ -1313,6 +1331,19 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
             </div>
           );
         })()}
+
+        <div className={styles.section}>
+          <h3>Estado de Publicación</h3>
+          <div className={styles.grid}>
+            <div className={styles.field}>
+              <label>Estado del Evento</label>
+              <select name="status" value={formData.status || 'publicado'} onChange={handleChange} style={{ width: '100%', padding: '12px', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', color: 'white', border: '1px solid rgba(255,255,255,0.1)' }}>
+                <option value="publicado">Publicado</option>
+                <option value="draft">Borrador (Draft)</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
         <div className={styles.actions}>
           <button type="submit" className={styles.btnSubmit}>

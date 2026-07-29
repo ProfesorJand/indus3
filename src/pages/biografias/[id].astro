@@ -16,7 +16,7 @@ import OrganizationSchema from "@components/seo/OrganizationSchema.astro";
 import InstagramReel from "@components/base/InstagramReel.astro";
 
 export async function getStaticPaths() {
-  const biografias = await getBiografias();
+  const biografias = (await getBiografias()).filter(b => b.status !== 'draft');
   return biografias.map((bio) => ({
     params: { id: bio.id },
     props: { bio },

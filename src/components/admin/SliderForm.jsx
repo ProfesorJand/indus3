@@ -8,7 +8,8 @@ const SliderForm = ({ sliderToEdit = null, onSuccess }) => {
     image: sliderToEdit?.image || '',
     fechaEvento: sliderToEdit?.fechaEvento || '',
     order: sliderToEdit?.order || 0,
-    actions: sliderToEdit?.actions || []
+    actions: sliderToEdit?.actions || [],
+    status: sliderToEdit?.status || 'publicado'
   };
 
   const [formData, setFormData] = useState(initialState);
@@ -142,6 +143,17 @@ const SliderForm = ({ sliderToEdit = null, onSuccess }) => {
                 <span>Subir</span>
               </label>
             </div>
+          </div>
+        </div>
+
+        <div className="form-section">
+          <h2>Estado de Publicación</h2>
+          <div className="form-group">
+            <label>Estado</label>
+            <select name="status" value={formData.status} onChange={handleChange}>
+              <option value="publicado">Publicado</option>
+              <option value="draft">Borrador (Draft)</option>
+            </select>
           </div>
         </div>
 

@@ -342,3 +342,26 @@
     display: none;
   }
 }
+
+.draftRow {
+  background: rgba(245, 158, 11, 0.04) !important;
+}
+
+.draftRow td:first-child {
+  border-left: 4px solid #f59e0b;
+}
+
+.draftBadge {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-left: 8px;
+  display: inline-block;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+}

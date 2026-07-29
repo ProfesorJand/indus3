@@ -23,7 +23,8 @@ const BioForm = ({ bioToEdit = null, onSuccess }) => {
     instagramReelId: bioToEdit?.instagramReelId || '',
     instagramReelVideo: bioToEdit?.instagramReelVideo || '',
     relatedEventUrl: bioToEdit?.relatedEventUrl || '',
-    relatedEventName: bioToEdit?.relatedEventName || ''
+    relatedEventName: bioToEdit?.relatedEventName || '',
+    status: bioToEdit?.status || 'publicado'
   };
 
   const [formData, setFormData] = useState(initialState);
@@ -296,6 +297,17 @@ const BioForm = ({ bioToEdit = null, onSuccess }) => {
                  </label>
                </div>
              </div>
+          </div>
+        </div>
+
+        <div className="form-section">
+          <h2>Estado de Publicación</h2>
+          <div className="form-group">
+            <label>Estado</label>
+            <select name="status" value={formData.status} onChange={handleChange}>
+              <option value="publicado">Publicado</option>
+              <option value="draft">Borrador (Draft)</option>
+            </select>
           </div>
         </div>
 

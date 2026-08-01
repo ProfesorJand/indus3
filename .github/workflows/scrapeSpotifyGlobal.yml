@@ -2,8 +2,7 @@ name: Scraping Top 50 Spotify Daily y Mensual
 
 on:
   schedule:
-    - cron: "0 0 1 * *"   # día 1 de cada mes
-    - cron: "0 0 * * *"   # todos los días
+    - cron: "1 4 * * *"   # todos los días 00:01 de Venezuela
   workflow_dispatch:
 
 # 🟢 IMPORTANTE: Permisos para que la Action pueda guardar archivos
@@ -33,12 +32,16 @@ jobs:
 
       # 🟢 Script día 1
       - name: Ejecutar scrapeSpotifyNew.js
-        if: github.event.schedule == '0 0 1 * *'
-        run: node scrapeSpotifyNew.js
+        run: |
+          if [ "$(TZ=America/Caracas date +%d)" = "01" ]; then
+            echo "Es el día 1, ejecutando scrapeSpotifyNew.js..."
+            node scrapeSpotifyNew.js
+          else
+            echo "No es día 1, se omite scrapeSpotifyNew."
+          fi
 
       # 🔵 Script diario / General
       - name: Ejecutar scrapeSpotifyGlobalSimple.js
-        if: github.event.schedule == '0 0 * * *' || github.event_name == 'workflow_dispatch'
         run: node scrapeSpotifyGlobalSimple.js
 
       # 🚀 PASO CLAVE: Guardar cambios en el repositorio

@@ -10,43 +10,44 @@ async function fetchWithRetry(url, options, retries = 3) {
   for (let i = 0; i < retries; i++) {
     try {
       const res = await fetch(url, options);
-      if (!res.ok) throw new Error(`HTTP Error: ${res.status}`);
-      return res;
+      const text = await res.text();
+
+      if (!res.ok) {
+        throw new Error(`HTTP Error: ${res.status} - ${text.slice(0, 150)}`);
+      }
+
+      try {
+        const json = JSON.parse(text);
+        return json;
+      } catch (err) {
+        throw new Error(`El servidor no devolvió un JSON válido. Respuesta del servidor (primeros 200 caracteres): ${text.slice(0, 200)}`);
+      }
     } catch (error) {
-      console.log(`Intento ${i + 1} falló: ${error.message}. Reintentando...`);
+      console.log(`Intento ${i + 1} falló: ${error.message}. Reintentando en 3s...`);
       if (i === retries - 1) throw error;
-      await new Promise(res => setTimeout(res, 2000));
+      await new Promise(res => setTimeout(res, 3000));
     }
   }
 }
 
 try {
-  const res = await fetchWithRetry("https://api.indus3pro.com/eventos/get-eventos.php?t="+Date.now(), {
+  const json = await fetchWithRetry("https://api.indus3pro.com/eventos/get-eventos.php?t="+Date.now(), {
     headers: {
-      Authorization: `Bearer ${process.env.PUBLIC_BACKEND_AUTH_KEY}`
+      "Authorization": `Bearer ${process.env.PUBLIC_BACKEND_AUTH_KEY}`,
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+      "Accept": "application/json"
     }
   });
 
-  const text = await res.text();
+  if (!json || !json.data) {
+    console.error("Respuesta inválida:", json);
+    process.exit(1); // 👈 corta el build con error claro
+  }
 
-
-let json;
-
-try {
-  json = JSON.parse(text);
-} catch (e) {
-  console.error("No es JSON válido");
-  process.exit(1);
-}
-
-if (!json || !json.data) {
-  console.error("Respuesta inválida:", json);
-  process.exit(1); // 👈 corta el build con error claro
-}
-
-fs.writeFileSync("./src/data/eventos.json", JSON.stringify(json.data, null, 2));
+  fs.writeFileSync("./src/data/eventos.json", JSON.stringify(json.data, null, 2));
+  console.log(`✅ Eventos guardados correctamente (${json.data.length} eventos).`);
 
 } catch (error) {
-  console.error("Fallo crítico al hacer fetch de Eventos:", error);
+  console.error("❌ Fallo crítico al hacer fetch de Eventos:", error.message || error);
   process.exit(1);
 }

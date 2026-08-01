@@ -315,11 +315,11 @@ function saveResults(data) {
     existingData = [];
   }
 
-  const newData = [...existingData];
+  let newData = [...existingData];
 
   for (const newItem of data) {
     const index = newData.findIndex(
-      (item) => item.url === newItem.url && item.date === newItem.date
+      (item) => item.url === newItem.url && (item.date || item.month) === (newItem.date || newItem.month)
     );
 
     if (index !== -1) {
@@ -329,8 +329,31 @@ function saveResults(data) {
     }
   }
 
+  // 🧹 Limpieza: Mantener únicamente los registros de las 2 fechas/meses más recientes
+  const uniqueDates = [
+    ...new Set(newData.map((item) => item.date || item.month)),
+  ]
+    .filter(Boolean)
+    .sort()
+    .reverse();
+
+  const allowedDates = new Set(uniqueDates.slice(0, 2));
+  const beforeCount = newData.length;
+
+  newData = newData.filter((item) =>
+    allowedDates.has(item.date || item.month)
+  );
+
+  if (beforeCount > newData.length) {
+    console.log(
+      `🧹 Limpieza de historial: se mantuvieron las fechas (${Array.from(
+        allowedDates
+      ).join(", ")}) — ${beforeCount - newData.length} registros antiguos eliminados.`
+    );
+  }
+
   fs.writeFileSync(filePath, JSON.stringify(newData, null, 2));
-  console.log(`💾 Datos guardados en ${filePath} (${data.length} artistas)`);
+  console.log(`💾 Datos guardados en ${filePath} (${newData.length} registros totales correspondientes al mes actual y anterior)`);
 }
 
 run();

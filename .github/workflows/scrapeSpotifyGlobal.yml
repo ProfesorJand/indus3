@@ -30,15 +30,11 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps chromium
 
-      # 🟢 Script día 1
+      # 🟢 Script Diario (Artistas Venezolanos)
       - name: Ejecutar scrapeSpotifyNew.js
-        run: |
-          if [ "$(TZ=America/Caracas date +%d)" = "01" ]; then
-            echo "Es el día 1, ejecutando scrapeSpotifyNew.js..."
-            node scrapeSpotifyNew.js
-          else
-            echo "No es día 1, se omite scrapeSpotifyNew."
-          fi
+        timeout-minutes: 30
+        continue-on-error: true
+        run: node scrapeSpotifyNew.js
 
       # 🔵 Script diario / General
       - name: Ejecutar scrapeSpotifyGlobalSimple.js
@@ -49,6 +45,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add spotify-top-50-songs-global.json spotify-data.json
+          git add spotify-top-50-songs-global.json spotify-data.json spotify-data-new.json
           git commit -m "chore: actualización automática de datos Spotify [skip ci]" || echo "No hay cambios para commitear"
           git push

@@ -172,8 +172,15 @@ async function scrapeArtist(browser, url) {
           link = href ? "https://open.spotify.com" + href : null;
           image = await track.locator("img").first().getAttribute("src", { timeout: 1000 });
           
-          const playsText = await track.locator(".F_VvNCRKZ2cKj1a9 > div").textContent({ timeout: 1000 }).catch(() => null);
-          plays = parseNumber(playsText);
+          // Buscar reproducciones de forma robusta sin depender de clases CSS ofuscadas
+          const texts = await track.locator('div').allTextContents();
+          for (let t of texts) {
+            const clean = t.trim();
+            if (/^[\d,.]+$/.test(clean) && clean.length > 5) {
+              plays = parseNumber(clean);
+              break;
+            }
+          }
         } catch (e) {}
 
         // Si aún no tenemos artistImage, intentamos sacarlo de la música (pero REUSANDO navegador)

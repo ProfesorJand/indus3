@@ -46,5 +46,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add spotify-top-50-songs-global.json spotify-data.json spotify-data-new.json
-          git commit -m "chore: actualización automática de datos Spotify [skip ci]" || echo "No hay cambios para commitear"
+          git commit -m "chore: actualización automática de datos Spotify" || echo "No hay cambios para commitear"
           git push

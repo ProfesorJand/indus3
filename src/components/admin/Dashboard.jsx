@@ -3,6 +3,7 @@ import styles from './Dashboard.module.css';
 import EventForm from '../forms/EventForm.jsx';
 import BioForm from './BioForm.jsx';
 import SliderForm from './SliderForm.jsx';
+import TopArtistaSpotify from '../Infografias/TopSpotify/TopArtistaSpotify.jsx';
 
 const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], initialPastFiles = [] }) => {
   const [activeTab, setActiveTab] = useState('events'); // 'overview', 'events', 'bios', 'sliders', 'pastEvents'
@@ -325,6 +326,13 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
           >
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             <span>Eventos Pasados</span>
+          </div>
+          <div 
+            className={`${styles.navItem} ${activeTab === 'spotify' ? styles.active : ''}`}
+            onClick={() => setActiveTab('spotify')}
+          >
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" /></svg>
+            <span>Spotify Infografías</span>
           </div>
         </nav>
 
@@ -691,6 +699,18 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
                     )}
                   </tbody>
                 </table>
+              </div>
+            </div>
+          )}
+
+          {/* SPOTIFY VIEW */}
+          {activeTab === 'spotify' && (
+            <div>
+              <div className={styles.viewHeader}>
+                <h1>Generador de Infografías Spotify</h1>
+              </div>
+              <div style={{ marginTop: '20px' }}>
+                <TopArtistaSpotify />
               </div>
             </div>
           )}

@@ -7,7 +7,7 @@ import Section from "@components/base/Section.astro";
 import BodyGrid from "@components/body/BodyGrid.astro";
 import { getEventos } from "@stores/eventos";
 import Card from "@components/base/Card.astro";
-const eventsData = (await getEventos()).filter(e => e.status !== 'draft');
+const eventsData = (await getEventos()).filter(e => e.status !== 'draft' && !e.oculto);
 
 const base = import.meta.env.BASE_URL;
 

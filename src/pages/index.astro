@@ -144,7 +144,7 @@ const clientes = files
 
 const base = import.meta.env.BASE_URL;
 
-const eventsData = allEventsHome.filter(e => e.status !== 'draft' && e.id !== '__indus3_past_events_order__' && !e.esPasado);
+const eventsData = allEventsHome.filter(e => e.status !== 'draft' && e.id !== '__indus3_past_events_order__' && !e.esPasado && !e.oculto);
 const recentEvents = eventsData.slice(0, 3);
 
 const biografiasData = (await getBiografias()).filter(b => b.status !== 'draft');
@@ -160,7 +160,7 @@ try {
 }
 
 const apiPastEventsHome = allEventsHome
-  .filter(e => e.status !== 'draft' && e.id !== '__indus3_past_events_order__' && e.esPasado)
+  .filter(e => e.status !== 'draft' && e.id !== '__indus3_past_events_order__' && e.esPasado && !e.oculto)
   .map(e => ({
     id: String(e.id),
     image: e.flyerEvento || e.imagenPR || e.imagenBanner,

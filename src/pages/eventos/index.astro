@@ -13,7 +13,7 @@ import { getEventos } from "@stores/eventos";
 
 
 const allEvents = await getEventos();
-const eventsData = allEvents.filter(e => e.status !== 'draft' && e.id !== '__indus3_past_events_order__' && !e.esPasado);
+const eventsData = allEvents.filter(e => e.status !== 'draft' && e.id !== '__indus3_past_events_order__' && !e.esPasado && !e.oculto);
 const orderObj = allEvents.find(e => e.id === '__indus3_past_events_order__');
 const savedOrder: string[] = orderObj?.orderList || [];
 

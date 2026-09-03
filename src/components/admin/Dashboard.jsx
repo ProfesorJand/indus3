@@ -236,6 +236,35 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
     }
   };
 
+  const handleToggleHiddenEvent = async (event) => {
+    const nextOculto = !event.oculto;
+    const confirmMsg = nextOculto 
+      ? `¿Deseas OCULTAR "${event.nombreEvento}"? No aparecerá en la web pública, pero seguirá viéndose en este panel.`
+      : `¿Deseas MOSTRAR "${event.nombreEvento}"? Volverá a estar público en la web.`;
+    if (!confirm(confirmMsg)) return;
+
+    const updatedEvent = { ...event, oculto: nextOculto };
+    
+    try {
+      const res = await fetch("https://api.indus3pro.com/eventos/save-event.php", {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+        },
+        body: JSON.stringify(updatedEvent)
+      });
+      if (res.ok) {
+        setEvents(prev => prev.map(ev => ev.id === event.id ? updatedEvent : ev));
+      } else {
+        alert("Error al actualizar el evento en el servidor.");
+      }
+    } catch (err) {
+      console.error("Error al cambiar visibilidad de evento:", err);
+      alert("Error de red al actualizar el evento.");
+    }
+  };
+
   const handleEdit = (item) => {
     setEditingItem(item);
     setShowModal(true);
@@ -432,6 +461,19 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
                               <span className={styles.itemName}>
                                 {event.nombreEvento}
                                 {event.status === 'draft' && <span className={styles.draftBadge}>Draft</span>}
+                                {event.oculto && (
+                                  <span style={{
+                                    marginLeft: '8px',
+                                    backgroundColor: '#ef4444',
+                                    color: '#fff',
+                                    fontSize: '0.7rem',
+                                    padding: '2px 6px',
+                                    borderRadius: '4px',
+                                    fontWeight: '600'
+                                  }}>
+                                    Oculto
+                                  </span>
+                                )}
                                 {event.esPasado && (
                                   <span style={{
                                     marginLeft: '8px',
@@ -456,6 +498,18 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
                         </td>
                         <td>
                           <div className={styles.actions}>
+                            <button
+                              className={styles.btnAction}
+                              style={{ backgroundColor: event.oculto ? '#ef4444' : '#10b981', color: 'white', marginRight: '4px' }}
+                              onClick={() => handleToggleHiddenEvent(event)}
+                              title={event.oculto ? "Mostrar Evento" : "Ocultar Evento"}
+                            >
+                              {event.oculto ? (
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" /></svg>
+                              ) : (
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                              )}
+                            </button>
                             <button
                               className={styles.btnAction}
                               style={{ backgroundColor: event.esPasado ? '#64748b' : '#3b82f6', color: 'white', marginRight: '4px' }}

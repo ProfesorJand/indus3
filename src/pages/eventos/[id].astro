@@ -15,7 +15,7 @@ import EventSchema from "@components/seo/EventSchema.astro";
 
 
 export async function getStaticPaths() {
-  const eventsData = (await getEventos()).filter(e => e.status !== 'draft');
+  const eventsData = (await getEventos()).filter(e => e.status !== 'draft' && !e.oculto);
   return eventsData.map((event) => ({
     params: { id: event.id.toString() },
     props: { event },

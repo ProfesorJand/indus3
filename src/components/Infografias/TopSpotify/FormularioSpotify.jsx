@@ -3,6 +3,7 @@ import { buscarArtistas, buscarArtista, buscarCanciones } from "@stores/dataSpot
 import { CapturarImagen } from "@utils/CapturarImagen";
 import styles from "./FormularioSpotify.module.css";
 import spotifyDataGlobalTop50 from "@spotify-data-global-songs";
+import spotifyDataGlobalArtistas from "@spotify-data-global";
 import spotifyData from "@spotify-data";
 
 const FormularioSpotify = ({
@@ -46,12 +47,20 @@ const FormularioSpotify = ({
       });
       sortedData = allTracks.sort((a, b) => a.rank - b.rank);
       setTopMusic(true);
+    } else if (sourceType === "globalesTop50Artistas") {
+      const dataToUse = spotifyDataGlobalArtistas;
+      const uniqueDates = [...new Set(dataToUse.map(item => item.date || item.month))].sort().reverse();
+      const latestDate = uniqueDates[0];
+      
+      sortedData = [...dataToUse.filter(item => (item.date || item.month) === latestDate)].sort((a, b) => (b.listeners || 0) - (a.listeners || 0));
+      setTopMusic(false);
     } else {
       const dataToUse = spotifyData;
       const uniqueDates = [...new Set(dataToUse.map(item => item.date || item.month))].sort().reverse();
       const latestDate = uniqueDates[0];
       
       sortedData = [...dataToUse.filter(item => (item.date || item.month) === latestDate)].sort((a, b) => (b.listeners || 0) - (a.listeners || 0));
+      setTopMusic(true);
     }
 
     // 2. Tomar los elementos según el inicio y el total permitido
@@ -142,8 +151,8 @@ const FormularioSpotify = ({
     setDatos((oldData)=>{
       return {
         ...oldData,
-        titulo: sourceType === "venezolanos" ? "TOP 30 ARTISTAS VENEZOLANOS" : "TOP 50 CANCIONES GLOBALES", 
-        titulo2: sourceType === "venezolanos" ? "MÁS ESCUCHADOS EN SPOTIFY" : "MÁS ESCUCHADAS EN SPOTIFY"  
+        titulo: sourceType === "venezolanos" ? "TOP 30 ARTISTAS VENEZOLANOS" : (sourceType === "globalesTop50Artistas" ? "TOP 20 ARTISTAS GLOBALES" : "TOP 20 CANCIONES GLOBALES"), 
+        titulo2: sourceType === "venezolanos" ? "MÁS ESCUCHADOS EN SPOTIFY" : (sourceType === "globalesTop50Artistas" ? "MÁS ESCUCHADOS EN SPOTIFY" : "MÁS ESCUCHADAS EN SPOTIFY")  
       }
     })
     setDatosArtistas(newDatosArtistas);
@@ -222,7 +231,8 @@ const FormularioSpotify = ({
             style={{ padding: '2px', borderRadius: '3px', background: '#222', color: '#fff', border: '1px solid #555' }}
           >
             <option value="venezolanos">Venezolanos</option>
-            <option value="globalesTop50">Globales Top 50</option>
+            <option value="globalesTop50">Globales Top 20 Canciones</option>
+            <option value="globalesTop50Artistas">Globales Top 20 Artistas</option>
           </select>
           <button type="button" onClick={cargarDatosAuto} style={{ padding: '2px 10px', background: '#1db954', color: 'white', border: 'none', borderRadius: '3px', cursor: 'pointer' }}>
             Autocargar desde Repo
@@ -410,8 +420,24 @@ const FormularioSpotify = ({
         Buscar artistas
       </button>
 
-      <button type="button" onClick={() => CapturarImagen({ backgroundRef, nombre: sourceType === "venezolanos" ? `SpotifyVenezuelaTop10-${datos.fechaArchivo}` : `SpotifyGlobalTop10-${datos.fechaArchivo}` })}>
-        Capturar
+      <button 
+        type="button" 
+        onClick={() => CapturarImagen({ backgroundRef, nombre: sourceType === "venezolanos" ? `SpotifyVenezuelaTop10-${datos.fechaArchivo}` : (sourceType === "globalesTop50Artistas" ? `SpotifyGlobalArtistasTop10-${datos.fechaArchivo}` : `SpotifyGlobalCancionesTop10-${datos.fechaArchivo}`) })}
+        style={{
+          marginTop: "20px",
+          padding: "15px",
+          backgroundColor: "#1db954",
+          color: "white",
+          border: "none",
+          borderRadius: "8px",
+          fontSize: "18px",
+          fontWeight: "bold",
+          cursor: "pointer",
+          width: "100%",
+          boxShadow: "0 4px 6px rgba(0,0,0,0.3)"
+        }}
+      >
+        📸 Capturar Infografía
       </button>
 
 

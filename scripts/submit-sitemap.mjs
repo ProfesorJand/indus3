@@ -27,7 +27,7 @@ const searchconsole = google.webmasters({
 
 async function submitSitemap() {
   // ATENCIÓN: Cambia esto por el dominio real de indus3 (con su slash final si es prefijo de URL)
-  const siteUrl = 'https://indus3pro.com/'; 
+  const siteUrl = 'sc-domain:indus3pro.com'; 
   const feedpath = 'https://indus3pro.com/sitemap-index.xml';
 
   try {

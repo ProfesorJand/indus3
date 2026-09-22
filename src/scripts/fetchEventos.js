@@ -3,6 +3,14 @@ import path from "path";
 import { fileURLToPath } from "url";
 import dns from "dns";
 
+const envPath = path.resolve(process.cwd(), ".env");
+if (fs.existsSync(envPath)) {
+  fs.readFileSync(envPath, "utf-8").split('\n').forEach(line => {
+    const [key, ...value] = line.split('=');
+    if (key && value.length > 0) process.env[key.trim()] = value.join('=').trim().replace(/^["']|["']$/g, '');
+  });
+}
+
 // Forzar IPv4 para evitar timeouts en GitHub Actions (Node 17+ usa IPv6 por defecto si hay registro AAAA)
 dns.setDefaultResultOrder("ipv4first");
 
@@ -35,7 +43,17 @@ try {
     headers: {
       "Authorization": `Bearer ${process.env.PUBLIC_BACKEND_AUTH_KEY}`,
       "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-      "Accept": "application/json"
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+      "Accept-Language": "es-ES,es;q=0.9,en;q=0.8",
+      "Cache-Control": "max-age=0",
+      "Sec-Ch-Ua": '"Chromium";v="122", "Google Chrome";v="122", "Not-A.Brand";v="99"',
+      "Sec-Ch-Ua-Mobile": "?0",
+      "Sec-Ch-Ua-Platform": '"Windows"',
+      "Sec-Fetch-Dest": "document",
+      "Sec-Fetch-Mode": "navigate",
+      "Sec-Fetch-Site": "none",
+      "Sec-Fetch-User": "?1",
+      "Upgrade-Insecure-Requests": "1"
     }
   });
 

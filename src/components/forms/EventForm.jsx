@@ -77,7 +77,9 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
     let baseData = initialState;
     if (eventToEdit) {
       baseData = { ...initialState, ...eventToEdit };
-      if (eventToEdit.linkInstagram || (eventToEdit.linksInstagram && eventToEdit.linksInstagram.length > 0)) {
+      if (eventToEdit.videosAdicionales && eventToEdit.videosAdicionales.length > 0) {
+         // Ya tiene videos nuevos guardados, no heredamos los links de Instagram antiguos.
+      } else if (eventToEdit.linkInstagram || (eventToEdit.linksInstagram && eventToEdit.linksInstagram.length > 0)) {
          const oldLinks = eventToEdit.linksInstagram?.length ? eventToEdit.linksInstagram : [eventToEdit.linkInstagram].filter(Boolean);
          if (!baseData.videosAdicionales) baseData.videosAdicionales = [];
          oldLinks.forEach(link => {
@@ -116,11 +118,23 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
       return;
     }
 
+    let finalName = formData.nombreEvento;
+    let finalType = type;
+    if (fieldName.startsWith('videosAdicionales-')) {
+      const parts = fieldName.split("-");
+      const index = parseInt(parts[1], 10) + 1;
+      finalName = `${formData.nombreEvento}-adicional-${index}`;
+      finalType = 'video'; // Forzamos a 'video' para que el PHP lo maneje bien
+    } else if (fieldName.startsWith('preguntas-') && fieldName.includes('-imagenes-')) {
+      const parts = fieldName.split("-");
+      finalName = `${formData.nombreEvento}-pregunta-${parts[1]}-img-${parts[3]}`;
+    }
+
     const uploadData = new FormData();
     uploadData.append('image', file);
-    uploadData.append('name', formData.nombreEvento);
+    uploadData.append('name', finalName);
     uploadData.append('category', 'eventos');
-    uploadData.append('type', type);
+    uploadData.append('type', finalType);
 
     const isVideo = file.type.startsWith('video/') || type === 'video';
     setStatus(isVideo ? 'Subiendo video...' : 'Subiendo imagen...');
@@ -471,7 +485,7 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
                     placeholder="https://...mp4"
                   />
                   <label className={styles.uploadBtn}>
-                    <input type="file" onChange={(e) => handleFileUpload(e, `videosAdicionales-${index}-url`, `videoAdicional-${index + 1}`)} accept="video/*" style={{ display: 'none' }} />
+                    <input type="file" onChange={(e) => handleFileUpload(e, `videosAdicionales-${index}-url`, 'video')} accept="video/*" style={{ display: 'none' }} />
                     <span>Subir</span>
                   </label>
                 </div>

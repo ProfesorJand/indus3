@@ -30,6 +30,17 @@ const datosArtistas = biografiasArtistas.filter((artista) => event?.artistas?.in
 
 const base = import.meta.env.BASE_URL;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+let videosAdicionales = (event?.videosAdicionales || []).map(v => v.url).filter(Boolean);
+
+// Fallback por si quedó algún dato guardado temporalmente con los links viejos
+if (videosAdicionales.length === 0) {
+  if (event?.linksInstagram && event.linksInstagram.length > 0) {
+    videosAdicionales = event.linksInstagram.filter(Boolean);
+  } else if (event?.linkInstagram) {
+    videosAdicionales = [event.linkInstagram];
+  }
+}
 ---
 
 <MainLayout title={seoTitle} canonical={canonicalUrl}>
@@ -209,6 +220,18 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
               </div>
             ))
            }
+           {videosAdicionales.length > 0 && (
+            <div class="instagram-grid">
+              {videosAdicionales.map(url => (
+                <div class="video-container-after-desc shadow-xl" style="margin: 0; max-width: 100%;">
+                  <video controls playsinline loop class="video-after-desc" style="height: 100%; max-height: 800px; object-fit: contain; width: 100%; background: #000;">
+                    <source src={url} type={url.includes('.webm') ? 'video/webm' : 'video/mp4'} />
+                    Tu navegador no soporta la reproducción de video.
+                  </video>
+                </div>
+              ))}
+            </div>
+          )}
 
         <div class="content-left">
         
@@ -759,5 +782,18 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     max-height: 500px;
     object-fit: contain;
   }
+
+  .instagram-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: var(--space-4) 0;
+  }
+  @media (min-width: 768px) {
+    .instagram-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
 </style>
 

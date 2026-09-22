@@ -9,6 +9,7 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
     descripcionEvento: '',
     imagenDespuesDescripcion: '',
     videoDespuesDescripcion: '',
+    videosAdicionales: [],
     imagenBanner: '',
     imagenPR: '',
     aperturaPuertas: '',
@@ -76,6 +77,13 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
     let baseData = initialState;
     if (eventToEdit) {
       baseData = { ...initialState, ...eventToEdit };
+      if (eventToEdit.linkInstagram || (eventToEdit.linksInstagram && eventToEdit.linksInstagram.length > 0)) {
+         const oldLinks = eventToEdit.linksInstagram?.length ? eventToEdit.linksInstagram : [eventToEdit.linkInstagram].filter(Boolean);
+         if (!baseData.videosAdicionales) baseData.videosAdicionales = [];
+         oldLinks.forEach(link => {
+            if (typeof link === 'string') baseData.videosAdicionales.push({ url: link });
+         });
+      }
       if (eventToEdit.schemaPerformerName && (!eventToEdit.schemaPerformers || eventToEdit.schemaPerformers.length === 0)) {
         baseData.schemaPerformers = [
           {
@@ -217,6 +225,15 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
         [name]: val
       }));
     }
+  };
+
+  const addVideoAdicional = () => {
+    setFormData(prev => ({ ...prev, videosAdicionales: [...(prev.videosAdicionales || []), { url: '' }] }));
+  };
+
+  const removeVideoAdicional = (index) => {
+    const newVids = (formData.videosAdicionales || []).filter((_, i) => i !== index);
+    setFormData(prev => ({ ...prev, videosAdicionales: newVids }));
   };
 
   const handleSpotifyChange = (index, value) => {
@@ -439,6 +456,29 @@ const EventForm = ({ eventToEdit = null, onSuccess }) => {
                 <span>Subir</span>
               </label>
             </div>
+          </div>
+
+          <div className={styles.field}>
+            <label>Videos Adicionales (MP4 / Reels subidos)</label>
+            {(formData.videosAdicionales || []).map((vid, index) => (
+              <div key={index} style={{ display: 'flex', gap: '8px', marginBottom: '8px', width: '100%' }}>
+                <div className={styles.inputWithButton} style={{ flex: 1, margin: 0 }}>
+                  <input 
+                    type="text" 
+                    name={`videosAdicionales-${index}-url`}
+                    value={vid.url || ''} 
+                    onChange={handleChange} 
+                    placeholder="https://...mp4"
+                  />
+                  <label className={styles.uploadBtn}>
+                    <input type="file" onChange={(e) => handleFileUpload(e, `videosAdicionales-${index}-url`, `videoAdicional-${index + 1}`)} accept="video/*" style={{ display: 'none' }} />
+                    <span>Subir</span>
+                  </label>
+                </div>
+                <button type="button" onClick={() => removeVideoAdicional(index)} className={styles.btnRemove} style={{ padding: '0 12px', background: '#dc3545', border: 'none', borderRadius: '4px', color: 'white', cursor: 'pointer' }}>×</button>
+              </div>
+            ))}
+            <button type="button" onClick={addVideoAdicional} className={styles.btnAdd} style={{ background: 'var(--color-primary)', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer', alignSelf: 'flex-start' }}>+ Agregar Video MP4</button>
           </div>
         </div>
 

@@ -2905,7 +2905,7 @@
   {
     "name": "Danny Ocean",
     "url": "https://open.spotify.com/artist/5H1nN1SzW0qNeUEZvuXjAj",
-    "listeners": 30830792711,
+    "listeners": 30792711,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb6d11079e9ea4fd57b5df6c97",
     "artistImageHistory": null,
@@ -2947,7 +2947,7 @@
   {
     "name": "Alleh",
     "url": "https://open.spotify.com/artist/3DeOmVSmpv7WknXoo1OS8p",
-    "listeners": 17417429982,
+    "listeners": 17429982,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb16edef7841fe5db8d6568b7b",
     "artistImageHistory": null,
@@ -2989,7 +2989,7 @@
   {
     "name": "ELENA ROSE",
     "url": "https://open.spotify.com/artist/0zO8yNnw5GQgutcIyXfGBY",
-    "listeners": 14814810636,
+    "listeners": 14810636,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb2948fdff5fcfa2303e18e12c",
     "artistImageHistory": null,
@@ -3026,12 +3026,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 3
+    "rank": 4
   },
   {
     "name": "Micro TDH",
     "url": "https://open.spotify.com/artist/1aWJsBQa67l72j1VT3D6Ow",
-    "listeners": 12412401274,
+    "listeners": 12401274,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebe686d2c840ac32e042eb613b",
     "artistImageHistory": null,
@@ -3068,12 +3068,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 4
+    "rank": 5
   },
   {
     "name": "Adolescent's Orquesta",
     "url": "https://open.spotify.com/artist/70nxnxEqDQIEWneRjg2Q4O",
-    "listeners": 11611589670,
+    "listeners": 11589670,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb85cbe9f05b11e3ea3d20ff0b",
     "artistImageHistory": null,
@@ -3110,12 +3110,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 5
+    "rank": 6
   },
   {
     "name": "Los Melódicos",
     "url": "https://open.spotify.com/artist/4LdArZAC1QPQdyz8JNOYVW",
-    "listeners": 9899989922,
+    "listeners": 989922,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb665e77ed709d4e12ad6f7031",
     "artistImageHistory": null,
@@ -3152,12 +3152,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 6
+    "rank": 38
   },
   {
     "name": "Chyno Miranda",
     "url": "https://open.spotify.com/artist/1VrWc8r4AjrR8YfT0vlsc7",
-    "listeners": 9037903733,
+    "listeners": 903733,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebeadf338c4b793a4f91a759e8",
     "artistImageHistory": null,
@@ -3194,12 +3194,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 7
+    "rank": 39
   },
   {
     "name": "Lil Supa",
     "url": "https://open.spotify.com/artist/0qHbO3z6lgLE6ZYCkQBo1K",
-    "listeners": 8527852651,
+    "listeners": 852651,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb6215bab6e478115ac5a2221e",
     "artistImageHistory": null,
@@ -3236,12 +3236,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 8
+    "rank": 41
   },
   {
     "name": "Servando & Florentino",
     "url": "https://open.spotify.com/artist/2sU7vdIXtvChlnXIcUliVe",
-    "listeners": 8497849703,
+    "listeners": 849703,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb762c1ba5215d61224863c1b1",
     "artistImageHistory": null,
@@ -3278,12 +3278,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 9
+    "rank": 42
   },
   {
     "name": "Luis Silva",
     "url": "https://open.spotify.com/artist/3B53VdSraW2MeEeLYAvEs1",
-    "listeners": 7732773173,
+    "listeners": 773173,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb04023cc4160ad3aaf4d3d78f",
     "artistImageHistory": null,
@@ -3320,54 +3320,54 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 10
+    "rank": 43
   },
   {
     "name": "Gustavo Dudamel",
     "url": "https://open.spotify.com/artist/0cxXnDhpgxcMMkKddhORHY",
-    "listeners": 7351735135,
+    "listeners": 735135,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6772690000c46c9e5d8f429e54fe49289839f6",
     "artistImageHistory": null,
     "topTracks": [
       {
         "title": "¿Quien puede detener la lluvia?",
-        "link": "https://open.spotify.com/track/7LkjlyLRY7vI3yuwa1L74D",
-        "image": "https://i.scdn.co/image/ab67616d00004851c42a84cc84e36347f8c365e7",
+        "link": "https://open.spotify.com/track/4tkbA2NAsCTRuqdVopzt7g",
+        "image": "https://i.scdn.co/image/ab67616d00004851c5b3729a231b151d26fba838",
         "plays": 122692
       },
       {
         "title": "Regreso a Venezuela",
-        "link": "https://open.spotify.com/track/2gEfjYpTT2R2Bl22aGypr4",
-        "image": "https://i.scdn.co/image/ab67616d00004851c42a84cc84e36347f8c365e7",
+        "link": "https://open.spotify.com/track/47IuR3sNr4QtDgMKJAQqJZ",
+        "image": "https://i.scdn.co/image/ab67616d00004851c5b3729a231b151d26fba838",
         "plays": 57609
       },
       {
         "title": "Manuela",
-        "link": "https://open.spotify.com/track/7H8DGu981cG5pMFzSZHeE1",
-        "image": "https://i.scdn.co/image/ab67616d00004851c42a84cc84e36347f8c365e7",
+        "link": "https://open.spotify.com/track/40VgVLJKysMUn8689v0rET",
+        "image": "https://i.scdn.co/image/ab67616d00004851c5b3729a231b151d26fba838",
         "plays": 37727
       },
       {
         "title": "María Teresa",
-        "link": "https://open.spotify.com/track/10ig4gqatL59NvgjXW07Yd",
-        "image": "https://i.scdn.co/image/ab67616d00004851c42a84cc84e36347f8c365e7",
+        "link": "https://open.spotify.com/track/7dijci6O6kPzcXlUEaCT3g",
+        "image": "https://i.scdn.co/image/ab67616d00004851c5b3729a231b151d26fba838",
         "plays": 52963
       },
       {
         "title": "Ellos están con nosotros",
-        "link": "https://open.spotify.com/track/2iFBGF4mkV8El5G4Wr0TjB",
-        "image": "https://i.scdn.co/image/ab67616d00004851c42a84cc84e36347f8c365e7",
+        "link": "https://open.spotify.com/track/40N9q5jAo90iBKsA7V2Wdr",
+        "image": "https://i.scdn.co/image/ab67616d00004851c5b3729a231b151d26fba838",
         "plays": 30529
       }
     ],
     "date": "2026-10-01",
-    "rank": 11
+    "rank": 44
   },
   {
     "name": "Billo's Caracas Boys",
     "url": "https://open.spotify.com/artist/38zyliF0xdJKS7k1BIEuL6",
-    "listeners": 7107710732,
+    "listeners": 710732,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb59c00dce17398d4a1de04e98",
     "artistImageHistory": null,
@@ -3404,12 +3404,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 12
+    "rank": 45
   },
   {
     "name": "Devendra Banhart",
     "url": "https://open.spotify.com/artist/1YZEoYFXx4AxVv13OiOPvZ",
-    "listeners": 6925692547,
+    "listeners": 692547,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb7d079249b30567c81b006ba8",
     "artistImageHistory": null,
@@ -3446,12 +3446,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 13
+    "rank": 46
   },
   {
     "name": "Joaquina",
     "url": "https://open.spotify.com/artist/081F5qgtVMfcHZKDY1IEa0",
-    "listeners": 5931593131,
+    "listeners": 593131,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb69d1e3778f34cdcfbfed397c",
     "artistImageHistory": null,
@@ -3488,12 +3488,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 14
+    "rank": 48
   },
   {
     "name": "Jambene",
     "url": "https://open.spotify.com/artist/4u1dsEB1FKbGcdG0EAvxP8",
-    "listeners": 5211521134,
+    "listeners": 521134,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebd95631f611fea3b29c71cf2e",
     "artistImageHistory": null,
@@ -3530,12 +3530,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 15
+    "rank": 49
   },
   {
     "name": "Irepelusa",
     "url": "https://open.spotify.com/artist/3KaNWDYObY73SDpcZBRzuw",
-    "listeners": 5161516104,
+    "listeners": 516104,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb52e3a7c0670b97b57acc5226",
     "artistImageHistory": null,
@@ -3572,12 +3572,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 16
+    "rank": 50
   },
   {
     "name": "Oscarcito",
     "url": "https://open.spotify.com/artist/1BCfXYvYcVKfcNNV7h3TKJ",
-    "listeners": 4602460246,
+    "listeners": 460246,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebeb3a88d7b2a9af7e59ea444a",
     "artistImageHistory": null,
@@ -3601,9 +3601,9 @@
         "plays": 2767827
       },
       {
-        "title": "Tumbayé",
-        "link": "https://open.spotify.com/track/1ulXmurmUVer1l6AAnBUWl",
-        "image": "https://i.scdn.co/image/ab67616d00004851916aff666777297b4f46fadf",
+        "title": "Tumbaye",
+        "link": "https://open.spotify.com/track/3J12tWsPCvfMqZcLAeInns",
+        "image": "https://i.scdn.co/image/ab67616d0000485170e9d054c96eb4780dbe4399",
         "plays": 12437426
       },
       {
@@ -3614,12 +3614,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 17
+    "rank": 51
   },
   {
     "name": "Los Mesoneros",
     "url": "https://open.spotify.com/artist/0OluGbRuQQEcYyttGww517",
-    "listeners": 4583458313,
+    "listeners": 458313,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebe032de56da0af4c79548defe",
     "artistImageHistory": null,
@@ -3656,12 +3656,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 18
+    "rank": 52
   },
   {
     "name": "Pecos Kanvas",
     "url": "https://open.spotify.com/artist/2pg6yxVpoNN8yJSKHUgRw8",
-    "listeners": 4328432819,
+    "listeners": 432819,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab67616d0000b2738c0fba985dc42e3d21d74957",
     "artistImageHistory": null,
@@ -3698,12 +3698,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 19
+    "rank": 53
   },
   {
     "name": "Jorge Guerrero",
     "url": "https://open.spotify.com/artist/3LzBrsUL9GilMqdTaKaKL7",
-    "listeners": 3913391293,
+    "listeners": 391293,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb7a148cfe436662efe5ad9297",
     "artistImageHistory": null,
@@ -3740,12 +3740,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 20
+    "rank": 54
   },
   {
     "name": "suei",
     "url": "https://open.spotify.com/artist/6jEjSPxnwsibG6vPOjkeER",
-    "listeners": 2706270629,
+    "listeners": 270629,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb056de802c6b1cb224bff90d0",
     "artistImageHistory": null,
@@ -3782,12 +3782,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 21
+    "rank": 55
   },
   {
     "name": "Gus",
     "url": "https://open.spotify.com/artist/3tQrRoZiGXR5uMkaCYf8S4",
-    "listeners": 2297229657,
+    "listeners": 229657,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebc8dd38a0942e98b51725f4b7",
     "artistImageHistory": null,
@@ -3824,12 +3824,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 22
+    "rank": 56
   },
   {
     "name": "Ronald Borjas",
     "url": "https://open.spotify.com/artist/1c8m6rFeA6QIhImbIaZ7k2",
-    "listeners": 2125212487,
+    "listeners": 212487,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebb0b2ba815baa87f50d405971",
     "artistImageHistory": null,
@@ -3866,12 +3866,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 23
+    "rank": 57
   },
   {
     "name": "Underaiki",
     "url": "https://open.spotify.com/artist/55IzEzlyUcBFqGgyam2Seo",
-    "listeners": 2122212174,
+    "listeners": 212174,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebfa5541d1e46a3d2cd897086d",
     "artistImageHistory": null,
@@ -3908,12 +3908,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 24
+    "rank": 58
   },
   {
     "name": "Simón Díaz",
     "url": "https://open.spotify.com/artist/29GjVRVQSln078FWYOX4r4",
-    "listeners": 1863186279,
+    "listeners": 186279,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb66bd7705646368a333f0f190",
     "artistImageHistory": null,
@@ -3950,12 +3950,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 25
+    "rank": 60
   },
   {
     "name": "Yorghaki",
     "url": "https://open.spotify.com/artist/4eq1q0o9XPyNq9RG3fNDD1",
-    "listeners": 1717011100,
+    "listeners": 17011100,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebf8588f79b57063f927c6ac80",
     "artistImageHistory": null,
@@ -3992,12 +3992,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 26
+    "rank": 3
   },
   {
     "name": "Nella",
     "url": "https://open.spotify.com/artist/6hgiVWraSMs9mbUrhPq8Oh",
-    "listeners": 1498149798,
+    "listeners": 149798,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebcd1092ebe9dc26b46f1fb654",
     "artistImageHistory": null,
@@ -4034,12 +4034,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 27
+    "rank": 62
   },
   {
     "name": "Lasso",
     "url": "https://open.spotify.com/artist/3SCOuAxngTC1yGjKMcIPEd",
-    "listeners": 989766024,
+    "listeners": 9766024,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebaf1b06ebee7396bbb09b095c",
     "artistImageHistory": null,
@@ -4076,12 +4076,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 28
+    "rank": 7
   },
   {
     "name": "Carlos Baute",
     "url": "https://open.spotify.com/artist/3smfreCkyJt7bShaTYpG77",
-    "listeners": 969607896,
+    "listeners": 9607896,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebd5460ced6d386f17926d7e77",
     "artistImageHistory": null,
@@ -4118,12 +4118,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 29
+    "rank": 8
   },
   {
     "name": "Chino & Nacho",
     "url": "https://open.spotify.com/artist/5NS0854TqZQVoRmJKSWtFZ",
-    "listeners": 939323866,
+    "listeners": 9323866,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebf8ec3f9872c09f4c69bb56f3",
     "artistImageHistory": null,
@@ -4154,18 +4154,18 @@
       },
       {
         "title": "El Poeta",
-        "link": "https://open.spotify.com/track/0G31zWm4L2c9fJ9zAzWsar",
-        "image": "https://i.scdn.co/image/ab67616d00004851f5918895e2fe1e1e62ba9f33",
+        "link": "https://open.spotify.com/track/2RpIevYYdiQJrQtaILchnG",
+        "image": "https://i.scdn.co/image/ab67616d0000485154310e6f0ba255f7b3d76d6c",
         "plays": 78009674
       }
     ],
     "date": "2026-10-01",
-    "rank": 30
+    "rank": 9
   },
   {
     "name": "Ricardo Montaner",
     "url": "https://open.spotify.com/artist/4uoz4FUMvpeyGClFTTDBsD",
-    "listeners": 929169182,
+    "listeners": 9169182,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb6cb69cfad850b2589da3366e",
     "artistImageHistory": null,
@@ -4202,12 +4202,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 31
+    "rank": 10
   },
   {
     "name": "Mau y Ricky",
     "url": "https://open.spotify.com/artist/2wkoKEfS6dXwThbyTnZWFU",
-    "listeners": 888826588,
+    "listeners": 8826588,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebd4a933da0a1bd24bee7c6b8c",
     "artistImageHistory": null,
@@ -4244,12 +4244,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 32
+    "rank": 11
   },
   {
     "name": "Franco De Vita",
     "url": "https://open.spotify.com/artist/4NEYQeEYBUjfaXgDQGvFvu",
-    "listeners": 888787371,
+    "listeners": 8787371,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb21fb9c2d53162906b9c23035",
     "artistImageHistory": null,
@@ -4286,12 +4286,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 33
+    "rank": 12
   },
   {
     "name": "ADSO",
     "url": "https://open.spotify.com/artist/29b16XDtyMXDrfo2hZ69wf",
-    "listeners": 879878969,
+    "listeners": 878969,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb71e14d070ee2382c3d5b97a6",
     "artistImageHistory": null,
@@ -4328,12 +4328,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 34
+    "rank": 40
   },
   {
     "name": "Rawayana",
     "url": "https://open.spotify.com/artist/2AbQwU2cuEGfD465wCXlg2",
-    "listeners": 858520389,
+    "listeners": 8520389,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb5d52d93053343dc60653bbde",
     "artistImageHistory": null,
@@ -4370,12 +4370,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 35
+    "rank": 13
   },
   {
     "name": "Canserbero",
     "url": "https://open.spotify.com/artist/1wGIhYkKWSq4yACtTkCkSX",
-    "listeners": 737253899,
+    "listeners": 7253899,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eba91405d63c939682e4efdcbc",
     "artistImageHistory": null,
@@ -4412,12 +4412,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 36
+    "rank": 14
   },
   {
     "name": "Caramelos De Cianuro",
     "url": "https://open.spotify.com/artist/34OLInsXImlQpjzmQw9Wd3",
-    "listeners": 679678959,
+    "listeners": 678959,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebd03c194a3c3ca6d3adcc53a5",
     "artistImageHistory": null,
@@ -4454,12 +4454,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 37
+    "rank": 47
   },
   {
     "name": "LAGOS",
     "url": "https://open.spotify.com/artist/7uQ1D2NNHs5cUL3CLKRbia",
-    "listeners": 666583638,
+    "listeners": 6583638,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb03101ae60c19568d1842ad8d",
     "artistImageHistory": null,
@@ -4496,12 +4496,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 38
+    "rank": 15
   },
   {
     "name": "Nacho",
     "url": "https://open.spotify.com/artist/2ayNSoKPCRAfjp6hQ76hRu",
-    "listeners": 656524617,
+    "listeners": 6524617,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebc8e26e3bff7dcc9cecbfe950",
     "artistImageHistory": null,
@@ -4538,12 +4538,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 39
+    "rank": 16
   },
   {
     "name": "Los Terricolas",
     "url": "https://open.spotify.com/artist/2nrSPPSfNesng85eRV4W4m",
-    "listeners": 575693393,
+    "listeners": 5693393,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb65de4bf4debef4187821d2bc",
     "artistImageHistory": null,
@@ -4580,12 +4580,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 40
+    "rank": 17
   },
   {
     "name": "Jerry Di",
     "url": "https://open.spotify.com/artist/7f02bxFbZIOVdSbYRNYvLT",
-    "listeners": 525186456,
+    "listeners": 5186456,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb10f5221cfb49391310a816d4",
     "artistImageHistory": null,
@@ -4622,12 +4622,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 41
+    "rank": 18
   },
   {
     "name": "Oscar D'León",
     "url": "https://open.spotify.com/artist/1c84wItoiAe1pEbpJMqUmQ",
-    "listeners": 525178524,
+    "listeners": 5178524,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/01a4bd3a5b74f35a8d47961c3bfcb94206eda751",
     "artistImageHistory": null,
@@ -4664,12 +4664,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 42
+    "rank": 19
   },
   {
     "name": "Evaluna Montaner",
     "url": "https://open.spotify.com/artist/52qzWdNUp6ebjcNsvgZSiC",
-    "listeners": 515096381,
+    "listeners": 5096381,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb500b0eb050686105098ecb1c",
     "artistImageHistory": null,
@@ -4706,12 +4706,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 43
+    "rank": 20
   },
   {
     "name": "La Dimensión Latina",
     "url": "https://open.spotify.com/artist/5wb8MfrYdUEBSg71SKD0A5",
-    "listeners": 424245673,
+    "listeners": 4245673,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebb207c3fee848ce7f19a4e9f3",
     "artistImageHistory": null,
@@ -4748,12 +4748,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 44
+    "rank": 21
   },
   {
     "name": "Lele Pons",
     "url": "https://open.spotify.com/artist/6i3DxIlAqnDkwELLw4aVrx",
-    "listeners": 333334016,
+    "listeners": 3334016,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebfc9b670f12ac4e47758569fe",
     "artistImageHistory": null,
@@ -4790,12 +4790,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 45
+    "rank": 22
   },
   {
     "name": "Big Soto",
     "url": "https://open.spotify.com/artist/2TQ4CGgxxCWHqa9yYIGDoU",
-    "listeners": 292921400,
+    "listeners": 2921400,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebdd0baaa11b09a4cab2b37f46",
     "artistImageHistory": null,
@@ -4832,12 +4832,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 46
+    "rank": 23
   },
   {
     "name": "Akapellah",
     "url": "https://open.spotify.com/artist/6fMZytDgX1Q9OV6ndSugym",
-    "listeners": 292856623,
+    "listeners": 2856623,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb75e86a27e54aae43e6325973",
     "artistImageHistory": null,
@@ -4874,12 +4874,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 47
+    "rank": 24
   },
   {
     "name": "Neutro Shorty",
     "url": "https://open.spotify.com/artist/5wUO3A6DT4tO5UDz21kE2Y",
-    "listeners": 262607436,
+    "listeners": 2607436,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebf10da3832debab54e90875b4",
     "artistImageHistory": null,
@@ -4916,12 +4916,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 48
+    "rank": 25
   },
   {
     "name": "Apache",
     "url": "https://open.spotify.com/artist/2pvyE8W9RWESQxkyAWZqgY",
-    "listeners": 262606274,
+    "listeners": 2606274,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebbbcefcf47b7ceb3677b19838",
     "artistImageHistory": null,
@@ -4958,12 +4958,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 49
+    "rank": 26
   },
   {
     "name": "Los Amigos Invisibles",
     "url": "https://open.spotify.com/artist/5x3mrCTZmkoTXURN7pWdGN",
-    "listeners": 252539527,
+    "listeners": 2539527,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb486c397b2cbd2026cbf59d25",
     "artistImageHistory": null,
@@ -5000,12 +5000,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 50
+    "rank": 27
   },
   {
     "name": "José Luis Rodríguez",
     "url": "https://open.spotify.com/artist/15YnmlNukYCFvwaFnoDwwV",
-    "listeners": 252504445,
+    "listeners": 2504445,
     "backgroundArtistImage": null,
     "artistImage": [
       {
@@ -5023,8 +5023,8 @@
       },
       {
         "title": "Dueño de Nada",
-        "link": "https://open.spotify.com/track/3Nb2l4PspllRJ6ZTtwQCnQ",
-        "image": "https://i.scdn.co/image/ab67616d00004851e10da05d606fa6a9e9f85f96",
+        "link": "https://open.spotify.com/track/01U3wUHEeqYtj3vPk08AC9",
+        "image": "https://i.scdn.co/image/ab67616d000048511e952e5eab69834a3c609dd6",
         "plays": 91203937
       },
       {
@@ -5035,8 +5035,8 @@
       },
       {
         "title": "Culpable Soy Yo",
-        "link": "https://open.spotify.com/track/6tQXkhiNbPO7WpTKt1eM8a",
-        "image": "https://i.scdn.co/image/ab67616d00004851ae729842fccfbb9f0a432ba7",
+        "link": "https://open.spotify.com/track/1ASbVP7bURAn44DmhqCNjY",
+        "image": "https://i.scdn.co/image/ab67616d000048511e952e5eab69834a3c609dd6",
         "plays": 14224910
       },
       {
@@ -5047,12 +5047,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 51
+    "rank": 28
   },
   {
     "name": "Zhamira",
     "url": "https://open.spotify.com/artist/2IdDxiUkjLI0WfypRO1Rh3",
-    "listeners": 242430665,
+    "listeners": 2430665,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb69fb9b306342fdafb51079f3",
     "artistImageHistory": null,
@@ -5089,12 +5089,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 52
+    "rank": 29
   },
   {
     "name": "3AM",
     "url": "https://open.spotify.com/artist/1LU7BxbUvvuA4eNDdEO22D",
-    "listeners": 222165990,
+    "listeners": 2165990,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb4f63ee1f0c6880045f917407",
     "artistImageHistory": null,
@@ -5131,12 +5131,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 53
+    "rank": 30
   },
   {
     "name": "Emily Galaviz",
     "url": "https://open.spotify.com/artist/0oxb3uhVq0HQLq3Oi7OIp7",
-    "listeners": 208207950,
+    "listeners": 207950,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebbc6ac7a0ba5c498205a49d6a",
     "artistImageHistory": null,
@@ -5173,12 +5173,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 54
+    "rank": 59
   },
   {
     "name": "Louis BPM",
     "url": "https://open.spotify.com/artist/54NBSkiOmMBEfacGfefPq0",
-    "listeners": 191901944,
+    "listeners": 1901944,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb818cff8dd1787d1852dad61e",
     "artistImageHistory": null,
@@ -5215,12 +5215,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 55
+    "rank": 31
   },
   {
     "name": "Pastor Lopez",
     "url": "https://open.spotify.com/artist/6Ud6RjvNXVe39mKiGUb7zE",
-    "listeners": 181838997,
+    "listeners": 1838997,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebbe3fa0ad400cf8146665ca13",
     "artistImageHistory": null,
@@ -5232,37 +5232,37 @@
         "plays": 40323154
       },
       {
+        "title": "Traicionera",
+        "link": "https://open.spotify.com/track/2LuUbyqweBpiAFmt2u8a36",
+        "image": "https://i.scdn.co/image/ab67616d00004851f02ff8397a2f0398de213ced",
+        "plays": 43783577
+      },
+      {
         "title": "Las Caleñas",
         "link": "https://open.spotify.com/track/5laURGcp39yiRUWZ3KtASj",
         "image": "https://i.scdn.co/image/ab67616d00004851109bc1da70e2ef28603b654a",
         "plays": 38908942
       },
       {
-        "title": "El Ausente",
-        "link": "https://open.spotify.com/track/6rfsWsD4tYHHPaxfrVgvmN",
-        "image": "https://i.scdn.co/image/ab67616d00004851109bc1da70e2ef28603b654a",
-        "plays": 35360868
+        "title": "Mentirosa",
+        "link": "https://open.spotify.com/track/0p2ebu4gOzX2mMKxIa0KvV",
+        "image": "https://i.scdn.co/image/ab67616d00004851e19812aa11528c03c3e8d409",
+        "plays": 29039621
       },
       {
-        "title": "El Eco De Tu Adiós - Remastered",
-        "link": "https://open.spotify.com/track/7MRozXQGyw9KM9GCw0b8mu",
-        "image": "https://i.scdn.co/image/ab67616d00004851a0fdf2592e2115f0a5f404ca",
-        "plays": 14196287
-      },
-      {
-        "title": "Solo un Cigarro",
-        "link": "https://open.spotify.com/track/5a2SaHfiU20oC8pCUADDso",
-        "image": "https://i.scdn.co/image/ab67616d00004851b4e9f1be08d92eb859fc528a",
-        "plays": 20444526
+        "title": "El Hijo Ausente",
+        "link": "https://open.spotify.com/track/3NxExyKQZeEiAg9tIV9qXR",
+        "image": "https://i.scdn.co/image/ab67616d00004851f02ff8397a2f0398de213ced",
+        "plays": 32695446
       }
     ],
     "date": "2026-10-01",
-    "rank": 56
+    "rank": 32
   },
   {
     "name": "McKlopedia",
     "url": "https://open.spotify.com/artist/1PNgAcUW6UgN59okEaTpvG",
-    "listeners": 171733344,
+    "listeners": 1733344,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebaab31f2d0a842d70d260c663",
     "artistImageHistory": null,
@@ -5299,12 +5299,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 57
+    "rank": 33
   },
   {
     "name": "Corina Smith",
     "url": "https://open.spotify.com/artist/7mXfsy3lF4kU0f2KTNKSr8",
-    "listeners": 171663461,
+    "listeners": 1663461,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebea152c4d5d854cc366de6d17",
     "artistImageHistory": null,
@@ -5341,12 +5341,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 58
+    "rank": 34
   },
   {
     "name": "Los Cadillac's",
     "url": "https://open.spotify.com/artist/44clbgZfF4GkBAyduMPE2W",
-    "listeners": 162162030,
+    "listeners": 162030,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb7aa8f67ef0447d7597162ec8",
     "artistImageHistory": null,
@@ -5383,12 +5383,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 59
+    "rank": 61
   },
   {
     "name": "Arca",
     "url": "https://open.spotify.com/artist/4SQdUpG4f7UbkJG3cJ2Iyj",
-    "listeners": 141389959,
+    "listeners": 1389959,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb4b88b2ab3ee04bb54003999e",
     "artistImageHistory": null,
@@ -5425,12 +5425,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 60
+    "rank": 35
   },
   {
     "name": "NOREH",
     "url": "https://open.spotify.com/artist/1JHgX0v8Dx86wpfQkZuJFg",
-    "listeners": 121224030,
+    "listeners": 1224030,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb2d10fe9cd5c7d18f057e2bc0",
     "artistImageHistory": null,
@@ -5467,12 +5467,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 61
+    "rank": 36
   },
   {
     "name": "Sanluis",
     "url": "https://open.spotify.com/artist/3b2zi4PtiILG4Iyswyk4LW",
-    "listeners": 111108915,
+    "listeners": 1108915,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb432d1de7b231d65629485085",
     "artistImageHistory": null,
@@ -5509,12 +5509,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 62
+    "rank": 37
   },
   {
     "name": "Desorden Público",
     "url": "https://open.spotify.com/artist/0kyQwKHCZnKE7kTXkxXjrB",
-    "listeners": 91591518,
+    "listeners": 91518,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb856a4c8434bc80e2518a1091",
     "artistImageHistory": null,
@@ -5551,12 +5551,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 63
+    "rank": 64
   },
   {
     "name": "Aran One",
     "url": "https://open.spotify.com/artist/2J6w7AO0a1hghIqa6cO7pg",
-    "listeners": 14914865,
+    "listeners": 14865,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebbce89d70ed29b4a3443be3cf",
     "artistImageHistory": null,
@@ -5593,12 +5593,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 64
+    "rank": 66
   },
   {
     "name": "C4 Trío",
     "url": "https://open.spotify.com/artist/316XlJTSEuNi2LaH6I2x7y",
-    "listeners": 6262008,
+    "listeners": 62008,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5ebbaecf9052567ecf54a99c790",
     "artistImageHistory": null,
@@ -5640,7 +5640,7 @@
   {
     "name": "Alfredo Sadel",
     "url": "https://open.spotify.com/artist/7rQgfDLAHgLGCmgQAZTUN7",
-    "listeners": 1212010,
+    "listeners": 12010,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab67616d0000b27346d518ead512663bc7618e44",
     "artistImageHistory": null,
@@ -5677,12 +5677,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 66
+    "rank": 67
   },
   {
     "name": "Anais Vivas",
     "url": "https://open.spotify.com/artist/1Kh1ez0McTFCo8s4Z8Q8S0",
-    "listeners": 353486,
+    "listeners": 3486,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb5b2057c03e01ca3653266e05",
     "artistImageHistory": null,
@@ -5719,12 +5719,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 67
+    "rank": 68
   },
   {
     "name": "Neel",
     "url": "https://open.spotify.com/artist/0lO6av16Xf5O2O39jHdyHx",
-    "listeners": 111085,
+    "listeners": 1085,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab67616d0000b27330382b727d88ca68eb53fa4e",
     "artistImageHistory": null,
@@ -5761,12 +5761,12 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 68
+    "rank": 69
   },
   {
     "name": "Neeus",
     "url": "https://open.spotify.com/artist/4OMnvxQdSJeobzinrEjTpO",
-    "listeners": null,
+    "listeners": 138088,
     "backgroundArtistImage": null,
     "artistImage": "https://i.scdn.co/image/ab6761610000e5eb9a6deefa7415baa321b06419",
     "artistImageHistory": null,
@@ -5803,6 +5803,6 @@
       }
     ],
     "date": "2026-10-01",
-    "rank": 69
+    "rank": 63
   }
 ]

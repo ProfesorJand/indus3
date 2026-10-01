@@ -120,10 +120,14 @@ async function scrapeArtist(browser, url) {
 
     // 👥 Monthly listeners (Selector más robusto)
     try {
-      const listenersElement = page.locator('span:has-text("monthly listeners")').first();
-      await listenersElement.waitFor({ state: 'visible', timeout: 5000 });
-      const listenersText = await listenersElement.textContent();
-      listeners = parseNumber(listenersText);
+      const listenersElement = page.locator('span:has-text("monthly listeners"), span:has-text("oyentes mensuales")').first();
+      await listenersElement.waitFor({ state: 'attached', timeout: 5000 });
+      const exactNumberText = await listenersElement.evaluate(el => {
+        const hidden = el.querySelector('[data-encore-id="visuallyHidden"]');
+        if (hidden) return hidden.textContent;
+        return el.innerText || el.textContent;
+      });
+      listeners = parseNumber(exactNumberText);
     } catch (e) {
       console.log("⚠️ Monthly listeners no encontrado");
     }

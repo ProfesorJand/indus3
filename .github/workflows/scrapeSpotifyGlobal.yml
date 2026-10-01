@@ -54,3 +54,8 @@ jobs:
           git add spotify-top-50-songs-global.json spotify-data.json spotify-data-new.json spotify-data-global.json
           git commit -m "chore: actualización automática de datos Spotify" || echo "No hay cambios para commitear"
           git push
+
+  deploy:
+    needs: scrape
+    uses: ./.github/workflows/deploy.yml
+    secrets: inherit

@@ -72,8 +72,7 @@ const ARTISTS = [
   "https://open.spotify.com/artist/1Kh1ez0McTFCo8s4Z8Q8S0",
   "https://open.spotify.com/artist/0lO6av16Xf5O2O39jHdyHx",
   "https://open.spotify.com/artist/5v3TYN6Mmi5vxV2uSOfXot",
-  "https://open.spotify.com/artist/0OluGbRuQQEcYyttGww517",
-  "https://open.spotify.com/artist/7mXfsy3lF4kU0f2KTNKSr8"
+  "https://open.spotify.com/artist/0OluGbRuQQEcYyttGww517"
 ];
 
 const ArtistaSimple = ["https://open.spotify.com/artist/3b2zi4PtiILG4Iyswyk4LW"]

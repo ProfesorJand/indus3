@@ -8,6 +8,8 @@ on:
 # 🟢 IMPORTANTE: Permisos para que la Action pueda guardar archivos
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 jobs:
   scrape:

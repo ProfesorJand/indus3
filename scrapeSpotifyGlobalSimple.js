@@ -87,9 +87,32 @@ async function scrapePlaylist() {
         songData.artists = artistNames.join(", ");
       } catch {}
 
-      // Imagen
+      // Imagen (Alta calidad 640x640)
       try {
-        songData.image = await row.locator('img').first().getAttribute("src");
+        const imgLocator = row.locator('img').first();
+        const rawSrc = await imgLocator.getAttribute("src");
+        const rawSrcset = await imgLocator.getAttribute("srcset");
+
+        let imgUrl = rawSrc;
+        if (rawSrcset) {
+          const entries = rawSrcset.split(',').map(s => s.trim().split(/\s+/));
+          const sorted = entries
+            .map(([u, w]) => ({ u, w: parseInt(w?.replace('w', '') || '0', 10) }))
+            .sort((a, b) => b.w - a.w);
+          if (sorted[0]?.u) {
+            imgUrl = sorted[0].u;
+          }
+        }
+
+        // Spotify CDN: convertir thumbnails (4851 = 64x64, 1e02 = 300x300, e1a3 = 150w/300w) a 640x640 (b273)
+        if (imgUrl) {
+          imgUrl = imgUrl
+            .replace("ab67616d00004851", "ab67616d0000b273")
+            .replace("ab67616d00001e02", "ab67616d0000b273")
+            .replace("ab67616d0000e1a3", "ab67616d0000b273");
+        }
+
+        songData.image = imgUrl || "N/A";
       } catch {}
 
       // Álbum

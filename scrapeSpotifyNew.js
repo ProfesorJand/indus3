@@ -173,8 +173,13 @@ async function scrapeArtist(browser, url) {
         try {
           title = await track.locator('[data-testid="internal-track-link"]').textContent({ timeout: 1000 });
           const href = await track.locator("a").first().getAttribute("href", { timeout: 1000 });
-          link = href ? "https://open.spotify.com" + href : null;
-          image = await track.locator("img").first().getAttribute("src", { timeout: 1000 });
+          const rawImg = await track.locator("img").first().getAttribute("src", { timeout: 1000 }).catch(() => null);
+          image = rawImg
+            ? rawImg
+                .replace("ab67616d00004851", "ab67616d0000b273")
+                .replace("ab67616d00001e02", "ab67616d0000b273")
+                .replace("ab67616d0000e1a3", "ab67616d0000b273")
+            : null;
           
           // Buscar reproducciones de forma robusta sin depender de clases CSS ofuscadas
           const texts = await track.locator('div').allTextContents();

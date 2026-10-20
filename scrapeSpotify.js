@@ -188,7 +188,13 @@ async function scrapeArtist(browser, url) {
         }
 
         try {
-          image = await track.locator("img").first().getAttribute("src");
+          const rawTrackImg = await track.locator("img").first().getAttribute("src");
+          image = rawTrackImg
+            ? rawTrackImg
+                .replace("ab67616d00004851", "ab67616d0000b273")
+                .replace("ab67616d00001e02", "ab67616d0000b273")
+                .replace("ab67616d0000e1a3", "ab67616d0000b273")
+            : null;
         } catch {
           console.log("⚠️ Imagen de musica no encontrada")
         }

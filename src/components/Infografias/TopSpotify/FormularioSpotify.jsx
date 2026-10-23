@@ -35,6 +35,12 @@ const FormularioSpotify = ({
       const latestDate = uniqueDates[0];
       
       const allTracks = spotifyDataGlobalTop50.filter(item => item.updatedAt === latestDate).map(track => {
+        const highResImg = track.image
+          ? track.image
+              .replace("ab67616d00004851", "ab67616d0000b273")
+              .replace("ab67616d00001e02", "ab67616d0000b273")
+              .replace("ab67616d0000e1a3", "ab67616d0000b273")
+          : "";
         return {
           ...track,
           artistName: track.artists,
@@ -42,7 +48,7 @@ const FormularioSpotify = ({
           artistUrl: "",
           backgroundArtistImage: "",
           link: track.url || "",
-          image: track.image
+          image: highResImg
         };
       });
       sortedData = allTracks.sort((a, b) => a.rank - b.rank);

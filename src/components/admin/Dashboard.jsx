@@ -4,6 +4,7 @@ import EventForm from '../forms/EventForm.jsx';
 import BioForm from './BioForm.jsx';
 import SliderForm from './SliderForm.jsx';
 import TopArtistaSpotify from '../Infografias/TopSpotify/TopArtistaSpotify.jsx';
+import NewsBarManager from './NewsBarManager.jsx';
 
 const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], initialPastFiles = [] }) => {
   const [activeTab, setActiveTab] = useState('events'); // 'overview', 'events', 'bios', 'sliders', 'pastEvents'
@@ -116,7 +117,7 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
     const savedOrder = orderObj?.orderList || JSON.parse(localStorage.getItem('indus3_past_events_order') || '[]');
 
     const apiPastEvents = events
-      .filter(e => e.esPasado && e.id !== '__indus3_past_events_order__')
+      .filter(e => e.esPasado && e.id !== '__indus3_past_events_order__' && e.id !== '__indus3_news_ticker__')
       .map(e => ({
         id: String(e.id),
         image: e.flyerEvento || e.imagenPR || e.imagenBanner,
@@ -357,6 +358,13 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
             <span>Eventos Pasados</span>
           </div>
           <div 
+            className={`${styles.navItem} ${activeTab === 'newsBar' ? styles.active : ''}`}
+            onClick={() => setActiveTab('newsBar')}
+          >
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" /></svg>
+            <span>Barra de Noticias</span>
+          </div>
+          <div 
             className={`${styles.navItem} ${activeTab === 'spotify' ? styles.active : ''}`}
             onClick={() => setActiveTab('spotify')}
           >
@@ -399,7 +407,7 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
               <div className={styles.statsGrid}>
                 <div className={styles.statCard}>
                   <div className={styles.statTitle}>Total Eventos</div>
-                  <div className={styles.statValue}>{events.length}</div>
+                  <div className={styles.statValue}>{events.filter(e => !String(e.id || '').startsWith('__')).length}</div>
                 </div>
                 <div className={styles.statCard}>
                   <div className={styles.statTitle}>Biografías</div>
@@ -440,7 +448,7 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
                   </thead>
                   <tbody>
                     {events
-                      .filter(e => e.id !== '__indus3_past_events_order__')
+                      .filter(e => e.id !== '__indus3_past_events_order__' && e.id !== '__indus3_news_ticker__')
                       .slice()
                       .sort((a, b) => {
                         const aPasado = a.esPasado ? 1 : 0;
@@ -766,6 +774,24 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
               <div style={{ marginTop: '20px' }}>
                 <TopArtistaSpotify />
               </div>
+            </div>
+          )}
+
+          {/* NEWS BAR VIEW */}
+          {activeTab === 'newsBar' && (
+            <div>
+              <div className={styles.viewHeader}>
+                <div>
+                  <h1>Barra de Noticias Superior (News Bar)</h1>
+                  <p style={{ color: '#94a3b8', fontSize: '0.95rem', marginTop: '4px' }}>
+                    Configura el texto marquesina que se desliza debajo del menú principal. Agrega múltiples avisos con sus enlaces clicables y separadores.
+                  </p>
+                </div>
+              </div>
+              <NewsBarManager 
+                initialData={events.find(e => e.id === '__indus3_news_ticker__')?.newsData}
+                onSaved={refreshData}
+              />
             </div>
           )}
         </main>

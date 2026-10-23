@@ -4,6 +4,8 @@ import Container from '@components/base/Container.astro';
 import MobileMenu from './MobileMenu.jsx';
 import ThemeToggle from '@components/base/ThemeToggle.astro';
 import HorizontalLogo from '@components/logo/horizontal.astro';
+import NewsBar from '@components/base/NewsBar.jsx';
+import { getNewsConfig } from '@stores/news';
 
 const base = import.meta.env.BASE_URL;
 
@@ -16,28 +18,33 @@ const navigation = [
   { label: 'Top Spotify', href: `${base}top-spotify` },
   { label: 'Contacto', href: `${base}contacto` },
 ];
+
+const initialNews = await getNewsConfig();
 ---
 
 <header class={styles.header} id="header-sticky" transition:persist>
-  <Container className={styles.inner} padding="padding-0-32">
-    <a href={base} class={styles.logo}><HorizontalLogo /></a>
-    
-    <nav class={styles.nav}>
-      {navigation.map(item => (
-        <a href={item.href} class={styles.navLink}>{item.label}</a>
-      ))}
-    </nav>
+  <div class={styles.mainNav}>
+    <Container className={styles.inner} padding="padding-0-32">
+      <a href={base} class={styles.logo}><HorizontalLogo /></a>
+      
+      <nav class={styles.nav}>
+        {navigation.map(item => (
+          <a href={item.href} class={styles.navLink}>{item.label}</a>
+        ))}
+      </nav>
 
-    <div class={styles.actions}>
-      <ThemeToggle />
-      <div class={styles.mobileActions}>
-        <MobileMenu client:load items={navigation} />
+      <div class={styles.actions}>
+        <ThemeToggle />
+        <div class={styles.mobileActions}>
+          <MobileMenu client:load items={navigation} />
+        </div>
       </div>
-    </div>
-  </Container>
+    </Container>
+  </div>
+  <NewsBar client:load initialConfig={initialNews} />
 </header>
 
-<script>
+<script is:inline>
   const header = document.getElementById('header-sticky');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 20) {

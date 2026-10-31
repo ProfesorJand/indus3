@@ -106,21 +106,26 @@ export const getSortedBlogPosts = async () => {
   try {
     const res = await fetch('https://api.indus3pro.com/blog/get_posts.php?t=' + Date.now());
     if (!res.ok) return [];
-    const data = await res.json();
-    if (data.success && Array.isArray(data.posts)) {
-      return data.posts
-        .filter((p) => p.status === 'published')
-        .map(normalizePost)
-        .sort((a, b) => {
-          // 1. Los posts destacados aparecen primero
-          if (a.featured !== b.featured) {
-            return a.featured ? -1 : 1;
-          }
-          // 2. Luego ordenados cronológicamente de más reciente a más antiguo
-          const timeA = new Date(a.createdAt || a.date).getTime() || 0;
-          const timeB = new Date(b.createdAt || b.date).getTime() || 0;
-          return timeB - timeA;
-        });
+    const text = await res.text();
+    try {
+      const data = JSON.parse(text);
+      if (data.success && Array.isArray(data.posts)) {
+        return data.posts
+          .filter((p) => p.status === 'published')
+          .map(normalizePost)
+          .sort((a, b) => {
+            // 1. Los posts destacados aparecen primero
+            if (a.featured !== b.featured) {
+              return a.featured ? -1 : 1;
+            }
+            // 2. Luego ordenados cronológicamente de más reciente a más antiguo
+            const timeA = new Date(a.createdAt || a.date).getTime() || 0;
+            const timeB = new Date(b.createdAt || b.date).getTime() || 0;
+            return timeB - timeA;
+          });
+      }
+    } catch {
+      // Respuesta de firewall no es JSON
     }
   } catch (err) {
     console.error('Error al obtener posts de Indus3 Blog:', err);
@@ -133,9 +138,14 @@ export const getBlogPostBySlug = async (slug) => {
   try {
     const res = await fetch(`https://api.indus3pro.com/blog/get_posts.php?slug=${encodeURIComponent(slug)}&t=${Date.now()}`);
     if (!res.ok) return null;
-    const data = await res.json();
-    if (data.success && data.post) {
-      return normalizePost(data.post);
+    const text = await res.text();
+    try {
+      const data = JSON.parse(text);
+      if (data.success && data.post) {
+        return normalizePost(data.post);
+      }
+    } catch {
+      // Respuesta de firewall no es JSON
     }
   } catch (err) {
     console.error('Error al consultar post por slug en Indus3:', err);
@@ -149,9 +159,14 @@ export const getBlogTags = async (publishedOnly = false) => {
     const url = `https://api.indus3pro.com/blog/tags.php?${publishedOnly ? 'published_only=1&' : ''}t=${Date.now()}`;
     const res = await fetch(url);
     if (!res.ok) return [];
-    const data = await res.json();
-    if (data.success && Array.isArray(data.tags)) {
-      return data.tags;
+    const text = await res.text();
+    try {
+      const data = JSON.parse(text);
+      if (data.success && Array.isArray(data.tags)) {
+        return data.tags;
+      }
+    } catch {
+      // Respuesta de firewall no es JSON
     }
   } catch (err) {
     console.error('Error al obtener etiquetas del blog:', err);

@@ -1,3 +1,5 @@
+import fallbackBiografias from '../data/biografias.json';
+
 export const JOB_TITLE = [
   "Artista Musical",
   "Banda",
@@ -72,12 +74,24 @@ export const ROL = [
 export const urlBiografias = "https://api.indus3pro.com/biografias/get-biografias.php?t="+Date.now();
 
 export const getBiografias = async () => {
-  const response = await fetch(urlBiografias, {
+  try {
+    const response = await fetch(urlBiografias, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${(typeof window !== 'undefined' ? sessionStorage.getItem('indus3_admin_token') : null) || import.meta.env.BACKEND_AUTH_KEY || import.meta.env.PUBLIC_BACKEND_AUTH_KEY || ''}`
     },
   });
-  const data = await response.json();
-  return data.data;
+    if (!response.ok) return fallbackBiografias;
+    const text = await response.text();
+    try {
+      const data = JSON.parse(text);
+      if (data && Array.isArray(data.data)) return data.data;
+    } catch {
+      // Si Imunify360 devuelve HTML
+    }
+    return fallbackBiografias;
+  } catch (error) {
+    return fallbackBiografias;
+  }
+
 }

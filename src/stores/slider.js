@@ -8,8 +8,14 @@ export const getSliders = async () => {
         'Authorization': `Bearer ${(typeof window !== 'undefined' ? sessionStorage.getItem('indus3_admin_token') : null) || import.meta.env.BACKEND_AUTH_KEY || import.meta.env.PUBLIC_BACKEND_AUTH_KEY || ''}`
       },
     });
-    const data = await response.json();
-    return data.data || [];
+    if (!response.ok) return [];
+    const text = await response.text();
+    try {
+      const data = JSON.parse(text);
+      return data?.data || [];
+    } catch {
+      return [];
+    }
   } catch (error) {
     console.error("Error fetching sliders:", error);
     return [];

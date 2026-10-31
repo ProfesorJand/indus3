@@ -22,7 +22,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -41,8 +41,6 @@ jobs:
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps chromium
-        env:
-          PLAYWRIGHT_HOST_PLATFORM_OVERRIDE: ubuntu24.04
 
       - name: Install, build and upload
         uses: withastro/action@v3

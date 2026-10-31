@@ -32,10 +32,11 @@ const SliderForm = ({ sliderToEdit = null, onSuccess }) => {
 
     setStatus('Subiendo imagen...');
     try {
+      const token = sessionStorage.getItem('indus3_admin_token') || import.meta.env.PUBLIC_BACKEND_AUTH_KEY || '';
       const res = await fetch('https://api.indus3pro.com/upload-image.php', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+          'Authorization': `Bearer ${token}`
         },
         body: uploadData
       });
@@ -82,12 +83,13 @@ const SliderForm = ({ sliderToEdit = null, onSuccess }) => {
     setStatus('Guardando...');
 
     try {
+      const token = sessionStorage.getItem('indus3_admin_token') || import.meta.env.PUBLIC_BACKEND_AUTH_KEY || '';
       const urlSaveSlider = "https://api.indus3pro.com/sliders/save-slider.php";
       const response = await fetch(urlSaveSlider, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json' ,
-          'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(formData)
       });

@@ -10,6 +10,7 @@
   --color-bg-alt: #c7c7c7;
   --color-bg-alt-2: #c2c2c2;
   --color-bg-alt-3: #a0a0a0;
+  --color-bg-cards: #e4e1e1;
   --color-border: #424242;
   --color-white: #ffffff;
   --color-black: #000000;
@@ -77,4 +78,5 @@ html.dark {
   --color-bg-alt-2: #1a1a1a;
   --color-bg-alt-3: #2e2e2e;
   --color-border: #334155;
+  --color-bg-cards: #1a1a1a;
 }

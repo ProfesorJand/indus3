@@ -1,0 +1,146 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import HeaderSticky from "@components/headers/HeaderSticky.astro";
+import FooterThreeCols from "@components/footers/FooterThreeCols.astro";
+import Section from "@components/base/Section.astro";
+import Container from "@components/base/Container.astro";
+import SEO from "@components/seo/SEO.astro";
+import BlogFilter from "@components/blog/BlogFilter.jsx";
+import BlogGrid from "@components/blog/BlogGrid.jsx";
+import { getSortedBlogPosts } from "@stores/blogStore";
+import { websiteSchema, organizationSchema } from "@utils/seo";
+
+const initialPosts = await getSortedBlogPosts();
+
+const seoTitle = "Blog & Noticias de Indus3";
+const seoDesc = "Descubre las últimas noticias sobre producción de eventos, conciertos, booking de artistas, tecnología en vivo y novedades del entretenimiento con Indus3.";
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site || "https://indus3pro.com");
+---
+
+<MainLayout title={seoTitle} canonical={canonicalUrl}>
+  <SEO
+    slot="seo"
+    title={seoTitle}
+    description={seoDesc}
+    keywords="Blog Indus3, Noticias de Conciertos, Producción de Eventos, Booking de Artistas, Entretenimiento Venezuela"
+    canonical={canonicalUrl.toString()}
+    schemas={[websiteSchema, organizationSchema]}
+  />
+
+  <HeaderSticky slot="header" />
+
+  <main class="blog-main">
+    <Section variant="hero">
+      <Container variant="mid" flexDirection="column">
+        <!-- Hero Header -->
+        <header class="blog-hero">
+          <!-- <div class="hero-badge">
+            <span class="badge-dot"></span>
+            Actualizaciones & Industria
+          </div> -->
+          <h1 class="hero-title">
+            Blog & Noticias de Indus3
+          </h1>
+          <p class="hero-subtitle">
+            Descubre las últimas noticias sobre producción de eventos, conciertos, booking de artistas y novedades del entretenimiento con Indus3.
+          </p>
+        </header>
+
+        <!-- Filtros y Búsqueda -->
+        <section class="filter-section">
+          <BlogFilter client:load initialPosts={initialPosts} />
+        </section>
+
+        <!-- Grilla de Artículos -->
+        <section class="grid-section">
+          <BlogGrid client:load initialPosts={initialPosts} />
+        </section>
+      </Container>
+    </Section>
+  </main>
+
+  <FooterThreeCols slot="footer" />
+</MainLayout>
+
+<style>
+  .blog-main {
+    min-height: 80vh;
+    padding-bottom: 4rem;
+  }
+
+  .blog-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    border-radius: 9999px;
+    background: rgba(59, 130, 246, 0.12);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 1.25rem;
+    backdrop-filter: blur(8px);
+  }
+
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #3b82f6;
+    box-shadow: 0 0 8px #60a5fa;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0 0 1rem 0;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-subtitle {
+    max-width: 680px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .filter-section,
+  .grid-section {
+    width: 100%;
+  }
+
+  /* Regla 8: Media query para dispositivos móviles */
+  @media only screen and (max-width: 900px) {
+    .hero-title {
+      font-size: 2.2rem;
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      padding: 0 0.5rem;
+    }
+
+    .blog-hero {
+      margin-bottom: 1.75rem;
+    }
+  }
+</style>
+

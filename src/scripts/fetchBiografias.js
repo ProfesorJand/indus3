@@ -39,9 +39,10 @@ async function fetchWithRetry(url, options, retries = 3) {
 }
 
 try {
+  const authKey = process.env.BACKEND_AUTH_KEY || process.env.PUBLIC_BACKEND_AUTH_KEY;
   const json = await fetchWithRetry("https://api.indus3pro.com/biografias/get-biografias.php?t="+Date.now(), {
     headers: {
-      "Authorization": `Bearer ${process.env.PUBLIC_BACKEND_AUTH_KEY}`,
+      "Authorization": `Bearer ${authKey}`,
       "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
       "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
       "Accept-Language": "es-ES,es;q=0.9,en;q=0.8",

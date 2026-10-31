@@ -5,18 +5,26 @@ import BioForm from './BioForm.jsx';
 import SliderForm from './SliderForm.jsx';
 import TopArtistaSpotify from '../Infografias/TopSpotify/TopArtistaSpotify.jsx';
 import NewsBarManager from './NewsBarManager.jsx';
+import BlogManager from './BlogManager.jsx';
 
 const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], initialPastFiles = [] }) => {
-  const [activeTab, setActiveTab] = useState('events'); // 'overview', 'events', 'bios', 'sliders', 'pastEvents'
+  const [activeTab, setActiveTab] = useState('events'); // 'overview', 'events', 'bios', 'sliders', 'pastEvents', 'newsBar', 'spotify', 'blog'
   const [events, setEvents] = useState([]);
   const [bios, setBios] = useState([]);
   const [sliders, setSliders] = useState([]);
   const [pastEventsList, setPastEventsList] = useState([]);
+  const [blogPostsCount, setBlogPostsCount] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
   const [isDeploying, setIsDeploying] = useState(false);
 
   const [authorized, setAuthorized] = useState(false);
+
+  const getAdminToken = () => {
+    return (typeof window !== 'undefined' && sessionStorage.getItem('indus3_admin_token')) ||
+      import.meta.env.PUBLIC_BACKEND_AUTH_KEY ||
+      '';
+  };
 
   useEffect(()=>{
     if (sessionStorage.getItem('indus3_admin_session') !== 'true') {
@@ -37,7 +45,7 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
         {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+            'Authorization': `Bearer ${getAdminToken()}`
           }
         }
       );
@@ -53,7 +61,7 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
         {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+            'Authorization': `Bearer ${getAdminToken()}`
           }
         }
       );
@@ -68,7 +76,7 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
         {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+            'Authorization': `Bearer ${getAdminToken()}`
           }
         }
       );
@@ -76,6 +84,24 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
         const updatedSliders = await resSliders.json();
         setSliders(updatedSliders.data || []);
         console.log({updatedSliders})
+      }
+
+      // Re-fetch blog posts count
+      try {
+        const resBlog = await fetch('https://api.indus3pro.com/blog/get_posts.php?t=' + Date.now(), {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${getAdminToken()}`
+          }
+        });
+        if (resBlog.ok) {
+          const blogData = await resBlog.json();
+          if (blogData.success && blogData.posts) {
+            setBlogPostsCount(blogData.posts.length);
+          }
+        }
+      } catch (errBlog) {
+        console.error("Error fetching blog posts count:", errBlog);
       }
     } catch (e) { 
       console.error("Error refreshing dashboard data:", e); 
@@ -97,7 +123,7 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+          'Authorization': `Bearer ${getAdminToken()}`
         },
         body: JSON.stringify({ id })
       });
@@ -175,7 +201,7 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+          'Authorization': `Bearer ${getAdminToken()}`
         },
         body: JSON.stringify(orderPayload)
       });
@@ -205,7 +231,7 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+          'Authorization': `Bearer ${getAdminToken()}`
         },
         body: JSON.stringify(updatedEvent)
       });
@@ -221,7 +247,7 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
               method: 'POST',
               headers: { 
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+                'Authorization': `Bearer ${getAdminToken()}`
               },
               body: JSON.stringify({ id: matchingSlider.id })
             });
@@ -251,7 +277,7 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+          'Authorization': `Bearer ${getAdminToken()}`
         },
         body: JSON.stringify(updatedEvent)
       });
@@ -285,10 +311,10 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
       const res = await fetch('https://api.indus3pro.com/trigger-deploy.php', {
         method: 'POST',
         headers: { 
-          'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+          'Authorization': `Bearer ${getAdminToken()}`
         }
       });
-      console.log({token: import.meta.env.PUBLIC_BACKEND_AUTH_KEY, res})
+      console.log({res})
       const data = await res.json();
       console.log({data})
       if (res.ok) {
@@ -365,6 +391,13 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
             <span>Barra de Noticias</span>
           </div>
           <div 
+            className={`${styles.navItem} ${activeTab === 'blog' ? styles.active : ''}`}
+            onClick={() => setActiveTab('blog')}
+          >
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+            <span>Blog / Noticias</span>
+          </div>
+          <div 
             className={`${styles.navItem} ${activeTab === 'spotify' ? styles.active : ''}`}
             onClick={() => setActiveTab('spotify')}
           >
@@ -416,6 +449,10 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
                 <div className={styles.statCard}>
                   <div className={styles.statTitle}>Sliders de Inicio</div>
                   <div className={styles.statValue}>{sliders.length}</div>
+                </div>
+                <div className={styles.statCard}>
+                  <div className={styles.statTitle}>Artículos Blog</div>
+                  <div className={styles.statValue}>{blogPostsCount}</div>
                 </div>
                 <div className={styles.statCard}>
                   <div className={styles.statTitle}>Próximo Evento</div>
@@ -792,6 +829,21 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
                 initialData={events.find(e => e.id === '__indus3_news_ticker__')?.newsData}
                 onSaved={refreshData}
               />
+            </div>
+          )}
+
+          {/* BLOG / NOTICIAS VIEW */}
+          {activeTab === 'blog' && (
+            <div>
+              <div className={styles.viewHeader}>
+                <div>
+                  <h1>Gestión de Blog y Noticias</h1>
+                  <p style={{ color: '#94a3b8', fontSize: '0.95rem', marginTop: '4px' }}>
+                    Crea, edita y administra los artículos, autores y etiquetas de tu blog en api.indus3pro.com.
+                  </p>
+                </div>
+              </div>
+              <BlogManager />
             </div>
           )}
         </main>

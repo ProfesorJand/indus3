@@ -1,0 +1,712 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import HeaderSticky from "@components/headers/HeaderSticky.astro";
+import FooterThreeCols from "@components/footers/FooterThreeCols.astro";
+import Section from "@components/base/Section.astro";
+import Container from "@components/base/Container.astro";
+import SEO from "@components/seo/SEO.astro";
+import BlogCard from "@components/blog/BlogCard.jsx";
+import { getSortedBlogPosts, getBlogPostBySlug } from "@stores/blogStore";
+import { websiteSchema, organizationSchema, articleSchema } from "@utils/seo";
+
+export async function getStaticPaths() {
+  const posts = await getSortedBlogPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+let { post } = Astro.props;
+
+// Si no viene en props (o se navega en modo SSR/dinámico), consultar por slug
+if (!post || !post.content) {
+  const currentSlug = post?.slug || Astro.params.slug;
+  if (currentSlug) {
+    post = await getBlogPostBySlug(currentSlug);
+  }
+}
+
+if (!post) {
+  return Astro.redirect('/blog/');
+}
+
+const seoTitle = post.seoTitle || post.title;
+const seoDesc = post.excerpt;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site || "https://indus3pro.com");
+
+// Construcción de Schemas SEO
+const postArticleSchema = articleSchema({
+  headline: post.title,
+  datePublished: post.createdAt || post.date,
+  dateModified: post.updatedAt || post.updatedDate || post.date,
+  authorName: post.author.name,
+  authorUrl: canonicalUrl.origin
+});
+
+// Artículos relacionados (excluyendo estrictamente el artículo actual)
+const allPosts = await getSortedBlogPosts();
+
+// Normalizadores para comparación exacta y robusta
+const cleanSlug = (s) => String(s || '').toLowerCase().trim().replace(/^\/+|\/+$/g, '');
+const currentSlug = cleanSlug(post.slug || Astro.params.slug);
+const currentId = post.id ? String(post.id) : null;
+const currentTitle = String(post.title || '').toLowerCase().trim();
+const currentTags = Array.isArray(post.tags)
+  ? post.tags.map((t) => (typeof t === 'string' ? t.toLowerCase().trim() : String(t.slug || t.nombre || '').toLowerCase().trim())).filter(Boolean)
+  : [];
+
+// 1. Filtrar descartando completamente el post que se está visualizando (por ID, Slug o Título)
+const otherPosts = allPosts.filter((p) => {
+  // Excluir por ID
+  if (currentId && p.id && String(p.id) === currentId) return false;
+
+  // Excluir por Slug normalizado
+  const pSlug = cleanSlug(p.slug);
+  if (pSlug && (pSlug === currentSlug || pSlug === cleanSlug(Astro.params.slug))) return false;
+
+  // Excluir por Título
+  if (currentTitle && p.title && String(p.title).toLowerCase().trim() === currentTitle) return false;
+
+  return true;
+});
+
+// 2. Priorizar artículos que compartan etiquetas (tags) con el artículo actual, o los más recientes
+const relatedPosts = otherPosts
+  .map((p) => {
+    const pTags = Array.isArray(p.tags)
+      ? p.tags.map((t) => (typeof t === 'string' ? t.toLowerCase().trim() : String(t.slug || t.nombre || '').toLowerCase().trim())).filter(Boolean)
+      : [];
+    const sharedTagsCount = pTags.filter((t) => currentTags.includes(t)).length;
+    return { post: p, sharedTagsCount };
+  })
+  .sort((a, b) => {
+    // Mayor coincidencia de tags primero
+    if (b.sharedTagsCount !== a.sharedTagsCount) {
+      return b.sharedTagsCount - a.sharedTagsCount;
+    }
+    // Luego destacados
+    if (a.post.featured !== b.post.featured) {
+      return a.post.featured ? -1 : 1;
+    }
+    // Luego cronológicamente más recientes
+    const timeA = new Date(a.post.createdAt || a.post.date).getTime() || 0;
+    const timeB = new Date(b.post.createdAt || b.post.date).getTime() || 0;
+    return timeB - timeA;
+  })
+  .map((item) => item.post)
+  .slice(0, 2);
+
+// Detección de video de YouTube
+let youtubeEmbedUrl = null;
+let isShortVideo = false;
+
+if (post.video) {
+  const rawVideo = post.video.trim();
+  isShortVideo = rawVideo.includes('/shorts/');
+  const match =
+    rawVideo.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/|live\/))([\w-]{11})/i) ||
+    rawVideo.match(/^([\w-]{11})$/);
+
+  if (match) {
+    youtubeEmbedUrl = `https://www.youtube.com/embed/${match[1]}`;
+  }
+}
+---
+
+<MainLayout title={seoTitle} canonical={canonicalUrl}>
+  <SEO
+    slot="seo"
+    title={seoTitle}
+    description={seoDesc}
+    keywords={post.keywords}
+    canonical={canonicalUrl.toString()}
+    schemas={[websiteSchema, organizationSchema, postArticleSchema]}
+  />
+
+  <HeaderSticky slot="header" />
+
+  <main class="article-main">
+    <Section>
+      <Container variant="mid" flexDirection="column">
+        <!-- Navegación de retorno -->
+        <nav class="back-nav">
+          <a href="/blog/" class="back-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12" />
+              <polyline points="12 19 5 12 12 5" />
+            </svg>
+            Volver a todas las noticias
+          </a>
+        </nav>
+
+        <!-- Cabecera del Artículo -->
+        <header class="article-header">
+          <h1 class="article-title">{post.title}</h1>
+
+          <div class="meta-bar">
+            <!-- Autor -->
+            <div class="author-block">
+              <img
+                src={post.author.avatar || '/indus3-logo.webp'}
+                alt={post.author.name}
+                class="author-avatar"
+                onerror="this.src='/indus3-logo.webp'"
+              />
+              <div class="author-info">
+                <span class="author-name">{post.author.name}</span>
+                <span class="author-role">{post.author.role}</span>
+              </div>
+            </div>
+
+            <!-- Detalles (Fecha, Actualización y Tiempo de lectura) -->
+            <div class="details-block">
+              <span class="meta-item" title="Fecha de publicación original">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+                {post.formattedDate}
+              </span>
+              {post.isUpdated && (
+                <span class="meta-item" title={`Última actualización: ${post.formattedUpdatedDate}`} style="color: #60a5fa;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                  </svg>
+                  Actualizado: {post.formattedUpdatedDate}
+                </span>
+              )}
+              <span class="meta-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+                {post.readTime}
+              </span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Medio Principal: Video o Imagen de Portada -->
+        <div class="hero-media">
+          {youtubeEmbedUrl ? (
+            <div class={`video-container ${isShortVideo ? 'video-short' : 'video-standard'}`}>
+              <iframe
+                src={youtubeEmbedUrl}
+                title={post.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              />
+            </div>
+          ) : post.image ? (
+            <img
+              src={post.image}
+              alt={post.title}
+              class="featured-image"
+              loading="eager"
+            />
+          ) : null}
+        </div>
+
+        <!-- Cuerpo del Artículo en HTML -->
+        <article class="article-content" set:html={post.content} />
+
+        <!-- Etiquetas al pie del artículo -->
+        {post.tags && post.tags.length > 0 && (
+          <div class="tags-footer">
+            <span class="tags-label">Etiquetas:</span>
+            <div class="tags-list">
+              {post.tags.map((tag) => (
+                <a href={`/blog/?tag=${encodeURIComponent(tag)}`} class="tag-link">
+                  #{tag}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Tarjeta de Biografía del Autor -->
+        {post.author && (
+          <section class="author-bio-card">
+            <img
+              src={post.author.avatar || '/indus3-logo.webp'}
+              alt={post.author.name}
+              class="bio-avatar"
+              onerror="this.src='/indus3-logo.webp'"
+            />
+            <div class="bio-content">
+              <span class="bio-badge">Sobre el Autor</span>
+              <h3 class="bio-name">{post.author.name}</h3>
+              <p class="bio-role">{post.author.role}</p>
+              <p class="bio-description">
+                {post.author.bio || 'Equipo de redacción y producción de contenidos de Indus3 Pro.'}
+              </p>
+            </div>
+          </section>
+        )}
+
+        <!-- Artículos Relacionados -->
+        {relatedPosts.length > 0 && (
+          <section class="related-section">
+            <div class="related-header">
+              <h2>Otras noticias recomendadas</h2>
+              <a href="/blog/" class="view-all-link">Ver todo el blog &rarr;</a>
+            </div>
+            <div class="related-grid">
+              {relatedPosts.map((related) => (
+                <BlogCard post={related} client:visible />
+              ))}
+            </div>
+          </section>
+        )}
+      </Container>
+    </Section>
+  </main>
+
+  <FooterThreeCols slot="footer" />
+</MainLayout>
+
+<style>
+  .article-main {
+    min-height: 80vh;
+    padding-bottom: 5rem;
+  }
+
+  /* Navegación */
+  .back-nav {
+    margin-bottom: 2rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: #3b82f6;
+    transform: translateX(-4px);
+  }
+
+  /* Cabecera */
+  .article-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .article-title {
+    font-size: 2.75rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    margin: 0;
+  }
+
+  .meta-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    
+  }
+
+  .author-block {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .author-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #3b82f6;
+    background: #0a0c12;
+  }
+
+  .author-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .author-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #60a5fa;
+  }
+
+  .author-role {
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+
+  .details-block {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.88rem;
+  }
+
+  /* Medio Destacado */
+  .hero-media {
+    margin-bottom: 2.5rem;
+    width: 100%;
+  }
+
+  .featured-image {
+    width: 100%;
+    max-height: 540px;
+    object-fit: cover;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  .video-container {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+    margin: 0 auto;
+  }
+
+  .video-standard {
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+  }
+
+  .video-short {
+    max-width: 380px;
+    aspect-ratio: 9 / 16;
+  }
+
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  /* Contenido HTML del Artículo */
+  .article-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 3.5rem;
+    word-break: break-word;
+  }
+
+  .article-content :global(h2) {
+    font-size: 1.85rem;
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .article-content :global(h3) {
+    font-size: 1.45rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .article-content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .article-content :global(a) {
+    text-decoration: underline;
+    transition: color 0.2s ease;
+  }
+
+  .article-content :global(blockquote) {
+    border-left: 4px solid #3b82f6;
+    background: rgba(59, 130, 246, 0.08);
+    margin: 2rem 0;
+    padding: 1.25rem 1.75rem;
+    border-radius: 0 12px 12px 0;
+    color: #e2e8f0;
+    font-style: italic;
+  }
+
+  .article-content :global(ul) {
+    list-style-type: disc !important;
+    list-style-position: outside;
+    padding-left: 2rem;
+    margin: 1.25rem 0 1.5rem 0;
+  }
+
+  .article-content :global(ol) {
+    list-style-type: decimal !important;
+    list-style-position: outside;
+    padding-left: 2rem;
+    margin: 1.25rem 0 1.5rem 0;
+  }
+
+  .article-content :global(li) {
+    display: list-item !important;
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+  }
+
+  .article-content :global(li::marker) {
+    font-weight: 600;
+  }
+
+  /* Color azul para la viñeta / número solo en modo oscuro */
+  :global(html.dark) .article-content :global(li::marker) {
+    color: #60a5fa;
+  }
+
+  .article-content :global(ul ul) {
+    list-style-type: circle !important;
+    margin: 0.4rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .article-content :global(ol ol) {
+    list-style-type: lower-alpha !important;
+    margin: 0.4rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .article-content :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 14px;
+    margin: 2rem 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .article-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+  }
+
+  .article-content :global(th),
+  .article-content :global(td) {
+    padding: 0.85rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .article-content :global(th) {
+    background: rgba(59, 130, 246, 0.15);
+    color: #adadad;
+    font-weight: 700;
+  }
+
+  /* Diseño de 2 columnas dentro del artículo */
+  .article-content :global(.indus3-columns-2) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem;
+    margin: 2rem 0;
+    align-items: start;
+  }
+
+  .article-content :global(.indus3-columns-2 > div) {
+    min-width: 0;
+  }
+
+  .article-content :global(.indus3-columns-2 img) {
+    margin: 0.5rem 0 1rem 0;
+  }
+
+  @media (max-width: 768px) {
+    .article-content :global(.indus3-columns-2) {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+  }
+
+  /* Tags al pie */
+  .tags-footer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .tags-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag-link {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .tag-link:hover {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: #3b82f6;
+    color: #60a5fa;
+  }
+
+  /* Tarjeta de Biografía del Autor */
+  .author-bio-card {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    background: var(--color-bg-alt-2);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: 18px;
+    padding: 2rem;
+    margin-bottom: 4rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  .bio-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #3b82f6;
+    background: #0a0c12;
+    flex-shrink: 0;
+  }
+
+  .bio-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .bio-badge {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #60a5fa;
+    font-weight: 700;
+  }
+
+  .bio-name {
+    font-size: 1.35rem;
+    font-weight: 800;
+    margin: 0;
+  }
+
+  .bio-role {
+    font-size: 0.88rem;
+    margin: 0 0 0.5rem 0;
+    font-weight: 600;
+  }
+
+  .bio-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Sección Relacionados */
+  .related-section {
+    width: 100%;
+    margin-top: 2rem;
+  }
+
+  .related-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .related-header h2 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 0;
+  }
+
+  .view-all-link {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+  }
+
+  .view-all-link:hover {
+    color: #60a5fa;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem;
+  }
+
+  /* Regla 8: Media query para dispositivos móviles */
+  @media only screen and (max-width: 900px) {
+    .article-title {
+      font-size: 2rem;
+    }
+
+    .meta-bar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .details-block {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .author-bio-card {
+      flex-direction: column;
+      text-align: center;
+      padding: 1.5rem;
+      gap: 1rem;
+    }
+
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .article-content {
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+  }
+</style>
+

@@ -75,9 +75,11 @@ export const getNewsConfig = async () => {
 };
 
 const getAuthHeader = () => {
-  const key = (typeof import.meta !== 'undefined' && import.meta.env?.PUBLIC_BACKEND_AUTH_KEY)
-    || (typeof process !== 'undefined' && process.env?.PUBLIC_BACKEND_AUTH_KEY)
-    || 'XW5V7VNGYUMILM1SJOAEKI8W48F1PVKW';
+  const sessionToken = typeof window !== 'undefined' ? sessionStorage.getItem('indus3_admin_token') : null;
+  const key = sessionToken
+    || (typeof import.meta !== 'undefined' && (import.meta.env?.BACKEND_AUTH_KEY || import.meta.env?.PUBLIC_BACKEND_AUTH_KEY))
+    || (typeof process !== 'undefined' && (process.env?.BACKEND_AUTH_KEY || process.env?.PUBLIC_BACKEND_AUTH_KEY))
+    || '';
   return `Bearer ${key}`;
 };
 

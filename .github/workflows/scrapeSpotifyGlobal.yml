@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   scrape:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Clonar repo
@@ -31,6 +31,8 @@ jobs:
       # 🟢 Instalar navegadores para Playwright (necesario para tus scripts)
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps chromium
+        env:
+          PLAYWRIGHT_HOST_PLATFORM_OVERRIDE: ubuntu24.04
 
       # 🟢 Script Diario (Artistas Venezolanos)
       - name: Ejecutar scrapeSpotifyNew.js

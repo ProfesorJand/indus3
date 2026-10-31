@@ -75,7 +75,7 @@ export const getBiografias = async () => {
   const response = await fetch(urlBiografias, {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${import.meta.env.PUBLIC_BACKEND_AUTH_KEY}`
+      'Authorization': `Bearer ${(typeof window !== 'undefined' ? sessionStorage.getItem('indus3_admin_token') : null) || import.meta.env.BACKEND_AUTH_KEY || import.meta.env.PUBLIC_BACKEND_AUTH_KEY || ''}`
     },
   });
   const data = await response.json();

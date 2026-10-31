@@ -9,6 +9,8 @@ const LoginForm = ({ backendUrl, googleClientId }) => {
   const [loading, setLoading] = useState(false);
   const otpInputs = useRef([]);
 
+  const authKey = import.meta.env.PUBLIC_BACKEND_AUTH_KEY || '';
+
   const showFeedback = (message, type = 'error') => {
     setFeedback({ message, type });
   };
@@ -20,14 +22,14 @@ const LoginForm = ({ backendUrl, googleClientId }) => {
       const userEmail = payload.email;
 
       const url = `${backendUrl}/auth-google.php`;
-      const authKey = import.meta.env.PUBLIC_BACKEND_AUTH_KEY;
+      const headers = { 'Content-Type': 'application/json' };
+      if (authKey) {
+        headers['Authorization'] = `Bearer ${authKey}`;
+      }
 
       const res = await fetch(url, {
         method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${authKey}`
-        },
+        headers,
         body: JSON.stringify({ email: userEmail, token: response.credential })
       });
 
@@ -35,6 +37,7 @@ const LoginForm = ({ backendUrl, googleClientId }) => {
 
       if (data.success) {
         sessionStorage.setItem('indus3_admin_session', 'true');
+        sessionStorage.setItem('indus3_admin_token', data.token || authKey);
         showFeedback("Acceso concedido. Redirigiendo...", "success");
         setTimeout(() => window.location.href = "/admin/dashboard", 1500);
       } else {
@@ -85,9 +88,14 @@ const LoginForm = ({ backendUrl, googleClientId }) => {
 
     setLoading(true);
     try {
+      const headers = { 'Content-Type': 'application/json' };
+      if (authKey) {
+        headers['Authorization'] = `Bearer ${authKey}`;
+      }
+
       const res = await fetch(`${backendUrl}/send-otp.php`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify({ email })
       });
 
@@ -111,15 +119,21 @@ const LoginForm = ({ backendUrl, googleClientId }) => {
 
     setLoading(true);
     try {
+      const headers = { 'Content-Type': 'application/json' };
+      if (authKey) {
+        headers['Authorization'] = `Bearer ${authKey}`;
+      }
+
       const res = await fetch(`${backendUrl}/verify-otp.php`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify({ email, otp: otpValue })
       });
 
       const data = await res.json();
       if (data.success) {
         sessionStorage.setItem('indus3_admin_session', 'true');
+        sessionStorage.setItem('indus3_admin_token', data.token || authKey);
         showFeedback("Código verificado. Redirigiendo...", "success");
         setTimeout(() => window.location.href = "/admin/dashboard", 1500);
       } else {

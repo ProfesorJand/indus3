@@ -510,88 +510,107 @@
     "schemaFechaFin": ""
   },
   {
-    "id": "andres-parra",
-    "nombreEvento": "Andrés Parra Venga Que Si Es Pa' Eso",
-    "fechaEvento": "25 de Noviembre 2026",
-    "descripcionEvento": "Andrés Parra llega con \"Venga que sí es pa' eso\", un espectáculo único donde el humor, la reflexión y las experiencias personales se unen para ofrecer una noche diferente. A través de anécdotas, observaciones sobre la vida cotidiana y momentos profundamente humanos, el reconocido actor colombiano invita al público a reír, pensar y conectar consigo mismo en una experiencia llena de autenticidad y emoción.",
-    "imagenBanner": "https://api.indus3pro.com/eventos/imagenes/banner-andres-parra-venga-que-si-es-pa-eso.webp",
-    "imagenPR": "https://api.indus3pro.com/eventos/imagenes/banner-andres-parra-venga-que-si-es-pa-eso.webp",
-    "aperturaPuertas": "17:30",
-    "comienzoShow": "19:30",
-    "lugarEvento": "Teatro Teresa Carreño, Caracas, Venezuela",
-    "flyerEvento": "https://api.indus3pro.com/eventos/imagenes/flyer-andres-parra-venga-que-si-es-pa-eso.webp",
+    "id": "bresh",
+    "nombreEvento": "BRESH Caracas Edición Especial Halloween",
+    "fechaEvento": "31 de Octubre 2026",
+    "descripcionEvento": "Edición Especial Halloween.",
+    "imagenDespuesDescripcion": "",
+    "videoDespuesDescripcion": "",
+    "videosAdicionales": [
+      {
+        "url": "https://api.indus3pro.com/eventos/imagenes/video-bresh-caracas-edicin-especial-halloween.mp4"
+      },
+      {
+        "url": "https://api.indus3pro.com/eventos/imagenes/video-bresh-caracas-edicin-especial-halloween-adicional-2.mp4"
+      }
+    ],
+    "imagenBanner": "https://api.indus3pro.com/eventos/imagenes/banner-bresh-caracas-edicin-especial-halloween.jpg",
+    "imagenPR": "https://api.indus3pro.com/eventos/imagenes/banner-bresh-caracas-edicin-especial-halloween.jpg",
+    "aperturaPuertas": "21:30",
+    "comienzoShow": "22:00",
+    "lugarEvento": "Caracas, Centro Comercial Parque Cerro Verde",
+    "flyerEvento": "https://api.indus3pro.com/eventos/imagenes/flyer-bresh-caracas-edicin-especial-halloween.jpg",
     "patrocinadores": [],
     "preguntas": [
       {
-        "pregunta": "¿Qué es \"Venga que sí es pa' eso\" de Andrés Parra?",
-        "respuesta": "\"Venga que sí es pa' eso\" es el espectáculo unipersonal del actor colombiano Andrés Parra, reconocido internacionalmente por sus interpretaciones en cine, televisión y teatro. En esta propuesta, Parra se aleja de los personajes para compartir su propia historia, combinando humor, vulnerabilidad y reflexiones sobre los desafíos que todos enfrentamos en algún momento de la vida.\n\nA lo largo del show, el actor aborda temas como el miedo, la soledad, la ansiedad, la búsqueda de propósito y el encuentro con uno mismo, siempre desde una perspectiva cercana, entretenida y cargada de humanidad. Con su característico carisma, transforma experiencias personales y situaciones cotidianas en relatos que generan risas, identificación y momentos de profunda reflexión.\n\nMás que un espectáculo de comedia tradicional, \"Venga que sí es pa' eso\" es una invitación a observar la vida desde otro lugar. Andrés Parra comparte parte de su propio proceso de transformación personal, mostrando cómo incluso los momentos más difíciles pueden convertirse en oportunidades de crecimiento y aprendizaje.\n\nEl resultado es una experiencia emotiva, divertida e inspiradora que conecta con públicos de todas las edades y que ha sido recibida con entusiasmo en diferentes escenarios de Latinoamérica.",
-        "imagenes": [
-          "https://api.indus3pro.com/eventos/imagenes/flyer-andres-parra-venga-que-si-es-pa-eso.webp"
-        ],
-        "columnasImagenes": "1",
-        "imagen": ""
-      },
-      {
-        "pregunta": "Sobre Andrés Parra",
-        "respuesta": "Andrés Parra es uno de los actores colombianos más reconocidos de Latinoamérica. A lo largo de su carrera ha protagonizado exitosas producciones de cine, televisión y teatro, alcanzando reconocimiento internacional por interpretaciones memorables que lo han convertido en una de las figuras más destacadas de la actuación en habla hispana.\n\nAdemás de su trayectoria artística, Parra ha desarrollado una faceta más personal y reflexiva que hoy comparte con el público a través de \"Venga que sí es pa' eso\", un espectáculo donde combina humor, experiencias de vida y aprendizaje personal en una propuesta única.\n\nConoce la biografía completa de [Andrés Parra](https://indus3pro.com/biografias/andres-parra/)",
+        "pregunta": "¿Qué es Bresh?",
+        "respuesta": "BRESH es mucho más que una fiesta. Es un movimiento que nació para vivir la música, disfrutar el momento y conectar con los demás sin prejuicios.\n\nLa idea es simple: conectar de verdad, sentirte parte de la comunidad y disfrutar en un espacio donde puedas ser tú mismo.\n\nTodo comenzó en Buenos Aires en 2016, como una fiesta que quería romper las reglas de cómo celebramos.\n\nY lo que empezó en Buenos Aires no tardó en convertirse en un fenómeno internacional.\n\nHoy BRESH está presente en más de 30 países, más de 200 ciudades y reúne a más de 8 millones de asistentes.\n\nPor eso BRESH no es solamente una noche de fiesta. Es una comunidad que sigue creciendo alrededor de la música y la libertad.",
         "imagenes": [],
         "columnasImagenes": "1"
       },
       {
-        "pregunta": "¿Cómo y dónde compro las entradas al Venga que si es pa' eso de Andrés Parra?",
-        "respuesta": "Ya se encuentran disponibles las entradas al Venga que si es pa' eso de Andrés Parra en Venezuela [tickets.indus3pro.com](https://tickets.indus3pro.com/checkout/andres-parra-venga-que-si-es-pa-eso-202611251930).",
+        "pregunta": "¿Dónde es BRESH Caracas Edicion Especial Halloween?",
+        "respuesta": "Centro Comercial Parque Cerro Verde, Caracas, Venezuela.",
+        "imagenes": [],
+        "columnasImagenes": "1"
+      },
+      {
+        "pregunta": "¿Cuándo es BRESH Caracas Edicion Especial Halloween?",
+        "respuesta": "El 31 de Ocubre 2026 , 10:00 PM.",
+        "imagenes": [],
+        "columnasImagenes": "1"
+      },
+      {
+        "pregunta": "¿Dónde compro las entradas de BRESH Caracas Edicion Especial Halloween?",
+        "respuesta": "[tickets.liveri.com.ve](https://tickets.liveri.com.ve/event/6a8da96e156dc8ef7243ba8b)",
+        "imagenes": [],
+        "columnasImagenes": "1"
+      },
+      {
+        "pregunta": "¿Quién hace BRESH Caracas Edicion Especial Halloween?",
+        "respuesta": "-[Indus3](https://www.instagram.com/indus3pro/)\n-[Oz shows](https://www.instagram.com/ozshows/)\n-Víctor Porfirio\n-Clock events",
         "imagenes": [],
         "columnasImagenes": "1"
       }
     ],
     "linkBiografia": "",
-    "restriccionesEdad": "",
+    "restriccionesEdad": "18",
     "logisticaHigienicos": "",
-    "imagenTicketera": "https://api.indus3pro.com/eventos/imagenes/banner-andres-parra-venga-que-si-es-pa-eso.webp",
+    "imagenTicketera": "https://api.indus3pro.com/eventos/imagenes/banner-bresh-caracas-edicin-especial-halloween.jpg",
     "imagenBiografia": "",
     "quienEsArtista": "",
     "mejoresCanciones": [
       ""
     ],
     "historiaArtista": "",
-    "ventaEntradas": "",
+    "ventaEntradas": "https://tickets.liveri.com.ve/event/6a8da96e156dc8ef7243ba8b",
     "datosCuriosos": "",
-    "keywords": "andres parra en venezuela, andres parra en caracas, andres parra concierto, andres parra tour venezuela",
-    "schemaActivo": true,
-    "schemaNombre": "Venga Que Si Es Pa' Eso",
-    "schemaDescripcion": "Andrés Parra llega con \"Venga que sí es pa' eso\", un espectáculo único donde el humor, la reflexión y las experiencias personales se unen para ofrecer una noche diferente. A través de anécdotas, observaciones sobre la vida cotidiana y momentos profundamente humanos, el reconocido actor colombiano invita al público a reír, pensar y conectar consigo mismo en una experiencia llena de autenticidad y emoción.",
+    "keywords": "bresh, bresh venezuela, evento bresh en venezuela, ",
+    "schemaActivo": false,
+    "schemaNombre": "Bresh Caracas Edición Especial Halloween",
+    "schemaDescripcion": "",
     "schemaTipoFechaInicio": "completa",
-    "schemaFechaInicioVal": "2026-09-25",
-    "schemaHoraInicioVal": "19:30",
+    "schemaFechaInicioVal": "",
+    "schemaHoraInicioVal": "",
     "schemaTimezoneInicio": "-04:00",
     "schemaTipoFechaFin": "completa",
     "schemaFechaFinVal": "",
-    "schemaHoraFinVal": "22:30",
+    "schemaHoraFinVal": "",
     "schemaTimezoneFin": "-04:00",
     "schemaEventStatus": "EventScheduled",
     "schemaAttendanceMode": "OfflineEventAttendanceMode",
-    "schemaPlaceName": "Teatro Teresa Carreño",
-    "schemaStreetAddress": "avenida Paseo de la Resistencia Indígena, en el sector de Bellas Artes",
+    "schemaPlaceName": "Centro Comercial Parque Cerro Verde",
+    "schemaStreetAddress": "en la subida de Los Naranjos del Cafetal, Municipio El Hatillo, Caracas, Venezuela",
     "schemaAddressLocality": "Caracas",
-    "schemaPostalCode": "1010",
+    "schemaPostalCode": "1060",
     "schemaAddressRegion": "Miranda",
     "schemaAddressCountry": "VE",
     "schemaImagen1x1": "",
-    "schemaImagen4x3": "https://api.indus3pro.com/eventos/imagenes/schema-andrs-parra-venga-que-si-es-pa-eso.webp",
-    "schemaImagen16x9": "https://api.indus3pro.com/eventos/imagenes/schema-andrs-parra-venga-que-si-es-pa-eso.webp",
-    "schemaOfferUrl": "https://tickets.indus3pro.com/checkout/andres-parra-venga-que-si-es-pa-eso-202611251930",
-    "schemaOfferPrice": "30",
+    "schemaImagen4x3": "",
+    "schemaImagen16x9": "",
+    "schemaOfferUrl": "",
+    "schemaOfferPrice": "",
     "schemaOfferPriceCurrency": "USD",
     "schemaOfferAvailability": "InStock",
-    "schemaOfferValidFrom": "2026-06-10",
+    "schemaOfferValidFrom": "",
     "schemaPerformerType": "PerformingGroup",
     "schemaPerformerName": "",
     "schemaPerformers": [
       {
         "type": "Person",
-        "name": "Andrés Parra",
+        "name": "",
         "sport": "",
-        "jobTitle": "Artista"
+        "jobTitle": ""
       }
     ],
     "schemaOrganizerName": "Indus3",
@@ -602,7 +621,136 @@
         "url": "https://indus3pro.com"
       }
     ],
-    "schemaFechaInicio": "2026-09-25T19:30:00-04:00",
-    "schemaFechaFin": ""
+    "schemaFechaInicio": "",
+    "schemaFechaFin": "",
+    "status": "publicado",
+    "linksInstagram": [
+      "https://www.instagram.com/p/DdROnrZRtvp/",
+      "https://www.instagram.com/p/Ddlls2KxMU9/"
+    ],
+    "linkInstagram": "https://www.instagram.com/p/DdROnrZRtvp/",
+    "oculto": false
+  },
+  {
+    "id": "the-tenors",
+    "nombreEvento": "The Tenors en Caracas / Venezuela 2026 - Season of Hope",
+    "fechaEvento": "15 de Diciembre del 2026",
+    "descripcionEvento": "El aclamado cuarteto vocal The Tenors aterrizará en la capital venezolana para presentar su gira “Season of Hope”, un evento inolvidable que cerrará por todo lo alto la agenda de conciertos del 2026 trayendo la navidad al Teatro Teresa Carreño. Una oportunidad única para compartir en familia, celebrar las fiestas y regalarse una experiencia artística de nivel internacional.",
+    "imagenDespuesDescripcion": "https://api.indus3pro.com/eventos/imagenes/vertical-the-tenors-en-caracas--venezuela-2026---season-of-hope.jpg",
+    "videoDespuesDescripcion": "",
+    "imagenBanner": "https://api.indus3pro.com/eventos/imagenes/banner-the-tenors-en-caracas--venezuela-2026---season-of-hope.jpg",
+    "imagenPR": "https://api.indus3pro.com/eventos/imagenes/banner-the-tenors-en-caracas--venezuela-2026---season-of-hope.jpg",
+    "aperturaPuertas": "19:00",
+    "comienzoShow": "19:30",
+    "lugarEvento": "Teatro Teresa Carreño, Caracas, Venezuela",
+    "flyerEvento": "https://api.indus3pro.com/eventos/imagenes/flyer-the-tenors-en-caracas--venezuela-2026---season-of-hope.jpg",
+    "patrocinadores": [],
+    "preguntas": [
+      {
+        "pregunta": "¿Qué es The Tenors Season of Hope?",
+        "respuesta": "Con sus potentes canciones, armonías excepcionales y un encanto innegable, The\nTenors transportarán al público en un viaje musical a través de entrañables clásicos\nnavideños, inspiradoras canciones originales y temas favoritos de la temporada. La gira\n“Season of Hope” celebra las tradiciones que nos unen, ofreciendo una velada llena de\ncalidez, risas y alegría para disfrutar en familia, con amigos y seres queridos, capturando\nla verdadera magia de la época.",
+        "imagenes": [],
+        "columnasImagenes": "1",
+        "imagen": ""
+      },
+      {
+        "pregunta": "¿Donde es The Tenors Season of Hope?",
+        "respuesta": "Teatro Teresa Carreño, Caracas, Venezuela",
+        "imagenes": [],
+        "columnasImagenes": "1"
+      },
+      {
+        "pregunta": "¿Cúando es el The Tenors Season of Hope?",
+        "respuesta": "15 de Diciembre del 2026",
+        "imagenes": [],
+        "columnasImagenes": "1"
+      },
+      {
+        "pregunta": "¿Donde comprar las entradas de The Tenors Season of Hope?",
+        "respuesta": "[https://tickets.liveri.com.ve](https://tickets.liveri.com.ve/event/6aaaeda70fdb88afab1a19f6)",
+        "imagenes": [],
+        "columnasImagenes": "1"
+      }
+    ],
+    "linkBiografia": "",
+    "restriccionesEdad": "",
+    "logisticaHigienicos": "",
+    "imagenTicketera": "",
+    "imagenBiografia": "",
+    "quienEsArtista": "",
+    "mejoresCanciones": [
+      ""
+    ],
+    "historiaArtista": "",
+    "ventaEntradas": "https://tickets.liveri.com.ve/event/6aaaeda70fdb88afab1a19f6",
+    "datosCuriosos": "",
+    "keywords": "The Tenors, The Tenors Caracas, The Tenors Venezuela, The Tenors Season of Hope, The Tenors Teatro Teresa Carreño, The Tenors 2026",
+    "schemaActivo": false,
+    "schemaNombre": "",
+    "schemaDescripcion": "",
+    "schemaTipoFechaInicio": "completa",
+    "schemaFechaInicioVal": "",
+    "schemaHoraInicioVal": "",
+    "schemaTimezoneInicio": "-04:00",
+    "schemaTipoFechaFin": "completa",
+    "schemaFechaFinVal": "",
+    "schemaHoraFinVal": "",
+    "schemaTimezoneFin": "-04:00",
+    "schemaEventStatus": "EventScheduled",
+    "schemaAttendanceMode": "OfflineEventAttendanceMode",
+    "schemaPlaceName": "",
+    "schemaStreetAddress": "",
+    "schemaAddressLocality": "Caracas",
+    "schemaPostalCode": "1060",
+    "schemaAddressRegion": "Miranda",
+    "schemaAddressCountry": "VE",
+    "schemaImagen1x1": "",
+    "schemaImagen4x3": "",
+    "schemaImagen16x9": "",
+    "schemaOfferUrl": "",
+    "schemaOfferPrice": "",
+    "schemaOfferPriceCurrency": "USD",
+    "schemaOfferAvailability": "InStock",
+    "schemaOfferValidFrom": "",
+    "schemaPerformerType": "PerformingGroup",
+    "schemaPerformerName": "",
+    "schemaPerformers": [
+      {
+        "type": "PerformingGroup",
+        "name": "",
+        "sport": "",
+        "jobTitle": ""
+      }
+    ],
+    "schemaOrganizerName": "Indus3",
+    "schemaOrganizerUrl": "https://indus3pro.com",
+    "schemaOrganizers": [
+      {
+        "name": "Indus3",
+        "url": "https://indus3pro.com"
+      }
+    ],
+    "schemaFechaInicio": "",
+    "schemaFechaFin": "",
+    "status": "publicado"
+  },
+  {
+    "id": "__indus3_news_ticker__",
+    "nombreEvento": "__indus3_news_ticker__",
+    "status": "draft",
+    "oculto": true,
+    "newsData": {
+      "enabled": true,
+      "items": [
+        {
+          "id": "1",
+          "text": "¡Ya están disponibles las entradas para The Tenors en Caracas Season of Hope!",
+          "url": "https://tickets.liveri.com.ve/event/6aaaeda70fdb88afab1a19f6",
+          "openInNewTab": true,
+          "enabled": true
+        }
+      ],
+      "speed": "slow"
+    }
   }
 ]

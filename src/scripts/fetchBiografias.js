@@ -43,30 +43,24 @@ try {
   const json = await fetchWithRetry("https://api.indus3pro.com/biografias/get-biografias.php?t="+Date.now(), {
     headers: {
       "Authorization": `Bearer ${authKey}`,
-      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-      "Accept-Language": "es-ES,es;q=0.9,en;q=0.8",
-      "Cache-Control": "max-age=0",
-      "Sec-Ch-Ua": '"Chromium";v="122", "Google Chrome";v="122", "Not-A.Brand";v="99"',
-      "Sec-Ch-Ua-Mobile": "?0",
-      "Sec-Ch-Ua-Platform": '"Windows"',
-      "Sec-Fetch-Dest": "document",
-      "Sec-Fetch-Mode": "navigate",
-      "Sec-Fetch-Site": "none",
-      "Sec-Fetch-User": "?1",
-      "Upgrade-Insecure-Requests": "1"
+      "Accept": "application/json",
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
     }
   });
 
   if (!json || !json.data) {
-    console.error("Respuesta inválida:", json);
-    process.exit(1); // 👈 corta el build con error claro
+    throw new Error("Respuesta inválida o sin datos: " + JSON.stringify(json));
   }
 
   fs.writeFileSync("./src/data/biografias.json", JSON.stringify(json.data, null, 2));
   console.log(`✅ Biografías guardadas correctamente (${json.data.length} biografías).`);
 
 } catch (error) {
-  console.error("❌ Fallo crítico al hacer fetch de Biografias:", error.message || error);
-  process.exit(1);
+  console.warn("⚠️ No se pudo actualizar biografías desde la API remota:", error.message || error);
+  if (fs.existsSync("./src/data/biografias.json")) {
+    console.log("ℹ️ Usando archivo de respaldo local existente (src/data/biografias.json). Continuando build...");
+  } else {
+    console.error("❌ Fallo crítico: no hay datos de biografías ni archivo de respaldo.");
+    process.exit(1);
+  }
 }

@@ -35,6 +35,10 @@ jobs:
         with:
           node-version: 22
           package-manager: npm
+        env:
+          PUBLIC_GOOGLE_CLIENT_ID: ${{ secrets.PUBLIC_GOOGLE_CLIENT_ID }}
+          PUBLIC_BACKEND_AUTH_KEY: ${{ secrets.PUBLIC_BACKEND_AUTH_KEY }}
+          BACKEND_AUTH_KEY: ${{ secrets.BACKEND_AUTH_KEY || secrets.PUBLIC_BACKEND_AUTH_KEY }}
 
   deploy:
     needs: build

@@ -7,7 +7,7 @@ import Container from "@components/base/Container.astro";
 import BodyGrid from "@components/body/BodyGrid.astro";
 import LogoCard from "@components/logo/LogoCard.astro";
 
-import artistasData from "../../../spotify-data-new2.json";
+import artistasData from "@spotify-data";
 import cancionesData from "../../../spotify-top-50-songs-global.json";
 import artistasGlobalesData from "../../../spotify-data-global.json";
 
@@ -16,7 +16,7 @@ const cards = [
     id:1,
     title: "Top 50 Artistas Venezolanos",
     image: "/img/guias/placeholder-guide.png",
-    images: artistasData.slice(0, 3).map((a: any) => a.artistImage.filter((artista: any) => artista?.name === a.name)[0]?.img || a.backgroundArtistImage),
+    images: artistasData.slice(0, 3).map((a: any) => a.artistImage || a.backgroundArtistImage || "/img/placeholder-artist.png"),
     href: "top-spotify/artistas-venezolanos",
     description: "Ranking de los artistas venezolanos más escuchados en Spotify."
   },

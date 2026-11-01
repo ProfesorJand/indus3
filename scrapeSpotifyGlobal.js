@@ -107,10 +107,10 @@ async function scrapeArtist(browser, url) {
       console.log("⚠️ Nombre no encontrado:", e.message);
     }
 
-    // 👥 Monthly listeners (Selector robusto)
+    // 👥 Monthly listeners (Selector robusto con timeout extendido y fallback meta)
     try {
-      const listenersElement = page.locator('span:has-text("monthly listeners"), span:has-text("oyentes mensuales")').first();
-      await listenersElement.waitFor({ state: 'attached', timeout: 5000 });
+      const listenersElement = page.locator('[data-encore-id="visuallyHidden"]:has-text("monthly listeners"), [data-encore-id="visuallyHidden"]:has-text("oyentes mensuales"), span:has-text("monthly listeners"), span:has-text("oyentes mensuales")').first();
+      await listenersElement.waitFor({ state: 'attached', timeout: 15000 });
       const exactNumberText = await listenersElement.evaluate(el => {
         const hidden = el.querySelector('[data-encore-id="visuallyHidden"]');
         if (hidden) return hidden.textContent;
@@ -118,7 +118,23 @@ async function scrapeArtist(browser, url) {
       });
       listeners = parseNumber(exactNumberText);
     } catch (e) {
-      console.log("⚠️ Monthly listeners no encontrado");
+      try {
+        const metaDesc = await page.locator('meta[property="og:description"], meta[name="description"]').first().getAttribute('content', { timeout: 2000 }).catch(() => null);
+        if (metaDesc) {
+          const match = metaDesc.match(/([\d,.]+)\s*([KMBkmb]?)\s*(?:monthly listeners|oyentes mensuales)/i);
+          if (match) {
+            let num = parseFloat(match[1].replace(/,/g, ''));
+            const unit = match[2]?.toUpperCase();
+            if (unit === 'K') num *= 1_000;
+            else if (unit === 'M') num *= 1_000_000;
+            else if (unit === 'B') num *= 1_000_000_000;
+            listeners = Math.round(num);
+          }
+        }
+      } catch (err) {}
+      if (!listeners) {
+        console.log("⚠️ Monthly listeners no encontrado:", e.message);
+      }
     }
 
     // 🖼️ Imagen de perfil (vía meta tag - súper rápido y confiable)

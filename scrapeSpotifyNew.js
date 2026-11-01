@@ -112,8 +112,21 @@ async function scrapeArtist(browser, url) {
 
     // 🎤 Nombre (Usando h1 o meta title)
     try {
-      const fullTitle = await page.title(); 
-      name = fullTitle.split('|')[0].trim();
+      name = await page.locator('meta[property="og:title"]').getAttribute('content', { timeout: 2000 }).catch(() => null);
+      if (!name) {
+        name = await page.locator('h1').first().textContent({ timeout: 2000 }).catch(() => null);
+      }
+      if (!name) {
+        const fullTitle = await page.title(); 
+        name = fullTitle.split('|')[0].trim();
+      }
+      if (name) {
+        name = name
+          .replace(/^Listen to\s+/i, '')
+          .replace(/\s+Songs.*$/i, '')
+          .replace(/\s+on Spotify$/i, '')
+          .trim();
+      }
     } catch (e) {
       console.log("⚠️ Nombre no encontrado:", e.message);
     }

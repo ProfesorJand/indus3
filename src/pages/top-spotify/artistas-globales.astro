@@ -66,9 +66,11 @@ const top50 = sortedArtists.map((artist, index) => {
   let rankDelta = 0;
   let rankDeltaType = 'new'; // 'up', 'down', 'stable', 'new'
 
-  if (prevRank) {
+  if (prevRank && prevListeners > 0) {
     rankDelta = prevRank - currentRank; 
     rankDeltaType = rankDelta > 0 ? 'up' : rankDelta < 0 ? 'down' : 'stable';
+  } else if (prevRank && prevListeners === 0) {
+    rankDeltaType = 'stable';
   }
 
   return {
@@ -162,12 +164,24 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
                           <span class="artist-name">{artist.name}</span>
                           <span class="mobile-listeners">
                             <strong>{formatter.format(artist.currentListeners)}</strong> oyentes
+                            {artist.prevListeners > 0 && artist.listenersDelta !== 0 && (
+                              <span class={`delta-badge mobile ${artist.listenersDeltaType}`}>
+                                {artist.listenersDelta > 0 ? `(+${formatter.format(artist.listenersDelta)})` : `(-${formatter.format(Math.abs(artist.listenersDelta))})`}
+                              </span>
+                            )}
                           </span>
                         </div>
                       </div>
                     </td>
                     <td class="listeners-cell current-month desktop-only">
-                      <strong>{formatter.format(artist.currentListeners)}</strong>
+                      <div class="listeners-content">
+                        <strong>{formatter.format(artist.currentListeners)}</strong>
+                        {artist.prevListeners > 0 && artist.listenersDelta !== 0 && (
+                          <span class={`delta-badge ${artist.listenersDeltaType}`}>
+                            {artist.listenersDelta > 0 ? `+${formatter.format(artist.listenersDelta)}` : `-${formatter.format(Math.abs(artist.listenersDelta))}`}
+                          </span>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -358,6 +372,35 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
   .listeners-cell {
     font-family: var(--font-family-mono);
     font-size: var(--font-size-sm);
+  }
+
+  .listeners-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .delta-badge {
+    font-size: 11px;
+    font-weight: 700;
+    font-family: var(--font-family-mono);
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .delta-badge.up {
+    color: #10b981;
+  }
+
+  .delta-badge.down {
+    color: #ef4444;
+  }
+
+  .delta-badge.mobile {
+    font-size: 10px;
+    margin-left: 4px;
   }
 
   .row-artist:hover {

@@ -42,6 +42,13 @@ const BlogCard = ({ post }) => {
       <div className={styles.cardBody}>
         <h3 className={styles.title}>{post.title}</h3>
         <p className={styles.excerpt}>{post.excerpt}</p>
+        <span className={styles.readMoreBtn}>
+            Leer más
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </span>
 
         {post.tags && post.tags.length > 0 && (
           <div className={styles.tagsRow}>
@@ -73,13 +80,7 @@ const BlogCard = ({ post }) => {
             </div>
           </div>
 
-          <span className={styles.readMoreBtn}>
-            Leer más
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
-          </span>
+          
         </div>
       </div>
     </a>

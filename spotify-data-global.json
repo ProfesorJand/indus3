@@ -1,797 +1,5 @@
 [
   {
-    "name": "Bruno Mars",
-    "url": "https://open.spotify.com/artist/0du5cEVh5yTK9QJze8zA0C",
-    "listeners": 128282207,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebc7688aad1bf03986934d7e26",
-    "date": "2026-10-24",
-    "rank": 1
-  },
-  {
-    "name": "The Weeknd",
-    "url": "https://open.spotify.com/artist/1Xyo4u8uXC1ZmMpatF05PJ",
-    "listeners": 116531665,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebc1719ac9e6a75c1c25835018",
-    "date": "2026-10-24",
-    "rank": 2
-  },
-  {
-    "name": "Justin Bieber",
-    "url": "https://open.spotify.com/artist/1uNFoZAHBGtllmzznpCI3s",
-    "listeners": 111432237,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebaf20f7db5288bce9beede034",
-    "date": "2026-10-24",
-    "rank": 3
-  },
-  {
-    "name": "Taylor Swift",
-    "url": "https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02",
-    "listeners": 105190854,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb12184bdd29403de54cb9d9c7",
-    "date": "2026-10-24",
-    "rank": 4
-  },
-  {
-    "name": "Lady Gaga",
-    "url": "https://open.spotify.com/artist/1HY2Jd0NmPuamShAr6KMms",
-    "listeners": 101285961,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebaadc18cac8d48124357c38e6",
-    "date": "2026-10-24",
-    "rank": 5
-  },
-  {
-    "name": "Coldplay",
-    "url": "https://open.spotify.com/artist/4gzpq5DPGxSnKTe4SA8HAU",
-    "listeners": 93736838,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb1ba8fc5f5c73e7e9313cc6eb",
-    "date": "2026-10-24",
-    "rank": 6
-  },
-  {
-    "name": "Ariana Grande",
-    "url": "https://open.spotify.com/artist/66CXWjxzNUsdJxJ2JdwvnR",
-    "listeners": 92882075,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb68412f2d0177a9ebc265ff58",
-    "date": "2026-10-24",
-    "rank": 7
-  },
-  {
-    "name": "Katy Perry",
-    "url": "https://open.spotify.com/artist/6jJ0s89eD6GaHleKKya26X",
-    "listeners": 88079196,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebcd50e745cf782f905769f482",
-    "date": "2026-10-24",
-    "rank": 8
-  },
-  {
-    "name": "Michael Jackson",
-    "url": "https://open.spotify.com/artist/3fMbdgg4jU18AjLCKBhRSm",
-    "listeners": 86884513,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb997cc9a4aec335d46c9481fd",
-    "date": "2026-10-24",
-    "rank": 9
-  },
-  {
-    "name": "Billie Eilish",
-    "url": "https://open.spotify.com/artist/6qqNVTkY8uBg9cP3Jd7DAH",
-    "listeners": 80862190,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb4a21b4760d2ecb7b0dcdc8da",
-    "date": "2026-10-24",
-    "rank": 10
-  },
-  {
-    "name": "Dua Lipa",
-    "url": "https://open.spotify.com/artist/6M2wZ9GZgrQXHCFfjv46we",
-    "listeners": 76131038,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb0c68f6c95232e716f0abee8d",
-    "date": "2026-10-24",
-    "rank": 11
-  },
-  {
-    "name": "Lana Del Rey",
-    "url": "https://open.spotify.com/artist/00FQb4jTyendYWaN8pK0wa",
-    "listeners": 71379517,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebb99cacf8acd5378206767261",
-    "date": "2026-10-24",
-    "rank": 12
-  },
-  {
-    "name": "Olivia Rodrigo",
-    "url": "https://open.spotify.com/artist/1McMsnEElThX1knmY4oliG",
-    "listeners": 70836821,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebb14eb4dcfd2f3858bed06e44",
-    "date": "2026-10-24",
-    "rank": 13
-  },
-  {
-    "name": "Harry Styles",
-    "url": "https://open.spotify.com/artist/6KImCVD70vtIoJWnq6nGn3",
-    "listeners": 62889813,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebe309f8c3056a59f20d0968ca",
-    "date": "2026-10-24",
-    "rank": 14
-  },
-  {
-    "name": "Tame Impala",
-    "url": "https://open.spotify.com/artist/5INjqkS1o8h1imAzPqGZBb",
-    "listeners": 61753178,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebe412a782245eb20d9626c601",
-    "date": "2026-10-24",
-    "rank": 15
-  },
-  {
-    "name": "Arctic Monkeys",
-    "url": "https://open.spotify.com/artist/7Ln80lUS6He07XvHI8qqHH",
-    "listeners": 57304424,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb7da39dea0a72f581535fb11f",
-    "date": "2026-10-24",
-    "rank": 16
-  },
-  {
-    "name": "Shawn Mendes",
-    "url": "https://open.spotify.com/artist/7n2wHs1TKAczGzO7Dd2rGr",
-    "listeners": 55979066,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb58b4b9419486550f6fda0535",
-    "date": "2026-10-24",
-    "rank": 17
-  },
-  {
-    "name": "sombr",
-    "url": "https://open.spotify.com/artist/4G9NDjRyZFDlJKMRL8hx3S",
-    "listeners": 54545270,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb78edaa6468cae153565c2c97",
-    "date": "2026-10-24",
-    "rank": 18
-  },
-  {
-    "name": "Olivia Dean",
-    "url": "https://open.spotify.com/artist/00x1fYSGhdqScXBRpSj3DW",
-    "listeners": 52536094,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb5c7577ad44daeb7ce4b941a1",
-    "date": "2026-10-24",
-    "rank": 19
-  },
-  {
-    "name": "The Neighbourhood",
-    "url": "https://open.spotify.com/artist/77SW9BnxLY8rJ0RciFqkHh",
-    "listeners": 51609490,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebdf0b5ac84376a0a4b2166816",
-    "date": "2026-10-24",
-    "rank": 20
-  },
-  {
-    "name": "JENNIE",
-    "url": "https://open.spotify.com/artist/250b0Wlc5Vk0CoUsaCY84M",
-    "listeners": 47915947,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb3feb82fe1bb947a2aa65f6b8",
-    "date": "2026-10-24",
-    "rank": 21
-  },
-  {
-    "name": "Radiohead",
-    "url": "https://open.spotify.com/artist/4Z8W4fKeB5YxbusRsdQVPb",
-    "listeners": 46315284,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb959527d2fabc9c64287e57b9",
-    "date": "2026-10-24",
-    "rank": 22
-  },
-  {
-    "name": "P!nk",
-    "url": "https://open.spotify.com/artist/1KCSPY1glIKqW2TotWuXOR",
-    "listeners": 45992027,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb7bbad89a61061304ec842588",
-    "date": "2026-10-24",
-    "rank": 23
-  },
-  {
-    "name": "Nicki Minaj",
-    "url": "https://open.spotify.com/artist/0hCNtLu0JehylgoiP8L4Gh",
-    "listeners": 45612849,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb07a50f0a9a8f11e5a1102cbd",
-    "date": "2026-10-24",
-    "rank": 24
-  },
-  {
-    "name": "Dominic Fike",
-    "url": "https://open.spotify.com/artist/6USv9qhCn6zfxlBQIYJ9qs",
-    "listeners": 45434402,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebc674a77fa82d00bcecf1a794",
-    "date": "2026-10-24",
-    "rank": 25
-  },
-  {
-    "name": "Alex Warren",
-    "url": "https://open.spotify.com/artist/0fTSzq9jAh4c36UVb4V7CB",
-    "listeners": 45252041,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb0548e7c357122cda80128c8f",
-    "date": "2026-10-24",
-    "rank": 26
-  },
-  {
-    "name": "Mac Miller",
-    "url": "https://open.spotify.com/artist/4LLpKhyESsyAXpc4laK94U",
-    "listeners": 43051795,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebed3b89aa602145fde71a163a",
-    "date": "2026-10-24",
-    "rank": 27
-  },
-  {
-    "name": "Burna Boy",
-    "url": "https://open.spotify.com/artist/3wcj11K77LjEY1PkEazffa",
-    "listeners": 42954137,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebb4e44d0f4e3e47af2cf06f3f",
-    "date": "2026-10-24",
-    "rank": 28
-  },
-  {
-    "name": "Oasis",
-    "url": "https://open.spotify.com/artist/2DaxqgrOhkeH0fpeiQq2f4",
-    "listeners": 40107126,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb23a08396d484aa0e81d73527",
-    "date": "2026-10-24",
-    "rank": 29
-  },
-  {
-    "name": "The Police",
-    "url": "https://open.spotify.com/artist/5NGO30tJxFlKixkPSgXcFE",
-    "listeners": 39605446,
-    "artistImage": "https://i.scdn.co/image/1f73a61faca2942cd5ea29c2143184db8645f0b3",
-    "date": "2026-10-24",
-    "rank": 30
-  },
-  {
-    "name": "The Goo Goo Dolls",
-    "url": "https://open.spotify.com/artist/2sil8z5kiy4r76CRTXxBCA",
-    "listeners": 39529498,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebe7b66b8c4ba729848574df7a",
-    "date": "2026-10-24",
-    "rank": 31
-  },
-  {
-    "name": "The Killers",
-    "url": "https://open.spotify.com/artist/0C0XlULifJtAgn6ZNCW2eu",
-    "listeners": 36518459,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb207b21f3ed0ee96adce3166a",
-    "date": "2026-10-24",
-    "rank": 32
-  },
-  {
-    "name": "SIENNA SPIRO",
-    "url": "https://open.spotify.com/artist/02gSuSAWEdWa5UOvqzjX6v",
-    "listeners": 35815416,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebfb0ab819bbd4502028cd1feb",
-    "date": "2026-10-24",
-    "rank": 33
-  },
-  {
-    "name": "Ty Dolla $ign",
-    "url": "https://open.spotify.com/artist/7c0XG5cIJTrrAgEC3ULPiq",
-    "listeners": 34330591,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb4ef6e245168c33922bc6df1a",
-    "date": "2026-10-24",
-    "rank": 34
-  },
-  {
-    "name": "Ella Langley",
-    "url": "https://open.spotify.com/artist/6BRxQ8cD3eqnrVj6WKDok8",
-    "listeners": 31980874,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebc4670378a4188c3174ef2ca9",
-    "date": "2026-10-24",
-    "rank": 35
-  },
-  {
-    "name": "Djo",
-    "url": "https://open.spotify.com/artist/5p9HO3XC5P3BLxJs5Mtrhm",
-    "listeners": 31904758,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb4113d395582d3667b7978430",
-    "date": "2026-10-24",
-    "rank": 36
-  },
-  {
-    "name": "BTS",
-    "url": "https://open.spotify.com/artist/3Nrfpe0tUJi4K4DXYWgMUX",
-    "listeners": 30692882,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebf80ec63ea7a0ef0fba60957d",
-    "date": "2026-10-24",
-    "rank": 37
-  },
-  {
-    "name": "Gigi Perez",
-    "url": "https://open.spotify.com/artist/1iCnM8foFssWlPRLfAbIwo",
-    "listeners": 30016513,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebd58f13475be93b37bb63893f",
-    "date": "2026-10-24",
-    "rank": 38
-  },
-  {
-    "name": "Temper City",
-    "url": "https://open.spotify.com/artist/5mHUmlJWkcoOk1NbjfrXWz",
-    "listeners": 29545331,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb58cd69025e54b4f139005b6e",
-    "date": "2026-10-24",
-    "rank": 39
-  },
-  {
-    "name": "Zach Bryan",
-    "url": "https://open.spotify.com/artist/40ZNYROS4zLfyyBSs2PGe2",
-    "listeners": 26487972,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb6492861f8e00ecfb8cabea3f",
-    "date": "2026-10-24",
-    "rank": 40
-  },
-  {
-    "name": "Lily-Rose Depp",
-    "url": "https://open.spotify.com/artist/1pBLC0qVRTB5zVMuteQ9jJ",
-    "listeners": 25856635,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebc2fb4b8e035fbdad27da865f",
-    "date": "2026-10-24",
-    "rank": 41
-  },
-  {
-    "name": "Nate Ruess",
-    "url": "https://open.spotify.com/artist/1qUjOF5fzrpoNycD36b2jZ",
-    "listeners": 23609654,
-    "artistImage": "https://i.scdn.co/image/5d5dec419f704181b9a23dd9c55562632817c442",
-    "date": "2026-10-24",
-    "rank": 42
-  },
-  {
-    "name": "League of Legends",
-    "url": "https://open.spotify.com/artist/47mIJdHORyRerp4os813jD",
-    "listeners": 15726728,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebe80d1ffb81aa6503ad41c574",
-    "date": "2026-10-24",
-    "rank": 43
-  },
-  {
-    "name": "Felipe e Rodrigo",
-    "url": "https://open.spotify.com/artist/7gZu6kPnY9enEi5FvgTO4F",
-    "listeners": 12354481,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb2fcf02dddd495f13341b92c4",
-    "date": "2026-10-24",
-    "rank": 44
-  },
-  {
-    "name": "i-dle",
-    "url": "https://open.spotify.com/artist/2AfmfGFbe0A0WsTYm0SDTx",
-    "listeners": 7324131,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eba6d269fc34884864c3f0f914",
-    "date": "2026-10-24",
-    "rank": 45
-  },
-  {
-    "name": "K/DA",
-    "url": "https://open.spotify.com/artist/4gOc8TsQed9eqnqJct2c5v",
-    "listeners": 2611622,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb9aff567ffc367b9851e272f9",
-    "date": "2026-10-24",
-    "rank": 46
-  },
-  {
-    "name": "Mimi Webb",
-    "url": "https://open.spotify.com/artist/3GxKJzJK4LpsYGXQrw77wz",
-    "listeners": 2213164,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebf9ebc4049116c65306ec0449",
-    "date": "2026-10-24",
-    "rank": 47
-  },
-  {
-    "name": "SOYEON",
-    "url": "https://open.spotify.com/artist/6Xg22wJOAcnvPUfk5WvODH",
-    "listeners": 1582949,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb69c2809713d3a5dcfce44a92",
-    "date": "2026-10-24",
-    "rank": 48
-  },
-  {
-    "name": "Sophie Powers",
-    "url": "https://open.spotify.com/artist/0hrMKLqgNEIemiF4Ag8dTI",
-    "listeners": 844865,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb11b4616f3e9be13501d69d25",
-    "date": "2026-10-24",
-    "rank": 49
-  },
-  {
-    "name": "MIYEON",
-    "url": "https://open.spotify.com/artist/779v40cWIJUUoIDtC1IGaF",
-    "listeners": 285003,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb63af86e93b004c33faffc97c",
-    "date": "2026-10-24",
-    "rank": 50
-  },
-  {
-    "name": "Bruno Mars",
-    "url": "https://open.spotify.com/artist/0du5cEVh5yTK9QJze8zA0C",
-    "listeners": 127089838,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebc7688aad1bf03986934d7e26",
-    "date": "2026-10-31",
-    "rank": 1
-  },
-  {
-    "name": "The Weeknd",
-    "url": "https://open.spotify.com/artist/1Xyo4u8uXC1ZmMpatF05PJ",
-    "listeners": 116392772,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebc1719ac9e6a75c1c25835018",
-    "date": "2026-10-31",
-    "rank": 2
-  },
-  {
-    "name": "Justin Bieber",
-    "url": "https://open.spotify.com/artist/1uNFoZAHBGtllmzznpCI3s",
-    "listeners": 110936847,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebaf20f7db5288bce9beede034",
-    "date": "2026-10-31",
-    "rank": 3
-  },
-  {
-    "name": "Lady Gaga",
-    "url": "https://open.spotify.com/artist/1HY2Jd0NmPuamShAr6KMms",
-    "listeners": 101402688,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebaadc18cac8d48124357c38e6",
-    "date": "2026-10-31",
-    "rank": 4
-  },
-  {
-    "name": "Taylor Swift",
-    "url": "https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02",
-    "listeners": 101026193,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb12184bdd29403de54cb9d9c7",
-    "date": "2026-10-31",
-    "rank": 5
-  },
-  {
-    "name": "Ariana Grande",
-    "url": "https://open.spotify.com/artist/66CXWjxzNUsdJxJ2JdwvnR",
-    "listeners": 92482321,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb68412f2d0177a9ebc265ff58",
-    "date": "2026-10-31",
-    "rank": 6
-  },
-  {
-    "name": "Coldplay",
-    "url": "https://open.spotify.com/artist/4gzpq5DPGxSnKTe4SA8HAU",
-    "listeners": 91666448,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb1ba8fc5f5c73e7e9313cc6eb",
-    "date": "2026-10-31",
-    "rank": 7
-  },
-  {
-    "name": "Michael Jackson",
-    "url": "https://open.spotify.com/artist/3fMbdgg4jU18AjLCKBhRSm",
-    "listeners": 87966060,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb997cc9a4aec335d46c9481fd",
-    "date": "2026-10-31",
-    "rank": 8
-  },
-  {
-    "name": "Katy Perry",
-    "url": "https://open.spotify.com/artist/6jJ0s89eD6GaHleKKya26X",
-    "listeners": 87104507,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebcd50e745cf782f905769f482",
-    "date": "2026-10-31",
-    "rank": 9
-  },
-  {
-    "name": "Billie Eilish",
-    "url": "https://open.spotify.com/artist/6qqNVTkY8uBg9cP3Jd7DAH",
-    "listeners": 80488737,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb4a21b4760d2ecb7b0dcdc8da",
-    "date": "2026-10-31",
-    "rank": 10
-  },
-  {
-    "name": "Dua Lipa",
-    "url": "https://open.spotify.com/artist/6M2wZ9GZgrQXHCFfjv46we",
-    "listeners": 74140806,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb0c68f6c95232e716f0abee8d",
-    "date": "2026-10-31",
-    "rank": 11
-  },
-  {
-    "name": "Olivia Rodrigo",
-    "url": "https://open.spotify.com/artist/1McMsnEElThX1knmY4oliG",
-    "listeners": 73140410,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebb14eb4dcfd2f3858bed06e44",
-    "date": "2026-10-31",
-    "rank": 12
-  },
-  {
-    "name": "Harry Styles",
-    "url": "https://open.spotify.com/artist/6KImCVD70vtIoJWnq6nGn3",
-    "listeners": 62903642,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebe309f8c3056a59f20d0968ca",
-    "date": "2026-10-31",
-    "rank": 13
-  },
-  {
-    "name": "Tame Impala",
-    "url": "https://open.spotify.com/artist/5INjqkS1o8h1imAzPqGZBb",
-    "listeners": 62122517,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebe412a782245eb20d9626c601",
-    "date": "2026-10-31",
-    "rank": 14
-  },
-  {
-    "name": "Arctic Monkeys",
-    "url": "https://open.spotify.com/artist/7Ln80lUS6He07XvHI8qqHH",
-    "listeners": 57223773,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb7da39dea0a72f581535fb11f",
-    "date": "2026-10-31",
-    "rank": 15
-  },
-  {
-    "name": "Shawn Mendes",
-    "url": "https://open.spotify.com/artist/7n2wHs1TKAczGzO7Dd2rGr",
-    "listeners": 55628197,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb58b4b9419486550f6fda0535",
-    "date": "2026-10-31",
-    "rank": 16
-  },
-  {
-    "name": "sombr",
-    "url": "https://open.spotify.com/artist/4G9NDjRyZFDlJKMRL8hx3S",
-    "listeners": 54769949,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb78edaa6468cae153565c2c97",
-    "date": "2026-10-31",
-    "rank": 17
-  },
-  {
-    "name": "Olivia Dean",
-    "url": "https://open.spotify.com/artist/00x1fYSGhdqScXBRpSj3DW",
-    "listeners": 52505958,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb5c7577ad44daeb7ce4b941a1",
-    "date": "2026-10-31",
-    "rank": 18
-  },
-  {
-    "name": "The Neighbourhood",
-    "url": "https://open.spotify.com/artist/77SW9BnxLY8rJ0RciFqkHh",
-    "listeners": 51778150,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebdf0b5ac84376a0a4b2166816",
-    "date": "2026-10-31",
-    "rank": 19
-  },
-  {
-    "name": "Tate McRae",
-    "url": "https://open.spotify.com/artist/45dkTj5sMRSjrmBSBeiHym",
-    "listeners": 51372881,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebeefdef74a162b2913094ad9c",
-    "date": "2026-10-31",
-    "rank": 20
-  },
-  {
-    "name": "Fuerza Regida",
-    "url": "https://open.spotify.com/artist/0ys2OFYzWYB5hRDLCsBqxt",
-    "listeners": 50391713,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebce436c411ab2436c7ab2c04d",
-    "date": "2026-10-31",
-    "rank": 21
-  },
-  {
-    "name": "JENNIE",
-    "url": "https://open.spotify.com/artist/250b0Wlc5Vk0CoUsaCY84M",
-    "listeners": 47654424,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb3feb82fe1bb947a2aa65f6b8",
-    "date": "2026-10-31",
-    "rank": 22
-  },
-  {
-    "name": "P!nk",
-    "url": "https://open.spotify.com/artist/1KCSPY1glIKqW2TotWuXOR",
-    "listeners": 47455052,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb7bbad89a61061304ec842588",
-    "date": "2026-10-31",
-    "rank": 23
-  },
-  {
-    "name": "Radiohead",
-    "url": "https://open.spotify.com/artist/4Z8W4fKeB5YxbusRsdQVPb",
-    "listeners": 45968154,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb959527d2fabc9c64287e57b9",
-    "date": "2026-10-31",
-    "rank": 24
-  },
-  {
-    "name": "Nicki Minaj",
-    "url": "https://open.spotify.com/artist/0hCNtLu0JehylgoiP8L4Gh",
-    "listeners": 45447088,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb07a50f0a9a8f11e5a1102cbd",
-    "date": "2026-10-31",
-    "rank": 25
-  },
-  {
-    "name": "Dominic Fike",
-    "url": "https://open.spotify.com/artist/6USv9qhCn6zfxlBQIYJ9qs",
-    "listeners": 45289197,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebc674a77fa82d00bcecf1a794",
-    "date": "2026-10-31",
-    "rank": 26
-  },
-  {
-    "name": "Alex Warren",
-    "url": "https://open.spotify.com/artist/0fTSzq9jAh4c36UVb4V7CB",
-    "listeners": 44166188,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb0548e7c357122cda80128c8f",
-    "date": "2026-10-31",
-    "rank": 27
-  },
-  {
-    "name": "Mac Miller",
-    "url": "https://open.spotify.com/artist/4LLpKhyESsyAXpc4laK94U",
-    "listeners": 42720818,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebed3b89aa602145fde71a163a",
-    "date": "2026-10-31",
-    "rank": 28
-  },
-  {
-    "name": "Chappell Roan",
-    "url": "https://open.spotify.com/artist/7GlBOeep6PqTfFi59PTUUN",
-    "listeners": 39979149,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebd258ecb0d66244e6300bcf64",
-    "date": "2026-10-31",
-    "rank": 29
-  },
-  {
-    "name": "Oasis",
-    "url": "https://open.spotify.com/artist/2DaxqgrOhkeH0fpeiQq2f4",
-    "listeners": 39853930,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb23a08396d484aa0e81d73527",
-    "date": "2026-10-31",
-    "rank": 30
-  },
-  {
-    "name": "The Police",
-    "url": "https://open.spotify.com/artist/5NGO30tJxFlKixkPSgXcFE",
-    "listeners": 39446204,
-    "artistImage": "https://i.scdn.co/image/1f73a61faca2942cd5ea29c2143184db8645f0b3",
-    "date": "2026-10-31",
-    "rank": 31
-  },
-  {
-    "name": "The Goo Goo Dolls",
-    "url": "https://open.spotify.com/artist/2sil8z5kiy4r76CRTXxBCA",
-    "listeners": 39382394,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebe7b66b8c4ba729848574df7a",
-    "date": "2026-10-31",
-    "rank": 32
-  },
-  {
-    "name": "Malcolm Todd",
-    "url": "https://open.spotify.com/artist/7eKkW1zo5uzW8kUntiiBvz",
-    "listeners": 38783447,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb9f6f7c2d12975d2a4b3a0fd8",
-    "date": "2026-10-31",
-    "rank": 33
-  },
-  {
-    "name": "The Killers",
-    "url": "https://open.spotify.com/artist/0C0XlULifJtAgn6ZNCW2eu",
-    "listeners": 36424421,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb207b21f3ed0ee96adce3166a",
-    "date": "2026-10-31",
-    "rank": 34
-  },
-  {
-    "name": "SIENNA SPIRO",
-    "url": "https://open.spotify.com/artist/02gSuSAWEdWa5UOvqzjX6v",
-    "listeners": 36328827,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebfb0ab819bbd4502028cd1feb",
-    "date": "2026-10-31",
-    "rank": 35
-  },
-  {
-    "name": "Ty Dolla $ign",
-    "url": "https://open.spotify.com/artist/7c0XG5cIJTrrAgEC3ULPiq",
-    "listeners": 34329146,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb4ef6e245168c33922bc6df1a",
-    "date": "2026-10-31",
-    "rank": 36
-  },
-  {
-    "name": "Ravyn Lenae",
-    "url": "https://open.spotify.com/artist/5RTLRtXjbXI2lSXc6jxlAz",
-    "listeners": 33219983,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebe881d4df24e1b39bd7154778",
-    "date": "2026-10-31",
-    "rank": 37
-  },
-  {
-    "name": "Ella Langley",
-    "url": "https://open.spotify.com/artist/6BRxQ8cD3eqnrVj6WKDok8",
-    "listeners": 31801091,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebc4670378a4188c3174ef2ca9",
-    "date": "2026-10-31",
-    "rank": 38
-  },
-  {
-    "name": "Djo",
-    "url": "https://open.spotify.com/artist/5p9HO3XC5P3BLxJs5Mtrhm",
-    "listeners": 31713266,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb4113d395582d3667b7978430",
-    "date": "2026-10-31",
-    "rank": 39
-  },
-  {
-    "name": "BTS",
-    "url": "https://open.spotify.com/artist/3Nrfpe0tUJi4K4DXYWgMUX",
-    "listeners": 30373302,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebf80ec63ea7a0ef0fba60957d",
-    "date": "2026-10-31",
-    "rank": 40
-  },
-  {
-    "name": "Gigi Perez",
-    "url": "https://open.spotify.com/artist/1iCnM8foFssWlPRLfAbIwo",
-    "listeners": 29393926,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebd58f13475be93b37bb63893f",
-    "date": "2026-10-31",
-    "rank": 41
-  },
-  {
-    "name": "Temper City",
-    "url": "https://open.spotify.com/artist/5mHUmlJWkcoOk1NbjfrXWz",
-    "listeners": 28167395,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb58cd69025e54b4f139005b6e",
-    "date": "2026-10-31",
-    "rank": 42
-  },
-  {
-    "name": "Lily-Rose Depp",
-    "url": "https://open.spotify.com/artist/1pBLC0qVRTB5zVMuteQ9jJ",
-    "listeners": 25973015,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebc2fb4b8e035fbdad27da865f",
-    "date": "2026-10-31",
-    "rank": 43
-  },
-  {
-    "name": "Nate Ruess",
-    "url": "https://open.spotify.com/artist/1qUjOF5fzrpoNycD36b2jZ",
-    "listeners": 25516824,
-    "artistImage": "https://i.scdn.co/image/5d5dec419f704181b9a23dd9c55562632817c442",
-    "date": "2026-10-31",
-    "rank": 44
-  },
-  {
-    "name": "Grand Theft Auto VI",
-    "url": "https://open.spotify.com/artist/15o7qdDTBzs6xWRUYUtZc1",
-    "listeners": 22579259,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb8b64bf5ce23508af9838eade",
-    "date": "2026-10-31",
-    "rank": 45
-  },
-  {
-    "name": "Zain Zohaib",
-    "url": "https://open.spotify.com/artist/0M4wzwZKh9SSHkOXYNvQlP",
-    "listeners": 13787638,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebaa9effe3affd5a9dad488712",
-    "date": "2026-10-31",
-    "rank": 46
-  },
-  {
-    "name": "Felipe e Rodrigo",
-    "url": "https://open.spotify.com/artist/7gZu6kPnY9enEi5FvgTO4F",
-    "listeners": 13608898,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb2fcf02dddd495f13341b92c4",
-    "date": "2026-10-31",
-    "rank": 47
-  },
-  {
-    "name": "Jamie Miller",
-    "url": "https://open.spotify.com/artist/2LkkwxA19J8C52wPQl5bG6",
-    "listeners": 13302471,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebeacc346eb50276f366ac542c",
-    "date": "2026-10-31",
-    "rank": 48
-  },
-  {
-    "name": "Hamza Malik",
-    "url": "https://open.spotify.com/artist/1GE8jiWTAhX18vP7Wqxig9",
-    "listeners": 10426250,
-    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb77a5a3faefc4f8957878a806",
-    "date": "2026-10-31",
-    "rank": 49
-  },
-  {
     "name": "Listen to Bruno Mars",
     "url": "https://open.spotify.com/artist/0du5cEVh5yTK9QJze8zA0C",
     "listeners": 126899498,
@@ -1182,5 +390,349 @@
     "artistImage": "https://i.scdn.co/image/ab67616d0000b273edf6710f9c0cd81e37fcaf3d",
     "date": "2026-11-01",
     "rank": 49
+  },
+  {
+    "name": "Bruno Mars",
+    "url": "https://open.spotify.com/artist/0du5cEVh5yTK9QJze8zA0C",
+    "listeners": 126776598,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebc7688aad1bf03986934d7e26",
+    "date": "2026-11-02",
+    "rank": 1
+  },
+  {
+    "name": "Rihanna",
+    "url": "https://open.spotify.com/artist/5pKCCKE2ajJHZ9KAiaK11H",
+    "listeners": 118108379,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebcb565a8e684e3be458d329ac",
+    "date": "2026-11-02",
+    "rank": 2
+  },
+  {
+    "name": "The Weeknd",
+    "url": "https://open.spotify.com/artist/1Xyo4u8uXC1ZmMpatF05PJ",
+    "listeners": 117139321,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebc1719ac9e6a75c1c25835018",
+    "date": "2026-11-02",
+    "rank": 3
+  },
+  {
+    "name": "Justin Bieber",
+    "url": "https://open.spotify.com/artist/1uNFoZAHBGtllmzznpCI3s",
+    "listeners": 110890244,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebaf20f7db5288bce9beede034",
+    "date": "2026-11-02",
+    "rank": 4
+  },
+  {
+    "name": "Lady Gaga",
+    "url": "https://open.spotify.com/artist/1HY2Jd0NmPuamShAr6KMms",
+    "listeners": 103570747,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebaadc18cac8d48124357c38e6",
+    "date": "2026-11-02",
+    "rank": 5
+  },
+  {
+    "name": "Michael Jackson",
+    "url": "https://open.spotify.com/artist/3fMbdgg4jU18AjLCKBhRSm",
+    "listeners": 91433461,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb997cc9a4aec335d46c9481fd",
+    "date": "2026-11-02",
+    "rank": 6
+  },
+  {
+    "name": "Katy Perry",
+    "url": "https://open.spotify.com/artist/6jJ0s89eD6GaHleKKya26X",
+    "listeners": 87343232,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebcd50e745cf782f905769f482",
+    "date": "2026-11-02",
+    "rank": 7
+  },
+  {
+    "name": "Olivia Rodrigo",
+    "url": "https://open.spotify.com/artist/1McMsnEElThX1knmY4oliG",
+    "listeners": 73707511,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebb14eb4dcfd2f3858bed06e44",
+    "date": "2026-11-02",
+    "rank": 8
+  },
+  {
+    "name": "Tame Impala",
+    "url": "https://open.spotify.com/artist/5INjqkS1o8h1imAzPqGZBb",
+    "listeners": 63825645,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebe412a782245eb20d9626c601",
+    "date": "2026-11-02",
+    "rank": 9
+  },
+  {
+    "name": "Shawn Mendes",
+    "url": "https://open.spotify.com/artist/7n2wHs1TKAczGzO7Dd2rGr",
+    "listeners": 55295577,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb58b4b9419486550f6fda0535",
+    "date": "2026-11-02",
+    "rank": 10
+  },
+  {
+    "name": "sombr",
+    "url": "https://open.spotify.com/artist/4G9NDjRyZFDlJKMRL8hx3S",
+    "listeners": 54929667,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb78edaa6468cae153565c2c97",
+    "date": "2026-11-02",
+    "rank": 11
+  },
+  {
+    "name": "Olivia Dean",
+    "url": "https://open.spotify.com/artist/00x1fYSGhdqScXBRpSj3DW",
+    "listeners": 52260008,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb5c7577ad44daeb7ce4b941a1",
+    "date": "2026-11-02",
+    "rank": 12
+  },
+  {
+    "name": "The Neighbourhood",
+    "url": "https://open.spotify.com/artist/77SW9BnxLY8rJ0RciFqkHh",
+    "listeners": 51683283,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebdf0b5ac84376a0a4b2166816",
+    "date": "2026-11-02",
+    "rank": 13
+  },
+  {
+    "name": "Fuerza Regida",
+    "url": "https://open.spotify.com/artist/0ys2OFYzWYB5hRDLCsBqxt",
+    "listeners": 50800658,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebce436c411ab2436c7ab2c04d",
+    "date": "2026-11-02",
+    "rank": 14
+  },
+  {
+    "name": "JENNIE",
+    "url": "https://open.spotify.com/artist/250b0Wlc5Vk0CoUsaCY84M",
+    "listeners": 48661743,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb3feb82fe1bb947a2aa65f6b8",
+    "date": "2026-11-02",
+    "rank": 15
+  },
+  {
+    "name": "P!nk",
+    "url": "https://open.spotify.com/artist/1KCSPY1glIKqW2TotWuXOR",
+    "listeners": 47860639,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb7bbad89a61061304ec842588",
+    "date": "2026-11-02",
+    "rank": 16
+  },
+  {
+    "name": "Radiohead",
+    "url": "https://open.spotify.com/artist/4Z8W4fKeB5YxbusRsdQVPb",
+    "listeners": 46178134,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb959527d2fabc9c64287e57b9",
+    "date": "2026-11-02",
+    "rank": 17
+  },
+  {
+    "name": "Nicki Minaj",
+    "url": "https://open.spotify.com/artist/0hCNtLu0JehylgoiP8L4Gh",
+    "listeners": 45605324,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb07a50f0a9a8f11e5a1102cbd",
+    "date": "2026-11-02",
+    "rank": 18
+  },
+  {
+    "name": "Dominic Fike",
+    "url": "https://open.spotify.com/artist/6USv9qhCn6zfxlBQIYJ9qs",
+    "listeners": 45452512,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebc674a77fa82d00bcecf1a794",
+    "date": "2026-11-02",
+    "rank": 19
+  },
+  {
+    "name": "ADÉLA",
+    "url": "https://open.spotify.com/artist/2qanRMyA5bNuTvz1dK45OP",
+    "listeners": 44812216,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb2005cc18964c60e22c4759b5",
+    "date": "2026-11-02",
+    "rank": 20
+  },
+  {
+    "name": "The Cranberries",
+    "url": "https://open.spotify.com/artist/7t0rwkOPGlDPEhaOcVtOt9",
+    "listeners": 41221833,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb9d7ed10720669900a0649c98",
+    "date": "2026-11-02",
+    "rank": 21
+  },
+  {
+    "name": "The Goo Goo Dolls",
+    "url": "https://open.spotify.com/artist/2sil8z5kiy4r76CRTXxBCA",
+    "listeners": 39535092,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebe7b66b8c4ba729848574df7a",
+    "date": "2026-11-02",
+    "rank": 22
+  },
+  {
+    "name": "Malcolm Todd",
+    "url": "https://open.spotify.com/artist/7eKkW1zo5uzW8kUntiiBvz",
+    "listeners": 38518836,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb9f6f7c2d12975d2a4b3a0fd8",
+    "date": "2026-11-02",
+    "rank": 23
+  },
+  {
+    "name": "The Killers",
+    "url": "https://open.spotify.com/artist/0C0XlULifJtAgn6ZNCW2eu",
+    "listeners": 36429482,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb207b21f3ed0ee96adce3166a",
+    "date": "2026-11-02",
+    "rank": 24
+  },
+  {
+    "name": "SIENNA SPIRO",
+    "url": "https://open.spotify.com/artist/02gSuSAWEdWa5UOvqzjX6v",
+    "listeners": 36416232,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebfb0ab819bbd4502028cd1feb",
+    "date": "2026-11-02",
+    "rank": 25
+  },
+  {
+    "name": "KATSEYE",
+    "url": "https://open.spotify.com/artist/3c0gDdb9lhnHGFtP4prQpn",
+    "listeners": 34397966,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb04ba72b2749f90d62152ebec",
+    "date": "2026-11-02",
+    "rank": 26
+  },
+  {
+    "name": "Ravyn Lenae",
+    "url": "https://open.spotify.com/artist/5RTLRtXjbXI2lSXc6jxlAz",
+    "listeners": 33107690,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebe881d4df24e1b39bd7154778",
+    "date": "2026-11-02",
+    "rank": 27
+  },
+  {
+    "name": "Djo",
+    "url": "https://open.spotify.com/artist/5p9HO3XC5P3BLxJs5Mtrhm",
+    "listeners": 31953390,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb4113d395582d3667b7978430",
+    "date": "2026-11-02",
+    "rank": 28
+  },
+  {
+    "name": "Ella Langley",
+    "url": "https://open.spotify.com/artist/6BRxQ8cD3eqnrVj6WKDok8",
+    "listeners": 31534455,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebc4670378a4188c3174ef2ca9",
+    "date": "2026-11-02",
+    "rank": 29
+  },
+  {
+    "name": "Ashe",
+    "url": "https://open.spotify.com/artist/6P5NO5hzJbuOqSdyPB7SJM",
+    "listeners": 30800449,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb1ecbc7955919e10c45604e85",
+    "date": "2026-11-02",
+    "rank": 30
+  },
+  {
+    "name": "BTS",
+    "url": "https://open.spotify.com/artist/3Nrfpe0tUJi4K4DXYWgMUX",
+    "listeners": 30295510,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebf80ec63ea7a0ef0fba60957d",
+    "date": "2026-11-02",
+    "rank": 31
+  },
+  {
+    "name": "Evanescence",
+    "url": "https://open.spotify.com/artist/5nGIFgo0shDenQYSE0Sn7c",
+    "listeners": 29876839,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebf42c2c9bead41b262780ea89",
+    "date": "2026-11-02",
+    "rank": 32
+  },
+  {
+    "name": "Temper City",
+    "url": "https://open.spotify.com/artist/5mHUmlJWkcoOk1NbjfrXWz",
+    "listeners": 27681704,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb58cd69025e54b4f139005b6e",
+    "date": "2026-11-02",
+    "rank": 33
+  },
+  {
+    "name": "Lily-Rose Depp",
+    "url": "https://open.spotify.com/artist/1pBLC0qVRTB5zVMuteQ9jJ",
+    "listeners": 26126436,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebc2fb4b8e035fbdad27da865f",
+    "date": "2026-11-02",
+    "rank": 34
+  },
+  {
+    "name": "Nate Ruess",
+    "url": "https://open.spotify.com/artist/1qUjOF5fzrpoNycD36b2jZ",
+    "listeners": 26053854,
+    "artistImage": "https://i.scdn.co/image/5d5dec419f704181b9a23dd9c55562632817c442",
+    "date": "2026-11-02",
+    "rank": 35
+  },
+  {
+    "name": "Grand Theft Auto VI",
+    "url": "https://open.spotify.com/artist/15o7qdDTBzs6xWRUYUtZc1",
+    "listeners": 23670982,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb8b64bf5ce23508af9838eade",
+    "date": "2026-11-02",
+    "rank": 36
+  },
+  {
+    "name": "Grelo",
+    "url": "https://open.spotify.com/artist/1eIYP01ZLPKEExhcV6xFgt",
+    "listeners": 14141447,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb74a8b964bcc32fc001e90ea8",
+    "date": "2026-11-02",
+    "rank": 37
+  },
+  {
+    "name": "Felipe e Rodrigo",
+    "url": "https://open.spotify.com/artist/7gZu6kPnY9enEi5FvgTO4F",
+    "listeners": 14071246,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb2fcf02dddd495f13341b92c4",
+    "date": "2026-11-02",
+    "rank": 38
+  },
+  {
+    "name": "Talking Heads",
+    "url": "https://open.spotify.com/artist/2x9SpqnPi8rlE9pjHBwmSC",
+    "listeners": 14034693,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebbb4de17ec7fc20b1c489e4ff",
+    "date": "2026-11-02",
+    "rank": 39
+  },
+  {
+    "name": "Jamie Miller",
+    "url": "https://open.spotify.com/artist/2LkkwxA19J8C52wPQl5bG6",
+    "listeners": 13873009,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5ebeacc346eb50276f366ac542c",
+    "date": "2026-11-02",
+    "rank": 40
+  },
+  {
+    "name": "João Gustavo e Murilo",
+    "url": "https://open.spotify.com/artist/6xerOqBLmelL3xZNZkVbGl",
+    "listeners": 13110477,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb4c01037f0c3053fbe901e02b",
+    "date": "2026-11-02",
+    "rank": 41
+  },
+  {
+    "name": "Rockwell",
+    "url": "https://open.spotify.com/artist/3xs0LEzcPXtgNfMNcHzLIP",
+    "listeners": 13050664,
+    "artistImage": "https://i.scdn.co/image/ab6772690000c46c38e130e4a87d0d8a46912426",
+    "date": "2026-11-02",
+    "rank": 42
+  },
+  {
+    "name": "Andrew Gold",
+    "url": "https://open.spotify.com/artist/5fmvGUlMVgmnCn45f1he7d",
+    "listeners": 10495158,
+    "artistImage": "https://i.scdn.co/image/ab6761610000e5eb5b80adaab28dc1d9bc464eaf",
+    "date": "2026-11-02",
+    "rank": 43
   }
 ]

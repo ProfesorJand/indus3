@@ -43,6 +43,34 @@ export const formatBlogDate = (dateString) => {
   return `${date.getDate()} de ${meses[date.getMonth()]}, ${date.getFullYear()}`;
 };
 
+// Helper para extraer información de videos de YouTube (estándar o Shorts)
+export const parseYouTubeVideo = (url) => {
+  if (!url) {
+    return {
+      youtubeId: null,
+      isShort: false,
+      embedUrl: null,
+      thumbnailMaxRes: null,
+      thumbnailHq: null
+    };
+  }
+
+  const raw = String(url).trim();
+  const isShort = raw.includes('/shorts/');
+  const match =
+    raw.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/|live\/))([\w-]{11})/i) ||
+    raw.match(/^([\w-]{11})$/);
+  const youtubeId = match ? match[1] : null;
+
+  return {
+    youtubeId,
+    isShort,
+    embedUrl: youtubeId ? `https://www.youtube.com/embed/${youtubeId}` : null,
+    thumbnailMaxRes: youtubeId ? `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg` : null,
+    thumbnailHq: youtubeId ? `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg` : null
+  };
+};
+
 // Normalizar la publicación proveniente de MySQL
 export const normalizePost = (post) => {
   if (!post) return null;
@@ -72,18 +100,38 @@ export const normalizePost = (post) => {
     }
   }
 
+  // Detección de Video / Short para apertura en modal (falso blog)
+  const yt = parseYouTubeVideo(post.video);
+  const rawReadTime = String(post.read_time || post.readTime || '').trim();
+  const isVideoModal =
+    rawReadTime.toLowerCase() === 'video' ||
+    Boolean(yt.youtubeId && (!post.content || post.content.trim() === '' || post.content.trim() === '<p>Video de YouTube</p>'));
+
+  // Si es un video modal y no tiene imagen de portada personalizada, utilizar miniatura de YouTube
+  let finalImage = post.image || '';
+  if ((!finalImage || finalImage === '/indus3-logo.webp') && yt.thumbnailMaxRes) {
+    finalImage = yt.thumbnailMaxRes;
+  }
+  if (!finalImage) {
+    finalImage = '/indus3-logo.webp';
+  }
+
   return {
     id: post.id,
     slug: post.slug,
     title: post.title,
     seoTitle: post.seo_title || post.seoTitle || post.title || '',
     keywords: post.keywords || '',
-    excerpt: post.excerpt,
+    excerpt: post.excerpt || '',
     content: post.content || '',
-    image: post.image || '/indus3-logo.webp',
+    image: finalImage,
+    customImage: post.image || '',
     video: post.video || null,
+    youtubeId: yt.youtubeId,
+    isShort: yt.isShort,
+    isVideoModal,
     featured: Boolean(Number(post.featured)),
-    readTime: post.read_time || '4 min de lectura',
+    readTime: isVideoModal ? 'Video' : (rawReadTime || '4 min de lectura'),
     date: dateOnly,
     formattedDate: formatBlogDate(rawCreatedAt),
     createdAt: rawCreatedAt,

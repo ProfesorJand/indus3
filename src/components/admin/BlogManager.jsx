@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { parseYouTubeVideo } from '@stores/blogStore';
 import styles from './css/BlogManager.module.css';
 
 /**
@@ -7,10 +8,14 @@ import styles from './css/BlogManager.module.css';
  * COMPONENTE BLOG MANAGER - PANEL DE ADMINISTRACIÓN INDUS3
  * ============================================================================
  * Permite crear, editar, listar y eliminar artículos de noticias y blog.
+ * Soporta dos modalidades:
+ * 1. Artículo Tradicional: Redacción HTML completa con autor y página individual.
+ * 2. Video / Short (Modal en Card): Card 16:9 que abre YouTube en modal sin página.
  * Conectado con la base de datos MySQL en api.indus3pro.com.
  */
 const BlogManager = () => {
   const [activeTab, setActiveTab] = useState('crear'); // 'crear' | 'lista'
+  const [postType, setPostType] = useState('article'); // 'article' | 'video'
   const [viewMode, setViewMode] = useState('split'); // 'split' | 'code' | 'preview'
 
   // Lista de autores y tags cargados desde la base de datos o valores por defecto
@@ -186,10 +191,9 @@ const BlogManager = () => {
     }
   };
 
-  // Limpiar y formatear slug escrito a mano (reemplazando acentos latinos antes de la limpieza)
-  const handleCleanManualSlug = () => {
-    if (!slug.trim()) return;
-    const cleaned = slug
+  // Helper para formatear texto a slug
+  const formatSlugText = (text) => {
+    return String(text || '')
       .toLowerCase()
       .trim()
       .replace(/[áàäâã]/g, 'a')
@@ -205,7 +209,12 @@ const BlogManager = () => {
       .replace(/\s+/g, '-')
       .replace(/-+/g, '-')
       .replace(/^-+|-+$/g, '');
+  };
 
+  // Limpiar y formatear slug escrito a mano (reemplazando acentos latinos antes de la limpieza)
+  const handleCleanManualSlug = () => {
+    if (!slug.trim()) return;
+    const cleaned = formatSlugText(slug);
     setSlug(cleaned);
     checkSlugAvailability(cleaned, postId);
   };
@@ -691,13 +700,19 @@ const BlogManager = () => {
     e.preventDefault();
 
     if (!title.trim()) {
-      alert('Por favor ingresa un título para la noticia.');
+      alert(postType === 'video' ? 'Por favor ingresa un título para el video.' : 'Por favor ingresa un título para la noticia.');
       return;
     }
 
-    if (!slug.trim()) {
-      alert('Por favor ingresa un slug único.');
+    if (postType === 'video' && !video.trim()) {
+      alert('Por favor ingresa la URL de YouTube para el video o short.');
       return;
+    }
+
+    let finalSlug = slug.trim();
+    if (!finalSlug) {
+      finalSlug = (postType === 'video' ? 'video-' : '') + formatSlugText(title);
+      setSlug(finalSlug);
     }
 
     if (slugStatus.available === false) {
@@ -707,19 +722,28 @@ const BlogManager = () => {
 
     setSaveStatus({ saving: true, message: 'Guardando publicación...', error: false });
 
+    // Determinar imagen final (personalizada o miniatura automática de YouTube)
+    let finalImage = image.trim();
+    if (postType === 'video') {
+      const yt = parseYouTubeVideo(video);
+      if (!finalImage || finalImage === '/indus3-logo.webp') {
+        finalImage = yt.thumbnailMaxRes || yt.thumbnailHq || '/indus3-logo.webp';
+      }
+    }
+
     const payload = {
       id: postId,
       title: title.trim(),
-      seo_title: seoTitle.trim(),
+      seo_title: seoTitle.trim() || title.trim(),
       keywords: keywords.trim(),
-      slug: slug.trim(),
+      slug: finalSlug,
       excerpt: excerpt.trim(),
-      content: content.trim(),
+      content: postType === 'video' ? '' : content.trim(),
       autor_id: autorId,
-      image: image.trim(),
+      image: finalImage,
       video: video.trim(),
       featured: featured,
-      read_time: readTime.trim(),
+      read_time: postType === 'video' ? 'Video' : readTime.trim(),
       status: status,
       created_at: createdAt || null,
       tag_ids: selectedTagIds
@@ -786,6 +810,7 @@ const BlogManager = () => {
 
   // Limpiar formulario para nuevo post
   const handleResetForm = () => {
+    setPostType('article');
     setPostId(0);
     setTitle('');
     setSeoTitle('');
@@ -807,6 +832,12 @@ const BlogManager = () => {
 
   // Cargar post para editar
   const handleEditPost = (post) => {
+    const isVideo =
+      String(post.read_time || '').toLowerCase() === 'video' ||
+      String(post.readTime || '').toLowerCase() === 'video' ||
+      (Boolean(post.video) && (!post.content || post.content.trim() === '' || post.content.trim() === '<p>Video de YouTube</p>'));
+
+    setPostType(isVideo ? 'video' : 'article');
     setPostId(post.id);
     setTitle(post.title || '');
     setSeoTitle(post.seo_title || post.seoTitle || '');
@@ -818,7 +849,7 @@ const BlogManager = () => {
     setImage(post.image || '/indus3-logo.webp');
     setVideo(post.video || '');
     setFeatured(Boolean(post.featured));
-    setReadTime(post.read_time || '4 min');
+    setReadTime(isVideo ? 'Video' : (post.read_time || '4 min de lectura'));
     setStatus(post.status || 'published');
     setCreatedAt(post.created_at ? post.created_at.split(' ')[0] : (post.date || new Date().toISOString().split('T')[0]));
     setUpdatedAt(post.updated_at || '');
@@ -864,8 +895,498 @@ const BlogManager = () => {
 
       {activeTab === 'crear' ? (
         <form onSubmit={handleSavePost} className={styles.formCard}>
-          {/* Fieldset 1: Información Principal, SEO y Estado */}
-          <fieldset className={styles.fieldset}>
+          {/* Selector de Tipo de Publicación */}
+          <div className={styles.postTypeContainer}>
+            <div className={styles.postTypeTabs}>
+              <button
+                type="button"
+                className={`${styles.postTypeTab} ${postType === 'article' ? styles.postTypeTabActive : ''}`}
+                onClick={() => {
+                  setPostType('article');
+                  if (readTime === 'Video') setReadTime('4 min de lectura');
+                }}
+              >
+                <span className={styles.postTypeEmoji}>📰</span>
+                <div>
+                  <span className={styles.postTypeLabel}>Artículo Tradicional</span>
+                  <span className={styles.postTypeSub}>Redacción completa con HTML, autor y página propia</span>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                className={`${styles.postTypeTab} ${postType === 'video' ? styles.postTypeTabActive : ''}`}
+                onClick={() => {
+                  setPostType('video');
+                  setReadTime('Video');
+                  if (postId === 0 && !slug.startsWith('video-') && slug) {
+                    setSlug(`video-${slug}`);
+                  }
+                }}
+              >
+                <span className={styles.postTypeEmoji}>🎬</span>
+                <div>
+                  <span className={styles.postTypeLabel}>Video / Short (Modal en Card)</span>
+                  <span className={styles.postTypeSub}>Card 16:9 que abre YouTube en modal sin página individual</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          {postType === 'video' ? (
+            /* ===============================================================
+               MODALIDAD VIDEO / SHORT: FORMULARIO DIRECTO Y OPTIMIZADO
+               =============================================================== */
+            <fieldset className={styles.fieldset}>
+              <legend className={styles.legend}>
+                🎬 Configuración de Video / Short (Modal en la misma página)
+              </legend>
+              <div className={styles.fieldsetGrid}>
+                {/* Título del Video */}
+                <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+                  <label className={styles.label}>
+                    <span>Título del Video (Se mostrará en la Card y en el reproductor):</span>
+                    <span style={{ color: '#94a3b8', fontSize: '0.8rem' }}>Requerido</span>
+                  </label>
+                  <input
+                    type="text"
+                    className={styles.input}
+                    placeholder="Ej: Danny Ocean en vivo en el Estadio Olímpico de Caracas..."
+                    value={title}
+                    onChange={(e) => {
+                      setTitle(e.target.value);
+                      if (postId === 0) {
+                        const auto = 'video-' + formatSlugText(e.target.value);
+                        setSlug(auto);
+                      }
+                    }}
+                    required
+                  />
+                </div>
+
+                {/* URL de YouTube */}
+                <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+                  <label className={styles.label}>
+                    <span>URL de YouTube (Video Estándar o Short):</span>
+                    <span style={{ color: '#94a3b8', fontSize: '0.8rem' }}>Requerido</span>
+                  </label>
+                  <input
+                    type="text"
+                    className={styles.input}
+                    placeholder="https://www.youtube.com/watch?v=... o https://youtube.com/shorts/..."
+                    value={video}
+                    onChange={(e) => {
+                      const url = e.target.value;
+                      setVideo(url);
+                      const yt = parseYouTubeVideo(url);
+                      if (yt.youtubeId && (!image || image === '/indus3-logo.webp')) {
+                        setImage(yt.thumbnailMaxRes || yt.thumbnailHq || '/indus3-logo.webp');
+                      }
+                    }}
+                    required
+                  />
+                  {/* Badge de detección inteligente de YouTube */}
+                  {(() => {
+                    const yt = parseYouTubeVideo(video);
+                    if (!video.trim()) return null;
+                    if (!yt.youtubeId) {
+                      return (
+                        <span style={{ fontSize: '0.82rem', color: '#f87171', marginTop: '0.35rem' }}>
+                          ⚠️ No se detectó un enlace válido de YouTube. Ingresa un enlace como youtube.com/watch?v=... o youtube.com/shorts/...
+                        </span>
+                      );
+                    }
+                    return (
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginTop: '0.45rem', flexWrap: 'wrap' }}>
+                        <span style={{
+                          fontSize: '0.8rem',
+                          padding: '0.2rem 0.65rem',
+                          borderRadius: '6px',
+                          background: yt.isShort ? 'rgba(234, 179, 8, 0.2)' : 'rgba(59, 130, 246, 0.2)',
+                          color: yt.isShort ? '#facc15' : '#60a5fa',
+                          fontWeight: 700,
+                          border: `1px solid ${yt.isShort ? 'rgba(234, 179, 8, 0.4)' : 'rgba(59, 130, 246, 0.4)'}`
+                        }}>
+                          {yt.isShort ? '⚡ DETECTADO: YouTube Short (Modal 9:16 vertical)' : '▶ DETECTADO: Video Estándar (Modal 16:9 horizontal)'}
+                        </span>
+                        <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>
+                          ID: <code>{yt.youtubeId}</code>
+                        </span>
+                      </div>
+                    );
+                  })()}
+                </div>
+
+                {/* Imagen Horizontal Personalizada para la Card (16:9) */}
+                <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+                  <label className={styles.label}>
+                    <span>Imagen horizontal personalizada (16:9) para la Card (Opcional):</span>
+                  </label>
+                  <div className={styles.imageActionsRow}>
+                    {image && image !== '/indus3-logo.webp' && (
+                      <img
+                        src={image}
+                        alt="Preview"
+                        className={styles.imagePreviewThumb}
+                        onError={(e) => { e.target.style.display = 'none'; }}
+                      />
+                    )}
+                    <input
+                      type="text"
+                      className={styles.input}
+                      placeholder="Deja vacío para usar automáticamente el thumbnail de YouTube"
+                      value={(() => {
+                        const yt = parseYouTubeVideo(video);
+                        if (image === yt.thumbnailMaxRes || image === yt.thumbnailHq || image === '/indus3-logo.webp') {
+                          return '';
+                        }
+                        return image;
+                      })()}
+                      onChange={(e) => setImage(e.target.value)}
+                      style={{ flex: 1 }}
+                    />
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      accept="image/*"
+                      onChange={handleFileUpload}
+                      style={{ display: 'none' }}
+                    />
+                    <button
+                      type="button"
+                      className={styles.btnSmall}
+                      onClick={() => fileInputRef.current?.click()}
+                      disabled={uploadingImg}
+                      title="Subir imagen horizontal a api.indus3pro.com"
+                    >
+                      {uploadingImg ? '⏳ Subiendo...' : '📤 Subir Imagen 16:9'}
+                    </button>
+                    <button
+                      type="button"
+                      className={styles.btnSmall}
+                      onClick={() => {
+                        setGalleryTarget('post');
+                        setGalleryOpen(true);
+                        fetchGallery();
+                      }}
+                      title="Abrir galería de imágenes del servidor"
+                    >
+                      🖼️ Galería
+                    </button>
+                    {(() => {
+                      const yt = parseYouTubeVideo(video);
+                      const isCustom = image && image !== '/indus3-logo.webp' && image !== yt.thumbnailMaxRes && image !== yt.thumbnailHq;
+                      if (!isCustom) return null;
+                      return (
+                        <button
+                          type="button"
+                          className={styles.btnSmall}
+                          onClick={() => {
+                            setImage(yt.thumbnailMaxRes || yt.thumbnailHq || '/indus3-logo.webp');
+                          }}
+                          title="Restablecer y usar la miniatura oficial de YouTube"
+                        >
+                          🔄 Usar miniatura YouTube
+                        </button>
+                      );
+                    })()}
+                  </div>
+                  <span style={{ fontSize: '0.78rem', color: '#94a3b8', marginTop: '0.35rem', lineHeight: '1.4' }}>
+                    💡 <strong>Para Shorts y Videos Verticales:</strong> La card recortará automáticamente el thumbnail de YouTube a 16:9 horizontal. Si prefieres un arte o flyer horizontal diseñado especialmente en 16:9, súbelo o colócalo aquí.
+                  </span>
+                </div>
+
+                {/* Extracto / Resumen breve del Video (Opcional) */}
+                <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+                  <label className={styles.label}>
+                    <span>Extracto / Resumen breve del Video (Opcional - se mostrará en la Card):</span>
+                    <span style={{ color: '#94a3b8', fontSize: '0.8rem' }}>Opcional</span>
+                  </label>
+                  <textarea
+                    className={styles.textarea}
+                    placeholder="Escribe un extracto o descripción breve que aparecerá en la card del video si lo deseas. Si lo dejas vacío, la card no mostrará extracto..."
+                    value={excerpt}
+                    onChange={(e) => setExcerpt(e.target.value)}
+                    rows={2}
+                  />
+                  <span style={{ fontSize: '0.78rem', color: '#94a3b8', marginTop: '0.2rem' }}>
+                    Tanto el título como el extracto se verán completos en la tarjeta, sin puntos suspensivos (...) de recorte.
+                  </span>
+                </div>
+
+                {/* Autor del Video */}
+                <div className={styles.formGroup}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
+                    <label className={styles.label} style={{ marginBottom: 0 }}>
+                      Autor del Video:
+                    </label>
+                    <button
+                      type="button"
+                      className={styles.linkBtn}
+                      onClick={handleOpenNewAuthor}
+                      title="Crear un nuevo autor"
+                    >
+                      + Crear Nuevo Autor
+                    </button>
+                  </div>
+                  <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                    <select
+                      className={styles.select}
+                      value={autorId}
+                      onChange={(e) => setAutorId(Number(e.target.value))}
+                      style={{ flex: 1 }}
+                    >
+                      {autores.map((a) => (
+                        <option key={a.id} value={a.id}>
+                          {a.nombre} ({a.rol})
+                        </option>
+                      ))}
+                    </select>
+                    <button
+                      type="button"
+                      className={styles.btnSmall}
+                      onClick={handleEditCurrentAuthor}
+                      title="Editar datos del autor"
+                    >
+                      ✏️ Editar
+                    </button>
+                  </div>
+                </div>
+
+                {/* Fecha de Publicación del Video */}
+                <div className={styles.formGroup}>
+                  <label className={styles.label}>
+                    <span>Fecha de Publicación del Video:</span>
+                  </label>
+                  <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                    <input
+                      type="date"
+                      className={styles.input}
+                      value={createdAt}
+                      onChange={(e) => setCreatedAt(e.target.value)}
+                      style={{ flex: 1 }}
+                    />
+                    <button
+                      type="button"
+                      className={styles.btnSmall}
+                      onClick={() => setCreatedAt(new Date().toISOString().split('T')[0])}
+                      title="Establecer fecha de hoy"
+                    >
+                      📅 Hoy
+                    </button>
+                  </div>
+                  <span style={{ fontSize: '0.78rem', color: '#94a3b8', marginTop: '0.2rem' }}>
+                    Fecha en la que el video se publicó. Se mostrará en la card junto al autor.
+                  </span>
+                </div>
+
+                {/* Previsualización en Vivo de la Card 16:9 */}
+                {(() => {
+                  const yt = parseYouTubeVideo(video);
+                  const isCustom = image && image !== '/indus3-logo.webp' && image !== yt.thumbnailMaxRes && image !== yt.thumbnailHq;
+                  const previewImg = isCustom
+                    ? image
+                    : (yt.thumbnailMaxRes || yt.thumbnailHq || '/indus3-logo.webp');
+                  const currentAuthorObj = autores.find((a) => a.id === autorId) || autores[0];
+
+                  return (
+                    <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+                      <label className={styles.label}>
+                        <span>👁️ Previsualización en Vivo de la Card (16:9 Horizontal):</span>
+                        <span style={{ fontSize: '0.8rem', color: '#60a5fa' }}>
+                          {isCustom ? '🖼️ Imagen horizontal personalizada' : '📹 Miniatura oficial de YouTube'}
+                        </span>
+                      </label>
+                      <div className={styles.videoCardPreviewWrapper}>
+                        <div className={styles.videoPreviewCard}>
+                          <div className={styles.videoPreviewThumbWrapper}>
+                            <img
+                              src={previewImg}
+                              alt={title || 'Preview'}
+                              className={styles.videoPreviewThumb}
+                              onError={(e) => {
+                                if (yt.thumbnailHq && e.target.src !== yt.thumbnailHq) {
+                                  e.target.src = yt.thumbnailHq;
+                                } else {
+                                  e.target.src = '/indus3-logo.webp';
+                                }
+                              }}
+                            />
+                            <div className={styles.videoPreviewOverlay} />
+                            <span className={styles.videoPreviewBadge}>
+                              {yt.isShort ? '⚡ SHORT' : '▶ VIDEO'}
+                            </span>
+                            <div className={styles.videoPreviewPlay}>
+                              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon points="5 3 19 12 5 21 5 3" />
+                              </svg>
+                            </div>
+                          </div>
+
+                          <div className={styles.videoPreviewBody}>
+                            {selectedTagIds.length > 0 && (
+                              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
+                                {availableTags
+                                  .filter((t) => selectedTagIds.includes(t.id))
+                                  .map((t) => (
+                                    <span
+                                      key={t.id}
+                                      style={{
+                                        fontSize: '0.72rem',
+                                        padding: '0.15rem 0.5rem',
+                                        borderRadius: '20px',
+                                        background: 'rgba(255, 255, 255, 0.05)',
+                                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                                        color: '#cbd5e1'
+                                      }}
+                                    >
+                                      #{t.nombre}
+                                    </span>
+                                  ))}
+                              </div>
+                            )}
+
+                            <h4 className={styles.videoPreviewTitle}>
+                              {title || 'Título del Video...'}
+                            </h4>
+
+                            {excerpt && excerpt.trim() !== '' && (
+                              <p className={styles.videoPreviewExcerpt}>
+                                {excerpt}
+                              </p>
+                            )}
+
+                            <div className={styles.videoPreviewFooter}>
+                              <span className={styles.videoPreviewAuthor}>
+                                {currentAuthorObj?.nombre || 'Equipo Indus3'}
+                              </span>
+                              <span className={styles.videoPreviewDate}>
+                                {createdAt || 'Fecha'}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()}
+
+                {/* Estado de Publicación */}
+                <div className={styles.formGroup}>
+                  <label className={styles.label}>
+                    <span>Estado de la Publicación:</span>
+                    <span style={{ color: status === 'published' ? '#4ade80' : '#fbbf24', fontSize: '0.8rem', fontWeight: 600 }}>
+                      {status === 'published' ? '🟢 En línea' : '🟡 Oculto (Borrador)'}
+                    </span>
+                  </label>
+                  <select
+                    className={styles.select}
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value)}
+                  >
+                    <option value="published">🟢 Publicado (Visible en el blog)</option>
+                    <option value="draft">🟡 Borrador (Oculto al público)</option>
+                  </select>
+                </div>
+
+                {/* Prioridad Destacado */}
+                <div className={styles.formGroup} style={{ justifyContent: 'center' }}>
+                  <label className={styles.label}>
+                    <span>Prioridad en Blog:</span>
+                  </label>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer', background: 'rgba(255, 255, 255, 0.03)', padding: '0.85rem 1rem', borderRadius: '8px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                    <input
+                      type="checkbox"
+                      checked={featured}
+                      onChange={(e) => setFeatured(e.target.checked)}
+                      style={{ width: '18px', height: '18px', accentColor: '#3b82f6', cursor: 'pointer' }}
+                    />
+                    <div>
+                      <span style={{ fontWeight: 600, color: '#ffffff', display: 'block' }}>⭐ Marcar como video destacado</span>
+                      <span style={{ fontSize: '0.78rem', color: '#94a3b8' }}>
+                        Aparecerá en los primeros puestos del blog.
+                      </span>
+                    </div>
+                  </label>
+                </div>
+
+                {/* Etiquetas (Tags) */}
+                <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+                  <label className={styles.label}>
+                    <span>Etiquetas (Tags - Opcional para filtrar en la grilla):</span>
+                  </label>
+                  <div className={styles.tagsContainer}>
+                    {availableTags.map((t) => {
+                      const isSelected = selectedTagIds.includes(t.id);
+                      return (
+                        <button
+                          key={t.id}
+                          type="button"
+                          className={`${styles.tagPill} ${isSelected ? styles.tagPillActive : ''}`}
+                          onClick={() => toggleTag(t.id)}
+                        >
+                          {isSelected ? '✓ ' : '+ '}#{t.nombre}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Slug Interno */}
+                <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+                  <label className={styles.label}>
+                    <span>Slug Interno (identificador único para base de datos):</span>
+                    {slugStatus.checking && (
+                      <span className={`${styles.slugStatus} ${styles.slugChecking}`}>⏳ Comprobando...</span>
+                    )}
+                    {slugStatus.available === true && (
+                      <span className={`${styles.slugStatus} ${styles.slugAvailable}`}>✓ {slugStatus.message}</span>
+                    )}
+                    {slugStatus.available === false && (
+                      <span className={`${styles.slugStatus} ${styles.slugUnavailable}`}>✗ {slugStatus.message}</span>
+                    )}
+                  </label>
+                  <div className={styles.slugWrapper}>
+                    <input
+                      type="text"
+                      className={styles.input}
+                      placeholder="video-danny-ocean-en-vivo"
+                      value={slug}
+                      onChange={(e) => {
+                        setSlug(e.target.value);
+                        setSlugStatus({ checking: false, available: null, message: '' });
+                      }}
+                      onBlur={() => checkSlugAvailability(slug)}
+                      required
+                    />
+                    <button
+                      type="button"
+                      className={styles.btnSmall}
+                      onClick={handleCleanManualSlug}
+                    >
+                      🛠️ Formatear
+                    </button>
+                    <button
+                      type="button"
+                      className={styles.btnSmall}
+                      onClick={() => checkSlugAvailability(slug)}
+                    >
+                      🔍 Comprobar
+                    </button>
+                  </div>
+                  <span style={{ fontSize: '0.78rem', color: '#94a3b8', marginTop: '0.2rem' }}>
+                    ℹ️ <strong>Importante:</strong> Para este video NO se creará una página web individual en <code>/blog/slug/</code>. Al hacer clic en su card se abrirá directamente el reproductor interactivo en un modal dentro de la misma página.
+                  </span>
+                </div>
+              </div>
+            </fieldset>
+          ) : (
+            /* ===============================================================
+               MODALIDAD ARTÍCULO TRADICIONAL
+               =============================================================== */
+            <>
+              {/* Fieldset 1: Información Principal, SEO y Estado */}
+              <fieldset className={styles.fieldset}>
             <legend className={styles.legend}>
               📝 1. Información General, SEO y Estado
             </legend>
@@ -1545,6 +2066,8 @@ const BlogManager = () => {
               </div>
             </div>
           </div>
+          </>
+          )}
 
           {/* Guardar post */}
           <div className={styles.actionRow}>
@@ -1567,8 +2090,8 @@ const BlogManager = () => {
               {saveStatus.saving
                 ? 'Guardando...'
                 : postId > 0
-                ? 'Actualizar Noticia'
-                : 'Guardar Noticia en Base de Datos'}
+                ? (postType === 'video' ? 'Actualizar Video Modal' : 'Actualizar Noticia')
+                : (postType === 'video' ? 'Guardar Video en Base de Datos' : 'Guardar Noticia en Base de Datos')}
             </button>
           </div>
         </form>
@@ -1609,8 +2132,45 @@ const BlogManager = () => {
                 {existingPosts.map((post) => (
                   <tr key={post.id}>
                     <td>#{post.id}</td>
-                    <td style={{ fontWeight: 600, color: '#ffffff' }}>{post.title}</td>
-                    <td style={{ color: '#60a5fa' }}>/{post.slug}/</td>
+                    <td style={{ fontWeight: 600, color: '#ffffff' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexWrap: 'wrap' }}>
+                        {String(post.read_time || '').toLowerCase() === 'video' || (!post.content && post.video) ? (
+                          <span style={{
+                            fontSize: '0.72rem',
+                            padding: '0.15rem 0.45rem',
+                            borderRadius: '4px',
+                            background: 'rgba(239, 68, 68, 0.2)',
+                            color: '#ef4444',
+                            border: '1px solid rgba(239, 68, 68, 0.4)',
+                            fontWeight: 700
+                          }}>
+                            🎬 Video
+                          </span>
+                        ) : (
+                          <span style={{
+                            fontSize: '0.72rem',
+                            padding: '0.15rem 0.45rem',
+                            borderRadius: '4px',
+                            background: 'rgba(59, 130, 246, 0.2)',
+                            color: '#60a5fa',
+                            border: '1px solid rgba(59, 130, 246, 0.4)',
+                            fontWeight: 700
+                          }}>
+                            📰 Artículo
+                          </span>
+                        )}
+                        <span>{post.title}</span>
+                      </div>
+                    </td>
+                    <td style={{ color: '#60a5fa' }}>
+                      {String(post.read_time || '').toLowerCase() === 'video' || (!post.content && post.video) ? (
+                        <span style={{ color: '#94a3b8', fontStyle: 'italic', fontSize: '0.85rem' }} title="Este video se reproduce en modal directo en la card del blog">
+                          (Modal directo)
+                        </span>
+                      ) : (
+                        `/${post.slug}/`
+                      )}
+                    </td>
                     <td>{post.autor_nombre || 'Equipo Indus3'}</td>
                     <td>
                       <span
@@ -1643,15 +2203,30 @@ const BlogManager = () => {
                         >
                           ✏️ Editar
                         </button>
-                        <a
-                          href={`/blog/${post.slug}/`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={styles.btnSmall}
-                          style={{ textDecoration: 'none' }}
-                        >
-                          👁️ Ver
-                        </a>
+                        {String(post.read_time || '').toLowerCase() === 'video' || (!post.content && post.video) ? (
+                          post.video ? (
+                            <a
+                              href={post.video}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={styles.btnSmall}
+                              style={{ textDecoration: 'none', color: '#ef4444', borderColor: 'rgba(239, 68, 68, 0.4)' }}
+                              title="Abrir video en YouTube"
+                            >
+                              ▶ YouTube
+                            </a>
+                          ) : null
+                        ) : (
+                          <a
+                            href={`/blog/${post.slug}/`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.btnSmall}
+                            style={{ textDecoration: 'none' }}
+                          >
+                            👁️ Ver
+                          </a>
+                        )}
                         <button
                           type="button"
                           className={styles.btnSmallDanger}

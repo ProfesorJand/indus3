@@ -11,7 +11,9 @@ import { websiteSchema, organizationSchema, articleSchema } from "@utils/seo";
 
 export async function getStaticPaths() {
   const posts = await getSortedBlogPosts();
-  return posts.map((post) => ({
+  // Excluir publicaciones de tipo Video Modal (falsos blogs) para que no se generen páginas estáticas
+  const articlePosts = posts.filter((post) => !post.isVideoModal && post.readTime !== 'Video');
+  return articlePosts.map((post) => ({
     params: { slug: post.slug },
     props: { post },
   }));
@@ -27,7 +29,8 @@ if (!post || !post.content) {
   }
 }
 
-if (!post) {
+// Si no existe o es un video modal (falso blog), redirigir directamente al listado del blog
+if (!post || post.isVideoModal || post.readTime === 'Video') {
   return Astro.redirect('/blog/');
 }
 
@@ -56,8 +59,11 @@ const currentTags = Array.isArray(post.tags)
   ? post.tags.map((t) => (typeof t === 'string' ? t.toLowerCase().trim() : String(t.slug || t.nombre || '').toLowerCase().trim())).filter(Boolean)
   : [];
 
-// 1. Filtrar descartando completamente el post que se está visualizando (por ID, Slug o Título)
+// 1. Filtrar descartando completamente el post que se está visualizando y los videos modales
 const otherPosts = allPosts.filter((p) => {
+  // Excluir videos modales de los artículos recomendados
+  if (p.isVideoModal || p.readTime === 'Video') return false;
+
   // Excluir por ID
   if (currentId && p.id && String(p.id) === currentId) return false;
 

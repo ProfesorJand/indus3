@@ -1,0 +1,150 @@
+[
+  {
+    "id": "1778963281251",
+    "title": "Guía de Conciertos 2026",
+    "description": "Descubre que debes de tener en cuenta a la hora de asistir a un concierto",
+    "image": "https://indus3pro.com/img/guias/conciertos.webp",
+    "fechaEvento": "",
+    "order": "6",
+    "actions": [
+      {
+        "label": "Más detalles",
+        "url": "/guias/consejos-para-ir-a-conciertos/",
+        "variant": "primary",
+        "target": "_self"
+      }
+    ],
+    "status": "publicado"
+  },
+  {
+    "id": "1778963345504",
+    "title": "Top 50 Artistas Venezolanos en Spotify",
+    "description": "Descubre las canciones más populares en Spotify a nivel mundial",
+    "image": "https://indus3pro.com/img/guias/placeholder-guide.png",
+    "fechaEvento": "",
+    "order": "7",
+    "actions": [
+      {
+        "label": "Más detalles",
+        "url": "/top-spotify/artistas-venezolanos/",
+        "variant": "primary",
+        "target": "_self"
+      }
+    ],
+    "status": "publicado"
+  },
+  {
+    "id": "1778963414271",
+    "title": "Top 50 Canciones Global en Spotify",
+    "description": "Descubre las canciones más populares en Spotify a nivel mundial",
+    "image": "https://indus3pro.com/img/guias/placeholder-guide.png",
+    "fechaEvento": "",
+    "order": "8",
+    "actions": [
+      {
+        "label": "Más detalles",
+        "url": "/top-spotify/canciones-globales/",
+        "variant": "primary",
+        "target": "_self"
+      }
+    ],
+    "status": "publicado"
+  },
+  {
+    "id": "1778963658380",
+    "title": "Sanluis - Aunque Sea Todo World Tour",
+    "description": "",
+    "image": "https://api.indus3pro.com/eventos/imagenes/banner-aunque-sea-todo-world-tour---sanluis.webp",
+    "fechaEvento": "24, 25 y 26 de Novimienbre 2026",
+    "order": "4",
+    "actions": [
+      {
+        "label": "Más detalles",
+        "url": "/eventos/sanluis",
+        "variant": "primary",
+        "target": "_self"
+      },
+      {
+        "label": "Comprar entradas",
+        "url": "https://bp.ticketplate.com/san-luis-aunque-sea-todo-world-tour-caracas-2611262000",
+        "variant": "primary",
+        "target": "_blank"
+      }
+    ],
+    "status": "publicado"
+  },
+  {
+    "id": "1779660198074",
+    "title": "Greeicy conquista Venezuela con su Candela World Tour: cuatro ciudades y una conexión inolvidable",
+    "description": "Greeicy culminó su Candela World Tour en Venezuela con cuatro conciertos en Caracas, Lechería, Maracaibo y Barquisimeto junto al talento nacional.",
+    "image": "https://api.indus3pro.com/blog/galeria/greeicy2026/1793979174_concierto-greeicy-en-caracas-2026-3.webp",
+    "fechaEvento": "6 de Noviembre 2026",
+    "order": "2",
+    "actions": [
+      {
+        "label": "Más Detalles",
+        "url": "/blog/greeicy-candela-world-tour-venezuela-2026/",
+        "variant": "primary",
+        "target": "_self"
+      }
+    ],
+    "status": "publicado"
+  },
+  {
+    "id": "1780523735330",
+    "title": "VGS 2026",
+    "description": "La 6ta edición del Venezuela Game Show",
+    "image": "https://api.indus3pro.com/blog/galeria/vgs2026/1793716120_VGS_2026-cosplayers-escenario.webp",
+    "fechaEvento": "16, 17 y 18 de Octubre 2026",
+    "order": "1",
+    "actions": [
+      {
+        "label": "Más detalles",
+        "url": "/blog/venezuela-game-show-2026/",
+        "variant": "primary",
+        "target": "_self"
+      }
+    ],
+    "status": "publicado"
+  },
+  {
+    "id": "1788531097431",
+    "title": "BRESH hizo historia en Venezuela: más de 1.400 personas vivieron su primera edición en Caracas",
+    "description": "BRESH llegó por primera vez a Venezuela con una edición especial de Halloween en Caracas, reuniendo a más de 1.400 personas junto a Oscarcito y NEOMAI.",
+    "image": "https://api.indus3pro.com/blog/galeria/bresh2026/1793980648_A69A2859.webp",
+    "fechaEvento": "6 de Noviembre 2026",
+    "order": "3",
+    "actions": [
+      {
+        "label": "Más Detalles",
+        "url": "/blog/bresh-hizo-historia-en-venezuela-2026",
+        "variant": "primary",
+        "target": "_self"
+      }
+    ],
+    "status": "publicado"
+  },
+  {
+    "id": "1790035318973",
+    "title": "The Tenors en Caracas / Venezuela 2026 - Season of Hope",
+    "description": "El aclamado cuarteto vocal The Tenors aterrizará en la capital venezolana para presentar su gira “Season of Hope”.",
+    "image": "https://api.indus3pro.com/eventos/imagenes/banner-the-tenors-en-caracas--venezuela-2026---season-of-hope.jpg",
+    "fechaEvento": "15 de Diciembre del 2026",
+    "order": "5",
+    "actions": [
+      {
+        "label": "Más Detalles",
+        "url": "/eventos/the-tenors",
+        "variant": "primary",
+        "target": "_self"
+      },
+      {
+        "label": "Comprar Entradas",
+        "url": "https://tickets.liveri.com.ve/event/6aaaeda70fdb88afab1a19f6",
+        "variant": "primary",
+        "target": "_blank"
+      }
+    ],
+    "status": "publicado"
+  }
+]

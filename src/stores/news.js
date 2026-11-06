@@ -11,6 +11,15 @@ const defaultEmptyConfig = {
 
 let memoryNewsConfig = null;
 
+export const getAuthHeader = () => {
+  const sessionToken = typeof window !== 'undefined' ? sessionStorage.getItem('indus3_admin_token') : null;
+  const key = sessionToken
+    || (typeof import.meta !== 'undefined' && (import.meta.env?.PUBLIC_BACKEND_AUTH_KEY || import.meta.env?.BACKEND_AUTH_KEY))
+    || (typeof process !== 'undefined' && (process.env?.PUBLIC_BACKEND_AUTH_KEY || process.env?.BACKEND_AUTH_KEY))
+    || '';
+  return key ? `Bearer ${key}` : '';
+};
+
 /**
  * Obtiene la configuración de noticias de forma síncrona inmediata (memoria o localStorage)
  * Evita cualquier parpadeo de carga al navegar entre páginas.
@@ -38,8 +47,14 @@ export const getSyncNewsConfig = () => {
 export const getNewsConfig = async () => {
   // 1. Intentar obtener desde la API PHP en GoDaddy
   try {
+    const headers = { 'Accept': 'application/json' };
+    const auth = getAuthHeader();
+    if (auth) {
+      headers['Authorization'] = auth;
+    }
+
     const res = await fetch(`${urlNoticias}?t=${Date.now()}`, {
-      headers: { 'Accept': 'application/json' }
+      headers
     });
     if (res.ok) {
       const json = await res.json();
@@ -72,15 +87,6 @@ export const getNewsConfig = async () => {
 
   // 3. Fallback: sin noticias y desactivado para no mostrar la barra
   return defaultEmptyConfig;
-};
-
-const getAuthHeader = () => {
-  const sessionToken = typeof window !== 'undefined' ? sessionStorage.getItem('indus3_admin_token') : null;
-  const key = sessionToken
-    || (typeof import.meta !== 'undefined' && (import.meta.env?.BACKEND_AUTH_KEY || import.meta.env?.PUBLIC_BACKEND_AUTH_KEY))
-    || (typeof process !== 'undefined' && (process.env?.BACKEND_AUTH_KEY || process.env?.PUBLIC_BACKEND_AUTH_KEY))
-    || '';
-  return `Bearer ${key}`;
 };
 
 /**

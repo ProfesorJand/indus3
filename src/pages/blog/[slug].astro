@@ -10,7 +10,9 @@ import { getSortedBlogPosts, getBlogPostBySlug } from "@stores/blogStore";
 import { websiteSchema, organizationSchema, articleSchema } from "@utils/seo";
 
 export async function getStaticPaths() {
-  const posts = await getSortedBlogPosts();
+  // En desarrollo local (astro dev), incluir borradores para poder previsualizarlos con su URL en localhost
+  const isDev = import.meta.env.DEV;
+  const posts = await getSortedBlogPosts({ includeDrafts: isDev });
   // Excluir publicaciones de tipo Video Modal (falsos blogs) para que no se generen páginas estáticas
   const articlePosts = posts.filter((post) => !post.isVideoModal && post.readTime !== 'Video');
   return articlePosts.map((post) => ({
@@ -31,6 +33,11 @@ if (!post || !post.content) {
 
 // Si no existe o es un video modal (falso blog), redirigir directamente al listado del blog
 if (!post || post.isVideoModal || post.readTime === 'Video') {
+  return Astro.redirect('/blog/');
+}
+
+// En producción en vivo (no localhost), no permitir acceso a borradores
+if (!import.meta.env.DEV && post.status === 'draft') {
   return Astro.redirect('/blog/');
 }
 
@@ -129,10 +136,38 @@ if (post.video) {
     canonical={canonicalUrl.toString()}
     schemas={[websiteSchema, organizationSchema, postArticleSchema]}
   />
+  {post.status === 'draft' && <meta name="robots" content="noindex, nofollow" slot="seo" />}
 
   <HeaderSticky slot="header" />
 
   <main class="article-main">
+    {post.status === 'draft' && (
+      <>
+        <div id="draft-admin-banner" style="background: rgba(234, 179, 8, 0.15); border-bottom: 1px solid rgba(234, 179, 8, 0.4); padding: 0.75rem 1rem; text-align: center; color: #fef08a; font-size: 0.88rem; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 0.75rem; flex-wrap: wrap;">
+          <span>🟡 <strong>Modo Borrador (Solo Administradores):</strong> Este artículo está guardado como borrador y únicamente es visible para ti por ser administrador.</span>
+          <a href="/admin/dashboard" style="background: #eab308; color: #0f172a; padding: 0.25rem 0.65rem; border-radius: 6px; text-decoration: none; font-size: 0.78rem; font-weight: 700;">Panel de Noticias</a>
+        </div>
+
+        <div id="draft-denied-box" style="display: none; min-height: 65vh; padding: 4rem 1.5rem; text-align: center; justify-content: center; align-items: center; flex-direction: column;">
+          <div style="max-width: 480px; margin: 0 auto; background: rgba(30, 41, 59, 0.95); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 16px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">⛔</div>
+            <h2 style="font-size: 1.4rem; font-weight: 700; color: #f87171; margin-bottom: 0.75rem;">Acceso Restringido</h2>
+            <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+              Este artículo está guardado como <strong>Borrador</strong> y requiere permisos de administrador para visualizarse. Por favor inicia sesión en el panel para continuar.
+            </p>
+            <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+              <a href="/admin" style="background: #3b82f6; color: #fff; padding: 0.65rem 1.25rem; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.9rem;">
+                🔐 Iniciar Sesión como Admin
+              </a>
+              <a href="/blog/" style="background: rgba(255,255,255,0.08); color: #cbd5e1; padding: 0.65rem 1.25rem; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.9rem;">
+                Volver al Blog
+              </a>
+            </div>
+          </div>
+        </div>
+      </>
+    )}
+    <div id="article-content-wrapper">
     <Section>
       <Container variant="mid" flexDirection="column">
         <!-- Navegación de retorno -->
@@ -269,6 +304,43 @@ if (post.video) {
         )}
       </Container>
     </Section>
+    </div>
+
+    {post.status === 'draft' && (
+      <script is:inline>
+        (function() {
+          try {
+            var host = window.location.hostname;
+            var isLocal = host === 'localhost' || host === '127.0.0.1';
+            var hasSession =
+              sessionStorage.getItem('indus3_admin_session') === 'true' ||
+              localStorage.getItem('indus3_admin_session') === 'true' ||
+              document.cookie.indexOf('indus3_admin_session=true') !== -1;
+            var hasToken =
+              Boolean(sessionStorage.getItem('indus3_admin_token')) ||
+              Boolean(localStorage.getItem('indus3_admin_token'));
+            
+            var isAdmin = isLocal || hasSession || hasToken;
+
+            var contentWrap = document.getElementById('article-content-wrapper');
+            var banner = document.getElementById('draft-admin-banner');
+            var denied = document.getElementById('draft-denied-box');
+
+            if (isAdmin) {
+              if (contentWrap) contentWrap.style.display = 'block';
+              if (banner) banner.style.display = 'flex';
+              if (denied) denied.style.display = 'none';
+            } else {
+              if (contentWrap) contentWrap.style.display = 'none';
+              if (banner) banner.style.display = 'none';
+              if (denied) denied.style.display = 'flex';
+            }
+          } catch (e) {
+            window.location.replace('/blog/');
+          }
+        })();
+      </script>
+    )}
   </main>
 
   <FooterThreeCols slot="footer" />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useStore } from '@nanostores/react';
-import { activeBlogTag, searchBlogQuery, resetBlogFilters, filterBlogPosts, normalizePost } from '@stores/blogStore';
+import { activeBlogTag, searchBlogQuery, resetBlogFilters, filterBlogPosts, normalizePost, isUserAdmin } from '@stores/blogStore';
 import BlogCard from './BlogCard.jsx';
 import styles from './css/BlogGrid.module.css';
 
@@ -15,16 +15,20 @@ const BlogGrid = ({ initialPosts = [] }) => {
   const currentQuery = useStore(searchBlogQuery);
   const [posts, setPosts] = useState(initialPosts);
   const [loading, setLoading] = useState(initialPosts.length === 0);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   // Consultar publicaciones actualizadas desde la base de datos de Indus3
   useEffect(() => {
+    const adminActive = isUserAdmin();
+    setIsAdmin(adminActive);
+
     const fetchPosts = async () => {
       try {
         const res = await fetch('https://api.indus3pro.com/blog/get_posts.php?t=' + Date.now());
         const data = await res.json();
         if (data.success && Array.isArray(data.posts)) {
           const normalized = data.posts
-            .filter((p) => p.status === 'published')
+            .filter((p) => adminActive ? (p.status === 'published' || p.status === 'draft') : p.status === 'published')
             .map(normalizePost)
             .sort((a, b) => {
               if (a.featured !== b.featured) {
@@ -53,10 +57,31 @@ const BlogGrid = ({ initialPosts = [] }) => {
   return (
     <div className={styles.gridContainer}>
       <div className={styles.resultsHeader}>
-        <span>
-          Mostrando <span className={styles.countHighlight}>{filteredPosts.length}</span>{' '}
-          {filteredPosts.length === 1 ? 'noticia o artículo' : 'noticias o artículos'}
-        </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
+          <span>
+            Mostrando <span className={styles.countHighlight}>{filteredPosts.length}</span>{' '}
+            {filteredPosts.length === 1 ? 'noticia o artículo' : 'noticias o artículos'}
+          </span>
+          {isAdmin && (
+            <span
+              title="Sesión de administrador activa. Los borradores solo son visibles para ti."
+              style={{
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                color: '#fef08a',
+                background: 'rgba(234, 179, 8, 0.15)',
+                border: '1px solid rgba(234, 179, 8, 0.35)',
+                padding: '0.2rem 0.6rem',
+                borderRadius: '6px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.35rem'
+              }}
+            >
+              🛡️ Vista Admin (Borradores visibles)
+            </span>
+          )}
+        </div>
 
         {isFiltering && (
           <button

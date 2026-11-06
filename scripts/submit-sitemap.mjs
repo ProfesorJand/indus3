@@ -26,17 +26,20 @@ const searchconsole = google.webmasters({
 });
 
 async function submitSitemap() {
-  // ATENCIÓN: Cambia esto por el dominio real de indus3 (con su slash final si es prefijo de URL)
   const siteUrl = 'sc-domain:indus3pro.com'; 
-  const feedpath = 'https://indus3pro.com/sitemap-index.xml';
+  const sitemaps = [
+    'https://indus3pro.com/sitemap-index.xml',
+    'https://indus3pro.com/sitemap-0.xml',
+  ];
 
-  try {
-    console.log(`Enviando notificación de sitemap a Google Search Console...`);
-    await searchconsole.sitemaps.submit({ siteUrl, feedpath });
-    console.log("✅ ¡Sitemap notificado y enviado con éxito a Google Search Console!");
-  } catch (error) {
-    console.error("❌ Error al notificar el sitemap a Google:", error.message);
-    process.exit(1);
+  for (const feedpath of sitemaps) {
+    try {
+      console.log(`Enviando notificación de sitemap (${feedpath}) a Google Search Console...`);
+      await searchconsole.sitemaps.submit({ siteUrl, feedpath });
+      console.log(`✅ ¡Sitemap ${feedpath} notificado y enviado con éxito a Google Search Console!`);
+    } catch (error) {
+      console.error(`❌ Error al notificar ${feedpath} a Google:`, error.message);
+    }
   }
 }
 

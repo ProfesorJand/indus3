@@ -98,6 +98,25 @@ const BlogCard = ({ post }) => {
             <div className={styles.imageOverlay} />
 
             {/* Badge distintivo de Video o Short */}
+            {post.status === 'draft' && (
+              <span style={{
+                position: 'absolute',
+                top: '0.75rem',
+                left: '0.75rem',
+                background: 'linear-gradient(135deg, #eab308 0%, #ca8a04 100%)',
+                color: '#0f172a',
+                fontSize: '0.72rem',
+                fontWeight: 800,
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
+                padding: '0.3rem 0.65rem',
+                borderRadius: '6px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.4)',
+                zIndex: 3
+              }}>
+                🟡 BORRADOR (Admin)
+              </span>
+            )}
             <span className={styles.readTimeBadge}>
               {post.isShort ? '⚡ SHORT' : '▶ VIDEO'}
             </span>
@@ -215,8 +234,15 @@ const BlogCard = ({ post }) => {
   // =========================================================================
   // MODALIDAD 2: CARD DE ARTÍCULO ESTÁNDAR
   // =========================================================================
+  const isDraft = post.status === 'draft';
+
   return (
-    <a href={`/blog/${post.slug}/`} className={styles.card} aria-label={`Leer artículo: ${post.title}`}>
+    <a
+      href={`/blog/${post.slug}/`}
+      className={styles.card}
+      style={isDraft ? { border: '1px dashed rgba(234, 179, 8, 0.65)', background: 'rgba(234, 179, 8, 0.04)' } : undefined}
+      aria-label={`Leer artículo: ${post.title}`}
+    >
       <div className={styles.imageWrapper}>
         <img
           src={post.image || '/indus3-logo.webp'}
@@ -225,6 +251,25 @@ const BlogCard = ({ post }) => {
           loading="lazy"
         />
         <div className={styles.imageOverlay} />
+        {isDraft ? (
+          <span style={{
+            position: 'absolute',
+            top: '0.75rem',
+            left: '0.75rem',
+            background: 'linear-gradient(135deg, #eab308 0%, #ca8a04 100%)',
+            color: '#0f172a',
+            fontSize: '0.72rem',
+            fontWeight: 800,
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+            padding: '0.3rem 0.65rem',
+            borderRadius: '6px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.4)',
+            zIndex: 3
+          }}>
+            🟡 BORRADOR (Admin)
+          </span>
+        ) : null}
         <span className={styles.readTimeBadge}>{post.readTime}</span>
       </div>
 

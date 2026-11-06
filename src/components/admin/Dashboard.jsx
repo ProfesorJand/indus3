@@ -6,6 +6,7 @@ import SliderForm from './SliderForm.jsx';
 import TopArtistaSpotify from '../Infografias/TopSpotify/TopArtistaSpotify.jsx';
 import NewsBarManager from './NewsBarManager.jsx';
 import BlogManager from './BlogManager.jsx';
+import SearchConsoleReports from './SearchConsoleReports.jsx';
 
 const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], initialPastFiles = [] }) => {
   const [activeTab, setActiveTab] = useState('events'); // 'overview', 'events', 'bios', 'sliders', 'pastEvents', 'newsBar', 'spotify', 'blog'
@@ -21,15 +22,28 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
   const [authorized, setAuthorized] = useState(false);
 
   const getAdminToken = () => {
-    return (typeof window !== 'undefined' && sessionStorage.getItem('indus3_admin_token')) ||
+    return (typeof window !== 'undefined' && (sessionStorage.getItem('indus3_admin_token') || localStorage.getItem('indus3_admin_token'))) ||
       import.meta.env.PUBLIC_BACKEND_AUTH_KEY ||
       '';
   };
 
   useEffect(()=>{
-    if (sessionStorage.getItem('indus3_admin_session') !== 'true') {
+    const isSession = typeof window !== 'undefined' && (
+      sessionStorage.getItem('indus3_admin_session') === 'true' ||
+      localStorage.getItem('indus3_admin_session') === 'true' ||
+      document.cookie.indexOf('indus3_admin_session=true') !== -1
+    );
+    if (!isSession) {
       window.location.replace('/admin');
       return;
+    }
+    sessionStorage.setItem('indus3_admin_session', 'true');
+    localStorage.setItem('indus3_admin_session', 'true');
+    document.cookie = "indus3_admin_session=true; path=/; max-age=86400; SameSite=Lax";
+    const tok = sessionStorage.getItem('indus3_admin_token') || localStorage.getItem('indus3_admin_token');
+    if (tok) {
+      sessionStorage.setItem('indus3_admin_token', tok);
+      localStorage.setItem('indus3_admin_token', tok);
     }
     setAuthorized(true);
     if (initialEvents.length) setEvents(initialEvents);
@@ -331,6 +345,9 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
 
   const handleLogout = () => {
     sessionStorage.removeItem('indus3_admin_session');
+    sessionStorage.removeItem('indus3_admin_token');
+    localStorage.removeItem('indus3_admin_session');
+    localStorage.removeItem('indus3_admin_token');
     window.location.href = '/admin';
   };
 
@@ -404,6 +421,13 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" /></svg>
             <span>Spotify Infografías</span>
           </div>
+          <div 
+            className={`${styles.navItem} ${activeTab === 'searchConsole' ? styles.active : ''}`}
+            onClick={() => setActiveTab('searchConsole')}
+          >
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+            <span>Search Console & IA</span>
+          </div>
         </nav>
 
         <div className={styles.navItem} onClick={() => window.location.href = '/'}>
@@ -416,7 +440,7 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
 
           <div className={styles.breadcrumb}>
-            <span>Admin</span> / <span>{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}</span>
+            <span>Admin</span> / <span>{activeTab === 'searchConsole' ? 'Search Console & IA' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}</span>
           </div>
           <div className={styles.userArea}>
              <button 
@@ -458,6 +482,17 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
                   <div className={styles.statTitle}>Próximo Evento</div>
                   <div className={styles.statValue} style={{fontSize: '1.2rem', color: '#3b82f6'}}>
                     {events[0]?.nombreEvento || 'Ninguno'}
+                  </div>
+                </div>
+                <div 
+                  className={styles.statCard} 
+                  style={{ cursor: 'pointer', borderColor: '#3b82f644' }}
+                  onClick={() => setActiveTab('searchConsole')}
+                  title="Ver Reportes de Tráfico Orgánico e Inteligencia Artificial"
+                >
+                  <div className={styles.statTitle}>Search Console & IA</div>
+                  <div className={styles.statValue} style={{fontSize: '1.1rem', color: '#10b981', display: 'flex', alignItems: 'center', gap: '6px'}}>
+                    <span>📊</span> <span>Reportes</span>
                   </div>
                 </div>
               </div>
@@ -844,6 +879,13 @@ const Dashboard = ({ initialEvents = [], initialBios = [], initialSliders = [], 
                 </div>
               </div>
               <BlogManager />
+            </div>
+          )}
+
+          {/* SEARCH CONSOLE & IA VIEW */}
+          {activeTab === 'searchConsole' && (
+            <div>
+              <SearchConsoleReports />
             </div>
           )}
         </main>

@@ -105,6 +105,57 @@ const base = import.meta.env.BASE_URL;
 
       window.gtag('config', 'G-29TGVTWF6F');
     </script>
+
+    <!-- Rastreador de Visitas Recomendadas por IA (ChatGPT, Perplexity, Claude, Gemini, Copilot) -->
+    <script is:inline>
+      (() => {
+        try {
+          if (typeof window === 'undefined' || !document.referrer) return;
+          const ref = document.referrer.toLowerCase();
+          const params = new URLSearchParams(window.location.search);
+          const utmSource = (params.get('utm_source') || '').toLowerCase();
+
+          let aiSource = null;
+          if (ref.includes('chatgpt.com') || ref.includes('openai.com') || utmSource.includes('chatgpt')) {
+            aiSource = 'ChatGPT';
+          } else if (ref.includes('perplexity.ai') || utmSource.includes('perplexity')) {
+            aiSource = 'Perplexity AI';
+          } else if (ref.includes('gemini.google.com') || utmSource.includes('gemini')) {
+            aiSource = 'Google Gemini';
+          } else if (ref.includes('claude.ai') || ref.includes('anthropic.com') || utmSource.includes('claude')) {
+            aiSource = 'Claude';
+          } else if (ref.includes('copilot.microsoft.com') || ref.includes('bing.com/chat') || utmSource.includes('copilot')) {
+            aiSource = 'Microsoft Copilot';
+          } else if (ref.includes('poe.com') || utmSource.includes('poe')) {
+            aiSource = 'Poe AI';
+          }
+
+          if (aiSource) {
+            const cacheKey = 'indus3_ai_ref_' + aiSource;
+            if (!sessionStorage.getItem(cacheKey)) {
+              sessionStorage.setItem(cacheKey, '1');
+              const payload = JSON.stringify({
+                ai_source: aiSource,
+                landing_page: window.location.pathname,
+                full_url: window.location.href,
+                referrer: document.referrer
+              });
+              if (navigator.sendBeacon) {
+                const blob = new Blob([payload], { type: 'application/json' });
+                navigator.sendBeacon('https://api.indus3pro.com/seo/track_ai_referral.php', blob);
+              } else {
+                fetch('https://api.indus3pro.com/seo/track_ai_referral.php', {
+                  method: 'POST',
+                  body: payload,
+                  headers: { 'Content-Type': 'application/json' },
+                  keepalive: true
+                }).catch(() => {});
+              }
+            }
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <slot name="header" />

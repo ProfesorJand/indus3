@@ -38,6 +38,9 @@ const LoginForm = ({ backendUrl, googleClientId }) => {
       if (data.success) {
         sessionStorage.setItem('indus3_admin_session', 'true');
         sessionStorage.setItem('indus3_admin_token', data.token || authKey);
+        localStorage.setItem('indus3_admin_session', 'true');
+        localStorage.setItem('indus3_admin_token', data.token || authKey);
+        document.cookie = "indus3_admin_session=true; path=/; max-age=86400; SameSite=Lax";
         showFeedback("Acceso concedido. Redirigiendo...", "success");
         setTimeout(() => window.location.href = "/admin/dashboard", 1500);
       } else {
@@ -134,6 +137,9 @@ const LoginForm = ({ backendUrl, googleClientId }) => {
       if (data.success) {
         sessionStorage.setItem('indus3_admin_session', 'true');
         sessionStorage.setItem('indus3_admin_token', data.token || authKey);
+        localStorage.setItem('indus3_admin_session', 'true');
+        localStorage.setItem('indus3_admin_token', data.token || authKey);
+        document.cookie = "indus3_admin_session=true; path=/; max-age=86400; SameSite=Lax";
         showFeedback("Código verificado. Redirigiendo...", "success");
         setTimeout(() => window.location.href = "/admin/dashboard", 1500);
       } else {

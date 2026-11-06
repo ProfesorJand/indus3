@@ -135,6 +135,24 @@ const BlogManager = () => {
 
   // Cargar autores, tags y posts al montar
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const isSession =
+          sessionStorage.getItem('indus3_admin_session') === 'true' ||
+          localStorage.getItem('indus3_admin_session') === 'true' ||
+          document.cookie.indexOf('indus3_admin_session=true') !== -1;
+        if (isSession) {
+          sessionStorage.setItem('indus3_admin_session', 'true');
+          localStorage.setItem('indus3_admin_session', 'true');
+          document.cookie = "indus3_admin_session=true; path=/; max-age=86400; SameSite=Lax";
+          const tok = sessionStorage.getItem('indus3_admin_token') || localStorage.getItem('indus3_admin_token');
+          if (tok) {
+            sessionStorage.setItem('indus3_admin_token', tok);
+            localStorage.setItem('indus3_admin_token', tok);
+          }
+        }
+      } catch (e) {}
+    }
     fetchAutores();
     fetchTags();
     fetchExistingPosts();
@@ -401,10 +419,20 @@ const BlogManager = () => {
       if (data.success && data.url) {
         if (galleryTarget === 'author') {
           setAuthorAvatar(data.url);
+          alert('¡Foto de autor subida exitosamente!');
+        } else if (galleryTarget === 'editor') {
+          setEditorImageUrl(data.url);
+          if (!editorImageAlt.trim()) {
+            const rawName = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
+            setEditorImageAlt(rawName.charAt(0).toUpperCase() + rawName.slice(1));
+          }
+          setEditorImageModalOpen(true);
+          setGalleryOpen(false);
+          alert('¡Imagen subida exitosamente! Lista para insertar en el contenido.');
         } else {
           setImage(data.url);
+          alert('¡Imagen de portada subida exitosamente!');
         }
-        alert('¡Imagen subida exitosamente!');
         fetchGallery();
       } else {
         alert(data.message || 'Error al subir la imagen');
@@ -826,6 +854,9 @@ const BlogManager = () => {
     setCreatedAt(new Date().toISOString().split('T')[0]);
     setUpdatedAt('');
     setSelectedTagIds([]);
+    setGalleryTarget('post');
+    setEditorImageUrl('');
+    setEditorImageAlt('');
     setSlugStatus({ checking: false, available: null, message: '' });
     setSaveStatus({ saving: false, message: '', error: false });
   };
@@ -856,6 +887,9 @@ const BlogManager = () => {
     if (post.tags && Array.isArray(post.tags)) {
       setSelectedTagIds(post.tags.map((t) => t.id));
     }
+    setGalleryTarget('post');
+    setEditorImageUrl('');
+    setEditorImageAlt('');
     setActiveTab('crear');
     checkSlugAvailability(post.slug, post.id);
   };
@@ -1956,6 +1990,7 @@ const BlogManager = () => {
                   type="button"
                   className={styles.toolBtn}
                   onClick={() => {
+                    setGalleryTarget('editor');
                     setEditorImageUrl('');
                     setEditorImageAlt('');
                     setEditorImageSource('url');
@@ -1964,6 +1999,19 @@ const BlogManager = () => {
                   title="Insertar imagen con URL, subida de archivo o desde la galería"
                 >
                   🖼️ Imagen
+                </button>
+                <button
+                  type="button"
+                  className={styles.toolBtn}
+                  onClick={() => {
+                    setGalleryTarget('editor');
+                    setEditorImageModalOpen(false);
+                    setGalleryOpen(true);
+                    fetchGallery();
+                  }}
+                  title="Abrir galería para insertar una imagen en el contenido del artículo"
+                >
+                  🖼️ Galería
                 </button>
                 <button
                   type="button"
@@ -2093,6 +2141,30 @@ const BlogManager = () => {
                 ? (postType === 'video' ? 'Actualizar Video Modal' : 'Actualizar Noticia')
                 : (postType === 'video' ? 'Guardar Video en Base de Datos' : 'Guardar Noticia en Base de Datos')}
             </button>
+            {slug && postType !== 'video' && (
+              <a
+                href={`/blog/${slug.trim()}/`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  padding: '0.65rem 1.1rem',
+                  fontSize: '0.9rem',
+                  fontWeight: 600,
+                  color: '#60a5fa',
+                  border: '1px solid rgba(59, 130, 246, 0.4)',
+                  background: 'rgba(59, 130, 246, 0.12)',
+                  borderRadius: '8px',
+                  cursor: 'pointer'
+                }}
+                title="Abrir la URL directa del artículo en una nueva pestaña"
+              >
+                👁️ {status === 'draft' ? 'Previsualizar Borrador' : 'Ver en la Web'}
+              </a>
+            )}
           </div>
         </form>
       ) : (
@@ -2249,7 +2321,24 @@ const BlogManager = () => {
         <div className={styles.modalOverlay} onClick={() => setGalleryOpen(false)}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
             <div className={styles.modalHeader}>
-              <h3>🖼️ Galería de Imágenes - Indus3</h3>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+                <h3 style={{ margin: 0 }}>🖼️ Galería de Imágenes - Indus3</h3>
+                {galleryTarget === 'editor' && (
+                  <span style={{ fontSize: '0.78rem', color: '#60a5fa', background: 'rgba(59, 130, 246, 0.15)', border: '1px solid rgba(59, 130, 246, 0.35)', padding: '0.2rem 0.6rem', borderRadius: '6px', fontWeight: 600 }}>
+                    Destino: 📝 Contenido HTML del Artículo
+                  </span>
+                )}
+                {galleryTarget === 'post' && (
+                  <span style={{ fontSize: '0.78rem', color: '#fef08a', background: 'rgba(234, 179, 8, 0.15)', border: '1px solid rgba(234, 179, 8, 0.35)', padding: '0.2rem 0.6rem', borderRadius: '6px', fontWeight: 600 }}>
+                    Destino: 🖼️ Imagen de Portada (Thumbnail)
+                  </span>
+                )}
+                {galleryTarget === 'author' && (
+                  <span style={{ fontSize: '0.78rem', color: '#c084fc', background: 'rgba(168, 85, 247, 0.15)', border: '1px solid rgba(168, 85, 247, 0.35)', padding: '0.2rem 0.6rem', borderRadius: '6px', fontWeight: 600 }}>
+                    Destino: 👤 Foto del Autor
+                  </span>
+                )}
+              </div>
               <button
                 type="button"
                 className={styles.modalCloseBtn}

@@ -29,6 +29,26 @@ export const resetBlogFilters = () => {
   }
 };
 
+// Helper para verificar si el visitante actual tiene sesión activa de administrador
+export const isUserAdmin = () => {
+  if (typeof window === 'undefined') return false;
+  try {
+    const hasSession =
+      sessionStorage.getItem('indus3_admin_session') === 'true' ||
+      localStorage.getItem('indus3_admin_session') === 'true' ||
+      document.cookie.indexOf('indus3_admin_session=true') !== -1;
+    const hasToken =
+      Boolean(sessionStorage.getItem('indus3_admin_token')) ||
+      Boolean(localStorage.getItem('indus3_admin_token'));
+    const isLocal =
+      window.location.hostname === 'localhost' ||
+      window.location.hostname === '127.0.0.1';
+    return Boolean(isLocal || hasSession || hasToken);
+  } catch {
+    return false;
+  }
+};
+
 // Formatear fechas a español (ej. "28 de Octubre, 2026")
 export const formatBlogDate = (dateString) => {
   if (!dateString) return '';
@@ -132,6 +152,7 @@ export const normalizePost = (post) => {
     isVideoModal,
     featured: Boolean(Number(post.featured)),
     readTime: isVideoModal ? 'Video' : (rawReadTime || '4 min de lectura'),
+    status: post.status || 'published',
     date: dateOnly,
     formattedDate: formatBlogDate(rawCreatedAt),
     createdAt: rawCreatedAt,
@@ -150,7 +171,8 @@ export const normalizePost = (post) => {
 };
 
 // Obtener todas las publicaciones ordenadas de más reciente a más antigua (Lectura Pública)
-export const getSortedBlogPosts = async () => {
+// Parámetro opcional includeDrafts para permitir previsualización en desarrollo local
+export const getSortedBlogPosts = async ({ includeDrafts = false } = {}) => {
   try {
     const res = await fetch('https://api.indus3pro.com/blog/get_posts.php?t=' + Date.now());
     if (!res.ok) return [];
@@ -159,7 +181,7 @@ export const getSortedBlogPosts = async () => {
       const data = JSON.parse(text);
       if (data.success && Array.isArray(data.posts)) {
         return data.posts
-          .filter((p) => p.status === 'published')
+          .filter((p) => includeDrafts ? (p.status === 'published' || p.status === 'draft') : p.status === 'published')
           .map(normalizePost)
           .sort((a, b) => {
             // 1. Los posts destacados aparecen primero

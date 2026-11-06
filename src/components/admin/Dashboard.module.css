@@ -365,3 +365,44 @@
   letter-spacing: 0.5px;
   vertical-align: middle;
 }
+
+@media print {
+  @page {
+    size: landscape;
+    margin: 0 !important;
+  }
+
+  :global(html),
+  :global(body) {
+    background: #0a0a0c !important;
+    background-color: #0a0a0c !important;
+    color: #fff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .sidebar,
+  .userArea,
+  .breadcrumb,
+  .btnPrimary,
+  .logoutBtn {
+    display: none !important;
+  }
+  .dashboard {
+    display: block !important;
+    background: #0a0a0c !important;
+    color: #fff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+  .main {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    background: #0a0a0c !important;
+  }
+}

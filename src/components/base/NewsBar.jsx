@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './NewsBar.module.css';
-import { getNewsConfig, getSyncNewsConfig, urlNoticias } from '../../stores/news.js';
+import { getNewsConfig, getSyncNewsConfig, getAuthHeader, urlNoticias } from '../../stores/news.js';
 import { renderFormattedNewsText, stripNewsFormatting } from '../../utils/newsFormatter.jsx';
 
 const defaultSettings = {
@@ -92,8 +92,13 @@ export default function NewsBar({ initialConfig = null }) {
   const handleClick = (item) => {
     if (!item || !item.id) return;
     try {
+      const headers = {};
+      const auth = getAuthHeader();
+      if (auth) headers['Authorization'] = auth;
+
       fetch(`${urlNoticias}?action=click&id=${encodeURIComponent(item.id)}`, {
         method: 'POST',
+        headers,
         keepalive: true
       }).catch(() => {});
     } catch (e) {}

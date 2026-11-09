@@ -1,4 +1,5 @@
 import { atom } from 'nanostores';
+import fallbackBlogPosts from '../data/blog.json';
 
 /**
  * ============================================================================
@@ -173,53 +174,95 @@ export const normalizePost = (post) => {
 // Obtener todas las publicaciones ordenadas de más reciente a más antigua (Lectura Pública)
 // Parámetro opcional includeDrafts para permitir previsualización en desarrollo local
 export const getSortedBlogPosts = async ({ includeDrafts = false } = {}) => {
+  const parseAndSort = (rawPosts) => {
+    return rawPosts
+      .filter((p) => includeDrafts ? (p.status === 'published' || p.status === 'draft') : p.status === 'published')
+      .map(normalizePost)
+      .sort((a, b) => {
+        // 1. Los posts destacados aparecen primero
+        if (a.featured !== b.featured) {
+          return a.featured ? -1 : 1;
+        }
+        // 2. Luego ordenados cronológicamente de más reciente a más antiguo
+        const timeA = new Date(a.createdAt || a.date).getTime() || 0;
+        const timeB = new Date(b.createdAt || b.date).getTime() || 0;
+        return timeB - timeA;
+      });
+  };
+
   try {
-    const res = await fetch('https://api.indus3pro.com/blog/get_posts.php?t=' + Date.now());
-    if (!res.ok) return [];
-    const text = await res.text();
-    try {
-      const data = JSON.parse(text);
-      if (data.success && Array.isArray(data.posts)) {
-        return data.posts
-          .filter((p) => includeDrafts ? (p.status === 'published' || p.status === 'draft') : p.status === 'published')
-          .map(normalizePost)
-          .sort((a, b) => {
-            // 1. Los posts destacados aparecen primero
-            if (a.featured !== b.featured) {
-              return a.featured ? -1 : 1;
-            }
-            // 2. Luego ordenados cronológicamente de más reciente a más antiguo
-            const timeA = new Date(a.createdAt || a.date).getTime() || 0;
-            const timeB = new Date(b.createdAt || b.date).getTime() || 0;
-            return timeB - timeA;
-          });
+    const authKey = (typeof window !== 'undefined' ? sessionStorage.getItem('indus3_admin_token') : null)
+      || (typeof import.meta !== 'undefined' && (import.meta.env?.PUBLIC_BACKEND_AUTH_KEY || import.meta.env?.BACKEND_AUTH_KEY))
+      || (typeof process !== 'undefined' && (process.env?.PUBLIC_BACKEND_AUTH_KEY || process.env?.BACKEND_AUTH_KEY))
+      || '';
+
+    const res = await fetch('https://api.indus3pro.com/blog/get_posts.php?t=' + Date.now(), {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': authKey ? `Bearer ${authKey}` : ''
       }
-    } catch {
-      // Respuesta de firewall no es JSON
+    });
+    if (res.ok) {
+      const text = await res.text();
+      try {
+        const data = JSON.parse(text);
+        if (data.success && Array.isArray(data.posts) && data.posts.length > 0) {
+          return parseAndSort(data.posts);
+        }
+      } catch {
+        // Respuesta de firewall no es JSON
+      }
     }
   } catch (err) {
     console.error('Error al obtener posts de Indus3 Blog:', err);
   }
+
+  // Fallback seguro a los datos locales
+  if (Array.isArray(fallbackBlogPosts) && fallbackBlogPosts.length > 0) {
+    return parseAndSort(fallbackBlogPosts);
+  }
+
   return [];
 };
 
 // Obtener un post por su slug (Lectura Pública)
 export const getBlogPostBySlug = async (slug) => {
+  const targetSlug = String(slug || '').toLowerCase().trim();
   try {
-    const res = await fetch(`https://api.indus3pro.com/blog/get_posts.php?slug=${encodeURIComponent(slug)}&t=${Date.now()}`);
-    if (!res.ok) return null;
-    const text = await res.text();
-    try {
-      const data = JSON.parse(text);
-      if (data.success && data.post) {
-        return normalizePost(data.post);
+    const authKey = (typeof window !== 'undefined' ? sessionStorage.getItem('indus3_admin_token') : null)
+      || (typeof import.meta !== 'undefined' && (import.meta.env?.PUBLIC_BACKEND_AUTH_KEY || import.meta.env?.BACKEND_AUTH_KEY))
+      || (typeof process !== 'undefined' && (process.env?.PUBLIC_BACKEND_AUTH_KEY || process.env?.BACKEND_AUTH_KEY))
+      || '';
+
+    const res = await fetch(`https://api.indus3pro.com/blog/get_posts.php?slug=${encodeURIComponent(slug)}&t=${Date.now()}`, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': authKey ? `Bearer ${authKey}` : ''
       }
-    } catch {
-      // Respuesta de firewall no es JSON
+    });
+    if (res.ok) {
+      const text = await res.text();
+      try {
+        const data = JSON.parse(text);
+        if (data.success && data.post) {
+          return normalizePost(data.post);
+        }
+      } catch {
+        // Respuesta de firewall no es JSON
+      }
     }
   } catch (err) {
     console.error('Error al consultar post por slug en Indus3:', err);
   }
+
+  // Fallback seguro a los datos locales
+  if (Array.isArray(fallbackBlogPosts) && fallbackBlogPosts.length > 0) {
+    const found = fallbackBlogPosts.find(p => String(p.slug || '').toLowerCase().trim() === targetSlug);
+    if (found) {
+      return normalizePost(found);
+    }
+  }
+
   return null;
 };
 

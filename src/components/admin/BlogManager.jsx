@@ -108,6 +108,73 @@ const BlogManager = () => {
   const [editorImageUploading, setEditorImageUploading] = useState(false);
   const editorFileInputRef = useRef(null);
 
+  // Estados para modal de Inserción y Subida de Video MP4 en el Editor HTML
+  const [editorVideoModalOpen, setEditorVideoModalOpen] = useState(false);
+  const [editorVideoOrientation, setEditorVideoOrientation] = useState('horizontal'); // 'horizontal' | 'vertical'
+  const [editorVideoSource, setEditorVideoSource] = useState('upload'); // 'upload' | 'url'
+  const [editorVideoFile, setEditorVideoFile] = useState(null);
+  const [editorVideoUrl, setEditorVideoUrl] = useState('');
+  const [editorVideoThumbSecond, setEditorVideoThumbSecond] = useState(5);
+  const [editorVideoThumbPreview, setEditorVideoThumbPreview] = useState(null);
+  const [editorVideoPosterUrl, setEditorVideoPosterUrl] = useState('');
+  const [editorVideoUploading, setEditorVideoUploading] = useState(false);
+  const [editorVideoUploadProgress, setEditorVideoUploadProgress] = useState(0);
+  const editorVideoInputRef = useRef(null);
+
+  // Extraer fotograma del video en el segundo especificado mediante HTML5 Canvas
+  const extractVideoThumbnail = (file, second = 5) => {
+    if (!file || typeof document === 'undefined') return;
+    try {
+      const video = document.createElement('video');
+      video.preload = 'metadata';
+      video.src = URL.createObjectURL(file);
+      video.muted = true;
+      video.playsInline = true;
+
+      video.onloadedmetadata = () => {
+        const targetTime = Math.min(Math.max(0, Number(second) || 0), Math.max(0, (video.duration || 1) - 0.2));
+        video.currentTime = targetTime;
+      };
+
+      video.onseeked = () => {
+        try {
+          const canvas = document.createElement('canvas');
+          canvas.width = video.videoWidth || 640;
+          canvas.height = video.videoHeight || 360;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+          const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+          setEditorVideoThumbPreview(dataUrl);
+          URL.revokeObjectURL(video.src);
+        } catch (err) {
+          console.warn('No se pudo capturar frame de video:', err);
+          URL.revokeObjectURL(video.src);
+        }
+      };
+
+      video.onerror = () => {
+        URL.revokeObjectURL(video.src);
+      };
+    } catch (err) {
+      console.warn('Error al inicializar captura de video:', err);
+    }
+  };
+
+  const handleVideoFileSelect = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setEditorVideoFile(file);
+    extractVideoThumbnail(file, editorVideoThumbSecond);
+  };
+
+  const handleThumbSecondChange = (sec) => {
+    const s = Math.max(0, Number(sec) || 0);
+    setEditorVideoThumbSecond(s);
+    if (editorVideoFile) {
+      extractVideoThumbnail(editorVideoFile, s);
+    }
+  };
+
   const textareaRef = useRef(null);
 
   // Helper para contar palabras del artículo (excluyendo etiquetas HTML)
@@ -496,6 +563,112 @@ const BlogManager = () => {
     setEditorImageModalOpen(false);
     setEditorImageUrl('');
     setEditorImageAlt('');
+  };
+
+  // Insertar o subir la etiqueta HTML del video MP4 en la posición del cursor del editor
+  const handleInsertEditorVideo = async (e) => {
+    if (e) e.preventDefault();
+    let finalVideoUrl = editorVideoUrl.trim();
+    let finalPosterUrl = editorVideoPosterUrl.trim();
+
+    if (editorVideoSource === 'upload') {
+      if (!editorVideoFile) {
+        alert('Por favor selecciona un archivo de video desde tu computadora.');
+        return;
+      }
+
+      setEditorVideoUploading(true);
+      setEditorVideoUploadProgress(0);
+
+      // Subida por fragmentos de 2 MB para evitar límites de post_max_size / upload_max_filesize en GoDaddy
+      const CHUNK_SIZE = 2 * 1024 * 1024; // 2 MB por petición
+      const totalChunks = Math.max(1, Math.ceil(editorVideoFile.size / CHUNK_SIZE));
+      const uploadId = `${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+
+      try {
+        for (let chunkIndex = 0; chunkIndex < totalChunks; chunkIndex++) {
+          const start = chunkIndex * CHUNK_SIZE;
+          const end = Math.min(editorVideoFile.size, start + CHUNK_SIZE);
+          const chunkBlob = editorVideoFile.slice(start, end);
+
+          const formData = new FormData();
+          formData.append('chunk', chunkBlob, editorVideoFile.name);
+          formData.append('upload_id', uploadId);
+          formData.append('chunk_index', String(chunkIndex));
+          formData.append('total_chunks', String(totalChunks));
+          formData.append('file_name', editorVideoFile.name);
+          formData.append('orientacion', editorVideoOrientation);
+
+          // Enviar la miniatura (poster) únicamente en el último fragmento
+          if (chunkIndex === totalChunks - 1 && editorVideoThumbPreview) {
+            formData.append('poster_base64', editorVideoThumbPreview);
+          }
+
+          const res = await fetch('https://api.indus3pro.com/blog/subir_video.php', {
+            method: 'POST',
+            headers: getAuthHeaders(false),
+            body: formData
+          });
+          const data = await res.json();
+
+          if (!data.success) {
+            alert('Error al subir video al servidor: ' + (data.message || 'Error desconocido'));
+            setEditorVideoUploading(false);
+            setEditorVideoUploadProgress(0);
+            return;
+          }
+
+          setEditorVideoUploadProgress(Math.round(((chunkIndex + 1) / totalChunks) * 100));
+
+          if (chunkIndex === totalChunks - 1) {
+            if (data.url) {
+              finalVideoUrl = data.url;
+              if (data.poster_url) {
+                finalPosterUrl = data.poster_url;
+              }
+            } else {
+              alert('El servidor no devolvió la URL final del video.');
+              setEditorVideoUploading(false);
+              setEditorVideoUploadProgress(0);
+              return;
+            }
+          }
+        }
+      } catch (err) {
+        console.error('Error al subir video:', err);
+        alert('Error de conexión al subir el video: ' + err.message);
+        setEditorVideoUploading(false);
+        setEditorVideoUploadProgress(0);
+        return;
+      } finally {
+        setEditorVideoUploading(false);
+      }
+    } else {
+      if (!finalVideoUrl) {
+        alert('Por favor ingresa la URL del video.');
+        return;
+      }
+    }
+
+    const isVertical = editorVideoOrientation === 'vertical';
+    const posterAttr = finalPosterUrl ? ` poster="${finalPosterUrl}"` : '';
+
+    let snippet = '';
+    if (isVertical) {
+      snippet = `\n<div class="videoWrapper videoWrapperShort" style="max-width: 380px; margin: 1.75rem auto;">\n  <video controls playsinline preload="metadata"${posterAttr} style="width: 100%; aspect-ratio: 9/16; border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: block;">\n    <source src="${finalVideoUrl}">\n    Tu navegador no soporta reproducción de video.\n  </video>\n</div>\n`;
+    } else {
+      snippet = `\n<div class="videoWrapper" style="max-width: 100%; margin: 1.5rem 0;">\n  <video controls playsinline preload="metadata"${posterAttr} style="width: 100%; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); display: block;">\n    <source src="${finalVideoUrl}">\n    Tu navegador no soporta reproducción de video.\n  </video>\n</div>\n`;
+    }
+
+    insertSnippet(snippet);
+    setEditorVideoModalOpen(false);
+    setEditorVideoFile(null);
+    setEditorVideoUrl('');
+    setEditorVideoThumbPreview(null);
+    setEditorVideoPosterUrl('');
+    setEditorVideoUploadProgress(0);
+    if (editorVideoInputRef.current) editorVideoInputRef.current.value = '';
+    alert('¡Video insertado exitosamente en el contenido!');
   };
 
   // Modal para crear nuevo autor
@@ -2056,7 +2229,15 @@ const BlogManager = () => {
                   }}
                   title="Insertar Video o Short de YouTube dentro del contenido"
                 >
-                  🎥 Video / Short
+                  ▶️ YouTube
+                </button>
+                <button
+                  type="button"
+                  className={styles.toolBtn}
+                  onClick={() => setEditorVideoModalOpen(true)}
+                  title="Subir o insertar Video MP4 (Horizontal o Vertical) al servidor"
+                >
+                  📹 Video MP4
                 </button>
 
                 {/* Selector de vista */}
@@ -2683,6 +2864,312 @@ const BlogManager = () => {
                     disabled={!editorImageUrl || editorImageUploading}
                   >
                     {editorImageUploading ? '⏳ Subiendo...' : '🚀 Insertar en el Editor'}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
+
+      {/* Modal para Subir o Insertar Video MP4 en el Editor */}
+      {editorVideoModalOpen && typeof document !== 'undefined' && createPortal(
+        <div className={styles.modalOverlay} onClick={() => !editorVideoUploading && setEditorVideoModalOpen(false)}>
+          <div
+            className={styles.modalContent}
+            style={{ maxWidth: '640px', width: '92%', maxHeight: '90vh', overflowY: 'auto' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={styles.modalHeader}>
+              <h3>📹 Insertar Video MP4 en el Artículo</h3>
+              <button
+                type="button"
+                className={styles.modalCloseBtn}
+                disabled={editorVideoUploading}
+                onClick={() => setEditorVideoModalOpen(false)}
+              >
+                &times;
+              </button>
+            </div>
+
+            <div className={styles.modalBody}>
+              <form onSubmit={handleInsertEditorVideo} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                {/* 1. Orientación del Video */}
+                <div>
+                  <label style={{ display: 'block', fontWeight: 600, color: '#f1f5f9', marginBottom: '0.5rem', fontSize: '0.92rem' }}>
+                    1. Orientación del Video:
+                  </label>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                    <button
+                      type="button"
+                      onClick={() => setEditorVideoOrientation('horizontal')}
+                      style={{
+                        padding: '0.75rem',
+                        borderRadius: '8px',
+                        border: editorVideoOrientation === 'horizontal' ? '2px solid #3b82f6' : '1px solid rgba(255,255,255,0.15)',
+                        background: editorVideoOrientation === 'horizontal' ? 'rgba(59, 130, 246, 0.2)' : 'rgba(255,255,255,0.03)',
+                        color: editorVideoOrientation === 'horizontal' ? '#60a5fa' : '#cbd5e1',
+                        cursor: 'pointer',
+                        fontWeight: 600,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '0.5rem',
+                        transition: 'all 0.2s'
+                      }}
+                    >
+                      <span>📺</span>
+                      <span>Horizontal (16:9 tradicional)</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setEditorVideoOrientation('vertical')}
+                      style={{
+                        padding: '0.75rem',
+                        borderRadius: '8px',
+                        border: editorVideoOrientation === 'vertical' ? '2px solid #3b82f6' : '1px solid rgba(255,255,255,0.15)',
+                        background: editorVideoOrientation === 'vertical' ? 'rgba(59, 130, 246, 0.2)' : 'rgba(255,255,255,0.03)',
+                        color: editorVideoOrientation === 'vertical' ? '#60a5fa' : '#cbd5e1',
+                        cursor: 'pointer',
+                        fontWeight: 600,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '0.5rem',
+                        transition: 'all 0.2s'
+                      }}
+                    >
+                      <span>📱</span>
+                      <span>Vertical / Reel (9:16 centrado)</span>
+                    </button>
+                  </div>
+                  <small style={{ color: '#94a3b8', fontSize: '0.8rem', marginTop: '0.35rem', display: 'block' }}>
+                    Se guardará en el servidor dentro de: <code style={{ color: '#38bdf8' }}>/blog/galeria/videos/{editorVideoOrientation === 'vertical' ? 'verticales' : 'horizontales'}/</code>
+                  </small>
+                </div>
+
+                {/* 2. Origen del Video (Subir o Enlace directo) */}
+                <div>
+                  <label style={{ display: 'block', fontWeight: 600, color: '#f1f5f9', marginBottom: '0.5rem', fontSize: '0.92rem' }}>
+                    2. Origen del Video:
+                  </label>
+                  <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                    <button
+                      type="button"
+                      onClick={() => setEditorVideoSource('upload')}
+                      style={{
+                        flex: 1,
+                        padding: '0.6rem',
+                        borderRadius: '6px',
+                        border: editorVideoSource === 'upload' ? '1px solid #3b82f6' : '1px solid rgba(255,255,255,0.15)',
+                        background: editorVideoSource === 'upload' ? 'rgba(59, 130, 246, 0.2)' : 'transparent',
+                        color: editorVideoSource === 'upload' ? '#93c5fd' : '#94a3b8',
+                        cursor: 'pointer',
+                        fontSize: '0.88rem',
+                        fontWeight: 500
+                      }}
+                    >
+                      📁 Subir desde mi Computadora
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setEditorVideoSource('url')}
+                      style={{
+                        flex: 1,
+                        padding: '0.6rem',
+                        borderRadius: '6px',
+                        border: editorVideoSource === 'url' ? '1px solid #3b82f6' : '1px solid rgba(255,255,255,0.15)',
+                        background: editorVideoSource === 'url' ? 'rgba(59, 130, 246, 0.2)' : 'transparent',
+                        color: editorVideoSource === 'url' ? '#93c5fd' : '#94a3b8',
+                        cursor: 'pointer',
+                        fontSize: '0.88rem',
+                        fontWeight: 500
+                      }}
+                    >
+                      🔗 Pegar URL directa (.mp4)
+                    </button>
+                  </div>
+
+                  {editorVideoSource === 'upload' ? (
+                    <div style={{
+                      border: '2px dashed rgba(255,255,255,0.2)',
+                      borderRadius: '10px',
+                      padding: '1.25rem',
+                      textAlign: 'center',
+                      background: 'rgba(0,0,0,0.2)'
+                    }}>
+                      <input
+                        type="file"
+                        ref={editorVideoInputRef}
+                        accept="video/mp4,video/webm,video/quicktime,video/ogg"
+                        onChange={handleVideoFileSelect}
+                        style={{ display: 'none' }}
+                        id="editorVideoFileInput"
+                      />
+                      <label
+                        htmlFor="editorVideoFileInput"
+                        style={{
+                          display: 'inline-block',
+                          padding: '0.65rem 1.25rem',
+                          background: '#2563eb',
+                          color: '#fff',
+                          borderRadius: '8px',
+                          cursor: 'pointer',
+                          fontWeight: 600,
+                          fontSize: '0.9rem',
+                          marginBottom: '0.5rem'
+                        }}
+                      >
+                        📂 Seleccionar Archivo de Video
+                      </label>
+                      {editorVideoFile ? (
+                        <div style={{ marginTop: '0.5rem', color: '#10b981', fontSize: '0.88rem', fontWeight: 500 }}>
+                          ✅ Archivo seleccionado: <strong>{editorVideoFile.name}</strong> ({(editorVideoFile.size / (1024 * 1024)).toFixed(1)} MB)
+                        </div>
+                      ) : (
+                        <p style={{ margin: '0.35rem 0 0 0', fontSize: '0.8rem', color: '#94a3b8' }}>
+                          Formatos admitidos: MP4, WebM, MOV. Se subirá directamente al servidor de Indus3.
+                        </p>
+                      )}
+                    </div>
+                  ) : (
+                    <div>
+                      <input
+                        type="url"
+                        className={styles.input}
+                        placeholder="https://api.indus3pro.com/blog/galeria/videos/.../video.mp4"
+                        value={editorVideoUrl}
+                        onChange={(e) => setEditorVideoUrl(e.target.value)}
+                        style={{ width: '100%' }}
+                      />
+                    </div>
+                  )}
+                </div>
+
+                {/* 3. Portada / Thumbnail (Poster) */}
+                <div style={{
+                  background: 'rgba(255,255,255,0.03)',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  borderRadius: '10px',
+                  padding: '1rem'
+                }}>
+                  <label style={{ display: 'block', fontWeight: 600, color: '#f1f5f9', marginBottom: '0.5rem', fontSize: '0.92rem' }}>
+                    3. Portada o Miniatura (Poster):
+                  </label>
+                  
+                  {editorVideoSource === 'upload' && editorVideoFile ? (
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                        <span style={{ fontSize: '0.85rem', color: '#cbd5e1' }}>Capturar fotograma en el segundo:</span>
+                        <input
+                          type="number"
+                          min="0"
+                          step="1"
+                          value={editorVideoThumbSecond}
+                          onChange={(e) => handleThumbSecondChange(e.target.value)}
+                          style={{
+                            width: '80px',
+                            padding: '0.4rem 0.5rem',
+                            borderRadius: '6px',
+                            border: '1px solid rgba(255,255,255,0.2)',
+                            background: 'rgba(0,0,0,0.4)',
+                            color: '#fff',
+                            textAlign: 'center'
+                          }}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => handleThumbSecondChange(editorVideoThumbSecond)}
+                          style={{
+                            padding: '0.4rem 0.75rem',
+                            borderRadius: '6px',
+                            border: '1px solid #3b82f6',
+                            background: 'rgba(59, 130, 246, 0.2)',
+                            color: '#60a5fa',
+                            cursor: 'pointer',
+                            fontSize: '0.82rem'
+                          }}
+                        >
+                          🔄 Recapturar
+                        </button>
+                      </div>
+
+                      {editorVideoThumbPreview && (
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                          <img
+                            src={editorVideoThumbPreview}
+                            alt="Preview miniatura"
+                            style={{
+                              width: editorVideoOrientation === 'vertical' ? '80px' : '140px',
+                              aspectRatio: editorVideoOrientation === 'vertical' ? '9/16' : '16/9',
+                              objectFit: 'cover',
+                              borderRadius: '6px',
+                              border: '1px solid rgba(255,255,255,0.2)'
+                            }}
+                          />
+                          <div style={{ fontSize: '0.8rem', color: '#94a3b8', lineHeight: 1.4 }}>
+                            <strong style={{ color: '#38bdf8' }}>Fotograma capturado automáticamente</strong> en el segundo {editorVideoThumbSecond}.
+                            <br />
+                            Se guardará en el servidor como imagen <code style={{ color: '#a7f3d0' }}>_thumb.jpg</code> y se asignará como portada del reproductor.
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div>
+                      <input
+                        type="url"
+                        className={styles.input}
+                        placeholder="URL opcional de la imagen de portada (https://...jpg)"
+                        value={editorVideoPosterUrl}
+                        onChange={(e) => setEditorVideoPosterUrl(e.target.value)}
+                        style={{ width: '100%' }}
+                      />
+                      <small style={{ color: '#94a3b8', fontSize: '0.78rem', marginTop: '0.35rem', display: 'block' }}>
+                        (Opcional) Imagen que se muestra antes de reproducir el video.
+                      </small>
+                    </div>
+                  )}
+                </div>
+
+                {/* Barra de progreso durante la subida por fragmentos */}
+                {editorVideoUploading && (
+                  <div style={{ marginTop: '0.25rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem', color: '#93c5fd', marginBottom: '0.35rem' }}>
+                      <span>Subiendo video por fragmentos al servidor...</span>
+                      <strong>{editorVideoUploadProgress}%</strong>
+                    </div>
+                    <div style={{ width: '100%', height: '8px', background: 'rgba(255,255,255,0.1)', borderRadius: '999px', overflow: 'hidden' }}>
+                      <div
+                        style={{
+                          width: `${editorVideoUploadProgress}%`,
+                          height: '100%',
+                          background: 'linear-gradient(90deg, #3b82f6, #10b981)',
+                          transition: 'width 0.25s ease'
+                        }}
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* Botones de Acción */}
+                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', marginTop: '0.5rem' }}>
+                  <button
+                    type="button"
+                    className={styles.btnSecondary}
+                    disabled={editorVideoUploading}
+                    onClick={() => setEditorVideoModalOpen(false)}
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    type="submit"
+                    className={styles.saveBtn}
+                    style={{ padding: '0.65rem 1.5rem', fontSize: '0.95rem' }}
+                    disabled={editorVideoUploading || (editorVideoSource === 'upload' && !editorVideoFile) || (editorVideoSource === 'url' && !editorVideoUrl.trim())}
+                  >
+                    {editorVideoUploading ? `⏳ Subiendo (${editorVideoUploadProgress}%)...` : '🚀 Insertar Video en el Editor'}
                   </button>
                 </div>
               </form>

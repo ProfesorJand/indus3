@@ -152,6 +152,7 @@ async function scrapePlaylist() {
     // Guardar el resultado final
     fs.writeFileSync(OUTPUT_FILE, JSON.stringify(results, null, 2));
     console.log(`\n💾 ¡Éxito! Datos guardados en ${OUTPUT_FILE}`);
+    await syncWithDatabase("global_canciones", results);
 
   } catch (error) {
     console.error("❌ Error durante la ejecución:", error.message);
@@ -161,4 +162,30 @@ async function scrapePlaylist() {
 }
 
 // Ejecutar
+
+// 🌐 Sincronizar datos con la base de datos MySQL (api.indus3pro.com)
+async function syncWithDatabase(type, items) {
+  const apiUrl = process.env.PUBLIC_API_URL || "https://api.indus3pro.com/spotify/guardar_spotify.php";
+  const authKey = process.env.BACKEND_AUTH_KEY || process.env.PUBLIC_BACKEND_AUTH_KEY || "XW5V7VNGYUMILM1SJOAEKI8W48F1PVKW";
+  try {
+    console.log(`📡 Sincronizando ${items.length} registros con la base de datos (${type})...`);
+    const res = await fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${authKey}`
+      },
+      body: JSON.stringify({ type, items })
+    });
+    const resJson = await res.json();
+    if (resJson.success) {
+      console.log(`✅ Base de datos actualizada: ${resJson.message}`);
+    } else {
+      console.warn(`⚠️ Advertencia BD: ${resJson.message}`);
+    }
+  } catch (err) {
+    console.warn(`⚠️ No se pudo sincronizar con la base de datos (se continuó con JSON): ${err.message}`);
+  }
+}
+
 scrapePlaylist();

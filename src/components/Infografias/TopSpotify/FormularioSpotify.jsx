@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { buscarArtistas, buscarArtista, buscarCanciones } from "@stores/dataSpotify"
+import { buscarArtistas, buscarArtista, buscarCanciones, getSpotifyDataDb } from "@stores/dataSpotify"
 import { CapturarImagen } from "@utils/CapturarImagen";
 import styles from "./FormularioSpotify.module.css";
 import spotifyDataGlobalTop50 from "@spotify-data-global-songs";
@@ -27,14 +27,16 @@ const FormularioSpotify = ({
   setSourceType
 }) => {
 
-  const cargarDatosAuto = () => {
+  const cargarDatosAuto = async () => {
     let sortedData = [];
     
     if (sourceType === "globalesTop50") {
-      const uniqueDates = [...new Set(spotifyDataGlobalTop50.map(item => item.updatedAt))].sort().reverse();
+      const dbData = await getSpotifyDataDb("global_canciones");
+      const dataSource = (dbData && dbData.length > 0) ? dbData : spotifyDataGlobalTop50;
+      const uniqueDates = [...new Set(dataSource.map(item => item.updatedAt || item.date))].sort().reverse();
       const latestDate = uniqueDates[0];
       
-      const allTracks = spotifyDataGlobalTop50.filter(item => item.updatedAt === latestDate).map(track => {
+      const allTracks = dataSource.filter(item => (item.updatedAt || item.date) === latestDate).map(track => {
         const highResImg = track.image
           ? track.image
               .replace("ab67616d00004851", "ab67616d0000b273")
@@ -54,14 +56,16 @@ const FormularioSpotify = ({
       sortedData = allTracks.sort((a, b) => a.rank - b.rank);
       setTopMusic(true);
     } else if (sourceType === "globalesTop50Artistas") {
-      const dataToUse = spotifyDataGlobalArtistas;
+      const dbData = await getSpotifyDataDb("global_artistas");
+      const dataToUse = (dbData && dbData.length > 0) ? dbData : spotifyDataGlobalArtistas;
       const uniqueDates = [...new Set(dataToUse.map(item => item.date || item.month))].sort().reverse();
       const latestDate = uniqueDates[0];
       
       sortedData = [...dataToUse.filter(item => (item.date || item.month) === latestDate)].sort((a, b) => (b.listeners || 0) - (a.listeners || 0));
       setTopMusic(false);
     } else {
-      const dataToUse = spotifyData;
+      const dbData = await getSpotifyDataDb("venezuela");
+      const dataToUse = (dbData && dbData.length > 0) ? dbData : spotifyData;
       const uniqueDates = [...new Set(dataToUse.map(item => item.date || item.month))].sort().reverse();
       const latestDate = uniqueDates[0];
       

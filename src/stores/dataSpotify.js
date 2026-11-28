@@ -204,3 +204,49 @@ export const buscarCanciones = async ({ urlCanciones, setMusicInfo }) => {
 
   setMusicInfo(data)
 }
+
+/**
+ * Obtener datos de Spotify directamente desde la base de datos MySQL (api.indus3pro.com)
+ * con fallback transparente a los datos locales si la red falla.
+ */
+export async function getSpotifyDataDb(type = 'venezuela', fecha = null) {
+  const url = new URL("https://api.indus3pro.com/spotify/get_spotify.php");
+  url.searchParams.append("type", type);
+  if (fecha) {
+    url.searchParams.append("fecha", fecha);
+  }
+
+  try {
+    const res = await fetch(url.toString());
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+      return json.data;
+    }
+  } catch (err) {
+    console.warn(`[getSpotifyDataDb] Usando datos locales para ${type}:`, err.message);
+  }
+  return null;
+}
+
+/**
+ * Obtener la lista de fechas disponibles en la base de datos para los selectores
+ */
+export async function getSpotifyDatesDb(type = 'venezuela') {
+  const url = new URL("https://api.indus3pro.com/spotify/get_spotify.php");
+  url.searchParams.append("type", type);
+  url.searchParams.append("fechas_disponibles", "1");
+
+  try {
+    const res = await fetch(url.toString());
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    if (json.success && Array.isArray(json.fechas)) {
+      return json.fechas;
+    }
+  } catch (err) {
+    console.warn(`[getSpotifyDatesDb] Error consultando fechas:`, err.message);
+  }
+  return [];
+}
+
